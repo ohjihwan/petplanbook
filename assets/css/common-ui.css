@@ -1,0 +1,364 @@
+@charset "utf-8";
+
+/*
+ INDEX
+
+ 1 RESET
+
+ 2 FONT-FACE
+
+ 3 VARIABLES
+
+ 4 ROOT
+
+ 5 COMMON UI
+ | ---------------------
+ + 4.1 TYPOGRAPHY
+ | =====================
+ | 4.1.1  제목
+ | 4.1.2  제목그룹
+ | 4.1.3  문단
+ | 4.1.4  링크
+ | 4.1.5  의미있는 텍스트
+ | 4.1.6  순서 있는 목록
+ | 4.1.7  순서 없는 목록
+ | 4.1.8  표
+ | 4.1.9  각주
+ | 4.1.10 구분선
+ | 4.1.11 간격
+ | ---------------------
+ + 4.2 FORM
+ | =====================
+ | 4.2.1  버튼
+ | 4.2.2  라운드 버튼
+ | 4.2.3  헤더 버튼
+ | 4.2.4  기타 버튼
+ | 4.2.5  레이블
+ | 4.2.6  텍스트필드
+ | 4.2.7  다중 텍스트필드
+ | 4.2.8  셀렉트
+ | 4.2.9  체크박스
+ | 4.2.10 라디오
+ | 4.2.11 박스라디오
+ | 4.2.12 스위치
+ | 4.2.13 스피너
+ | 4.2.14 필드/믹스
+ | ---------------------
+ + 4.3 LIST
+ | =====================
+ | 4.3.1  정의형 리스트
+ | 4.3.2  데이터 리스트
+ | 4.3.3  기타 리스트
+ | 4.3.4  커스텀 리스트
+ | ---------------------
+ + 4.4 BOXES
+ | =====================
+ | 4.4.1  박스
+ | 4.4.2  라인 박스
+ | 4.4.3  이미지 박스
+ | 4.4.4  비주얼 박스
+ | 4.4.5  정보 요약
+ | 4.4.6  아코디언
+ | 4.4.7  알아주세여
+ | 4.4.8  필터 바
+ | ---------------------
+ + 4.5 MESSAGES
+ | =====================
+ | 4.5.1  메시지
+ | 4.5.2  결과메시지
+ | ---------------------
+ + 4.6 COMPONENTS
+ | =====================
+ | 4.6.1  배지
+ | 4.6.2  툴팁
+ | 4.6.3  배너
+ | 4.6.4  공유하기
+ | 4.6.5  인증번호
+ | 4.6.6  계좌 선택/목록
+ | ---------------------
+ + 4.7 ICONS
+ | =====================
+ | 4.7.1  은행
+ | 4.7.2  증권
+ | 4.7.3  보험
+ | 4.7.4  국기
+
+ 6 TEMPLATES
+ | ---------------------
+ + 5.1 페이지
+ | =====================
+ | 5.1.1  약관
+ | 5.1.2  게시판 목록
+ | 5.1.3  썸네일 목록
+ | 5.1.4  게시판 상세
+ | 5.1.5  계좌정보 리스트
+ | 5.1.6  설정
+ | ---------------------
+ + 5.2 팝업
+ | =====================
+ | 5.2.1  약관보기
+ | 5.2.2  문서 미리보기
+ | ---------------------
+ | 5.3 레이어
+ | =====================
+ | 5.4 얼럿
+
+ 7 LAYOUT
+ | ---------------------
+ + 6.1 레이아웃
+ | =====================
+ | 6.1.1  페이지
+ | 6.1.2  팝업
+ | 6.1.3  레이어
+ | 6.1.4  얼럿
+ | 6.1.5  CMS
+ | ---------------------
+ | 6.2 딤
+
+ 8 HELPER
+
+ 9 FUNCTION
+
+ 10 SERVICES
+ | 10.1  계좌관리(Account)
+ | 10.2  상품(Commodity)
+ | 10.3  외환(Exchange)
+ | 10.4  금융(Finance)
+ | 10.5  메인(Home)
+ | 10.6  라이프(Life)
+ | 10.7  마이올원(Myallone)
+ | 10.8  전체메뉴(Navigation)
+ | 10.9  공과금(Tax)
+ | 10.10 공통(Utility)
+*/
+
+/* RESET
+   ===== */
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+ul,
+ol,
+dl {
+    list-style: none;
+}
+img {
+    max-width: 100%;
+    vertical-align: top;
+}
+.img {
+    width:100%;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+button {
+    cursor: pointer;
+}
+input,
+textarea {
+    user-select: auto;
+   -webkit-user-select: auto;
+}
+
+/* FONT-FACE
+   ========= */
+
+@font-face {
+    font-weight: normal;
+    font-family: "Noto Sans KR";
+    src:url(../fonts/NotoSansKR-Regular.otf)   format("opentype"),
+        url(../fonts/NotoSansKR-Regular.woff)  format("woff"),
+        url(../fonts/NotoSansKR-Regular.woff2) format("woff2"),
+        url(../fonts/NotoSansKR-Regular.ttf)   format("truetype");
+}
+
+@font-face {
+    font-weight: bold;
+    font-family: "Noto Sans KR";
+    src:url(../fonts/NotoSansKR-Medium.otf)    format("opentype"),
+        url(../fonts/NotoSansKR-Medium.woff)   format("woff"),
+        url(../fonts/NotoSansKR-Medium.woff2)  format("woff2"),
+        url(../fonts/NotoSansKR-Medium.ttf)    format("truetype");
+}
+
+@font-face {
+    font-weight: normal;
+    font-family: "Roboto";
+    src:url(../fonts/Roboto-Regular.woff2)     format("woff2");
+}
+
+@font-face {
+    font-weight: bold;
+    font-family: "Roboto";
+    src:url(../fonts/Roboto-Medium.woff2)      format("woff2");
+}
+
+html {
+    font-size: 62.5%;
+    -webkit-overflow-scrolling: auto;
+}
+
+@media (max-width: 320px) { html { font-size: 56.5%; } }
+@media (max-width: 280px) { html { font-size: 50%; } }
+
+body {
+    color: var(--color-root);
+    font-size: 1.5rem;
+    line-height: 1.5;
+    font-family: var(--word);
+    letter-spacing: -0.025em;
+    overflow-wrap: break-word;
+    -webkit-text-size-adjust: none;
+}
+
+body.big-font { font-size:1.6rem; }
+
+button,
+input,
+textarea {
+    color:var(--font1);
+    font-size: 1.6rem;
+    line-height: 1.5;
+    font-family: var(--word);
+    letter-spacing: -0.025em;
+    -webkit-appearance:none;
+}
+
+
+/* VARIABLES
+   ========= */
+
+/*
+    COLOR PALETTE
+
+    --G : Gray       --B : Background  --FR : Function Red
+    --F : Font       --P : Point       --FB : Function Blue
+    --E : Etc
+*/
+
+body {
+    --G01:#111111; --F01:#121212; --FR1:#400000; --E01:#331f00; --B01:#5fa376; --B11:#f2faf5; --B21:#d3f2dd; --B31:#173321;
+    --G02:#333333; --F02:#343434; --FR2:#800000; --E02:#664400; --B02:#c27e9f; --B12:#faf5f7; --B22:#f2d3e2; --B32:#3d1629;
+    --G03:#555555; --F03:#666666; --FR3:#ec0c0c; --E03:#997300; --B03:#9871c7; --B13:#f6f2fa; --B23:#e1d3f2; --B33:#34204d;
+    --G04:#999999; --F04:#909090; --FR4:#ff6666; --E04:#d9ae02; --B04:#416c94; --B14:#edf4fa; --B24:#d3e4f2; --B34:#1b344d;
+    --G05:#b3b3b3; --F05:#a6a6a6; --FR5:#ffb2b2; --E05:#ffd103; --B05:#5c9cb8; --B15:#edf6fa; --B25:#d3e9f2; --B35:#164559;
+    --G06:#d3d3d3; --F06:#bfbfbf; --FB1:#002259; --E06:#ffe600; --B06:#52a39c; --B16:#e8faf8; --B26:#d3f2f0; --B36:#13403c;
+    --G07:#e6e6e6; --F07:#d9d9d9; --FB2:#003b99; --E07:#ffec40; --B07:#c26391; --B17:#faf0f5; --B27:#f7d7e7; --B37:#4d1b33;
+    --G08:#f0f0f0; --F08:#e6e6e6; --FB3:#2c6dd4; --E08:#fff27f; --B08:#7d76c2; --B18:#f1f0fa; --B28:#d5d3f2; --B38:#211e4a;
+    --G09:#f6f6f6; --F09:#f2f2f2; --FB4:#66a1ff; --E09:#fff9bf; --B09:#7a7a7a; --B19:#f7f7f7; --B29:#f2f2f2; --B39:#333333;
+    --G10:#ffffff; --F10:#ffffff; --FB5:#b2d0ff; --E10:#fffce5; --B10:#90959e; --B20:#f0f4fa; --B30:#e1e7f2; --B40:#383b40;
+
+    --P11:#062512; --P21:#38001b; --P31:#200443; --P41:#011b33; --P51:#012d40; --P61:#002925; --P71:#2e0016; --P81:#090536;
+    --P12:#093f1f; --P22:#5a0d32; --P32:#3d0e77; --P42:#01284d; --P52:#023e58; --P62:#003a35; --P72:#4e0026; --P82:#130d54;
+    --P13:#0d572b; --P23:#92265a; --P33:#4f1696; --P43:#013566; --P53:#095778; --P63:#005952; --P73:#88124b; --P83:#221a73;
+    --P14:#12743a; --P24:#af4f7d; --P34:#6b29be; --P44:#014280; --P54:#187aa4; --P64:#088076; --P74:#b2266a; --P84:#302793;
+    --P15:#00ac47; --P25:#d870a3; --P35:#8b41e7; --P45:#015aac; --P55:#2b9ac9; --P65:#12a396; --P75:#d4478c; --P85:#4338b8;
+    --P16:#34cf74; --P26:#e794bd; --P36:#9f62eb; --P46:#287dca; --P56:#57b6de; --P66:#3dc0b4; --P76:#e269a4; --P86:#6d63d3;
+    --P17:#6be99f; --P27:#eeb7d2; --P37:#b78bee; --P47:#6eabe5; --P57:#7dcaea; --P67:#6dd8ce; --P77:#ed8cbc; --P87:#8d85e5;
+    --P18:#a6f4c6; --P28:#f7cce1; --P38:#d1b3f6; --P48:#9dcffd; --P58:#a8dcf2; --P68:#99e9e2; --P78:#fab5d7; --P88:#b9b3f6;
+    --P19:#cdfbe0; --P29:#f7deea; --P39:#ebdaff; --P49:#cae6ff; --P59:#d1f1ff; --P69:#c6fffa; --P79:#ffd6ea; --P89:#d4d0ff;
+    --P20:#e2ffee; --P30:#ffeff7; --P40:#f4ebff; --P50:#e8f4ff; --P60:#e8f8ff; --P70:#dbfffc; --P80:#ffedf6; --P80:#e9e7ff;
+}
+
+.dark-mode {
+    --G01:#ffffff; --F01:#ffffff;
+    --G02:#e6e6e6; --F02:#f2f2f2;
+    --G03:#d0d0d0; --F03:#d9d9d9;
+    --G04:#b0b0b0; --F04:#bfbfbf;
+    --G05:#909090; --F05:#a6a6a6;
+    --G06:#707070; --F06:#909090;
+    --G07:#505050; --F07:#777777;
+    --G08:#404040; --F08:#555555;
+    --G09:#303030; --F09:#343434;
+    --G10:#212121; --F10:#121212;
+}
+
+/* COLOR SET */
+
+body {
+    /* --point-light                      : var(--P16); */
+}
+
+/* ROOT
+   ==== */
+
+body {overflow-x:hidden; overflow-y:scroll; background-color:var(--bg-root);}
+body.lock {overflow:hidden; position:fixed; width:100%; height:100vh;}
+
+.content.-wide .hr {margin:2rem 0;}
+
+/* 헤더 버튼 */
+.header .func {display:flex; align-items:center; height:2.4rem; background-color:transparent; color:var(--font4); font-size:1.4rem; white-space:nowrap;}
+.header .func.-back    {width:1.2rem; background:url(../imgs/ico/common/ico-func-back.png)       no-repeat 0 / cover;}
+.header .func.-bigsize {width:  4rem; background:url(../imgs/ico/common/ico-func-bigsize.png)    no-repeat 0 / cover;}
+.header .func.-alarm   {width:  2rem; background:url(../imgs/ico/common/ico-func-alarm.png)      no-repeat 0 / cover;}
+.header .func.-home    {width:  2rem; background:url(../imgs/ico/common/ico-func-home.png)       no-repeat 50% / 1.8rem 2.4rem;}
+.header .func.-menu    {width:  2rem; background:url(../imgs/ico/common/ico-func-menu.png)       no-repeat 0 / cover;}
+.header .func.-close   {width:1.8rem; background:url(../imgs/ico/common/ico-func-close.png)      no-repeat 0 / cover;}
+.header .func.-setting {width:  2rem; background:url(../imgs/ico/common/ico-func-setting.png)    no-repeat 0 / cover;}
+.header .func.-search  {width:2.1rem; background:url(../imgs/ico/common/ico-func-search.png)     no-repeat 0 / cover;}
+.header .func.-in      {width:  2rem; background:url(../imgs/ico/common/ico-func-in.png)         no-repeat 0 / cover;}
+.header .func.-out     {width:  2rem; background:url(../imgs/ico/common/ico-func-out.png)        no-repeat 0 / cover;}
+
+.header .func.-active {position:relative;}
+.header .func.-active:after {content:""; position:absolute; top:0; right:-0.3rem; width:.5rem; height:.5rem; border-radius:50%; background-color:#f00;}
+
+.dark-mode .header .func.-back    {background-image:url(../imgs/ico/common/dark-mode/ico-func-back.png);}
+.dark-mode .header .func.-bigsize {background-image:url(../imgs/ico/common/dark-mode/ico-func-bigsize.png);}
+.dark-mode .header .func.-alarm   {background-image:url(../imgs/ico/common/dark-mode/ico-func-alarm.png);}
+.dark-mode .header .func.-home    {background-image:url(../imgs/ico/common/dark-mode/ico-func-home.png);}
+.dark-mode .header .func.-menu    {background-image:url(../imgs/ico/common/dark-mode/ico-func-menu.png);}
+.dark-mode .header .func.-close   {background-image:url(../imgs/ico/common/dark-mode/ico-func-close.png);}
+.dark-mode .header .func.-setting {background-image:url(../imgs/ico/common/dark-mode/ico-func-setting.png);}
+.dark-mode .header .func.-search  {background-image:url(../imgs/ico/common/dark-mode/ico-func-search.png);}
+.dark-mode .header .func.-in      {background-image:url(../imgs/ico/common/dark-mode/ico-func-in.png);}
+.dark-mode .header .func.-out     {background-image:url(../imgs/ico/common/dark-mode/ico-func-out.png);}
+
+/* 배지 */
+.badges {display:flex;}
+.badges.-left {justify-content:flex-start;}
+.badges.-center {justify-content:center;}
+.badges.-right {justify-content:flex-end;}
+.badges .badge + .badge {margin-left:.4rem;}
+
+.badge {display:inline-block; padding:.2rem 1rem; border-radius:2rem; background-color:#eff4fc; color:#646873; font-size:1.1rem; line-height:1.6rem;}
+
+.badge.-grade1 {border:1px solid #ec0c0c; background-color:transparent; color:#ec0c0c;}
+.badge.-grade2 {border:1px solid #ff7f29; background-color:transparent; color:#ff7f29;}
+.badge.-grade3 {border:1px solid #d9ae02; background-color:transparent; color:#d9ae02;}
+.badge.-grade4 {border:1px solid #12a396; background-color:transparent; color:#12a396;}
+.badge.-grade5 {border:1px solid #015aac; background-color:transparent; color:#015aac;}
+.badge.-grade6 {border:1px solid #2b9ac9; background-color:transparent; color:#2b9ac9;}
+
+/* 툴팁 */
+.tooltip {display:inline-flex; position:relative; width:1.8rem; margin:0 .4rem; vertical-align:middle;}
+.tooltip > .trigger {position:absolute; top:50%; left:0; width:1.8rem; height:1.8rem; background:url(../imgs/ico/common/ico-tooltip.png) no-repeat 0 / 1.8rem; vertical-align:middle; transform:translateY(-58%);}
+.tooltip.-active > .trigger {background-image:url(../imgs/ico/common/ico-tooltip-active.png);}
+.tooltip > .panel {display:none; position:absolute; top:1.4rem; left:0; padding:1.3rem 4.7rem 1.3rem 2rem; border:1px solid var(--line2); border-radius:.4rem; background-color:var(--bg-root); color:var(--font1); font-style:normal; font-weight:normal; font-size:1.4rem; line-height:1.5; text-decoration:none; text-align:left;}
+.tooltip.-active > .panel {display:block; z-index:10;}
+.tooltip.-reversed > .panel {top:auto; bottom: 1.7rem;}
+.tooltip > .panel > .close {position:absolute; top:.9rem; right:1.2rem; width:2.8rem; height:2.8rem; background:url(../imgs/ico/common/ico-tooltip-close.png) no-repeat 0 0 / cover;}
+.tooltip > .panel > .title {display:block; margin-bottom:1.2rem; color:var(--font1); font-weight:bold; font-size:1.7rem;}
+.tooltip > .panel > span:not(.title) {display:block; position:relative; margin-top:.0667em; padding-left:0.66667em; word-break:keep-all; overflow-wrap:break-word;}
+.tooltip > .panel > span:first-child {margin-top:0;}
+.tooltip > .panel > span:not(.title):before {content:""; position:absolute; top:0.66667em; left:0; width:.2em; height:.2em; border-radius:50%; background-color:var(--font2);}
+
+.dark-mode .tooltip > .trigger {background-image:url(../imgs/ico/common/dark-mode/ico-tooltip.png);}
+.dark-mode .tooltip.-active > .trigger {background-image:url(../imgs/ico/common/dark-mode/ico-tooltip-active.png);}
+.dark-mode .tooltip > .panel > .close {background-image:url(../imgs/ico/common/dark-mode/ico-tooltip-close.png);}
+
+.label + .tooltip {margin-bottom:.2rem;}
