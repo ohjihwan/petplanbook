@@ -118,6 +118,7 @@ textarea {
     --E : Etc
 */
 
+@media (prefers-color-scheme: dark) {
 body {
     --G01:#111111; --F01:#121212; --FR1:#400000; --E01:#331f00; --B01:#5fa376; --B11:#f2faf5; --B21:#d3f2dd; --B31:#173321;
     --G02:#333333; --F02:#343434; --FR2:#800000; --E02:#664400; --B02:#c27e9f; --B12:#faf5f7; --B22:#f2d3e2; --B32:#3d1629;
@@ -140,23 +141,7 @@ body {
     --P18:#a6f4c6; --P28:#f7cce1; --P38:#d1b3f6; --P48:#9dcffd; --P58:#a8dcf2; --P68:#99e9e2; --P78:#fab5d7; --P88:#b9b3f6;
     --P19:#cdfbe0; --P29:#f7deea; --P39:#ebdaff; --P49:#cae6ff; --P59:#d1f1ff; --P69:#c6fffa; --P79:#ffd6ea; --P89:#d4d0ff;
     --P20:#e2ffee; --P30:#ffeff7; --P40:#f4ebff; --P50:#e8f4ff; --P60:#e8f8ff; --P70:#dbfffc; --P80:#ffedf6; --P80:#e9e7ff;
-}
-
-.dark-mode {
-    --G01:#ffffff; --F01:#ffffff;
-    --G02:#e6e6e6; --F02:#f2f2f2;
-    --G03:#d0d0d0; --F03:#d9d9d9;
-    --G04:#b0b0b0; --F04:#bfbfbf;
-    --G05:#909090; --F05:#a6a6a6;
-    --G06:#707070; --F06:#909090;
-    --G07:#505050; --F07:#777777;
-    --G08:#404040; --F08:#555555;
-    --G09:#303030; --F09:#343434;
-    --G10:#212121; --F10:#121212;
-}
-
-/* COLOR SET */
-body {
+	
 	--point-light: var(--P16); --point: var(--P15); --point-dark: var(--P14);
 	--font1: var(--F01); --font2: var(--F02); --font3: var(--F03); --font4: var(--F04); --font5: var(--F06); --font6: var(--F07); --font-allblack: var(--F01);
 	--emphasis: var(--P15);	--red: var(--FR3); --blue: var(--FB3);
@@ -205,21 +190,22 @@ body {
 	 --border-segments: var(--G06); --border-segments-active: var(--G01); 
 	 --color-segments: var(--F04); --color-segments-active: var(--G01); 
 	 --value-auth-number: var(--F06);
-
-	 /* icons */
-	 --notice-icon: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 21.35 21.35' %3E%3Cpath d='M10.6 0A10.7 10.7 0 003 3.15a10.75 10.75 0 0015.2 15.2A10.75 10.75 0 0010.6 0zm0 20a9.25 9.25 0 119.25-9.25A9.27 9.27 0 0110.6 20zm-1-7.75v-6a.75.75 0 011.5 0v6a.75.75 0 01-1.5 0zM11.35 15a1 1 0 11-1-1 1 1 0 011 1z' fill='%23222' /%3E%3C/svg%3E");
-	 --refresh-icon: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' %3E%3Cpath d='M41.57 33.31A18.83 18.83 0 116.43 19.75a20 20 0 011.28-2.68 2.26 2.26 0 013.9 2.27 13.56 13.56 0 00-1 2 14.33 14.33 0 1018.53-8.21 11.63 11.63 0 00-3.93-.13l-1.21.08 3 2.64a2.25 2.25 0 01.2 3.17 2.22 2.22 0 01-1.69.77 2.26 2.26 0 01-1.48-.56l-9-8 9-8a2.25 2.25 0 013 3.38l-2.23 2h.13a14.38 14.38 0 015.85.52 18.85 18.85 0 0110.79 24.31z' fill='%23111' /%3E%3C/svg%3E");
-	 --plus-icon: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' %3E%3Cpath d='M11.75 6a.76.76 0 01-.75.75H6.75V11a.75.75 0 01-1.5 0V6.75H1a.75.75 0 010-1.5h4.25V1a.75.75 0 011.5 0v4.25H11a.76.76 0 01.75.75z' fill='%23111' /%3E%3C/svg%3E");
-	 --plus-disabled-icon: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' %3E%3Cpath d='M11.75 6a.76.76 0 01-.75.75H6.75V11a.75.75 0 01-1.5 0V6.75H1a.75.75 0 010-1.5h4.25V1a.75.75 0 011.5 0v4.25H11a.76.76 0 01.75.75z' fill='%23b3b3b3' /%3E%3C/svg%3E");
-	 --minus-disabled-icon: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' %3E%3Cpath d='M11.75 6a.76.76 0 01-.75.75H1a.75.75 0 010-1.5h10a.76.76 0 01.75.75z' fill='%23b3b3b3' /%3E%3C/svg%3E");
-	 --minus-icon: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' %3E%3Cpath d='M11.75 6a.76.76 0 01-.75.75H1a.75.75 0 010-1.5h10a.76.76 0 01.75.75z' fill='%23111' /%3E%3C/svg%3E");
-	 --arrow-right-icon: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' %3E%3Cpath d='M7.5,21.75A.74.74,0,0,1,7,21.53a.75.75,0,0,1,0-1.06L15.44,12,7,3.53A.75.75,0,0,1,8,2.47l9,9a.75.75,0,0,1,0,1.06l-9,9A.75.75,0,0,1,7.5,21.75Z' fill='%23666' /%3E%3C/svg%3E");
-	 --clear-icon: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 42 42' %3E%3Cpath d='M21 0A21 21 0 110 21 21 21 0 0121 0zm2.12 21.5l6.16 6.16a1.5 1.5 0 11-2 2.22l-.07-.07L21 23.62l-6.16 6.16a1.5 1.5 0 01-2.22-2 .23.23 0 01.07-.07l6.16-6.16-6.16-6.16a1.5 1.5 0 011.67-2.49 1.55 1.55 0 01.33.3l.07.07L21 19.38l6.16-6.16a1.5 1.5 0 012.19 2l-.07.07z' fill='%23767676' fill-rule='evenodd' /%3E%3C/svg%3E");
-	 --vertical-dashed-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' %3E%3Cline x1='2' y1='2' x2='2' y2='100%' stroke='%23000' stroke-width='2' stroke-dasharray='3%2c5' stroke-dashoffset='0' stroke-linecap='round'/%3e%3c/svg%3e");
-	 --common-checked-icon: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 19.6' %3E%3Cpath d='M13.3 17.6L11.9 19c-.8.8-2 .8-2.8 0L.6 10.5c-.8-.8-.8-2 0-2.8.8-.8 2-.8 2.8 0l9.9 9.9zM9.1 19l-1.4-1.4 17-17c.8-.8 2-.8 2.8 0 .8.8.8 2 0 2.8L11.9 19c-.8.8-2 .8-2.8 0z' fill='%23fff' /%3E%3C/svg%3E");
+}
 }
 
-.dark-mode {
+@media (prefers-color-scheme: dark) {
+body {
+    --G01:#ffffff; --F01:#ffffff;
+    --G02:#e6e6e6; --F02:#f2f2f2;
+    --G03:#d0d0d0; --F03:#d9d9d9;
+    --G04:#b0b0b0; --F04:#bfbfbf;
+    --G05:#909090; --F05:#a6a6a6;
+    --G06:#707070; --F06:#909090;
+    --G07:#505050; --F07:#777777;
+    --G08:#404040; --F08:#555555;
+    --G09:#303030; --F09:#343434;
+    --G10:#212121; --F10:#121212;
+
 	--point-light: var(--P16); --point: var(--P15); --point-dark: var(--P14);
 	--font1: var(--F01); --font2: var(--F02); --font3: var(--F03); --font4: var(--F04); --font5: var(--F06); --font6: var(--F08); --font-allblack: var(--F10);
 	--emphasis: var(--P15); --red: var(--FR4); --blue: var(--FB4);
@@ -269,6 +255,9 @@ body {
 	--color-segments: var(--F04); --color-segments-active: var(--G01); 
 	--value-auth-number: var(--F06);
 }
+}
+
+/* COLOR SET */
 
 /* ROOT
    ==== */
@@ -291,17 +280,6 @@ body.lock {overflow:hidden; position:fixed; width:100%; height:100vh;}
 
 .header .func.-active {position:relative;}
 .header .func.-active:after {content:""; position:absolute; top:0; right:-0.3rem; width:.5rem; height:.5rem; border-radius:50%; background-color:#f00;}
-
-.dark-mode .header .func.-back    {background-image:url(../imgs/ico/common/dark-mode/ico-func-back.png);}
-.dark-mode .header .func.-bigsize {background-image:url(../imgs/ico/common/dark-mode/ico-func-bigsize.png);}
-.dark-mode .header .func.-alarm   {background-image:url(../imgs/ico/common/dark-mode/ico-func-alarm.png);}
-.dark-mode .header .func.-home    {background-image:url(../imgs/ico/common/dark-mode/ico-func-home.png);}
-.dark-mode .header .func.-menu    {background-image:url(../imgs/ico/common/dark-mode/ico-func-menu.png);}
-.dark-mode .header .func.-close   {background-image:url(../imgs/ico/common/dark-mode/ico-func-close.png);}
-.dark-mode .header .func.-setting {background-image:url(../imgs/ico/common/dark-mode/ico-func-setting.png);}
-.dark-mode .header .func.-search  {background-image:url(../imgs/ico/common/dark-mode/ico-func-search.png);}
-.dark-mode .header .func.-in      {background-image:url(../imgs/ico/common/dark-mode/ico-func-in.png);}
-.dark-mode .header .func.-out     {background-image:url(../imgs/ico/common/dark-mode/ico-func-out.png);}
 
 /* 배지 */
 .badges {display:flex;}
