@@ -11,8 +11,6 @@
     padding: 0;
     border: none;
     outline: none;
-    user-select: none;
-    -webkit-user-select: none;
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: transparent;
 }
@@ -36,43 +34,14 @@ a {
 button {
     cursor: pointer;
 }
-input,
-textarea {
-    user-select: auto;
-   -webkit-user-select: auto;
-}
 
 /* FONT-FACE
    ========= */
-
 @font-face {
-    font-weight: normal;
-    font-family: "Noto Sans KR";
-    src:url(../fonts/NotoSansKR-Regular.otf)   format("opentype"),
-        url(../fonts/NotoSansKR-Regular.woff)  format("woff"),
-        url(../fonts/NotoSansKR-Regular.woff2) format("woff2"),
-        url(../fonts/NotoSansKR-Regular.ttf)   format("truetype");
-}
-
-@font-face {
-    font-weight: bold;
-    font-family: "Noto Sans KR";
-    src:url(../fonts/NotoSansKR-Medium.otf)    format("opentype"),
-        url(../fonts/NotoSansKR-Medium.woff)   format("woff"),
-        url(../fonts/NotoSansKR-Medium.woff2)  format("woff2"),
-        url(../fonts/NotoSansKR-Medium.ttf)    format("truetype");
-}
-
-@font-face {
-    font-weight: normal;
-    font-family: "Roboto";
-    src:url(../fonts/Roboto-Regular.woff2)     format("woff2");
-}
-
-@font-face {
-    font-weight: bold;
-    font-family: "Roboto";
-    src:url(../fonts/Roboto-Medium.woff2)      format("woff2");
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
 }
 
 html {
@@ -84,25 +53,16 @@ html {
 @media (max-width: 280px) { html { font-size: 50%; } }
 
 body {
-    color: var(--color-root);
     font-size: 1.5rem;
     line-height: 1.5;
-    font-family: var(--word);
+    font-family: 'Pretendard-Regular';
     letter-spacing: -0.025em;
-    overflow-wrap: break-word;
     -webkit-text-size-adjust: none;
 }
-
-body.big-font { font-size:1.6rem; }
 
 button,
 input,
 textarea {
-    color:var(--font1);
-    font-size: 1.6rem;
-    line-height: 1.5;
-    font-family: var(--word);
-    letter-spacing: -0.025em;
     -webkit-appearance:none;
 }
 
@@ -193,7 +153,7 @@ body {
 }
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
 body {
     --G01:#ffffff; --F01:#ffffff;
     --G02:#e6e6e6; --F02:#f2f2f2;
@@ -262,24 +222,13 @@ body {
 /* ROOT
    ==== */
 
-body {overflow-x:hidden; overflow-y:scroll; background-color:var(--bg-root);}
+body {background-color:var(--bg-root);}
 body.lock {overflow:hidden; position:fixed; width:100%; height:100vh;}
 
-/* 헤더 버튼 */
-.header .func {display:flex; align-items:center; height:2.4rem; background-color:transparent; color:var(--font4); font-size:1.4rem; white-space:nowrap;}
-.header .func.-back    {width:1.2rem; background:url(../imgs/ico/common/ico-func-back.png)       no-repeat 0 / cover;}
-.header .func.-bigsize {width:  4rem; background:url(../imgs/ico/common/ico-func-bigsize.png)    no-repeat 0 / cover;}
-.header .func.-alarm   {width:  2rem; background:url(../imgs/ico/common/ico-func-alarm.png)      no-repeat 0 / cover;}
-.header .func.-home    {width:  2rem; background:url(../imgs/ico/common/ico-func-home.png)       no-repeat 50% / 1.8rem 2.4rem;}
-.header .func.-menu    {width:  2rem; background:url(../imgs/ico/common/ico-func-menu.png)       no-repeat 0 / cover;}
-.header .func.-close   {width:1.8rem; background:url(../imgs/ico/common/ico-func-close.png)      no-repeat 0 / cover;}
-.header .func.-setting {width:  2rem; background:url(../imgs/ico/common/ico-func-setting.png)    no-repeat 0 / cover;}
-.header .func.-search  {width:2.1rem; background:url(../imgs/ico/common/ico-func-search.png)     no-repeat 0 / cover;}
-.header .func.-in      {width:  2rem; background:url(../imgs/ico/common/ico-func-in.png)         no-repeat 0 / cover;}
-.header .func.-out     {width:  2rem; background:url(../imgs/ico/common/ico-func-out.png)        no-repeat 0 / cover;}
-
-.header .func.-active {position:relative;}
-.header .func.-active:after {content:""; position:absolute; top:0; right:-0.3rem; width:.5rem; height:.5rem; border-radius:50%; background-color:#f00;}
+/* 버튼 */
+.button {height:4rem; line-height:4rem; padding:0 2.6rem; font-size:1.6rem; font-weight:600;}
+.button.-primary {color:#000; background-color:#ffcd00;}
+.button.-secondary  {color:#000; background-color:#fff5cb;}
 
 /* 배지 */
 .badges {display:flex;}

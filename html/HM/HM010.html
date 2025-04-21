@@ -6,69 +6,52 @@
     <title>HM010</title>
 	
 	<link rel="stylesheet" href="../../assets/css/common-ui.css">
+	<link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
     <div class="page">
 		<div class="container">
 			<header class="header">
-				<h1 class="logo">
-					<span>Pet Plan Book</span>
-				</h1>
+				<div class="inner">
+					<h1 class="logo">
+						<span class="txt" style="display:none;">펫 플랜 북</span>
+					</h1>
 
-				<ul class="menu">
-					<li>
-						<a href="#none">장소찾기</a>
-						<ul>
-							<li><a href="#none">숙박</a></li>
-							<li><a href="#none">식당/카페</a></li>
-							<li><a href="#none">놀거리</a></li>
+					<nav class="gnb">
+						<ul class="menu-depth1">
+							<li>
+								<a href="#none" class="link">장소찾기</a>
+								<ul class="menu-depth2">
+									<li><a href="#none" class="link">숙박</a></li>
+									<li><a href="#none" class="link">식당/카페</a></li>
+									<li><a href="#none" class="link">놀거리</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#none" class="link">커뮤니티</a>
+								<ul class="menu-depth2">
+									<li><a href="#none" class="link">루트공유하기</a></li>
+									<li><a href="#none" class="link">이벤트</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#none" class="link">마이페이지</a>
+								<ul class="menu-depth2">
+									<li><a href="#none" class="link">루트저장하기</a></li>
+									<li><a href="#none" class="link">내글보기</a></li>
+									<li><a href="#none" class="link">프로필</a></li>
+								</ul>
+							</li>
 						</ul>
-					</li>
-					<li>
-						<a href="#none">커뮤니티</a>
-						<ul>
-							<li><a href="#none">루트공유하기</a></li>
-							<li><a href="#none">이벤트</a></li>
-						</ul>
-					</li>
-					<li>
-						<a href="#none">마이페이지</a>
-						<ul>
-							<li><a href="#none">루트저장하기</a></li>
-							<li><a href="#none">내글보기</a></li>
-							<li><a href="#none">프로필필</a></li>
-						</ul>
-					</li>
-				</ul>
+					</nav>
 
-				<div class="quick-search-box">
 					<div class="quick-search">
-						<label for="search"><span class="hide">장소 검색색</span></label>
-						<input type="search" id="search" placeholder="빠른 검색창">
+						<a href="#none" class="link">휴가 계획하기 좋은곳?</a>
 					</div>
-					<ul class="quick-location">
-						<li>
-							<a href="#none">
-								<figure>
-									<img src="" alt="">
-								</figure>
-								<div class="location-list">
-									<ul>
-										<li>
-											<span class="quick-location-list">호텔땡땡땡</span>
-											<span class="quick-location-add">경기도 수원시 458</span>
-											<span class="quick-location-tel">010-1234-5678</span>
-										</li>
-										<li>
-											<span class="quick-location-list">카페땡땡땡</span>
-											<span class="quick-location-add">경기도 안양시 457</span>
-											<span class="quick-location-tel">010-1234-5678</span>
-										</li>
-									</ul>
-								</div>
-							</a>
-						</li>
-					</ul>
+
+					<div class="quick-link">
+						<a href="#none" class="link">LOGIN</a>
+					</div>
 				</div>
 			</header>
 
@@ -76,177 +59,184 @@
 				<div class="content">
 					
 					<section class="main-banner">
+						<figure class="img-box">
+							<img src="../../assets/imgs/img/img-HM010-3.jpg" alt="">
+						</figure>
 						<div class="title-box">
 							<h2 class="title">어디로 갈까요?</h2>
-							<p class="txt">반려동물과 함께 떠나는 여행지 루트짜기</p>
-						</div>
-						<div class="button-box">
-							<button type="button">찾아보기</button>
+							<p class="txt">내 새꾸와 함께하는, 여행지 루트 만들기!</p>
+							<div class="button-box">
+								<button type="button" class="button -primary">추천보기</button>
+							</div>
 						</div>
 					</section>
 
 					<section class="suggestion-place">
-						<div class="title-box">
-							<h2 class="title">추천 목적지지</h2>
-							<p class="txt">카테고리별 추천 드리는곳곳</p>
-						</div>
-						<div class="place-area">
-							<div class="suggestion-place">
-								<div class="img-box">
-									<div class="badges">
-										<span class="badge">배지</span>
-										<span class="badge">배지</span>
-									</div>
-									<img src="" alt="">
-								</div>
-
-								<div class="place-info">
-									<h3>호텔 OOO</h3>
-									<span>주소 : 서울시 서초구 방배동동</span>
-								</div>
-							</div>
-							<div class="suggestion-place">
-								<div class="img-box">
-									<div class="badges">
-										<span class="badge">배지</span>
-										<span class="badge">배지</span>
-									</div>
-									<img src="" alt="">
-								</div>
-
-								<div class="place-info">
-									<h3>식당 OOO</h3>
-									<span>주소 : 서울시 서초구 방배동동</span>
-								</div>
-							</div>
-							<div class="suggestion-place">
-								<div class="img-box">
-									<div class="badges">
-										<span class="badge">배지</span>
-										<span class="badge">배지</span>
-									</div>
-									<img src="" alt="">
-								</div>
-
-								<div class="place-info">
-									<h3>애견유치원 OOO</h3>
-									<span>주소 : 서울시 서초구 방배동동</span>
-								</div>
-							</div>
-						</div>
-					</section>
-
-					<section class="route-setting-area">
-						<div class="img-title">
-							<img src="" alt="" >
+						<div class="inner">
 							<div class="title-box">
-								<h2 class="title">어디로 갈까요?</h2>
-								<p class="txt">반려동물과 함께 떠나는 여행지 루트짜기</p>
+								<h2 class="title">추천 목적지</h2>
+								<p class="txt">여기 정말 괜찮아요 추천할게요</p>
+							</div>
+							<div class="place-area">
+								<div class="place">
+									<div class="img-box">
+										<img src="" alt="">
+									</div>
+									<div class="place-info">
+										<h3 class="main-txt">호텔 OOO</h3>
+										<span class="sub-txt">주소 : 서울시 서초구 방배동동</span>
+									</div>
+									<div class="hashtag">
+										<span>#놀거리</span>
+									</div>
+								</div>
+								<div class="place">
+									<div class="img-box">
+										<img src="" alt="">
+									</div>
+
+									<div class="place-info">
+										<h3 class="main-txt">식당 OOO</h3>
+										<span class="sub-txt">주소 : 서울시 서초구 방배동동</span>
+									</div>
+									<div class="hashtag">
+										<span>#식당/카페</span>
+									</div>
+								</div>
+								<div class="place">
+									<div class="img-box">
+										<img src="" alt="">
+									</div>
+
+									<div class="place-info">
+										<h3 class="main-txt">애견유치원 OOO</h3>
+										<span class="sub-txt">주소 : 서울시 서초구 방배동동</span>
+									</div>
+									<div class="hashtag">
+										<span>#숙박</span>
+									</div>
+								</div>
 							</div>
 						</div>
-						<form action="" class="route-setting">
-							<div class="route-fields">
-								<div class="route-field">
-									<div class="field">
-										<label for="id1">장소 찾기</label>
-										<input type="text" name="" id="id1">
-									</div>
-									<div class="location-list">
-										<ul>
-											<li>
-												<span class="quick-location-list">호텔땡땡땡</span>
-												<span class="quick-location-add">경기도 수원시 458</span>
-												<span class="quick-location-tel">010-1234-5678</span>
-											</li>
-											<li>
-												<span class="quick-location-list">카페땡땡땡</span>
-												<span class="quick-location-add">경기도 안양시 457</span>
-												<span class="quick-location-tel">010-1234-5678</span>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<div class="route-field">
-									<div class="field">
-										<label for="id2">날짜 선택</label>
-										<input type="date" name="" id="id2">
-									</div>
-									<div class="location-list">
-										<ul>
-											<li>
-												<span class="quick-location-list">호텔땡땡땡</span>
-												<span class="quick-location-add">경기도 수원시 458</span>
-												<span class="quick-location-tel">010-1234-5678</span>
-											</li>
-											<li>
-												<span class="quick-location-list">카페땡땡땡</span>
-												<span class="quick-location-add">경기도 안양시 457</span>
-												<span class="quick-location-tel">010-1234-5678</span>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<div class="route-field">
-									<div class="field">
-										<label for="id3">시간 선택</label>
-										<input type="time" name="" id="id3">
-									</div>
-									<div class="location-list">
-										<ul>
-											<li>
-												<span class="quick-location-list">호텔땡땡땡</span>
-												<span class="quick-location-add">경기도 수원시 458</span>
-												<span class="quick-location-tel">010-1234-5678</span>
-											</li>
-											<li>
-												<span class="quick-location-list">카페땡땡땡</span>
-												<span class="quick-location-add">경기도 안양시 457</span>
-												<span class="quick-location-tel">010-1234-5678</span>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="button-box">
-								<button type="button">루트 만들기</button>
-							</div>
-						</form>
 					</section>
 
 					<section class="community-area">
-						<div class="title-box">
-							<h2 class="title">커뮤니티</h2>
-							<p class="txt">집사님이 남겨주신 최신 리뷰를 읽어보세요</p>
-						</div>
-						<div class="communitys">
-							<div class="unit">
-								<div class="img-box">
-									<img src="" alt="">
-								</div>
-								<p class="main-txt">여태여태</p>
-								<div class="sub-txt">
-									<span>김아무개</span>
-								</div>
+						<div class="inner">
+							<div class="title-box">
+								<h2 class="title">커뮤니티</h2>
+								<p class="txt">찐집사들이 다녀온 후기</p>
 							</div>
-							<div class="unit">
-								<div class="img-box">
-									<img src="" alt="">
+							<div class="communitys">
+								<div class="unit">
+									<a href="#none">
+										<div class="img-box">
+											<img src="" alt="">
+										</div>
+										<div class="txt-box">
+											<p class="main-txt">여태 가본데 중에 여기 최고인거 같아요</p>
+											<p class="sub-txt ellipsis">
+												김아무개 Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae molestias tenetur sed, quidem perferendis quas ex error? Odit ducimus rem dolor, debitis maiores, porro excepturi, nihil sit nobis reprehenderit voluptate.
+											</p>
+										</div>
+										<span class="name">카리나</span>
+									</a>
 								</div>
-								<p class="main-txt">여태여태</p>
-								<div class="sub-txt">
-									<span>김아무개</span>
+								<div class="unit">
+									<a href="#none">
+										<div class="img-box">
+											<img src="" alt="">
+										</div>
+										<div class="txt-box">
+											<p class="main-txt">여태 가본데 중에 여기 최고인거 같아요</p>
+											<p class="sub-txt ellipsis">
+												진짜로 친절하시구, 친구랑 같이 가기에도 굿!!
+											</p>
+										</div>
+										<span class="name">카리나</span>
+									</a>
+								</div>
+								<div class="unit">
+									<a href="#none">
+										<div class="img-box">
+											<img src="" alt="">
+										</div>
+										<div class="txt-box">
+											<p class="main-txt">여태 가본데 중에 여기 최고인거 같아요</p>
+											<p class="sub-txt ellipsis">
+												진짜로 친절하시구, 친구랑 같이 가기에도 굿!!
+											</p>
+										</div>
+										<span class="name">카리나</span>
+									</a>
+								</div>
+								<div class="unit">
+									<a href="#none">
+										<div class="img-box">
+											<img src="" alt="">
+										</div>
+										<div class="txt-box">
+											<p class="main-txt">여태 가본데 중에 여기 최고인거 같아요</p>
+											<p class="sub-txt ellipsis">
+												진짜로 친절하시구, 친구랑 같이 가기에도 굿!!
+											</p>
+										</div>
+										<span class="name">카리나</span>
+									</a>
 								</div>
 							</div>
 						</div>
 					</section>
 					
-					<section class="Instagram-area">
-						<div class="title-box">
-							<h2 class="title">인스타그램에서 만나요</h2>
-							<p class="txt">최신 SNS 소식을 팔로우 해보세요</p>
-						</div>
-						<div class="Instagram-item">
-							<!-- 가능? -->
+					<section class="celebrity-area">
+						<div class="inner">
+							<div class="title-box">
+								<h2 class="title">뜨거운 집사님</h2>
+								<p class="txt">이 구역, 가장 뜨거운 집사는 나야나~</p>
+							</div>
+							
+							<div class="celebrity-people">
+								<ul>
+									<li>
+										<a href="#none" class="link">
+											<span class="level">38.5<span>도</span></span>
+											<div class="gauge-box" aria-hidden="true">
+												<div class="gauge-bar" data-gauge="38.5"></div>
+											</div>
+											<figure class="img-box">
+												<img src="../" alt="">
+											</figure>
+											<span class="name">박영수</span>
+										</a>
+									</li>
+									<li>
+										<a href="#none" class="link">
+											<span class="level">38.5<span>도</span></span>
+											<div class="gauge-box" aria-hidden="true">
+												<div class="gauge-bar" data-gauge="38.5"></div>
+											</div>
+											<figure class="img-box">
+												<img src="../" alt="">
+											</figure>
+											<span class="name">박영수</span>
+										</a>
+									</li>
+									<li>
+										<a href="#none" class="link">
+											<span class="level">38.5<span>도</span></span>
+											<div class="gauge-box" aria-hidden="true">
+												<div class="gauge-bar" data-gauge="38.5"></div>
+											</div>
+											<figure class="img-box">
+												<img src="../" alt="">
+											</figure>
+											<span class="name">박영수</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="celebrity-buttons">
+								<button type="button" class="button -secondary">커뮤니티 놀러가기</button>
+							</div>
 						</div>
 					</section>
 
@@ -254,11 +244,15 @@
 			</main>
 
 			<footer class="footer">
-				<img src="" alt="">
-				<ul class="footer-info">
-					<li>이메일<span>null</span></li>
-					<li>연락처<span>null</span></li>
-				</ul>
+				<div class="inner">
+					<ul class="footer-info">
+						<li>이메일 : <span>ovitwisdom@gmail.com</span></li>
+						<li>대표문의 : <span>010-9658-6663</span></li>
+					</ul>
+					<p class="footer-copy">
+						All ⓒ copyrights reserved OOO.<br>Site designer MH.
+					</p>
+				</div>
 			</footer>
 		</div>
 	</div>
