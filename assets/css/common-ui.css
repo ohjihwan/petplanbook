@@ -78,7 +78,6 @@ textarea {
     --E : Etc
 */
 
-@media (prefers-color-scheme: dark) {
 body {
     --G01:#111111; --F01:#121212; --FR1:#400000; --E01:#331f00; --B01:#5fa376; --B11:#f2faf5; --B21:#d3f2dd; --B31:#173321;
     --G02:#333333; --F02:#343434; --FR2:#800000; --E02:#664400; --B02:#c27e9f; --B12:#faf5f7; --B22:#f2d3e2; --B32:#3d1629;
@@ -151,10 +150,9 @@ body {
 	 --color-segments: var(--F04); --color-segments-active: var(--G01); 
 	 --value-auth-number: var(--F06);
 }
-}
 
-@media (prefers-color-scheme: light) {
-body {
+
+.dark-mode body {
     --G01:#ffffff; --F01:#ffffff;
     --G02:#e6e6e6; --F02:#f2f2f2;
     --G03:#d0d0d0; --F03:#d9d9d9;
@@ -215,7 +213,7 @@ body {
 	--color-segments: var(--F04); --color-segments-active: var(--G01); 
 	--value-auth-number: var(--F06);
 }
-}
+
 
 /* COLOR SET */
 
