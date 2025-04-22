@@ -64,7 +64,10 @@ button,
 input,
 textarea {
     -webkit-appearance:none;
+    font-family: 'Pretendard-Regular';
 }
+input[type="file"] {line-height:5rem;}
+input[type="file"]::file-selector-button {display:none;}
 
 
 /* VARIABLES
@@ -214,8 +217,8 @@ body {
 	--value-auth-number: var(--F06);
 }
 
-
-/* COLOR SET */
+.w-full {width:100% !important}
+.hide {overflow:hidden !important; position:absolute !important; width:1px !important; height:1px !important; margin:0 !important; padding:0 !important; border:0 !important; white-space:nowrap !important; clip:rect(1px, 1px, 1px, 1px) !important; clip-path:inset(50%) !important;}
 
 /* ROOT
    ==== */
@@ -226,7 +229,8 @@ body.lock {overflow:hidden; position:fixed; width:100%; height:100vh;}
 /* 버튼 */
 .button {display:inline-block; height:4rem; line-height:4rem; padding:0 2.6rem; font-size:1.6rem; font-weight:600;}
 .button.-primary {color:#000; background-color:#ffcd00;}
-.button.-secondary  {color:#000; background-color:#fff5cb;}
+.button.-secondary {color:#000; background-color:#fff5cb;}
+.button:disabled {color:#474747; background-color:#d9d9d9;}
 
 /* 레이아웃 */
 .container {padding-top:11rem;}
@@ -255,14 +259,16 @@ body.lock {overflow:hidden; position:fixed; width:100%; height:100vh;}
 .header.-open-depth2 .inner .gnb .menu-depth2 .link {line-height:4rem; font-size:2.3rem; font-weight:400; color:#000;}
 .header.-open-depth2 .inner .quick-search::after {left:0;}
 
-.field .label {font-size:2.4rem; font-weight:600; color:#000;}
+.field .label {display:block; font-size:2.4rem; font-weight:600; color:#000;}
 .field .text ,
 .field .select {position:relative; width:100%; margin-top:1.7rem;}
 .field .text input,
 .field .select select {display:block; width:100%; height:5rem; padding:0 1.6rem; border:1px solid #d9d9d9; border-radius:1rem; background-color:#fff; font-size:2rem; font-weight:300; color:#000;}
 .field .select select {background:url(../imgs/ico/ico-select-arrow.png) no-repeat right 1.6rem center / 1rem auto; -webkit-appearance:none;}
 .field .text input::placeholder {color:#474747;}
-
+.field .text.-file input {background:url(../imgs/ico/ico-file-input.png) no-repeat right 2rem center / 2.4rem auto;}
+.textarea {position:relative;}
+.textarea textarea {display:block; width:100%; min-height:18.8rem; padding:1.6rem; margin-top:1.7rem; border:1px solid #d9d9d9; border-radius:1rem; background-color:transparent; color:var(--font1); font-size:2rem; resize:none;}
 .field + .field {margin-top:3.4rem;}
 
 .footer {display:flex; align-items:center; min-width:var(--limit-width); height:33rem; margin-top:17.8rem; background-color:#ffcd00;}

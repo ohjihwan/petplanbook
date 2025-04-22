@@ -71,126 +71,116 @@
 							</div>
 						</div>
 					</section>
-					
+
 					<section class="map-content-area">
 						<div class="inner">
-							<div class="function-box">
+							<div class="title-box">
+								<h2 class="title">글 내용 보기</h2>
+								<p class="txt">마음에든다? 내루트로 저장하자</p>
+							</div>
+
+							
+							<div class="function-box -gray-case">
+
+								<div class="following-Path">
+									<ul>
+										<li>
+											<strong>로켓 호텔</strong>
+											<dl>
+												<dt>주소</dt>
+												<dd>서울시 송파구</dd>
+												<dt>전화</dt>
+												<dd>02-0000-0000</dd>
+												<dt>날짜</dt>
+												<dd>2025-04-17</dd>
+												<dt>시간</dt>
+												<dd>오전 11:30</dd>
+											</dl>
+										</li>
+										<li>
+											<strong>봄날 카페</strong>
+											<dl>
+												<dt>주소</dt>
+												<dd>서울시 강북구</dd>
+												<dt>전화</dt>
+												<dd>02-0000-0000</dd>
+												<dt>날짜</dt>
+												<dd>2025-04-17</dd>
+												<dt>시간</dt>
+												<dd>오후 02:30</dd>
+											</dl>
+										</li>
+										<li>
+											<strong>꾸러기 애견 캠핑</strong>
+											<dl>
+												<dt>주소</dt>
+												<dd>서울시 강남구</dd>
+												<dt>전화</dt>
+												<dd>02-0000-0000</dd>
+												<dt>날짜</dt>
+												<dd>2025-04-17</dd>
+												<dt>시간</dt>
+												<dd>오전 08:00</dd>
+											</dl>
+										</li>
+										<li>
+											<strong>케이스 TEST 2</strong>
+											<dl>
+												<dt>주소</dt>
+												<dd>서울시 강남구</dd>
+												<dt>전화</dt>
+												<dd>02-0000-0000</dd>
+												<dt>날짜</dt>
+												<dd>2025-04-17</dd>
+												<dt>시간</dt>
+												<dd>오전 08:00</dd>
+											</dl>
+										</li>
+									</ul>
+								</div>
 								<!-- API 기능 -->
 								<div id="map" class="map-box">
 									<div style="display:flex; align-items:center; justify-content:center; width:100%; height:100%; font-size:6rem; font-weight:900; text-align:center; background-color:#ddd;">MAP AI 자리<br> 꼭 해당 div 를 지워주세요</div>
 								</div>
 								<!-- // -->
-								<div class="field-area">
+								<div class="board-area">
 									<div class="field">
-										<label for="text1" class="label">장소 검색</label>
-										<div class="text">
-											<input type="text" id="text1" placeholder="(예시:애견유치원)">
+										<p class="label">글 제목</p>
+										<div class="board-text">
+											<p>냥이랑 이렇게 즐거운 여행은 처음이네요</p>
 										</div>
 									</div>
 									<div class="field">
-										<label for="text" class="label">펫종류</label>
-										<div class="select">
-											<select name="" id="">
-												<option value="0">선택해 주세요</option>
-												<option value="1">강아지</option>
-												<option value="2">고양이</option>
-											</select>
+										<p class="label">사진 첨부</p>
+										<div class="board-text -board-textarea">
+											<p>기다렸던 보람이 있었어요 >_< 행복하구 즐거웠구.. 사진도 기대했던거 보다 훨씬 잘 나와서 주변에서 막 부럽다고 그러네요 겨울에도 한번 더 다녀오고 싶어용!!</p>
 										</div>
 									</div>
 									<div class="field">
-										<label for="text3" class="label">인원수</label>
-										<div class="text">
-											<input type="text" id="text3" placeholder="인원수를 입력해주세요">
-										</div>
-									</div>
-									<div class="field">
-										<label for="text4" class="label">애견수</label>
-										<div class="text">
-											<input type="text" id="text4" placeholder="애견수를 입력해주세요">
+										<p class="label">평가하기</p>
+										<div class="board-text">
+											<div class="rating-box">
+												<button type="button" class="good"><span class="hide">좋아요</span></button>
+												<!-- <button type="button"><span class="hide">싫어요</span></button> 보류 -->
+												<p class="rating-txt"><span class="number">11</span>명의 집사님이 탐내는 루트에요</p>
+											</div>
 										</div>
 									</div>
 								</div>
+
+								<div class="upload-gallery">
+									<img src="../../assets/imgs/temp/temp1.png" alt="">
+									<img src="../../assets/imgs/temp/temp2.png" alt="">
+									<img src="../../assets/imgs/temp/temp3.png" alt="">
+									<img src="../../assets/imgs/temp/temp1.png" alt="">
+									<img src="../../assets/imgs/temp/temp2.png" alt="">
+									<img src="../../assets/imgs/temp/temp3.png" alt="">
+								</div>
 							</div>
-
-							<div class="search-result-box">
-								<ul>
-									<li>
-										<a href="#none">
-											<div class="img-box">
-												<div class="flags">
-													<span class="flag -color1">신규</span>
-												</div>
-												<img src="" alt="">
-											</div>
-											<div class="txts">
-												<strong class="main-txt">무지개 <span class="point">애견</span> 유치원</strong>
-												<span class="sub-txt">경기도 평택시 비전동</span>
-
-												<span class="button -primary">자세히 보기</span>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a href="#none">
-											<div class="img-box">
-												<div class="flags">
-													<span class="flag -color2">인기</span>
-												</div>
-												<img src="" alt="">
-											</div>
-											<div class="txts">
-												<strong class="main-txt"><span class="point">애견</span>가게 스타필드점점</strong>
-												<span class="sub-txt">서울시 서초구 방배동</span>
-
-												<span class="button -primary">자세히 보기</span>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a href="#none">
-											<div class="img-box">
-												<div class="flags">
-													<span class="flag -color3">추천</span>
-												</div>
-												<img src="" alt="">
-											</div>
-											<div class="txts">
-												<strong class="main-txt">별나라 <span class="point">애견</span>동반 호텔</strong>
-												<span class="sub-txt">서울시 강남구 역삼동</span>
-
-												<span class="button -primary">자세히 보기</span>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a href="#none">
-											<div class="img-box">
-												<img src="" alt="">
-											</div>
-											<div class="txts">
-												<strong class="main-txt">공주님 <span class="point">애견</span>동반 호텔</strong>
-												<span class="sub-txt">서울시 강남구 역삼동</span>
-
-												<span class="button -primary">자세히 보기</span>
-											</div>
-										</a>
-									</li>
-
-									
-									<li>
-										<a href="#none">
-											<div class="img-box">
-												<img src="" alt="">
-											</div>
-											<div class="txts">
-												<strong class="main-txt">케이스 TEST <span class="point">애견</span></strong>
-												<span class="sub-txt">서울시 강남구 역삼동</span>
-
-												<span class="button -primary">자세히 보기</span>
-											</div>
-										</a>
-									</li>
-								</ul>
+							
+							<div class="map-content-buttons">
+								<button type="button" class="button -primary">내루트에 저장</button>
+								<button type="button" class="button -secondary">목록으로</button>
 							</div>
 						</div>
 					</section>
