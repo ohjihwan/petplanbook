@@ -224,41 +224,47 @@ body {background-color:var(--bg-root);}
 body.lock {overflow:hidden; position:fixed; width:100%; height:100vh;}
 
 /* 버튼 */
-.button {height:4rem; line-height:4rem; padding:0 2.6rem; font-size:1.6rem; font-weight:600;}
+.button {display:inline-block; height:4rem; line-height:4rem; padding:0 2.6rem; font-size:1.6rem; font-weight:600;}
 .button.-primary {color:#000; background-color:#ffcd00;}
 .button.-secondary  {color:#000; background-color:#fff5cb;}
 
-/* 배지 */
-.badges {display:flex;}
-.badges.-left {justify-content:flex-start;}
-.badges.-center {justify-content:center;}
-.badges.-right {justify-content:flex-end;}
-.badges .badge + .badge {margin-left:.4rem;}
+/* 레이아웃 */
+.container {padding-top:11rem;}
+.header {display:flex; align-items:flex-start; overflow:hidden; position:fixed; top:0; left:0; z-index:100; width:100%; height:11rem; background-color:#fff; transition:height 0.25s ease-in-out;}
+.header .inner {display:flex; align-items:center;}
+.header .inner .logo {display:flex; align-items:center; position:relative; width:31rem; height:11rem; margin-left:3.5rem; transition:opacity 0.25s ease-in-out;}
+.header .inner .logo a {display:block; overflow:hidden;}
+.header .inner .logo img {display:block; width:100%; transition:transform 0.25s ease-in-out;}
+.header .inner .logo::after {content:''; position:absolute; right:-5.5rem; bottom:-30rem; z-index:-1; width:16rem; height:16.6rem; background:url(../imgs/img/img-HM010-4.svg) no-repeat 50% / 100% auto; transition:bottom 0.25s 0.25s ease-in-out;}
+.header .inner .gnb {margin-left:8.5rem;}
+.header .inner .gnb .menu-depth1 {display:flex; gap:4rem; font-size:1.4rem;}
+.header .inner .gnb .menu-depth1 li {position:relative; width:12rem; text-align:center;}
+.header .inner .gnb .menu-depth1 li .link {font-size:2.8rem; font-weight:500; word-break:keep-all; text-align:center;}
+.header .inner .gnb .menu-depth1 li .link:hover {font-weight:800; color:#ffcd00;}
+.header .inner .gnb .menu-depth2 {display:none; position:absolute; padding-top:2rem; text-align:center; }
+.header .inner .quick-search {position:relative; margin-left:5.4rem;}
+.header .inner .quick-search::after {content:''; position:absolute; left:8rem; top:9rem; width:26.5rem; height:13rem; background:url(../imgs/img/img-HM010-5.svg) no-repeat 50% / 100% auto; transition:left 0.25s ease-in-out;}
+.header .inner .quick-search .link {display:flex; align-items:center; position:relative; width:29.3rem; height:5.1rem; padding:1.4rem 5.7rem 1.3rem 1.6rem; background-color:#f0f0f0; font-size:2rem; color:#474747;}
+.header .inner .quick-search .link::after {content:''; position:absolute; right:0; top:0; width:4.5rem; height:5.1rem; background:var(--button-primary) url(../imgs/ico/ico-search.png) no-repeat 50% / 4rem auto;}
+.header .inner .quick-link {margin-left:5.3rem;}
+.header .inner .quick-link .link {font-size:2.4rem;}
+.header.-open-depth2 {height:24.9rem;}
+.header.-open-depth2 .inner .logo::after {bottom:-16.5rem;}
+.header.-open-depth2 .inner .logo img {transform:translateX(-8rem);}
+.header.-open-depth2 .inner .gnb .menu-depth2 {display:block;}
+.header.-open-depth2 .inner .gnb .menu-depth2 .link {line-height:4rem; font-size:2.3rem; font-weight:400; color:#000;}
+.header.-open-depth2 .inner .quick-search::after {left:0;}
 
-.badge {display:inline-block; padding:.2rem 1rem; border-radius:2rem; background-color:#eff4fc; color:#646873; font-size:1.1rem; line-height:1.6rem;}
+.field .label {font-size:2.4rem; font-weight:600; color:#000;}
+.field .text ,
+.field .select {position:relative; width:100%; margin-top:1.7rem;}
+.field .text input,
+.field .select select {display:block; width:100%; height:5rem; padding:0 1.6rem; border:1px solid #d9d9d9; border-radius:1rem; background-color:#fff; font-size:2rem; font-weight:300; color:#000;}
+.field .select select {background:url(../imgs/ico/ico-select-arrow.png) no-repeat right 1.6rem center / 1rem auto; -webkit-appearance:none;}
+.field .text input::placeholder {color:#474747;}
 
-.badge.-grade1 {border:1px solid #ec0c0c; background-color:transparent; color:#ec0c0c;}
-.badge.-grade2 {border:1px solid #ff7f29; background-color:transparent; color:#ff7f29;}
-.badge.-grade3 {border:1px solid #d9ae02; background-color:transparent; color:#d9ae02;}
-.badge.-grade4 {border:1px solid #12a396; background-color:transparent; color:#12a396;}
-.badge.-grade5 {border:1px solid #015aac; background-color:transparent; color:#015aac;}
-.badge.-grade6 {border:1px solid #2b9ac9; background-color:transparent; color:#2b9ac9;}
+.field + .field {margin-top:3.4rem;}
 
-/* 툴팁 */
-.tooltip {display:inline-flex; position:relative; width:1.8rem; margin:0 .4rem; vertical-align:middle;}
-.tooltip > .trigger {position:absolute; top:50%; left:0; width:1.8rem; height:1.8rem; background:url(../imgs/ico/common/ico-tooltip.png) no-repeat 0 / 1.8rem; vertical-align:middle; transform:translateY(-58%);}
-.tooltip.-active > .trigger {background-image:url(../imgs/ico/common/ico-tooltip-active.png);}
-.tooltip > .panel {display:none; position:absolute; top:1.4rem; left:0; padding:1.3rem 4.7rem 1.3rem 2rem; border:1px solid var(--line2); border-radius:.4rem; background-color:var(--bg-root); color:var(--font1); font-style:normal; font-weight:normal; font-size:1.4rem; line-height:1.5; text-decoration:none; text-align:left;}
-.tooltip.-active > .panel {display:block; z-index:10;}
-.tooltip.-reversed > .panel {top:auto; bottom: 1.7rem;}
-.tooltip > .panel > .close {position:absolute; top:.9rem; right:1.2rem; width:2.8rem; height:2.8rem; background:url(../imgs/ico/common/ico-tooltip-close.png) no-repeat 0 0 / cover;}
-.tooltip > .panel > .title {display:block; margin-bottom:1.2rem; color:var(--font1); font-weight:bold; font-size:1.7rem;}
-.tooltip > .panel > span:not(.title) {display:block; position:relative; margin-top:.0667em; padding-left:0.66667em; word-break:keep-all; overflow-wrap:break-word;}
-.tooltip > .panel > span:first-child {margin-top:0;}
-.tooltip > .panel > span:not(.title):before {content:""; position:absolute; top:0.66667em; left:0; width:.2em; height:.2em; border-radius:50%; background-color:var(--font2);}
-
-.dark-mode .tooltip > .trigger {background-image:url(../imgs/ico/common/dark-mode/ico-tooltip.png);}
-.dark-mode .tooltip.-active > .trigger {background-image:url(../imgs/ico/common/dark-mode/ico-tooltip-active.png);}
-.dark-mode .tooltip > .panel > .close {background-image:url(../imgs/ico/common/dark-mode/ico-tooltip-close.png);}
-
-.label + .tooltip {margin-bottom:.2rem;}
+.footer {display:flex; align-items:center; min-width:var(--limit-width); height:33rem; margin-top:17.8rem; background-color:#ffcd00;}
+.footer .footer-info {display:flex; justify-content:space-evenly; align-items:center; font-size:2rem; font-weight:500; color:#000;}
+.footer .footer-copy {margin-top:9rem; font-size:1.4rem; font-weight:100; color:#000; text-align:center;}
