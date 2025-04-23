@@ -96,7 +96,10 @@ body {
 .map-content-area .function-box .board-area .board-text {padding:1.4rem 1.6rem; border-bottom:1px solid #d9d9d9; font-size:2rem; font-weight:300; color:#474747;}
 .map-content-area .function-box .board-area .board-text.-board-textarea {overflow-y:auto; height:20rem;}
 .map-content-area .function-box .board-area .board-text .rating-box {display:flex; align-items:center; justify-content:flex-start; height:5rem;}
-.map-content-area .function-box .board-area .board-text .rating-box button {width:2rem; height:2rem; background:url(../imgs/ico/ico-up.png) no-repeat 50% / 100% auto;}
+.map-content-area .function-box .board-area .board-text .rating-box .good,
+.map-content-area .function-box .board-area .board-text .rating-box .bad {width:2rem; height:2rem;}
+.map-content-area .function-box .board-area .board-text .rating-box .good {margin-right:2.3rem; background:url(../imgs/ico/ico-good.png) no-repeat 50% / 100% auto;}
+.map-content-area .function-box .board-area .board-text .rating-box .bad {background:url(../imgs/ico/ico-bad.png) no-repeat 50% / 100% auto;}
 .map-content-area .function-box .board-area .board-text .rating-box .rating-txt {margin-left:3.5rem; line-height:2rem; font-size:1.2rem; font-weight:600; color:#000;}
 .map-content-area .function-box .following-Path {flex:0 0 20rem;}
 .map-content-area .function-box .side-menu {display:flex; align-items:center; gap:0.4rem; position:absolute; left:-1px; top:-4.1rem; height:4rem; padding:0.4rem 0.4rem 0.4rem 1rem; font-size:2rem; background-color:#f2f2f2;}
