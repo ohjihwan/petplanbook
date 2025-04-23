@@ -12,16 +12,6 @@
 900 black
 */
 
-body {
-    --limit-width:144rem;
-	--button-primary:#ffcd00
-}
-
-.inner {width:var(--limit-width); min-width:var(--limit-width); margin:0 auto;}
-.ellipsis {position:relative; overflow:hidden; height:6rem; font-size:2rem; color:#000;}
-.ellipsis::before {content:''; position:absolute; right:0; bottom:0; width:17rem; height:3rem; background: linear-gradient(90deg,rgba(255, 255, 255, 0) 0%, rgba(242, 242, 242, 1) 40%);}
-.point {color:#fcb900}
-
 .main-banner {position:relative; min-width:var(--limit-width);}
 .main-banner .img-box {overflow:hidden; height:66.6rem;}
 .main-banner .img-box img {width:100%; height:100%; object-fit:cover; object-position:50%; animation:bannerEffect 0.75s forwards ease-in-out;}
@@ -66,7 +56,8 @@ body {
 .community-area .communitys .img-box {position:absolute; left:2.8rem; top:50%; transform:translateY(-50%);}
 .community-area .communitys .img-box img {width:15rem; height:15rem; border:none; background-color:#d9d9d9;}
 .community-area .communitys .txt-box .main-txt {font-size:2.4rem; font-weight:600; color:#000;}
-.community-area .communitys .txt-box .sub-txt {height:6rem; font-size:2rem; color:#000;}
+.community-area .communitys .txt-box .sub-txt {position:relative; overflow:hidden; height:6rem; font-size:2rem; color:#000;}
+.community-area .communitys .txt-box .sub-txt::before {content:''; position:absolute; right:0; bottom:0; width:17rem; height:3rem; background: linear-gradient(90deg,rgba(255, 255, 255, 0) 0%, rgba(242, 242, 242, 1) 40%);}
 
 .celebrity-area {margin-top:15rem;}
 .celebrity-area .title-box {text-align:center;}
@@ -141,3 +132,33 @@ body {
 .map-content-area .upload-gallery img {display:block; width:12.8rem; height:12.8rem;}
 
 /* CO */
+.list-content-area {margin-top:15rem;}
+.list-content-area .title-box {text-align:center;}
+.list-content-area .title-box .title {line-height:1.2; font-size:6.4rem; font-weight:900; color:var(--button-primary);}
+.list-content-area .title-box .txt {font-size:2.4rem; font-weight:600; color:#000;}
+.list-content-area .buttons {margin:6rem 0 2.8rem;}
+.list-content-area .list-content {}
+.list-content-area .list-content .lists {}
+.list-content-area .list-content .unit a {display:flex; align-items:center; position:relative; background-color:#fbfbfb;}
+.list-content-area .list-content .unit + .unit {overflow:hidden; margin-top:1.3rem;}
+.list-content-area .list-content .unit .img-box {flex:0 0 20.8rem; height:20.8rem;}
+.list-content-area .list-content .unit .img-box img {display:block; width:100%; height:100%; object-fit:cover; object-position:50%;}
+.list-content-area .list-content .unit .txts {flex:1; display:flex; flex-direction:column; justify-content:space-between; height:20.8rem; padding:3rem 6rem 2.3rem 3.5rem;}
+.list-content-area .list-content .unit .txts .main-txt {font-size:2.4rem; font-weight:600; color:#000;}
+.list-content-area .list-content .unit .txts .sub-txt { overflow:hidden; position:relative; height:6rem; margin-top:1.2rem; font-size:2rem; font-weight:300; color:#000;}
+.list-content-area .list-content .unit .txts .sub-txt::before {content:''; position:absolute; right:0; bottom:0; width:17rem; height:3rem; background:linear-gradient(90deg,rgba(255, 255, 255, 0) 0%, rgba(251, 251, 251, 1) 40%);}
+.list-content-area .list-content .unit .txts .info {display:block; margin-top:2rem; font-size:1.6rem; color:#000;}
+.list-content-area .list-content .unit .deco-txt {position:absolute; right:2.7rem; bottom:2.3rem;}
+
+/* ETC */
+.navigation {display:flex; justify-content:center; align-items:center; gap:0 0.8rem; margin-top:6rem;}
+.navigation a {display:flex; justify-content:center; align-items:center; width:4rem; height:4rem; border:1px solid #d9d9d9; border-radius:50%; font-size:2rem; font-weight:500; color:#000;}
+.navigation a.-active {background-color:#ffcd00;}
+.navigation .prev,
+.navigation .next {position:relative;}
+.navigation .prev::after,
+.navigation .next::after {content:''; display:block; width:1rem; height:1rem; border-top:1px solid #000; border-right:1px solid #000}
+.navigation .prev::after {transform:rotate(-135deg);}
+.navigation .next::after {transform:rotate(45deg);}
+.navigation .prev {margin-right:1.2rem; padding-left:0.5rem;}
+.navigation .next {margin-left:1.2rem; padding-right:0.5rem;}

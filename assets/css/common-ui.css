@@ -60,6 +60,7 @@ body {
     -webkit-text-size-adjust: none;
 }
 
+select,
 button,
 input,
 textarea {
@@ -217,8 +218,16 @@ body {
 	--value-auth-number: var(--F06);
 }
 
+body {
+    --limit-width:144rem;
+	--button-primary:#ffcd00
+}
+
 .w-full {width:100% !important}
 .hide {overflow:hidden !important; position:absolute !important; width:1px !important; height:1px !important; margin:0 !important; padding:0 !important; border:0 !important; white-space:nowrap !important; clip:rect(1px, 1px, 1px, 1px) !important; clip-path:inset(50%) !important;}
+.buttons.-right {text-align:right;}
+.inner {width:var(--limit-width); min-width:var(--limit-width); margin:0 auto;}
+.point {color:#fcb900}
 
 /* ROOT
    ==== */
@@ -227,7 +236,7 @@ body {background-color:var(--bg-root);}
 body.lock {overflow:hidden; position:fixed; width:100%; height:100vh;}
 
 /* 버튼 */
-.button {display:inline-block; height:4rem; line-height:4rem; padding:0 2.6rem; font-size:1.6rem; font-weight:600;}
+.button {display:inline-block; height:4rem; line-height:4rem; padding:0 1.5rem; font-size:1.6rem; font-weight:600;}
 .button.-primary {color:#000; background-color:#ffcd00;}
 .button.-secondary {color:#000; background-color:#fff5cb;}
 .button:disabled {color:#474747; background-color:#d9d9d9;}
