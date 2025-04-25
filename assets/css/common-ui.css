@@ -240,7 +240,7 @@ body.lock {overflow:hidden; position:fixed; width:100%; height:100vh;}
 .button {display:inline-block; height:4rem; line-height:4rem; padding:0 1.5rem; font-size:1.6rem; font-weight:600; background-color:#fff;}
 .button.-primary {color:#000; background-color:#ffcd00;}
 .button.-secondary {color:#000; background-color:#fff5cb;}
-.button.-lg {height:6.5rem; padding:0 5rem; font-size:2.1rem; font-weight:700;}
+.button.-lg {height:6.5rem; line-height:6.5rem; padding:0 5rem; font-size:2.1rem; font-weight:700;}
 .button:disabled {color:#474747; background-color:#d9d9d9;}
 
 /* 레이아웃 */
