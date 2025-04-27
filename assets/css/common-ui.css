@@ -53,6 +53,8 @@ html {
 @media (max-width: 280px) { html { font-size: 50%; } }
 
 body {
+	overflow-y:auto;
+	overflow-x: hidden;
     font-size: 1.5rem;
     line-height: 1.5;
     font-family: 'Pretendard-Regular';

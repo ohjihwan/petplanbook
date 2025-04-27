@@ -34,18 +34,20 @@
 }
 
 .suggestion-place {margin-top:15rem;}
+.suggestion-place .inner .overflow-area {overflow:hidden; width:100rem; margin:0 auto;}
 .suggestion-place .title-box {text-align:center;}
 .suggestion-place .title-box .title {line-height:1.2; font-size:6.4rem; font-weight:900; color:var(--button-primary);}
 .suggestion-place .title-box .txt {font-size:2.4rem; font-weight:600; color:#000;}
-.suggestion-place .place-area {display:flex; justify-content:center; align-items:center; gap:0 10.2rem; margin-top:7rem;}
-.suggestion-place .place-area .img-box {display:block; width:29.2rem; height:29.2rem;}
+.suggestion-place .place-area {height:48.8rem; margin-top:7rem; pointer-events:none;}
+.suggestion-place .place-area .place {overflow:hidden; width:29.2rem; height:29.2rem; color:#000; text-align:center;}
+.suggestion-place .place-area .place.swiper-slide-active {height:48.8rem; transition:height 0.5s 0.5s ease-in;}
+.suggestion-place .place-area .img-box {display:block; height:29.2rem;}
 .suggestion-place .place-area .img-box img {display:block; width:100%; height:100%; background-color:#f2f2f2;}
-.suggestion-place .place-area .place {color:#000; text-align:center;}
 .suggestion-place .place-area .place-info {margin-top:2.5rem;}
 .suggestion-place .place-area .place-info .main-txt{font-size:2.4rem; font-weight:600;}
-.suggestion-place .place-area .place-info .sub-txt{font-size:2rem;}
-.suggestion-place .place-area .hashtag {margin-top:3rem; font-size:2rem;}
-.suggestion-place .place-area .hashtag span {display:inline-block;}
+.suggestion-place .place-area .place-info .sub-txt{height:5.4rem; font-size:2rem;}
+.suggestion-place .place-area .hashtag {height:6rem; margin-top:1.5rem; font-size:2rem;}
+.suggestion-place .place-area .hashtag span {display:inline-block; color:#343434;}
 .suggestion-place .place-area .hashtag span + span {margin-left:0.6rem;}
 
 .community-area {margin-top:15rem;}
