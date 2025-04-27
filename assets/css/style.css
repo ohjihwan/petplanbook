@@ -61,7 +61,7 @@
 .community-area .communitys .img-box img {width:15rem; height:15rem; border:none; background-color:#d9d9d9;}
 .community-area .communitys .txt-box .main-txt {font-size:2.4rem; font-weight:600; color:#000;}
 .community-area .communitys .txt-box .sub-txt {position:relative; overflow:hidden; height:6rem; font-size:2rem; color:#000;}
-.community-area .communitys .txt-box .sub-txt::before {content:''; position:absolute; right:0; bottom:0; width:17rem; height:3rem; background: linear-gradient(90deg,rgba(255, 255, 255, 0) 0%, rgba(242, 242, 242, 1) 40%);}
+.community-area .communitys .txt-box .sub-txt::before {content:''; position:absolute; right:0; bottom:0; width:17rem; height:3rem; background:linear-gradient(90deg,rgba(255, 255, 255, 0) 0%, rgba(242, 242, 242, 1) 40%);}
 
 .celebrity-area {margin-top:15rem;}
 .celebrity-area .title-box {text-align:center;}
@@ -191,3 +191,12 @@
 .navigation .next::after {transform:rotate(45deg);}
 .navigation .prev {margin-right:1.2rem; padding-left:0.5rem;}
 .navigation .next {margin-left:1.2rem; padding-right:0.5rem;}
+
+.location-detail .title-box {text-align:center;}
+.location-detail .title-box .title {line-height:1.2; font-size:6.4rem; font-weight:900; color:var(--button-primary);}
+.location-detail .title-box .txt {font-size:2.4rem; font-weight:600; color:#000;}
+.location-detail .detail-imgs {width:240px; height:320px; margin:1rem auto;}
+.location-detail .detail-imgs .swiper-slide {display:flex;align-items:center;justify-content:center;border-radius:18px;font-size:22px;font-weight:bold;color:#fff;background-color:#fff;border:1px solid #e6e6e6;}
+.location-detail .details {display:flex; flex-wrap:wrap; margin:0 10rem;}
+.location-detail .details dt {flex:0 0 7.5rem; font-size:2rem; font-weight:600; color:#000;}
+.location-detail .details dd {flex:0 0 calc(100% - 7.5rem); font-size:2rem; color:#666;}

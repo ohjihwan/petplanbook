@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>PL020</title>
 	
+	<link rel="stylesheet" href="../../assets/css/swiper.css">
 	<link rel="stylesheet" href="../../assets/css/common-ui.css">
 	<link rel="stylesheet" href="../../assets/css/style.css">
+	<style>
+
+
+	</style>
 </head>
 <body>
     <div class="modal">
@@ -19,7 +24,50 @@
 
 			<main class="contents">
 				<div class="content">
-					자세히 보기 페이지 확인
+					
+					<div class="location-detail">
+						<div class="title-box">
+							<h2 class="title">장소 자세히</h2>
+							<p class="txt">자세히 읽고나서 저장해보세요</p>
+						</div>
+
+						<div class="detail-imgs swiper mySwiper">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<img src="../../assets/imgs/temp/temp1.png" alt="">
+								</div>
+								<div class="swiper-slide">
+									<img src="../../assets/imgs/temp/temp2.png" alt="">
+								</div>
+								<div class="swiper-slide">
+									<img src="../../assets/imgs/temp/temp3.png" alt="">
+								</div>
+								<div class="swiper-slide">
+									<img src="../../assets/imgs/temp/temp4.jpg" alt="">
+								</div>
+								<div class="swiper-slide">
+									<img src="../../assets/imgs/temp/temp5.jpg" alt="">
+								</div>
+								<div class="swiper-slide">
+									<img src="../../assets/imgs/temp/temp6.jpg" alt="">
+								</div>
+							</div>
+						</div>
+						
+						<dl class="details">
+							<dt>상호이름</dt>
+							<dd>퍼피스드림</dd>
+							<dt>상세주소</dt>
+							<dd>서울 서초구 서래로</dd>
+							<dt>동반가능</dt>
+							<dd>강아지/고양이</dd>
+							<dt>대표번호</dt>
+							<dd>02-000-0000</dd>
+							<dt>홈페이지</dt>
+							<dd>instagram.com/puppy</dd>
+						</dl>
+					</div>
+
 				</div>
 			</main>
 
@@ -38,7 +86,10 @@
 	<script src="../../assets/js/style.js"></script>
 	<script src="../../assets/js/dev.js"></script>
 	<script>
-		// 스크립트 작성
+		var swiper = new Swiper(".detail-imgs", {
+			effect: "cards",
+			grabCursor: true,
+		});
 	</script>
 </body>
 </html>
