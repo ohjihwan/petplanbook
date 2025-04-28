@@ -9,6 +9,11 @@ $('.gnb').on('mouseenter', function(){
     $('.header').removeClass('-open-depth2')
 })
 
+$('.rating input').on('click', function(){
+    if( $(this).is(':checked') == true ) {
+        $(this).closest('.rating').siblings('.rating').find('input').prop('checked', false)
+    }
+});
 
 var swiper = new Swiper(".suggestion-place .overflow-area", {
     slideClass: "place",
