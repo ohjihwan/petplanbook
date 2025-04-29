@@ -34,10 +34,11 @@
 }
 
 .suggestion-place {margin-top:15rem;}
-.suggestion-place .inner .overflow-area {overflow:hidden; width:100rem; margin:0 auto;}
+.suggestion-place .inner .overflow-area {display:block; overflow:hidden; width:100rem; margin:0 auto;}
 .suggestion-place .title-box {text-align:center;}
 .suggestion-place .title-box .title {line-height:1.2; font-size:6.4rem; font-weight:900; color:var(--button-primary);}
-.suggestion-place .title-box .txt {font-size:2.4rem; font-weight:600; color:#000;}
+.suggestion-place .title-box .txt {display:inline-block; position:relative; padding-right:2rem; font-size:2.4rem; font-weight:600; color:#000;}
+.suggestion-place .title-box .txt::after {content:''; position:absolute; right:0; top:50%; transform:translateY(-50%) rotate(45deg); width:1.2rem; height:1.2rem; border-top:1px solid #343434; border-right:1px solid #343434;}
 .suggestion-place .place-area {height:48.8rem; margin-top:7rem; pointer-events:none;}
 .suggestion-place .place-area .place {overflow:hidden; width:29.2rem; height:29.2rem; color:#000; text-align:center;}
 .suggestion-place .place-area .place.swiper-slide-active {height:48.8rem; transition:height 0.5s 0.5s ease-in;}

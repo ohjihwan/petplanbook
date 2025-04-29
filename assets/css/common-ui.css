@@ -237,10 +237,10 @@ body {background-color:var(--bg-root);}
 body.lock {overflow:hidden; position:fixed; width:100%; height:100vh;}
 
 /* 버튼 */
-.button {display:inline-block; height:4rem; line-height:4rem; padding:0 1.5rem; font-size:1.6rem; font-weight:600; background-color:#fff;}
+.button {display:inline-block; height:4rem; line-height:4rem; padding:0 1.5rem; border-radius:0.8rem; font-size:1.6rem; font-weight:600; background-color:#fff;}
 .button.-primary {color:#000; background-color:#ffcd00;}
 .button.-secondary {color:#000; background-color:#fff5cb;}
-.button.-lg {height:6.5rem; line-height:6.5rem; padding:0 5rem; font-size:2.1rem; font-weight:700;}
+.button.-lg {height:6.5rem; line-height:6.5rem; padding:0 5rem; border-radius:1.2rem; font-size:2.1rem; font-weight:700;}
 .button:disabled {color:#474747; background-color:#d9d9d9;}
 
 /* 레이아웃 */
@@ -297,4 +297,6 @@ body.lock {overflow:hidden; position:fixed; width:100%; height:100vh;}
 .modal .header {position:static; height:5rem; padding:0; background-color:#fff;}
 .modal .header .close {position:absolute; right:0; top:0; width:5.5rem; height:5.5rem; background:url(../imgs/ico/ico-close.svg) no-repeat 50% / 100% auto;}
 .modal .content {overflow-x:hidden; overflow-y:auto; max-height:77rem; padding:5.5rem 2.4rem 3rem;}
-.modal .fixed {width:100%; height:9.4rem; padding:2.4rem 0 3rem; text-align:center;}
+.modal .fixed {width:100%; padding:2.4rem 0 3rem; text-align:center;}
+
+.event-imgs {display:block;}
