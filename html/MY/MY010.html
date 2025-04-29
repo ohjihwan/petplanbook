@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>MY010</title>
-	
+	<link rel="stylesheet" href="../../assets/libs/jquery-ui/jquery-ui.min.css">
+	<link rel="stylesheet" href="../../assets/css/swiper.css">
 	<link rel="stylesheet" href="../../assets/css/common-ui.css">
 	<link rel="stylesheet" href="../../assets/css/style.css">
 </head>
@@ -83,9 +84,10 @@
 									<img src="../../assets/imgs/img/img-MY010-2.jpg" alt="">
 								</a>
 							</div>
-							<ul class="make-route">
-								<li class="item">
-									<button type="button" class="sorting-handler"></button>
+							<div class="make-route">
+								<div class="item -placeholder"></div>
+								<div class="item">
+									<div class="sorting-handler"></div>
 									<figure class="img-box">
 										<img src="../../assets/imgs/temp/temp4.jpg" alt="">
 									</figure>
@@ -103,11 +105,11 @@
 										</dl>
 									</div>
 									<div class="button-set">
-										<button type="button" class="button">수정하기</button>
+										<button type="button" class="button">삭제하기</button>
 									</div>
-								</li>
-								<li class="item">
-									<button type="button" class="sorting-handler"></button>
+								</div>
+								<div class="item">
+									<div class="sorting-handler"></div>
 									<figure class="img-box">
 										<img src="../../assets/imgs/temp/temp5.jpg" alt="">
 									</figure>
@@ -125,11 +127,11 @@
 										</dl>
 									</div>
 									<div class="button-set">
-										<button type="button" class="button">수정하기</button>
+										<button type="button" class="button">삭제하기</button>
 									</div>
-								</li>
-								<li class="item">
-									<button type="button" class="sorting-handler"></button>
+								</div>
+								<div class="item">
+									<div class="sorting-handler"></div>
 									<figure class="img-box">
 										<img src="../../assets/imgs/temp/temp6.jpg" alt="">
 									</figure>
@@ -147,10 +149,10 @@
 										</dl>
 									</div>
 									<div class="button-set">
-										<button type="button" class="button">수정하기</button>
+										<button type="button" class="button">삭제하기</button>
 									</div>
-								</li>
-							</ul>
+								</div>
+							</div>
 						</div>
 					</section>
 
@@ -188,6 +190,21 @@
 	<script src="../../assets/js/dev.js"></script>
 	<script>
 		// 스크립트 작성
+		$(function () {
+			$('.make-route').sortable({
+			handle: '.sorting-handler',
+			axis: 'y',
+			containment: 'parent',
+			start: function (e, ui) {
+				ui.item.css('transform', 'scale(1.05)'); // 드래그 시작 시 투명도
+				console.log('드래그 시작');
+			},
+			stop: function (e, ui) {
+				ui.item.css('transform', 'scale(1)'); // 드래그 끝나면 복원
+				console.log('드래그 끝');
+			}
+			});
+		});
 	</script>
 </body>
 </html>

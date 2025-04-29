@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>PL010</title>
-	
+	<link rel="stylesheet" href="../../assets/css/swiper.css">
 	<link rel="stylesheet" href="../../assets/css/common-ui.css">
 	<link rel="stylesheet" href="../../assets/css/style.css">
 </head>
@@ -82,6 +82,31 @@
 								<!-- // -->
 								<div class="field-area">
 									<div class="field">
+										<label for="region" class="label">지역</label>
+										<div class="select">
+											<select name="region" id="region">
+												<option value="">지역 선택</option>
+												<option value="강원특별자치도">강원특별자치도</option>
+												<option value="경기도">경기도</option>
+												<option value="경상남도">경상남도</option>
+												<option value="경상북도">경상북도</option>
+												<option value="광주광역시">광주광역시</option>
+												<option value="대구광역시">대구광역시</option>
+												<option value="대전광역시">대전광역시</option>
+												<option value="부산광역시">부산광역시</option>
+												<option value="서울특별시">서울특별시</option>
+												<option value="세종특별자치시">세종특별자치시</option>
+												<option value="울산광역시">울산광역시</option>
+												<option value="인천광역시">인천광역시</option>
+												<option value="전라남도">전라남도</option>
+												<option value="전라북도">전라북도</option>
+												<option value="제주특별자치도">제주특별자치도</option>
+												<option value="충청남도">충청남도</option>
+												<option value="충청북도">충청북도</option>
+											</select>
+										</div>
+									</div>
+									<div class="field">
 										<label for="text1" class="label">장소 검색</label>
 										<div class="text">
 											<input type="text" id="text1" required placeholder="(예시:애견유치원)">
@@ -123,10 +148,10 @@
 							<div class="search-result-box">
 								<ul>
 									<li>
-										<a href="../PL/PL020.html">
+										<a href="#none" role="button" onclick="locationModalOpen()">
 											<div class="img-box">
 												<div class="flags">
-													<span class="flag -color1">신규</span>
+													<span class="flag -color3">추천</span>
 												</div>
 												<img src="" alt="">
 											</div>
@@ -139,7 +164,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="../PL/PL020.html">
+										<a href="#none" role="button" onclick="locationModalOpen()">
 											<div class="img-box">
 												<div class="flags">
 													<span class="flag -color2">인기</span>
@@ -155,11 +180,8 @@
 										</a>
 									</li>
 									<li>
-										<a href="../PL/PL020.html">
+										<a href="#none" role="button" onclick="locationModalOpen()">
 											<div class="img-box">
-												<div class="flags">
-													<span class="flag -color3">추천</span>
-												</div>
 												<img src="" alt="">
 											</div>
 											<div class="txts">
@@ -171,7 +193,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="../PL/PL020.html">
+										<a href="#none" role="button" onclick="locationModalOpen()">
 											<div class="img-box">
 												<img src="" alt="">
 											</div>
@@ -186,7 +208,7 @@
 
 									
 									<li>
-										<a href="../PL/PL020.html">
+										<a href="#none" role="button" onclick="locationModalOpen()">
 											<div class="img-box">
 												<img src="" alt="">
 											</div>
@@ -223,6 +245,73 @@
 					</p>
 				</div>
 			</footer>
+		</div>
+	</div>
+	
+    <div class="modal">
+		<div class="container">
+			<header class="header">
+				<div class="inner">
+					<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
+				</div>
+			</header>
+
+			<main class="contents">
+				<div class="content">
+					
+					<div class="location-detail">
+						<div class="title-box">
+							<h2 class="title">장소 자세히</h2>
+							<p class="txt">자세히 읽고나서 저장해보세요</p>
+						</div>
+
+						<div class="detail-imgs swiper mySwiper">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<img src="../../assets/imgs/temp/temp1.png" alt="">
+								</div>
+								<div class="swiper-slide">
+									<img src="../../assets/imgs/temp/temp2.png" alt="">
+								</div>
+								<div class="swiper-slide">
+									<img src="../../assets/imgs/temp/temp3.png" alt="">
+								</div>
+								<div class="swiper-slide">
+									<img src="../../assets/imgs/temp/temp4.jpg" alt="">
+								</div>
+								<div class="swiper-slide">
+									<img src="../../assets/imgs/temp/temp5.jpg" alt="">
+								</div>
+								<div class="swiper-slide">
+									<img src="../../assets/imgs/temp/temp6.jpg" alt="">
+								</div>
+							</div>
+							<div class="swiper-button-next"></div>
+    						<div class="swiper-button-prev"></div>
+						</div>
+						
+						<dl class="details">
+							<dt>상호이름</dt>
+							<dd>퍼피스드림</dd>
+							<dt>상세주소</dt>
+							<dd>서울 서초구 서래로</dd>
+							<dt>동반가능</dt>
+							<dd>강아지/고양이</dd>
+							<dt>대표번호</dt>
+							<dd>02-000-0000</dd>
+							<dt>홈페이지</dt>
+							<dd>instagram.com/puppy</dd>
+						</dl>
+					</div>
+
+				</div>
+			</main>
+
+			<div class="fixed">
+				<div class="buttons">
+					<button type="button" class="button -primary -lg">이 장소 저장하기</a>
+				</div>
+			</div>
 		</div>
 	</div>
 

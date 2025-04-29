@@ -9,11 +9,11 @@
 	<link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
-    <div class="modal">
+    <div class="modal" style="display: block;">
 		<div class="container">
 			<header class="header">
 				<div class="inner">
-					<button type="button" class="close"><span class="hide">닫기</span></button>
+					<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
 				</div>
 			</header>
 
@@ -81,10 +81,7 @@
 	<script src="../../assets/js/style.js"></script>
 	<script src="../../assets/js/dev.js"></script>
 	<script>
-		var swiper = new Swiper(".detail-imgs", {
-			effect: "cards",
-			grabCursor: true,
-		});
+		locationModalOpen()
 	</script>
 </body>
 </html>

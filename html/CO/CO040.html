@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>CM040</title>
-	
+	<link rel="stylesheet" href="../../assets/css/swiper.css">
 	<link rel="stylesheet" href="../../assets/css/common-ui.css">
 	<link rel="stylesheet" href="../../assets/css/style.css">
 </head>
@@ -82,7 +82,7 @@
 							<div class="list-content">
 								<ul class="lists">
 									<li class="unit">
-										<a href="../ETC/ETC030.html">
+										<a href="#none" onclick="modalOpenId('event1')">
 											<figure class="img-box">
 												<img src="../../assets/imgs/temp/temp-event1.jpg" alt="">
 											</figure>
@@ -95,7 +95,7 @@
 										</a>
 									</li>
 									<li class="unit">
-										<a href="../ETC/ETC030.html">
+										<a href="#none" onclick="modalOpenId('event1')">
 											<figure class="img-box">
 												<img src="../../assets/imgs/temp/temp-event2.jpg" alt="">
 											</figure>
@@ -150,6 +150,30 @@
 					</p>
 				</div>
 			</footer>
+		</div>
+	</div>
+
+	<div id="event1" class="modal">
+		<div class="container">
+			<header class="header">
+				<div class="inner">
+					<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
+				</div>
+			</header>
+
+			<main class="contents">
+				<div class="content">
+					<a href="#none" class="event-imgs">
+						<img src="../../assets/imgs/temp/temp-event-page1.jpg" alt="">
+					</a>
+				</div>
+			</main>
+
+			<div class="fixed">
+				<div class="buttons">
+					<button type="button" class="button -primary -lg" onclick="alert('이벤트 준비중')">이벤트 자세히보기</a>
+				</div>
+			</div>
 		</div>
 	</div>
 
