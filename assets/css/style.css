@@ -179,7 +179,12 @@
 .list-content-area .buttons + .list-content {margin-bottom:2.8rem;}
 
 /* MY */
-.add-route {margin:15rem 5.3rem 0;}
+.add-route {display:flex; align-items:stretch; margin:15rem 5.3rem 0; padding:2rem; border:0.2rem solid #ffcd00;}
+.add-route .field-area {flex:1; display:flex; flex-wrap:wrap; gap:1.5rem;}
+.add-route .field-area .field {width:calc(33.33% - 3rem);}
+.add-route .field-area .field-half {gap:1.5rem;}
+.add-route .add-route-link {flex:0 0 7rem; display:block; margin-right:1.5rem; background-color:#f1f1f1;}
+
 .make-route {position:relative; margin:0 5.3rem;}
 .make-route .item {display:flex; align-items:stretch; position:relative; padding:2.3rem 2.1rem; background-color:#f5f5f5; transition:transform 0.25s;}
 .make-route .item + .item {margin-top:1rem;}
