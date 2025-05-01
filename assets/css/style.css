@@ -18,7 +18,7 @@
 .main-banner .img-box::after {content:''; position:absolute; top:0; right:0; bottom:0; left:0; background-color:rgba(0,0,0,0.44);}
 .main-banner .text-box {position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); text-align:center;}
 .main-banner .text-box .title {line-height:1.2; font-size:6.4rem; font-weight:900; color:#fff;}
-.main-banner .text-box .txt {line-height:1.2; font-size:2.4rem; font-weight:600; color:#fff;}
+.main-banner .text-box .txt {font-size:2.4rem; font-weight:600; color:#fff;}
 .main-banner .text-box .button-box {margin-top:1.5rem;}
 @keyframes bannerEffect {
     0% {transform:scale(1.05);}
@@ -33,7 +33,9 @@
     100% {transform:translateY(0);}
 }
 
+.celebrity-area,
 .suggestion-place,
+.community-area,
 .map-content-area,
 .list-content-area,
 .make-route-area {margin-top:15rem;}
@@ -67,7 +69,7 @@
 .suggestion-place .place-area .swiper-slide-shadow-left,
 .suggestion-place .place-area .swiper-slide-shadow-right {height:29.2rem;}
 
-.community-area {min-width:144rem; margin-top:8rem; padding:7rem 0 12rem; background-color:#f0f0f0;}
+.community-area {min-width:144rem; padding:7rem 0 12rem; background-color:#f0f0f0;}
 .community-area .communitys {display:flex; flex-wrap:wrap; justify-content:center; gap:1.6rem 1.8rem; margin-top:7.4rem;}
 .community-area .communitys .unit a {display:flex; flex-direction:column; justify-content:space-between; position:relative; width:64rem; height:20.6rem; padding:3.4rem 2.8rem 3rem 20.7rem; border:1px solid #d3d3d3; border-radius:1.2rem; background-color:#fff;}
 .community-area .communitys .img-box {overflow:hidden; position:absolute; left:2.8rem; top:50%; transform:translateY(-50%); border-radius:0.8rem;}
@@ -78,7 +80,6 @@
 .community-area .communitys .unit a:hover .main-txt,
 .community-area .communitys .unit a:hover .sub-txt {text-decoration:underline; text-underline-offset:4px;}
 
-.celebrity-area {margin-top:10rem;}
 .celebrity-area .celebrity-people {margin:7.4rem 20rem 0;}
 .celebrity-area .celebrity-people ul {display:grid; grid-template-columns: repeat(3, 1fr)}
 .celebrity-area .celebrity-people ul li:nth-child(1) {order:2;}
