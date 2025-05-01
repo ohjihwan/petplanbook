@@ -59,9 +59,9 @@
 .suggestion-place .place-area .hashtag {margin-top:1.5rem; font-size:2rem;}
 .suggestion-place .place-area .hashtag span {display:inline-block; line-height:2; padding:0 1.6rem; border-radius:3rem; color:#343434; background-color:#e6e6e6;}
 .suggestion-place .place-area .hashtag span + span {margin-left:0.6rem;}
-.suggestion-place .swiper-button-next {width:4.5rem; height:10rem; padding:1rem; background-color:rgba(0,0,0,0.44);}
+.suggestion-place .swiper-button-next {width:4.5rem; height:10rem; padding:1rem; background-color:rgba(0,0,0,0.7);}
 .suggestion-place .swiper-button-next::after {color:#fff;}
-.suggestion-place .swiper-button-prev {width:4.5rem; height:10rem; padding:1rem; background-color:rgba(0,0,0,0.44);}
+.suggestion-place .swiper-button-prev {width:4.5rem; height:10rem; padding:1rem; background-color:rgba(0,0,0,0.7);}
 .suggestion-place .swiper-button-prev::after {color:#fff;}
 .suggestion-place .place-area .place:hover .main-txt,
 .suggestion-place .place-area .place:hover .sub-txt {text-decoration:underline; text-underline-offset:4px;}
