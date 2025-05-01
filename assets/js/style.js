@@ -20,30 +20,42 @@ function mainSuggestionSwiper(){
         slideClass: "place",
         observer:true,
         observerParents:true,
+        loop: true,
         autoplay:{
-            delay: 3000
+            delay: 4000
         },
         loopedSlides: 10,
         speed:500,
         wahchOverflow:true,
         effect: "coverflow",
-        loop: true,
         grabCursor: true,
         centeredSlides: true,
         slidesPerView: "auto",
         coverflowEffect: {
-            rotate: 50,
+            rotate: 15,
             stretch: 0,
             depth: 100,
-            modifier: 1,
+            modifier: 2,
             slideShadows: true,
         },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+
+    $('.suggestion-place .overflow-area').on('mouseenter', function () {
+        mainSuggestionSwiper.autoplay.stop();
+    }).on('mouseleave', function () {
+        mainSuggestionSwiper.autoplay.start();
     });
 }
 
 function detailImgs(){
     let detailImgs = new Swiper(".detail-imgs", {
         effect: "cards",
+        observer:true,
+        observerParents:true,
         grabCursor: true,
         navigation: {
             nextEl: ".swiper-button-next",
