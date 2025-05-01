@@ -258,9 +258,9 @@ body.lock {overflow:hidden;}
 .header .inner .gnb .menu-depth1 li .link {font-size:2.8rem; font-weight:500; word-break:keep-all; text-align:center;}
 .header .inner .gnb .menu-depth1 li .link:hover {font-weight:800; color:#ffcd00;}
 .header .inner .gnb .menu-depth2 {display:none; position:absolute; padding-top:2rem; text-align:center; }
-.header .inner .quick-search {position:relative; margin-left:5.4rem;}
+.header .inner .quick-search {overflow:hidden; position:relative; margin-left:5.4rem; border:1px solid #d3d3d3; border-radius:0.8rem;}
 .header .inner .quick-search::after {content:''; position:absolute; left:8rem; top:9rem; width:26.5rem; height:13rem; background:url(../imgs/img/img-HM010-5.svg) no-repeat 50% / 100% auto; transition:left 0.25s ease-in-out;}
-.header .inner .quick-search .link {display:flex; align-items:center; position:relative; width:29.3rem; height:5.1rem; padding:1.4rem 5.7rem 1.3rem 1.6rem; background-color:#f0f0f0; font-size:2rem; color:#474747;}
+.header .inner .quick-search .link {display:flex; align-items:center; position:relative; width:29.3rem; height:5.1rem; padding:1.4rem 5.7rem 1.3rem 1.6rem; font-size:2rem; color:#474747;}
 .header .inner .quick-search .link::after {content:''; position:absolute; right:0; top:0; width:4.5rem; height:5.1rem; background:var(--button-primary) url(../imgs/ico/ico-search.png) no-repeat 50% / 4rem auto;}
 .header .inner .quick-link {margin-left:5.3rem;}
 .header .inner .quick-link .link {font-size:2.4rem; background-color:#fff;}
