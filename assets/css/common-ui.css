@@ -70,7 +70,6 @@ textarea {
 input[type="file"] {line-height:5rem;}
 input[type="file"]::file-selector-button {display:none;}
 
-
 /* VARIABLES
    ========= */
 
@@ -284,7 +283,7 @@ body.lock {overflow:hidden;}
 .field-half {display:flex; align-items:center; gap:2.8rem;}
 .field-half .field {width:50%; margin:0 !important;}
 
-.footer {display:flex; align-items:center; min-width:var(--limit-width); height:20rem; margin-top:17.8rem; background-color:#ffcd00;}
+.footer {display:flex; align-items:center; min-width:var(--limit-width); height:20rem; margin-top:19rem; background-color:#ffcd00;}
 .footer .footer-info {display:flex; justify-content:space-evenly; align-items:center; font-size:2rem; font-weight:500; color:#000;}
 .footer .footer-info dl {display:flex; align-items:center;}
 .footer .footer-info dl dt {margin-right:0.4rem;}
