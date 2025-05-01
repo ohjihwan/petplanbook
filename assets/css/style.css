@@ -67,7 +67,7 @@
 .suggestion-place .place-area .swiper-slide-shadow-left,
 .suggestion-place .place-area .swiper-slide-shadow-right {height:29.2rem;}
 
-.community-area {margin-top:8rem; padding:7rem 0 12rem; background-color:#f0f0f0;}
+.community-area {min-width:144rem; margin-top:8rem; padding:7rem 0 12rem; background-color:#f0f0f0;}
 .community-area .communitys {display:flex; flex-wrap:wrap; justify-content:center; gap:1.6rem 1.8rem; margin-top:7.4rem;}
 .community-area .communitys .unit a {display:flex; flex-direction:column; justify-content:space-between; position:relative; width:64rem; height:20.6rem; padding:3.4rem 2.8rem 3rem 20.7rem; border:1px solid #d3d3d3; border-radius:1.2rem; background-color:#fff;}
 .community-area .communitys .img-box {overflow:hidden; position:absolute; left:2.8rem; top:50%; transform:translateY(-50%); border-radius:0.8rem;}
