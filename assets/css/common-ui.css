@@ -310,3 +310,45 @@ body.lock {overflow:hidden;}
 .modal .header .close {position:absolute; right:0; top:0; width:5.5rem; height:5.5rem; background:url(../imgs/ico/ico-close.svg) no-repeat 50% / 100% auto;}
 .modal .content {overflow-x:hidden; overflow-y:auto; max-height:77rem; padding:5.5rem 2.4rem 3rem;}
 .modal .fixed {width:100%; padding:2.4rem 0 3rem; text-align:center;}
+
+
+.swal2-container {
+	/* 전체 컨테이너 */
+}
+
+.swal2-container .swal2-popup {
+	/* 모달 박스 */
+}
+
+.swal2-container .swal2-title {
+	/* 제목 텍스트 */
+}
+
+.swal2-container .swal2-html-container {
+	/* 설명 텍스트 */
+}
+
+.swal2-container .swal2-actions {
+	/* 버튼 영역 래퍼 */
+}
+
+.swal2-container .swal2-confirm,
+.swal2-container .swal2-cancel {
+	/* 각각의 버튼 */
+	color: #000 !important;
+}
+
+.swal2-container .swal2-styled {
+	/* 공통 버튼 스타일 */
+	color: #000 !important;
+	background-color: #fbbc05; /* 예: 노랑 배경 */
+}
+
+.swal2-container .swal2-styled:focus {
+	box-shadow: none;
+	outline: none;
+}
+
+.swal2-container .swal2-styled span {
+	/* 버튼 내부 텍스트 span (자동 생성되는 경우) */
+}

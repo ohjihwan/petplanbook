@@ -78,15 +78,9 @@
 								<h2 class="title">완성된 루트</h2>
 								<p class="txt">꾸미느라 정말 수고 많으셨어요</p>
 							</div>
-
 							
 							<div class="function-box -gray-case">
-								<div class="side-menu">
-									<strong>루트명 쓰세요 : </strong>
-									<span>나들이 계획</span>
-									<input type="hidden">
-									<button type="button" class="trash"><span class="hide">삭제</span></button>
-								</div>
+								
 								<div class="following-path">
 									<div class="scrolling swiper-wrapper">
 										<ul class="swiper-slide">
@@ -153,6 +147,7 @@
 							<div class="map-content-buttons">
 								<button type="button" class="button -primary -lg">공유하기</button>
 								<a href="../CO/CO020.html" class="button -secondary -lg">수정하기</a>
+								<button type="button" class="button -secondary -lg" onclick="deleteData()">삭제하기</button>
 							</div>
 						</div>
 					</section>
@@ -186,6 +181,7 @@
 	<script src="../../assets/libs/swiper/dist/js/swiper.min.js"></script>
 	<script src="../../assets/js/style.js"></script>
 	<script src="../../assets/js/dev.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9921046766278baaca9a7d657feaf033&libraries=services"></script>
 	<script>
 		mapSeting()		
