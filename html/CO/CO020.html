@@ -181,6 +181,45 @@
 										</div>
 									</div>
 								</div>
+
+								<div class="upload-gallery">
+									<div class="img-box">
+										<button type="button" class="img-view" onclick="modalOpenId('imgView1')">
+											<img src="../../assets/imgs/temp/temp1.png" alt="">
+										</button>
+										<button type="button" class="close" onclick="deleteData(this, '.img-box')"><span class="hide">사진 삭제</span></button>
+									</div>
+									<div class="img-box">
+										<button type="button" class="img-view" onclick="modalOpenId('imgView2')">
+											<img src="../../assets/imgs/temp/temp2.png" alt="">
+										</button>
+										<button type="button" class="close" onclick="deleteData(this, '.img-box')"><span class="hide">사진 삭제</span></button>
+									</div>
+									<div class="img-box">
+										<button type="button" class="img-view" onclick="modalOpenId('imgView3')">
+											<img src="../../assets/imgs/temp/temp3.png" alt="">
+										</button>
+										<button type="button" class="close" onclick="deleteData(this, '.img-box')"><span class="hide">사진 삭제</span></button>
+									</div>
+									<div class="img-box">
+										<button type="button" class="img-view" onclick="modalOpenId('imgView1')">
+											<img src="../../assets/imgs/temp/temp1.png" alt="">
+										</button>
+										<button type="button" class="close" onclick="deleteData(this, '.img-box')"><span class="hide">사진 삭제</span></button>
+									</div>
+									<div class="img-box">
+										<button type="button" class="img-view" onclick="modalOpenId('imgView2')">
+											<img src="../../assets/imgs/temp/temp2.png" alt="">
+										</button>
+										<button type="button" class="close" onclick="deleteData(this, '.img-box')"><span class="hide">사진 삭제</span></button>
+									</div>
+									<div class="img-box">
+										<button type="button" class="img-view" onclick="modalOpenId('imgView3')">
+											<img src="../../assets/imgs/temp/temp3.png" alt="">
+										</button>
+										<button type="button" class="close" onclick="deleteData(this, '.img-box')"><span class="hide">사진 삭제</span></button>
+									</div>
+								</div>
 							</div>
 							
 							<div class="map-content-buttons">
@@ -214,12 +253,67 @@
 		</div>
 	</div>
 
+    <div id="imgView1" class="modal">
+		<div class="container">
+			<header class="header">
+				<div class="inner">
+					<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
+				</div>
+			</header>
+
+			<main class="contents">
+				<div class="content">
+					<div class="img-view-box">
+						<img src="../../assets/imgs/temp/temp1.png" alt="">
+					</div>
+				</div>
+			</main>
+		</div>
+	</div>
+
+    <div id="imgView2" class="modal">
+		<div class="container">
+			<header class="header">
+				<div class="inner">
+					<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
+				</div>
+			</header>
+
+			<main class="contents">
+				<div class="content">
+					<div class="img-view-box">
+						<img src="../../assets/imgs/temp/bigbigbig.jpg" alt="">
+					</div>
+				</div>
+			</main>
+		</div>
+	</div>
+
+    <div id="imgView3" class="modal">
+		<div class="container">
+			<header class="header">
+				<div class="inner">
+					<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
+				</div>
+			</header>
+
+			<main class="contents">
+				<div class="content">
+					<div class="img-view-box">
+						<img src="../../assets/imgs/temp/temp-event-page1.jpg" alt="">
+					</div>
+				</div>
+			</main>
+		</div>
+	</div>
+
     <script src="../../assets/libs/jquery/jquery-3.6.0.min.js"></script>
 	<script src="../../assets/libs/jquery-ui/jquery-ui.min.js"></script>
 	<script src="../../assets/libs/jquery-ui/jquery.ui.touch-punch.min.js"></script>
 	<script src="../../assets/libs/swiper/dist/js/swiper.min.js"></script>
 	<script src="../../assets/js/style.js"></script>
 	<script src="../../assets/js/dev.js"></script>
+	<script src="../../assets/js/map.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9921046766278baaca9a7d657feaf033&libraries=services"></script>
 	<script>
 		mapSeting()		

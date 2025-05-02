@@ -123,8 +123,8 @@ $(document).on('keydown', function (e) {
 	}
 });
 
+
 gnbMouseenter() // GNB
 ratingChecked() // 좋아요&싫어요
 mainSuggestionSwiper() // 메인 모션 스와이프
 followingPath() // 동선스크롤 이벤트
-

@@ -142,12 +142,68 @@
 								<!-- API 기능 -->
 								<div id="map" class="map-box"></div>
 								<!-- // -->
+								 
+								<div class="board-area">
+									<div class="field">
+										<p class="label">글 제목</p>
+										<div class="board-text">
+											<p>냥이랑 이렇게 즐거운 여행은 처음이네요</p>
+										</div>
+									</div>
+									<div class="field">
+										<p class="label">사진 첨부</p>
+										<div class="board-text -board-textarea">
+											<p>기다렸던 보람이 있었어요 >_< 행복하구 즐거웠구.. 사진도 기대했던거 보다 훨씬 잘 나와서 주변에서 막 부럽다고 그러네요 겨울에도 한번 더 다녀오고 싶어용!!</p>
+										</div>
+									</div>
+									<div class="field">
+										<p class="label">평가하기</p>
+										<div class="board-text">
+											<div class="rating-box">
+												<p class="rating-txt"><span class="number">11</span>명이 추천하는 루트에요</p>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="upload-gallery">
+									<div class="img-box">
+										<button type="button" class="img-view" onclick="modalOpenId('imgView1')">
+											<img src="../../assets/imgs/temp/temp1.png" alt="">
+										</button>
+									</div>
+									<div class="img-box">
+										<button type="button" class="img-view" onclick="modalOpenId('imgView2')">
+											<img src="../../assets/imgs/temp/temp2.png" alt="">
+										</button>
+									</div>
+									<div class="img-box">
+										<button type="button" class="img-view" onclick="modalOpenId('imgView3')">
+											<img src="../../assets/imgs/temp/temp3.png" alt="">
+										</button>
+									</div>
+									<div class="img-box">
+										<button type="button" class="img-view" onclick="modalOpenId('imgView1')">
+											<img src="../../assets/imgs/temp/temp1.png" alt="">
+										</button>
+									</div>
+									<div class="img-box">
+										<button type="button" class="img-view" onclick="modalOpenId('imgView2')">
+											<img src="../../assets/imgs/temp/temp2.png" alt="">
+										</button>
+									</div>
+									<div class="img-box">
+										<button type="button" class="img-view" onclick="modalOpenId('imgView3')">
+											<img src="../../assets/imgs/temp/temp3.png" alt="">
+										</button>
+									</div>
+								</div>
 							</div>
 							
 							<div class="map-content-buttons">
 								<button type="button" class="button -primary -lg">공유하기</button>
 								<a href="../CO/CO020.html" class="button -secondary -lg">수정하기</a>
-								<button type="button" class="button -secondary -lg" onclick="deleteData()">삭제하기</button>
+								<button type="button" class="button -secondary -lg" onclick="deleteDataPage()">삭제하기</button>
 							</div>
 						</div>
 					</section>
@@ -175,13 +231,67 @@
 		</div>
 	</div>
 
+    <div id="imgView1" class="modal">
+		<div class="container">
+			<header class="header">
+				<div class="inner">
+					<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
+				</div>
+			</header>
+
+			<main class="contents">
+				<div class="content">
+					<div class="img-view-box">
+						<img src="../../assets/imgs/temp/temp1.png" alt="">
+					</div>
+				</div>
+			</main>
+		</div>
+	</div>
+
+    <div id="imgView2" class="modal">
+		<div class="container">
+			<header class="header">
+				<div class="inner">
+					<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
+				</div>
+			</header>
+
+			<main class="contents">
+				<div class="content">
+					<div class="img-view-box">
+						<img src="../../assets/imgs/temp/bigbigbig.jpg" alt="">
+					</div>
+				</div>
+			</main>
+		</div>
+	</div>
+
+    <div id="imgView3" class="modal">
+		<div class="container">
+			<header class="header">
+				<div class="inner">
+					<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
+				</div>
+			</header>
+
+			<main class="contents">
+				<div class="content">
+					<div class="img-view-box">
+						<img src="../../assets/imgs/temp/temp-event-page1.jpg" alt="">
+					</div>
+				</div>
+			</main>
+		</div>
+	</div>
+
     <script src="../../assets/libs/jquery/jquery-3.6.0.min.js"></script>
 	<script src="../../assets/libs/jquery-ui/jquery-ui.min.js"></script>
 	<script src="../../assets/libs/jquery-ui/jquery.ui.touch-punch.min.js"></script>
 	<script src="../../assets/libs/swiper/dist/js/swiper.min.js"></script>
 	<script src="../../assets/js/style.js"></script>
 	<script src="../../assets/js/dev.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="../../assets/js/map.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9921046766278baaca9a7d657feaf033&libraries=services"></script>
 	<script>
 		mapSeting()		
