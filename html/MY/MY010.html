@@ -39,7 +39,8 @@
 								<a href="../MY/MY010.html" class="link">마이페이지</a>
 								<ul class="menu-depth2">
 									<li><a href="../MY/MY010.html" class="link">루트꾸미기</a></li>
-									<li><a href="../MY/MY030.html" class="link">내글보기</a></li>
+									<li><a href="../MY/MY022.html" class="link">마이장소</a></li>
+									<li><a href="../MY/MY030.html" class="link">마이루트</a></li>
 									<li><a href="../MY/MY040.html" class="link">프로필</a></li>
 								</ul>
 							</li>
@@ -73,14 +74,12 @@
 						</div>
 					</section>
 					
-					<section class="make-route-area">
+					<section class="map-content-area">
 						<div class="inner">
-							<form class="add-route-form">
-								<legend class="hide">루트를 새롭게 등록하세요</legend>
-							</form>
-							
-							<div class="add-route">
-								<a href="../PL/PL010.html" class="add-route-link"></a>
+							<div class="function-box">
+								<!-- API 기능 -->
+								<div id="map" class="map-box"></div>
+								<!-- // -->
 								<div class="field-area">
 									<div class="field">
 										<label for="region" class="label">지역</label>
@@ -114,13 +113,19 @@
 										</div>
 									</div>
 									<div class="field">
-										<label for="select" class="label">펫종류</label>
-										<div class="select">
-											<select id="select" required>
-												<option value="0">선택해 주세요</option>
-												<option value="1">강아지</option>
-												<option value="2">고양이</option>
-											</select>
+										<p class="label">펫종류</p>
+										<style>
+											
+										</style>
+										<div class="checkboxs">
+											<div class="checkbox">
+												<input type="checkbox" id="dog" name="pet" class="checked">
+												<label for="dog">강아지</label>
+											</div>
+											<div class="checkbox">
+												<input type="checkbox" id="cat" name="pet" class="checked">
+												<label for="cat">고양이</label>
+											</div>
 										</div>
 									</div>
 									<div class="field">
@@ -133,18 +138,29 @@
 										<div class="field">
 											<label for="text33" class="label">인원수</label>
 											<div class="text">
-												<input type="text" id="text33" placeholder="인원수를 입력">
+												<input type="text" id="text33" placeholder="인원수 입력">
 											</div>
 										</div>
 										<div class="field">
 											<label for="text44" class="label">반려동물 수</label>
 											<div class="text">
-												<input type="text" id="text44" placeholder="반려동물 수를 입력">
+												<input type="text" id="text44" placeholder="반려동물 수 입력">
 											</div>
 										</div>
 									</div>
+									<div class="comp-buttons">
+										<button type="button" class="button -primary -lg w-full">루트 추가하기</button>
+									</div>
 								</div>
 							</div>
+						</div>
+					</section>
+
+					<section class="make-route-area">
+						<div class="inner">
+							<form class="add-route-form">
+								<legend class="hide">루트를 새롭게 등록하세요</legend>
+							</form>
 							<div class="make-route">
 								<div class="item -placeholder"></div>
 								<div class="item">
@@ -249,23 +265,10 @@
 	<script src="../../assets/libs/swiper/dist/js/swiper.min.js"></script>
 	<script src="../../assets/js/style.js"></script>
 	<script src="../../assets/js/dev.js"></script>
+	<script src="../../assets/js/map.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9921046766278baaca9a7d657feaf033&libraries=services"></script>
 	<script>
-		// 스크립트 작성
-		$(function () {
-			$('.make-route').sortable({
-			handle: '.sorting-handler',
-			axis: 'y',
-			containment: 'parent',
-			start: function (e, ui) {
-				ui.item.css('transform', 'scale(1.05)'); // 드래그 시작 시 투명도
-				console.log('드래그 시작');
-			},
-			stop: function (e, ui) {
-				ui.item.css('transform', 'scale(1)'); // 드래그 끝나면 복원
-				console.log('드래그 끝');
-			}
-			});
-		});
+		mapSeting()
 	</script>
 </body>
 </html>

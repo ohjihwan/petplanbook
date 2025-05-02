@@ -1,6 +1,6 @@
 
 function gnbMouseenter(){
-    $('.gnb').on('mouseenter', function(){
+    $('.header').on('mouseenter', function(){
         $('.header').addClass('-open-depth2')
     }).on('mouseleave', function(){
         $('.header').removeClass('-open-depth2')
@@ -117,14 +117,31 @@ function followingPath(){
     }
 }
 
+// 스크립트 작성
+function makeRoute(){
+    $('.make-route').sortable({
+    handle: '.sorting-handler',
+    axis: 'y',
+    containment: 'parent',
+    start: function (e, ui) {
+        ui.item.css('transform', 'scale(1.05)'); // 드래그 시작 시 투명도
+        console.log('드래그 시작');
+    },
+    stop: function (e, ui) {
+        ui.item.css('transform', 'scale(1)'); // 드래그 끝나면 복원
+        console.log('드래그 끝');
+    }
+    });
+};
+
 $(document).on('keydown', function (e) {
 	if (e.key === "Escape" || e.keyCode === 27) {
 		modalClose() // 해당 팝업 닫힘
 	}
 });
 
-
 gnbMouseenter() // GNB
 ratingChecked() // 좋아요&싫어요
 mainSuggestionSwiper() // 메인 모션 스와이프
 followingPath() // 동선스크롤 이벤트
+makeRoute() // 루트꾸미기 순서 섞기
