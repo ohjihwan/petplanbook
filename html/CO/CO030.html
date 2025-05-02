@@ -30,7 +30,7 @@
 							<li>
 								<a href="../CO/CO010.html" class="link">커뮤니티</a>
 								<ul class="menu-depth2">
-									<li><a href="../CO/CO010.html" class="link">루트자랑</a></li>
+									<li><a href="../CO/CO010.html" class="link">추천 루트</a></li>
 									<li><a href="../CO/CO040.html" class="link">월간이벤트</a></li>
 								</ul>
 							</li>
@@ -63,8 +63,8 @@
 							<img src="../../assets/imgs/img/img-CM010-1.jpg" alt="">
 						</figure>
 						<div class="text-box">
-							<h2 class="title">루트자랑</h2>
-							<p class="txt">집사들이 다녀온 후기들</p>
+							<h2 class="title">추천 루트</h2>
+							<p class="txt">다른 반려인들이 다녀온 루트를 그대로 따라 해보세요!</p>
 							<div class="guide-arrow" aria-label="하단에 컨텐츠가 있습니다">
 								<i></i>
 								<i></i>
@@ -141,9 +141,7 @@
 									</div>
 								</div>
 								<!-- API 기능 -->
-								<div id="map" class="map-box">
-									<div style="display:flex; align-items:center; justify-content:center; width:100%; height:100%; font-size:6rem; font-weight:900; text-align:center; background-color:#ddd;">MAP AI 자리<br> 꼭 해당 div 를 지워주세요</div>
-								</div>
+								<div id="map" class="map-box"></div>
 								<!-- // -->
 								<div class="board-area">
 									<div class="field">
@@ -170,7 +168,7 @@
 													 <input type="checkbox" id="rating-bad" class="hide">
 													 <label for="rating-bad"><span class="hide">싫어요</span></label>
 												</div>
-												<p class="rating-txt"><span class="number">11</span>명의 집사님이 탐내는 루트에요</p>
+												<p class="rating-txt"><span class="number">11</span>명이 추천하는 루트에요</p>
 											</div>
 										</div>
 									</div>
@@ -206,7 +204,7 @@
 							
 							<div class="map-content-buttons">
 								<button type="button" class="button -primary -lg">내루트에 저장</button>
-								<button type="button" class="button -secondary -lg">목록으로</button>
+								<a href="../CO/CO010.html" class="button -secondary -lg">목록으로</a>
 							</div>
 						</div>
 					</section>
@@ -240,8 +238,9 @@
 	<script src="../../assets/libs/swiper/dist/js/swiper.min.js"></script>
 	<script src="../../assets/js/style.js"></script>
 	<script src="../../assets/js/dev.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9921046766278baaca9a7d657feaf033&libraries=services"></script>
 	<script>
-		// 스크립트 작성
+		mapSeting()		
 	</script>
 </body>
 </html>
