@@ -225,7 +225,7 @@ body {
 .w-full {width:100% !important}
 .hide {overflow:hidden !important; position:absolute !important; width:1px !important; height:1px !important; margin:0 !important; padding:0 !important; border:0 !important; white-space:nowrap !important; clip:rect(1px, 1px, 1px, 1px) !important; clip-path:inset(50%) !important;}
 .buttons.-right {text-align:right;}
-.buttons.-center {margin-top:1.7rem; text-align:center;}
+.buttons.-center {margin-top:8rem; text-align:center;}
 .inner {width:var(--limit-width); min-width:var(--limit-width); margin:0 auto;}
 .point {color:#fcb900}
 .-ellipsis-2 {display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; text-overflow:ellipsis;}
