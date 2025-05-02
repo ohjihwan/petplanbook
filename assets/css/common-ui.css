@@ -243,6 +243,14 @@ body.lock {overflow:hidden;}
 .button.-lg {height:6.5rem; line-height:6.5rem; padding:0 5rem; border-radius:1.2rem; font-size:2.1rem; font-weight:700;}
 .button:disabled {color:#474747; background-color:#d9d9d9;}
 
+.checkboxs {display:flex; justify-content:space-between;}
+.checkboxs .checkbox {flex:1; position:relative; margin-top:0.5rem;}
+.checkboxs .checkbox > label {padding-left:2.5rem; font-size:2rem;}
+.checkboxs .checkbox > label::before {content:''; position:absolute; left:0; top:50%; transform:translateY(-50%); width:2.2rem; height:2.2rem; border:1px solid #e6e6e6; border-radius:0.4rem;}
+.checkboxs .checkbox > .checked:checked + label::before {border-color:#ffcd00; background-color:#ffcd00; transition:all 0.25s;}
+.checkboxs .checkbox > label::after {content:''; position:absolute; left:0; top:50%; transform:translateY(-50%); width:2.2rem; height:2.2rem; background:url(../imgs/ico/ico-checked.svg) no-repeat 50% / 1.2rem auto; filter:invert(1);}
+.checkboxs .checkbox > .checked:checked + label::after {filter:invert(0);}
+
 /* 레이아웃 */
 .container {padding-top:11rem;}
 .header {display:flex; align-items:flex-start; overflow:hidden; position:fixed; top:0; left:0; z-index:100; width:100%; height:11rem; background-color:#fff; transition:height 0.25s ease-in-out;}
