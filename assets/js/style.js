@@ -53,10 +53,17 @@ function mainSuggestionSwiper(){
 
 function detailImgs(){
     let detailImgs = new Swiper(".detail-imgs", {
-        effect: "cards",
-        observer:true,
-        observerParents:true,
         grabCursor: true,
+		effect: "creative",
+		creativeEffect: {
+			prev: {
+				shadow: true,
+				translate: [0, 0, -400],
+			},
+			next: {
+				translate: ["100%", 0, 0],
+			},
+		},
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
@@ -110,8 +117,14 @@ function followingPath(){
     }
 }
 
+$(document).on('keydown', function (e) {
+	if (e.key === "Escape" || e.keyCode === 27) {
+		modalClose() // 해당 팝업 닫힘
+	}
+});
 
 gnbMouseenter() // GNB
 ratingChecked() // 좋아요&싫어요
 mainSuggestionSwiper() // 메인 모션 스와이프
 followingPath() // 동선스크롤 이벤트
+

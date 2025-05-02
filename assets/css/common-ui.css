@@ -243,6 +243,13 @@ body.lock {overflow:hidden;}
 .button.-lg {height:6.5rem; line-height:6.5rem; padding:0 5rem; border-radius:1.2rem; font-size:2.1rem; font-weight:700;}
 .button:disabled {color:#474747; background-color:#d9d9d9;}
 
+/* 스와이프 좌우 버튼 */
+.swiper-button-next {width:4.5rem; height:10rem; padding:1rem; background-color:rgba(0,0,0,0.7);}
+.swiper-button-next::after {color:#fff;}
+.swiper-button-prev {width:4.5rem; height:10rem; padding:1rem; background-color:rgba(0,0,0,0.7);}
+.swiper-button-prev::after {color:#fff;}
+
+/* 체크박스 */
 .checkboxs {display:flex; justify-content:space-between;}
 .checkboxs .checkbox {flex:1; position:relative; margin-top:0.5rem;}
 .checkboxs .checkbox > label {padding-left:2.5rem; font-size:2rem;}
