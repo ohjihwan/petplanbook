@@ -54,4 +54,4 @@ function loginOpenPage() {
 /* 로드 페이지 관리 */
 $('.page .header').load('../../html/ETC/header.html');
 $('.page .footer').load('../../html/ETC/footer.html');
-$('.modal.-login-modal').load('../../html/ETC/ETC010.html');
+$('.modal.-login-modal').load('../../html/ETC/login.html');
