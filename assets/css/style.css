@@ -24,8 +24,8 @@
     0% {transform:scale(1.05);}
     100% {transform:scale(1);}
 }
-.main-banner .text-box .guide-arrow {position:absolute; top:13rem; left:50%; transform:translateX(-50%); width:4.8rem; margin:0 auto; }
-.main-banner .text-box .guide-arrow i {display:block; width:4.8rem; height:2.4rem; margin-top:5rem; background:url(../imgs/ico/ico-guide-arrow.png) no-repeat 50% / 100% auto; animation:guideArrow 1s infinite ease-in-out;}
+.main-banner .text-box .guide-arrow {position:absolute; top:18rem; left:50%; transform:translateX(-50%); width:4.8rem; margin:0 auto; cursor:pointer;}
+.main-banner .text-box .guide-arrow i {display:block; width:4.8rem; height:2.4rem; background:url(../imgs/ico/ico-guide-arrow.png) no-repeat 50% / 100% auto; animation:guideArrow 1s infinite ease-in-out;}
 .main-banner .text-box .guide-arrow i + i {margin-top:-0.3rem; animation-delay:0.15s;}
 @keyframes guideArrow {
     0% {transform:translateY(0);}
@@ -226,6 +226,19 @@
 .location-detail .details {display:flex; flex-wrap:wrap; margin:0 10rem;}
 .location-detail .details dt {flex:0 0 7.5rem; font-size:2rem; font-weight:600; color:#000;}
 .location-detail .details dd {flex:0 0 calc(100% - 7.5rem); font-size:2rem; color:#666;}
+
+.modal.-login-modal .container {width:51.3rem;}
+.modal.-login-modal .container .login-img-motions {width:18.6rem; height:19.3rem; margin:0 auto;}
+.modal.-login-modal .container .login-txt {font-size:1.6rem; color:#666; text-align:center;}
+.modal.-login-modal .container .login-txt button {font-size:inherit; color:#000; background-color:transparent;}
+.modal.-login-modal .container .login-txt button:hover {text-decoration:underline; text-underline-offset:4px;}
+.modal.-login-modal .container .login-form {width:30rem; margin:0 auto;}
+.modal.-login-modal .container .login-form .field,
+.modal.-login-modal .container .login-form .buttons {margin-top:1.5rem;}
+.modal.-login-modal .signup-area .signup-title {line-height:1.2; font-size:6.4rem; font-weight:900; color:var(--button-primary); text-align:center;}
+
+.ico {display:inline-block; vertical-align:middle;}
+.ico.-kakao {width:3.3rem; height:3.3rem; background:url(../imgs/ico/ico-kakao.png) no-repeat 50% / 100% auto; vertical-align:-9px;}
 
 .event-imgs {display:block;}
 

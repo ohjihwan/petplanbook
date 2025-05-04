@@ -230,6 +230,8 @@ body {
 .point {color:#fcb900}
 .-ellipsis-2 {display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; text-overflow:ellipsis;}
 .plr-0 {padding-left:0 !important; padding-right:0 !important;}
+.center {text-align:center;}
+.ptb-8 {padding-top:0.8rem !important; padding-bottom:0.8rem !important;}
 
 /* ROOT
    ==== */
@@ -241,8 +243,11 @@ body.lock {overflow:hidden;}
 .button {display:inline-block; height:4rem; line-height:4rem; padding:0 1.5rem; border-radius:0.8rem; font-size:1.6rem; font-weight:600; background-color:#fff;}
 .button.-primary {color:#000; background-color:#ffcd00;}
 .button.-secondary {color:#000; background-color:#fff5cb;}
+.button.-border-type {color:#000; border:1px solid #d3ded3; background-color:#fff;}
+.button.-md {height:5rem; line-height:5rem; padding:0 5rem; border-radius:1.2rem; font-size:1.8rem; font-weight:600;}
 .button.-lg {height:6.5rem; line-height:6.5rem; padding:0 5rem; border-radius:1.2rem; font-size:2.1rem; font-weight:700;}
 .button:disabled {color:#474747; background-color:#d9d9d9;}
+.button.w-full {padding:0 0.4rem;}
 
 /* 스와이프 좌우 버튼 */
 .swiper-button-next {width:4.5rem; height:10rem; padding:1rem; background-color:rgba(0,0,0,0.7);}
@@ -261,7 +266,7 @@ body.lock {overflow:hidden;}
 
 /* 레이아웃 */
 .container {padding-top:11rem;}
-.header {display:flex; align-items:flex-start; overflow:hidden; position:fixed; top:0; left:0; z-index:100; width:100%; height:11rem; background-color:#fff; transition:height 0.25s ease-in-out;}
+.header {display:flex; align-items:flex-start; overflow:hidden; position:fixed; top:0; left:0; z-index:100; width:100%; height:11rem; border-bottom:1px solid #d3d3d3; background-color:#fff; transition:height 0.25s ease-in-out;}
 .header .inner {display:flex; align-items:center;}
 .header .inner .logo {display:flex; align-items:center; position:relative; width:31rem; height:11rem; margin-left:3.5rem; transition:opacity 0.25s ease-in-out;}
 .header .inner .logo a {display:block; overflow:hidden;}
@@ -308,48 +313,18 @@ body.lock {overflow:hidden;}
 .modal {display:none; position:relative; z-index:1000;}
 .modal::before {content:''; position:fixed; left:0; top:0; width:100vw; height:100vh; background-color:rgba(0,0,0,.3);}
 .modal .container {overflow:hidden; position:fixed; left:50%; top:50%; transform:translate(-50%, -50%); z-index:100; width:70rem; padding:0; border-radius:1.2rem; background-color:#fff;}
-.modal .header {position:static; height:5rem; padding:0; background-color:#fff;}
+.modal .header {position:static; height:5rem; padding:0; border-bottom:none; background-color:#fff;}
 .modal .header .close {position:absolute; right:0; top:0; width:5.5rem; height:5.5rem; background:url(../imgs/ico/ico-close.svg) no-repeat 50% / 100% auto;}
-.modal .content {overflow-x:hidden; overflow-y:auto; max-height:77rem; padding:5.5rem 2.4rem 3rem;}
+.modal .content {overflow-x:hidden; overflow-y:auto; max-height:77rem; padding:0 2.4rem 3rem;}
 .modal .fixed {width:100%; padding:2.4rem 0 3rem; text-align:center;}
 
-
-.swal2-container {
-	/* 전체 컨테이너 */
-}
-
-.swal2-container .swal2-popup {
-	border-radius:1.4rem;;
-}
-
-.swal2-container .swal2-title {
-	font-size:3rem; color:#000;
-}
-
-.swal2-container .swal2-html-container {
-	font-size:1.8rem; color:#343434;
-}
-
-.swal2-container .swal2-actions {
-}
-
+.swal2-container {/* 전체 컨테이너 */}
+.swal2-container .swal2-popup {border-radius:1.4rem;}
+.swal2-container .swal2-title {font-size:3rem; color:#000;}
+.swal2-container .swal2-html-container {font-size:1.8rem; color:#343434;}
+.swal2-container .swal2-actions {}
 .swal2-container .swal2-confirm,
-.swal2-container .swal2-cancel {
-	color: #000;
-}
-
-.swal2-container .swal2-styled {
-	height:4rem; line-height:4rem; padding:0 1.5rem; border-radius:0.8rem;
-	font-size:1.6rem; font-weight:600; 
-	color: #000;
-	background-color: #ffcd00; 
-}
-
-.swal2-container .swal2-styled:focus {
-	box-shadow: none;
-	outline: none;
-}
-
-.swal2-container .swal2-styled span {
-	/* 버튼 내부 텍스트 span (자동 생성되는 경우) */
-}
+.swal2-container .swal2-cancel {color:#000;}
+.swal2-container .swal2-styled {height:4rem; line-height:4rem; padding:0 1.5rem; border-radius:0.8rem; font-size:1.6rem; font-weight:600; color: #000; background-color: #ffcd00;}
+.swal2-container .swal2-styled:focus {box-shadow: none; outline: none;}
+.swal2-container .swal2-styled span {/* 버튼 내부 텍스트 span (자동 생성되는 경우) */}

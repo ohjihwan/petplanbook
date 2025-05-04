@@ -1,21 +1,97 @@
 <!-- <div class="modal -login-modal"> -->
-	<div class="container">
-		<header class="header">
-			<div class="inner">
-				<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
-			</div>
-		</header>
+<div class="container">
+	<header class="header">
+		<div class="inner">
+			<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
+		</div>
+	</header>
 
-		<main class="contents">
-			<div class="content">
-				로그인창
-			</div>
-		</main>
+	<main class="contents">
+		<div class="content">
+			<div class="signup-area">
+				<h3 class="signup-title">
+					회원가입
+				</h3>
+				<p class="login-txt">계정이 없다면? <button type="button" onclick="loginShow()">여기를 눌러 가입</button>해주세요</p>
+				<form action="" class="login-form">
+					<div class="field">
+						<label for="text1" class="label">회원가입 이메일</label>
+						<div class="text">
+							<input type="text" id="text1" required placeholder="이메일을 입력해 주세요">
+						</div>
+					</div>
 
-		<div class="fixed">
-			<div class="buttons">
-				<button type="button" class="button -primary -lg">이 장소 저장하기</button>
+					<div class="field">
+						<label for="password" class="label">비밀번호</label>
+						<div class="text">
+							<input type="password" id="password" required placeholder="비밀번호를 입력해 주세요">
+						</div>
+					</div>
+
+					<div class="field">
+						<label for="password2" class="label">비밀번호 확인</label>
+						<div class="text">
+							<input type="password" id="password2" required placeholder="한번 더 비밀번호를 입력해 주세요">
+						</div>
+					</div>
+
+					<div class="field">
+						<label for="test2" class="label">닉네임</label>
+						<div class="text">
+							<input type="text" id="test2" required placeholder="넥네임을을 입력해 주세요">
+						</div>
+					</div>
+
+					<div class="field">
+						<p class="label">당신의 반려동물은?</p>
+						<style>
+							
+						</style>
+						<div class="checkboxs">
+							<div class="checkbox">
+								<input type="checkbox" id="dog" name="pet" class="checked">
+								<label for="dog">강아지</label>
+							</div>
+							<div class="checkbox">
+								<input type="checkbox" id="cat" name="pet" class="checked">
+								<label for="cat">고양이</label>
+							</div>
+						</div>
+					</div>
+
+					<div class="buttons">
+						<button type="button" class="button -secondary -md w-full">회원가입</button>
+					</div>
+				</form>
+			</div>
+			<div class="login-area">
+				<div class="login-img-motions">
+					<img src="../../assets/imgs/img/img-ETC010-1.svg" alt="">
+				</div>
+				<p class="login-txt">계정이 없다면? <button type="button" onclick="signupShow()">여기를 눌러 가입</button>해주세요</p>
+				<form action="" class="login-form">
+					<div class="field">
+						<label for="text1" class="label">로그인 이메일</label>
+						<div class="text">
+							<input type="text" id="text1" required placeholder="이곳에 이메일을 입력해 주세요">
+						</div>
+					</div>
+
+					<div class="field">
+						<label for="password" class="label">비밀번호</label>
+						<div class="text">
+							<input type="password" id="password" required placeholder="이곳에 비밀번호를 입력해 주세요">
+						</div>
+					</div>
+
+					<div class="buttons">
+						<button type="button" class="button -primary -md w-full">로그인</button>
+						<div class="ptb-8 center">또는</div>
+						<button type="button" class="button -border-type -md w-full"><i class="ico -kakao"></i> 카카오톡 로그인</button>
+					</div>
+				</form>
 			</div>
 		</div>
-	</div>
+	</main>
+</div>
 <!-- </div> -->

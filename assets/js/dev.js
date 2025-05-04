@@ -46,6 +46,18 @@ function deleteDataPage() {
 function loginOpenPage() {
 	$('body').addClass('lock');
 	$('.modal.-login-modal').show();
+	$('.modal .signup-area').hide();
+	$('.modal .login-area').show();
+}
+
+function loginShow() {
+	$('.modal .signup-area').hide();
+	$('.modal .login-area').show();
+}
+
+function signupShow() {
+	$('.modal .login-area').hide();
+	$('.modal .signup-area').show();
 }
 
 // deleteData() // 뭔가 삭제할때 쓰는 스크립트

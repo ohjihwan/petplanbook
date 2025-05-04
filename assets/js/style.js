@@ -74,7 +74,7 @@ function detailImgs(){
 function locationModalOpen(){
     $('body').addClass('lock')
     $('.modal').show()
-    detailImgs()
+    // detailImgs()
 }
 
 function modalOpenId(modalId){
@@ -117,7 +117,6 @@ function followingPath(){
     }
 }
 
-// 스크립트 작성
 function makeRoute(){
     $('.make-route').sortable({
     handle: '.sorting-handler',
@@ -133,6 +132,17 @@ function makeRoute(){
     }
     });
 };
+
+document.querySelector('.guide-arrow').addEventListener('click', function () {
+	const headerHeight = document.querySelector('.header').offsetHeight;
+	const bannerHeight = document.querySelector('.main-banner').offsetHeight;
+	const scrollY = headerHeight + bannerHeight;
+
+	window.scrollTo({
+		top: scrollY,
+		behavior: 'smooth'
+	});
+});
 
 $(document).on('keydown', function (e) {
 	if (e.key === "Escape" || e.keyCode === 27) {
