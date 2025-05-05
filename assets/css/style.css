@@ -39,6 +39,7 @@
 .map-content-area,
 .list-content-area,
 .my-region-area,
+.profile-area,
 .make-route-area {margin-top:15rem;}
 .map-content-area + .make-route-area {margin-top:0;}
 
@@ -205,6 +206,8 @@
 .search-result-box ul li .close {position:absolute; right:1rem; top:1rem; width:3rem; height:3rem; border-radius:50%; background-color:rgba(0,0,0,0.7);}
 .search-result-box ul li .close::before {content:''; position:absolute; left:50%; top:50%; width:1px; height:1.4rem; background-color:#fff; transform:translate(-50%, -50%) rotate(45deg);}
 .search-result-box ul li .close::after {content:''; position:absolute; left:50%; top:50%; width:1px; height:1.4rem; background-color:#fff; transform:translate(-50%, -50%) rotate(-45deg);}
+
+.profile-area {margin-top:15rem;}
 
 /* ETC */
 .navigation {display:flex; justify-content:center; align-items:center; gap:0 0.8rem; margin-top:6rem;}
