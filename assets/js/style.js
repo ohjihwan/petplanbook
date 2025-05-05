@@ -144,6 +144,16 @@ document.querySelector('.guide-arrow').addEventListener('click', function () {
 	});
 });
 
+function profileEditMode(e, el) {
+	const $editModeHasDiv = $('.profile-area');
+	const $target = $(e);
+	if( !$editModeHasDiv.hasClass('-edit-mode') ) {
+		$editModeHasDiv.addClass('-edit-mode')
+		$('.profile-buttons .button.none').removeClass('none')
+		$target.addClass('none')
+	}
+}
+
 $(document).on('keydown', function (e) {
 	if (e.key === "Escape" || e.keyCode === 27) {
 		modalClose() // 해당 팝업 닫힘
@@ -155,3 +165,4 @@ ratingChecked() // 좋아요&싫어요
 mainSuggestionSwiper() // 메인 모션 스와이프
 followingPath() // 동선스크롤 이벤트
 makeRoute() // 루트꾸미기 순서 섞기
+profileEditMode() // 루트꾸미기 순서 섞기

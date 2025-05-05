@@ -232,6 +232,7 @@ body {
 .plr-0 {padding-left:0 !important; padding-right:0 !important;}
 .center {text-align:center;}
 .ptb-8 {padding-top:0.8rem !important; padding-bottom:0.8rem !important;}
+.none {display:none !important}
 
 /* ROOT
    ==== */
