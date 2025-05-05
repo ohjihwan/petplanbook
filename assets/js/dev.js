@@ -201,6 +201,14 @@ function errorInputClear() {
 errorInputClear() // 인풋 유휴성 체크
 
 /* 로드 페이지 관리 */
-$('.page .header').load('../../html/ETC/header.html');
-$('.page .footer').load('../../html/ETC/footer.html');
-$('.modal.-login-modal').load('../../html/ETC/login.html');
+let basePath = '';
+if (location.port === '8080') {
+  // Node 서버: public 폴더 기준
+  basePath = '';
+} else if (location.port === '5500' || location.port === '5501') {
+  // Live Server: html 폴더 내부 기준
+  basePath = '/html';
+}
+$('.page .header').load(`${basePath}/ETC/header.html?v=${Date.now()}`);
+$('.page .footer').load(`${basePath}/ETC/footer.html?v=${Date.now()}`);
+$('.modal.-login-modal').load(`${basePath}/ETC/login.html?v=${Date.now()}`);
