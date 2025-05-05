@@ -133,16 +133,22 @@ function makeRoute(){
     });
 };
 
-document.querySelector('.guide-arrow').addEventListener('click', function () {
-	const headerHeight = document.querySelector('.header').offsetHeight;
-	const bannerHeight = document.querySelector('.main-banner').offsetHeight;
-	const scrollY = headerHeight + bannerHeight;
+const guideArrow = document.querySelector('.guide-arrow');
+if (guideArrow) {
+	guideArrow.addEventListener('click', function () {
+		const header = document.querySelector('.header');
+		const banner = document.querySelector('.main-banner');
 
-	window.scrollTo({
-		top: scrollY,
-		behavior: 'smooth'
+		const headerHeight = header ? header.offsetHeight : 0;
+		const bannerHeight = banner ? banner.offsetHeight : 0;
+		const scrollY = headerHeight + bannerHeight;
+
+		window.scrollTo({
+			top: scrollY,
+			behavior: 'smooth'
+		});
 	});
-});
+}
 
 function profileEditMode(e, el) {
 	const $editModeHasDiv = $('.profile-area');
