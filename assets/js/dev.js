@@ -58,10 +58,62 @@ function loginShow() {
 function signupShow() {
 	$('.modal .login-area').hide();
 	$('.modal .signup-area').show();
+	let count = 0;
+	let fieldHeight = $('.signup-form .field').outerHeight(true);
+	let buttonHeight = $('.signup-form .buttons').outerHeight(true);
+	$('.signup-form .field').hide();
+	$('.signup-form [required]').each(function () {
+		$(this).closest('.field').show();
+		count += 1;
+	});
+	$('.signup-form').height(fieldHeight * count + buttonHeight);
+}
+
+function optionalField(e) {
+	let isValid = true;
+	let count = 0;
+	$('.signup-form [required]').each(function () {
+		const value = $(this).val()?.trim();
+		if (value === '') {
+			isValid = false;
+			$(this).closest('.field').addClass('-error');
+		} else {
+			$(this).closest('.field').removeClass('-error');
+		}
+	});
+	if (!isValid) {
+		alert('모든 필수 입력값을 입력해 주세요.');
+		return;
+	}
+	$('.signup-form [required]').each(function () {
+		$(this).closest('.field').show();
+		count += 1;
+	});
+	$(e).siblings('.button').removeClass('none');
+	$(e).addClass('none');
+}
+
+function errorInputClear() {
+	$(document).on('keyup change', '.signup-form :input[required]', function () {
+		const $field = $(this).closest('.field');
+		const type = $(this).attr('type');
+		const value = $(this).val();
+	
+		if (type === 'file') {
+			if (this.files.length > 0) {
+				$field.removeClass('-error');
+			}
+		} else {
+			if (value && value.trim().length > 0) {
+				$field.removeClass('-error');
+			}
+		}
+	});
 }
 
 // deleteData() // 뭔가 삭제할때 쓰는 스크립트
 // deleteDataPage() // 게시글 자체가 페이지 내 삭제될 경우
+errorInputClear()
 
 /* 로드 페이지 관리 */
 $('.page .header').load('../../html/ETC/header.html');

@@ -13,7 +13,7 @@
 					회원가입
 				</h3>
 				<p class="login-txt">계정이 없다면? <button type="button" onclick="loginShow()">여기를 눌러 가입</button>해주세요</p>
-				<form action="" class="login-form">
+				<form action="" id="signup-field1" class="signup-form">
 					<div class="field">
 						<label for="text1" class="label">회원가입 이메일</label>
 						<div class="text">
@@ -43,23 +43,9 @@
 					</div>
 
 					<div class="field">
-						<p class="label">당신의 반려동물은?</p>
-						<div class="checkboxs">
-							<div class="checkbox">
-								<input type="checkbox" id="dog11" name="pet" class="checked">
-								<label for="dog11">강아지</label>
-							</div>
-							<div class="checkbox">
-								<input type="checkbox" id="cat22" name="pet" class="checked">
-								<label for="cat22">고양이</label>
-							</div>
-						</div>
-					</div>
-
-					<div class="field">
 						<label for="region" class="label">지역</label>
 						<div class="select">
-							<select name="region" id="region">
+							<select name="region" id="region" required>
 								<option value="">지역 선택</option>
 								<option value="강원특별자치도">강원특별자치도</option>
 								<option value="경기도">경기도</option>
@@ -82,8 +68,31 @@
 						</div>
 					</div>
 
+					<div class="field">
+						<p class="label">당신의 반려동물은?</p>
+						<div class="checkboxs">
+							<div class="checkbox">
+								<input type="checkbox" id="dog11" name="pet" class="checked">
+								<label for="dog11">강아지</label>
+							</div>
+							<div class="checkbox">
+								<input type="checkbox" id="cat22" name="pet" class="checked">
+								<label for="cat22">고양이</label>
+							</div>
+						</div>
+					</div>
+
+					<div class="field">
+						<label for="text3" class="label">사진 첨부</label>
+						<div class="text -file">
+							<input type="file" id="text3" value="최대 30mb 첨부 가능해요">
+						</div>
+					</div>
+
 					<div class="buttons">
-						<button type="button" class="button -secondary -md w-full">회원가입</button>
+						<button type="button" class="button -secondary -md w-full" onclick="optionalField(this)">다음</button>
+						<button type="button" class="button -secondary -md none">이전</button>
+						<button type="button" class="button -primary -md none">회원가입</button>
 					</div>
 				</form>
 			</div>
