@@ -1,14 +1,14 @@
 
 function gnbMouseenter(){
-    $('.header').on('mouseenter', function(){
+    $(document).on('mouseenter','.header', function(){
         $('.header').addClass('-open-depth2')
-    }).on('mouseleave', function(){
+    }).on('mouseleave','.header', function(){
         $('.header').removeClass('-open-depth2')
     })
 }
 
 function ratingChecked(){
-    $('.rating input').on('click', function(){
+    $(document).on('click','.rating input', function(){
         if( $(this).is(':checked') == true ) {
             $(this).closest('.rating').siblings('.rating').find('input').prop('checked', false)
         }
@@ -44,9 +44,9 @@ function mainSuggestionSwiper(){
         },
     });
 
-    $('.suggestion-place .overflow-area').on('mouseenter', function () {
+    $(document).on('mouseenter','.suggestion-place .overflow-area', function () {
         mainSuggestionSwiper.autoplay.stop();
-    }).on('mouseleave', function () {
+    }).on('mouseleave','.suggestion-place .overflow-area', function () {
         mainSuggestionSwiper.autoplay.start();
     });
 }
@@ -133,16 +133,32 @@ function makeRoute(){
     });
 };
 
-document.querySelector('.guide-arrow').addEventListener('click', function () {
-	const headerHeight = document.querySelector('.header').offsetHeight;
-	const bannerHeight = document.querySelector('.main-banner').offsetHeight;
-	const scrollY = headerHeight + bannerHeight;
+const guideArrow = document.querySelector('.guide-arrow');
+if (guideArrow) {
+	guideArrow.addEventListener('click', function () {
+		const header = document.querySelector('.header');
+		const banner = document.querySelector('.main-banner');
 
-	window.scrollTo({
-		top: scrollY,
-		behavior: 'smooth'
+		const headerHeight = header ? header.offsetHeight : 0;
+		const bannerHeight = banner ? banner.offsetHeight : 0;
+		const scrollY = headerHeight + bannerHeight;
+
+		window.scrollTo({
+			top: scrollY,
+			behavior: 'smooth'
+		});
 	});
-});
+}
+
+function profileEditMode(e, el) {
+	const $editModeHasDiv = $('.profile-area');
+	const $target = $(e);
+	if( !$editModeHasDiv.hasClass('-edit-mode') ) {
+		$editModeHasDiv.addClass('-edit-mode')
+		$('.profile-buttons .button.none').removeClass('none')
+		$target.addClass('none')
+	}
+}
 
 $(document).on('keydown', function (e) {
 	if (e.key === "Escape" || e.keyCode === 27) {
@@ -155,3 +171,4 @@ ratingChecked() // 좋아요&싫어요
 mainSuggestionSwiper() // 메인 모션 스와이프
 followingPath() // 동선스크롤 이벤트
 makeRoute() // 루트꾸미기 순서 섞기
+profileEditMode() // 루트꾸미기 순서 섞기
