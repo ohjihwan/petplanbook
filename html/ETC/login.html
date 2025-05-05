@@ -14,35 +14,35 @@
 				</h3>
 				<p class="login-txt">계정이 없다면? <button type="button" onclick="loginShow()">여기를 눌러 가입</button>해주세요</p>
 				<form action="" id="signup-field1" class="signup-form">
-					<div class="field">
+					<div class="field step1">
 						<label for="text1" class="label">회원가입 이메일</label>
 						<div class="text">
-							<input type="text" id="text1" required placeholder="이메일을 입력해 주세요">
+							<input type="text" id="text1" name="email" required placeholder="이메일을 입력해 주세요">
 						</div>
 					</div>
 
-					<div class="field">
+					<div class="field step1">
 						<label for="password" class="label">비밀번호</label>
 						<div class="text">
-							<input type="password" id="password" required placeholder="비밀번호를 입력해 주세요">
+							<input type="password" id="password" name="password" required placeholder="비밀번호를 입력해 주세요">
 						</div>
 					</div>
 
-					<div class="field">
+					<div class="field step1">
 						<label for="password2" class="label">비밀번호 확인</label>
 						<div class="text">
-							<input type="password" id="password2" required placeholder="한번 더 비밀번호를 입력해 주세요">
+							<input type="password" id="password2" name="passwordConfirm" required placeholder="한번 더 비밀번호를 입력해 주세요">
 						</div>
 					</div>
 
-					<div class="field">
+					<div class="field step1">
 						<label for="test2" class="label">닉네임</label>
 						<div class="text">
-							<input type="text" id="test2" required placeholder="넥네임을을 입력해 주세요">
+							<input type="text" id="test2" name="nickname" required placeholder="넥네임을을 입력해 주세요">
 						</div>
 					</div>
 
-					<div class="field">
+					<div class="field step1">
 						<label for="region" class="label">지역</label>
 						<div class="select">
 							<select name="region" id="region" required>
@@ -68,7 +68,7 @@
 						</div>
 					</div>
 
-					<div class="field">
+					<div class="field step2">
 						<p class="label">당신의 반려동물은?</p>
 						<div class="checkboxs">
 							<div class="checkbox">
@@ -82,17 +82,20 @@
 						</div>
 					</div>
 
-					<div class="field">
+					<div class="field step2">
 						<label for="text3" class="label">사진 첨부</label>
 						<div class="text -file">
-							<input type="file" id="text3" value="최대 30mb 첨부 가능해요">
+							<input type="file" id="text3" name="profileImage">
+						</div>
+						<div class="img-view-box">
+							<img src="" alt="">
 						</div>
 					</div>
 
 					<div class="buttons">
 						<button type="button" class="button -secondary -md w-full" onclick="optionalField(this)">다음</button>
-						<button type="button" class="button -secondary -md none">이전</button>
-						<button type="button" class="button -primary -md none">회원가입</button>
+						<button type="button" class="button -secondary -md none" onclick="goBackToRequired(this)">이전</button>
+						<button type="button" class="button -primary -md none" onclick="submitSignupForm()">회원가입</button>
 					</div>
 				</form>
 			</div>
@@ -126,4 +129,7 @@
 		</div>
 	</main>
 </div>
+<script>
+	setImagePreviewAll('.signup-form'); // 첨부파일 이미지 미리보기
+</script>
 <!-- </div> -->

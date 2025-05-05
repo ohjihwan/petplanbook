@@ -276,12 +276,13 @@
 .modal.-login-modal .container .login-form .field,
 .modal.-login-modal .container .login-form .buttons {margin-top:1.5rem;}
 .modal.-login-modal .signup-area .signup-title {line-height:1.2; font-size:6.4rem; font-weight:900; color:var(--button-primary); text-align:center;}
-.modal.-login-modal .container .signup-form {width:30rem; margin:0 auto; transition:height 0.5s linear;}
+.modal.-login-modal .container .signup-form {width:30rem; margin:0 auto; transition:height 0.25s ease-in;}
 .modal.-login-modal .container .signup-form .field,
 .modal.-login-modal .container .signup-form .buttons {margin-top:1.5rem;}
 .modal.-login-modal .container .signup-form .field.-error .label {color:#ec0c0c;}
 .modal.-login-modal .container .signup-form .field.-error input,
 .modal.-login-modal .container .signup-form .field.-error select {border-color:#ec0c0c;}
+.modal.-login-modal .container .signup-form .img-view-box {margin-top:1rem;}
 
 .ico {display:inline-block; vertical-align:middle;}
 .ico.-kakao {width:3.3rem; height:3.3rem; background:url(../imgs/ico/ico-kakao.png) no-repeat 50% / 100% auto; vertical-align:-9px;}
