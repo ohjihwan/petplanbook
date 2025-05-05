@@ -133,6 +133,7 @@ function recalculateSignupFormHeight() {
 
 function submitSignupForm() {
 	const $form = $('.signup-form');
+	// 회원가입 데이터 수집
 	const signupData = {
 		email: $form.find('[name="email"]').val()?.trim(),
 		password: $form.find('[name="password"]').val()?.trim(),
@@ -142,21 +143,40 @@ function submitSignupForm() {
 		pets: [],
 		fileName: $form.find('[name="profileImage"]')[0]?.files[0]?.name || null
 	};
+	// 체크된 반려동물 종류 수집
 	$form.find('input[name="pet"]:checked').each(function () {
 		signupData.pets.push($(this).val() || $(this).next('label').text());
 	});
-	console.log('회원가입 데이터:', signupData);
-	alert('회원가입이 완료되었습니다!');
-	$form[0].reset();
-	$form.find('.img-view-box img').attr('src', '');
-	$form.find('.field').removeClass('-error');
-	$form.find('.field.step2').hide();
-	$form.find('.field.step1').show();
-	$form.find('.button.-secondary').addClass('none');
-	$form.find('.button.-primary').addClass('none');
-	$form.find('.button:contains("다음")').removeClass('none');
-	recalculateSignupFormHeight();
-	loginShow();
+	// fetch를 통한 서버 전송
+	fetch('/api/user/signup', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(signupData)
+	})
+	.then(res => res.json())
+	.then(data => {
+		if (data.success) {
+			alert('회원가입이 완료되었습니다!');
+			// 입력 초기화
+			$form[0].reset();
+			$form.find('.img-view-box img').attr('src', '');
+			$form.find('.field').removeClass('-error');
+			$form.find('.field.step2').hide();
+			$form.find('.field.step1').show();
+			$form.find('.button.-secondary').addClass('none');
+			$form.find('.button.-primary').addClass('none');
+			$form.find('.button:contains("다음")').removeClass('none');
+			// 높이 재계산 및 로그인 화면 전환
+			recalculateSignupFormHeight();
+			loginShow();
+		} else {
+			alert('회원가입 실패: ' + data.message);
+		}
+	})
+	.catch(err => {
+		console.error('서버 오류:', err);
+		alert('서버 오류가 발생했습니다.');
+	});
 }
 
 function errorInputClear() {
