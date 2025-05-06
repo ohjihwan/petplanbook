@@ -158,6 +158,20 @@ function profileEditMode(e, el) {
 		$('.profile-buttons .button.none').removeClass('none')
 		$target.addClass('none')
 	}
+    $('.profile-my-changes').removeClass('none')
+    $('.profile-my-views').addClass('none')
+}
+
+function profileComp(e, el) {
+	const $editModeHasDiv = $('.profile-area');
+	const $target = $(e);
+	if( $editModeHasDiv.hasClass('-edit-mode') ) {
+		$editModeHasDiv.removeClass('-edit-mode')
+		$('.profile-buttons .button.none').removeClass('none')
+		$target.addClass('none')
+	}
+    $('.profile-my-changes').addClass('none')
+    $('.profile-my-views').removeClass('none')
 }
 
 $(document).on('keydown', function (e) {
@@ -171,4 +185,4 @@ ratingChecked() // 좋아요&싫어요
 mainSuggestionSwiper() // 메인 모션 스와이프
 followingPath() // 동선스크롤 이벤트
 makeRoute() // 루트꾸미기 순서 섞기
-profileEditMode() // 루트꾸미기 순서 섞기
+// profileEditMode() // 프로필 수정하기
