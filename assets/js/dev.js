@@ -204,7 +204,7 @@ function submitSignupForm() {
 
 	// 체크된 반려동물 종류 수집
 	$form.find('input[name="pet"]:checked').each(function () {
-		signupData.pets.push($(this).val() || $(this).next('label').text());
+		signupData.pets.push($(this).val());
 	});
 
 	// fetch 요청
@@ -252,15 +252,16 @@ function submitLogin() {
 	fetch('/api/user/login', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ email, password })
+		body: JSON.stringify({ email, password }),
+		credentials: 'include'
 	})
 	.then(res => res.json())
 	.then(data => {
 		if (data.success) {
-			console.log('로그인 성공:', data);
 			localStorage.setItem("user", JSON.stringify(data));
 			localStorage.setItem("loginTime", Date.now());
 			alert(`${data.nickname}님 환영합니다!`);
+			console.log("로그인 응답 데이터:", data);
 			modalClose();
 			updateLoginButtons();
 		} else {
