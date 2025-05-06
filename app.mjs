@@ -7,17 +7,17 @@ import userRouter from "./router/user.mjs";
 const app = express();
 
 app.use(cors({
-  origin:true,
-  credentials:true
+	origin:true,
+	credentials:true
 }));
 app.use(express.json());
 app.use(session({
-  secret: "your-secure-secret-key",
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 1000 * 60 * 60,
-  }
+	secret: "your-secure-secret-key",
+	resave: false,
+	saveUninitialized: false,
+	cookie: {
+		maxAge: 1000 * 60 * 60,
+	}
 }));
 app.use("/uploads", express.static("uploads"));
 app.use("/assets", express.static("assets"));
@@ -26,5 +26,5 @@ app.use("/api/user", userRouter);
 app.use(placeRouter);
 
 app.listen(8080, () => {
-  console.log("서버 실행 중: http://localhost:8080");
+	console.log("서버 실행 중: http://localhost:8080");
 });
