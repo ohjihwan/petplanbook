@@ -162,18 +162,6 @@ function profileEditMode(e, el) {
     $('.profile-my-views').addClass('none')
 }
 
-function profileComp(e, el) {
-	const $editModeHasDiv = $('.profile-area');
-	const $target = $(e);
-	if( $editModeHasDiv.hasClass('-edit-mode') ) {
-		$editModeHasDiv.removeClass('-edit-mode')
-		$('.profile-buttons .button.none').removeClass('none')
-		$target.addClass('none')
-	}
-    $('.profile-my-changes').addClass('none')
-    $('.profile-my-views').removeClass('none')
-}
-
 $(document).on('keydown', function (e) {
 	if (e.key === "Escape" || e.keyCode === 27) {
 		modalClose() // 해당 팝업 닫힘
