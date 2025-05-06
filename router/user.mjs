@@ -84,5 +84,69 @@ router.post("/logout", (req, res) => {
 		res.json({ success: true, message: "로그아웃 성공" });
 	});
 });
-  
+
+// 사용자 정보 수정 API
+router.put("/edit", async (req, res) => {
+	try {
+		const { email, password, nickname, region, pets } = req.body;
+		const cat_or_dog = pets.join(','); // 'cat,dog' 등 문자열로 저장
+
+		const sql = `
+			UPDATE user
+			SET password = ?, nickname = ?, region = ?, cat_or_dog = ?
+			WHERE email = ?
+		`;
+
+		await db.execute(sql, [password, nickname, region, cat_or_dog, email]);
+		res.status(200).json({ success: true, message: "수정 완료" });
+	} catch (err) {
+		console.error("프로필 수정 실패:", err);
+		res.status(500).json({ success: false, message: "서버 오류" });
+	}
+});
+
+router.post('/update-profile', async (req, res) => {
+	try {
+		const { email, password, nickname, region, cat_or_dog } = req.body;
+
+		console.log('[프로필 수정 요청] cat_or_dog:', cat_or_dog);
+
+		if (!email || !password || !nickname || !region) {
+			return res.status(400).json({ success: false, message: "필수 항목 누락" });
+		}
+
+		const sql = `
+			UPDATE user 
+			SET password = ?, nickname = ?, region = ?, cat_or_dog = ? 
+			WHERE email = ?
+		`;
+		const params = [password, nickname, region, cat_or_dog, email];
+
+		const [result] = await db.execute(sql, params);
+
+		if (result.affectedRows === 1) {
+			return res.json({ success: true });
+		} else {
+			return res.json({ success: false, message: "업데이트 실패" });
+		}
+	} catch (error) {
+		console.error("❌ 프로필 수정 오류:", error);
+		return res.status(500).json({ success: false, message: "서버 오류 발생" });
+	}
+});
+
+router.post('/delete-profile-image', async (req, res) => {
+	try {
+		const { email } = req.body;
+		if (!email) return res.status(400).json({ success: false, message: "이메일 누락" });
+
+		await db.execute(`UPDATE user SET profile_image_url = NULL WHERE email = ?`, [email]);
+
+		res.json({ success: true });
+	} catch (error) {
+		console.error("프로필 이미지 삭제 오류:", error);
+		res.status(500).json({ success: false, message: "서버 오류" });
+	}
+});
+
 export default router;
