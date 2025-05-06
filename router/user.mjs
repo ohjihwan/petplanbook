@@ -62,6 +62,7 @@ router.post("/signup", async (req, res) => {
 	}
 });
 
+// 회원가입 아이디/이메일 중복 체크
 router.post("/check-email", async (req, res) => {
 	try {
 		const { email } = req.body;
@@ -76,6 +77,7 @@ router.post("/check-email", async (req, res) => {
 	}
 });
 
+// 로그아웃
 router.post("/logout", (req, res) => {
 	req.session.destroy(err => {
 		if (err) return res.status(500).send("로그아웃 실패");
