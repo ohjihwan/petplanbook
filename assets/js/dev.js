@@ -321,7 +321,31 @@ function errorInputClear() {
 	});
 }
 
-errorInputClear() // 인풋 유휴성 체크
+function checkAccessPermission() {
+	document.addEventListener('click', function (e) {
+		const link = e.target.closest('a[href]');
+		if (!link) return;
+
+		const href = link.getAttribute('href');
+
+		if (!href || href === '#' || href === '#none' || href.startsWith('javascript:')) return;
+
+		const allowPaths = ['/HM/HM010.html', '/PL/PL010.html'];
+		const isAllowed = allowPaths.some(path => href.endsWith(path));
+		const user = JSON.parse(localStorage.getItem("user"));
+
+		if (!user && !isAllowed) {
+			e.preventDefault();
+			alert("로그인 후 이용해주세요.");
+		}
+	});
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+	errorInputClear() // 인풋 유휴성 체크
+	checkAccessPermission(); // 비로그인/로그인 페이지 진입 관련
+});
 
 /* 로드 페이지 관리 */
 let basePath = '';
