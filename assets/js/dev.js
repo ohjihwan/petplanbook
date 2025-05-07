@@ -24,18 +24,21 @@ function deleteDataPage() {
     }
 }
 
+// ✅ 헤더 로그인 기능
 function loginOpenPage() {
 	modalOpenId('login-modal');
 	$('.modal .signup-area').hide();
 	$('.modal .login-area').show();
 }
 
+// ✅ 헤더 회원가입 -> 로그인 교체
 function loginShow() {
 	$('.modal .signup-area').hide();
 	$('.modal .login-area').show();
 	$('.login-form .button:contains("로그인")').removeClass('none');
 }
 
+// ✅ 헤더 로그인 -> 회원가입 교체
 function signupShow() {
 	$('.modal .login-area').hide();
 	$('.modal .signup-area').show();
@@ -46,87 +49,75 @@ function signupShow() {
 	recalculateSignupFormHeight();
 }
 
+// ✅ 회원가입 step1 리팩토리
 function optionalField(e) {
-	const $form = $('.signup-form');
+    const $form = $('.signup-form');
+    $form.find('.field').removeClass('-error');
 
-	$form.find('.field').removeClass('-error');
+    const email = $form.find('[name="email"]').val()?.trim();
+    const password = $form.find('[name="password"]').val()?.trim();
+    const passwordConfirm = $form.find('[name="passwordConfirm"]').val()?.trim();
 
-	const email = $form.find('[name="email"]').val()?.trim();
-	const password = $form.find('[name="password"]').val()?.trim();
-	const passwordConfirm = $form.find('[name="passwordConfirm"]').val()?.trim();
-
-	// 1️⃣ 이메일 중복 체크
-	fetch('/api/user/check-email', {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ email })
-	})
-	.then(res => {
-		if (res.status === 409) {
-			$form.find('[name="email"]').closest('.field').addClass('-error');
-			alert('이미 사용 중인 이메일입니다.');
-			throw new Error('중복 이메일');
-		}
-		return res.json();
-	})
-	.then(() => {
-		// 2️⃣ 비밀번호 일치 확인
-		if (password !== passwordConfirm) {
-			$form.find('[name="passwordConfirm"]').closest('.field').addClass('-error');
-			alert('비밀번호가 일치하지 않습니다.');
-			throw new Error('비밀번호 불일치');
-		}
-
-		// 3️⃣ 필수 입력값 모두 체크
-		let isValid = true;
-		$form.find('.field.step1 :input[required]').each(function () {
-			const value = $(this).val()?.trim();
-			if (!value) {
-				$(this).closest('.field').addClass('-error');
-				isValid = false;
-			}
-		});
-		if (!isValid) {
-			alert('모든 필수 입력값을 입력해 주세요.');
-			throw new Error('필수 입력값 누락');
-		}
-
-		// 🔄 모든 검사 통과 시 다음 단계로
-		$('.signup-form .field.step1').hide();
-		$('.signup-form .field.step2').show();
-		$(e).addClass('none');
-		$(e).siblings('.button.-secondary').removeClass('none');
-		$('.button.-primary').removeClass('none');
-		recalculateSignupFormHeight();
-	})
-	.catch(err => {
-		console.warn('검증 중단:', err.message);
-	});
+    // 회원가입 입력값 체크 후 step2 로 이동동
+    checkEmailDuplication(email)
+        .then(() => verifyPasswordMatch(password, passwordConfirm))
+        .then(() => checkRequiredFields($form))
+        .then(() => moveToNextStep(e))
+        .catch(err => console.warn('검증 중단:', err.message));
 }
 
-function continueOptionalStep(e) {
-	let isValid = true;
-	$('.signup-form .field.step1 :input[required]').each(function () {
-		const value = $(this).val()?.trim();
-		if (value === '') {
-			isValid = false;
-			$(this).closest('.field').addClass('-error');
-		} else {
-			$(this).closest('.field').removeClass('-error');
-		}
-	});
-	if (!isValid) {
-		alert('모든 필수 입력값을 입력해 주세요.');
-		return;
-	}
-	$('.signup-form .field.step1').hide();
-	$('.signup-form .field.step2').show();
-	$(e).addClass('none');
-	$(e).siblings('.button.-secondary').removeClass('none');
-	$('.button.-primary').removeClass('none');
-	recalculateSignupFormHeight();
+// ✅ 이메일 중복 체크
+function checkEmailDuplication(email) {
+    return fetch('/api/user/check-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+    }).then(res => {
+        if (res.status === 409) {
+            $('.signup-form [name="email"]').closest('.field').addClass('-error');
+            alert('이미 사용 중인 이메일입니다.');
+            throw new Error('중복 이메일');
+        }
+        return res.json();
+    });
 }
 
+// ✅ 비밀번호 확인
+function verifyPasswordMatch(password, passwordConfirm) {
+    if (password !== passwordConfirm) {
+        $('.signup-form [name="passwordConfirm"]').closest('.field').addClass('-error');
+        alert('비밀번호가 일치하지 않습니다.');
+        throw new Error('비밀번호 불일치');
+    }
+}
+
+// ✅ 필수 입력값 확인
+function checkRequiredFields($form) {
+    const isValid = $form.find('.field.step1 :input[required]').toArray().every(input => {
+        const value = $(input).val()?.trim();
+        if (!value) {
+            $(input).closest('.field').addClass('-error');
+            return false;
+        }
+        return true;
+    });
+
+    if (!isValid) {
+        alert('모든 필수 입력값을 입력해 주세요.');
+        throw new Error('필수 입력값 누락');
+    }
+}
+
+// ✅ 다음 단계 이동
+function moveToNextStep(e) {
+    $('.signup-form .field.step1').hide();
+    $('.signup-form .field.step2').show();
+    $(e).addClass('none').siblings('.button.-secondary').removeClass('none');
+    $('.button.-primary').removeClass('none');
+    recalculateSignupFormHeight();
+}
+
+// ✅ 회원가입 이전
 function goBackToRequired(e) {
 	$('.signup-form .field.step2').hide();
 	$('.signup-form .field.step1').show();
