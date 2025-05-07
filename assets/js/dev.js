@@ -342,120 +342,123 @@ function checkAccessPermission() {
 }
 
 function syncUserProfileUI(user) {
-	const petsArray = (user.cat_or_dog || '').split(',').map(p => p.trim()).filter(p => p && p !== '없음');
-	const orderedPets = ['강아지', '고양이'];
-	const uniquePets = [...new Set(petsArray)];
-	const normalizedPets = orderedPets.filter(p => uniquePets.includes(p)).join(', ') || '없음';
+    const petsArray = (user.cat_or_dog || '').split(',').map(p => p.trim()).filter(p => p && p !== '없음');
+    const orderedPets = ['강아지', '고양이'];
+    const uniquePets = [...new Set(petsArray)];
+    const normalizedPets = orderedPets.filter(p => uniquePets.includes(p)).join(', ') || '없음';
 
-	$('#nickname-txt, #nickname').text(user.nickname);
-	$('#region-txt, #made-region-txt').text(user.region);
-	$('#pet-txt').text(normalizedPets);
+    $('#nickname-txt, #nickname').text(user.nickname);
+    $('#region-txt, #made-region-txt').text(user.region);
+    $('#pet-txt').text(normalizedPets);
 
-	if (normalizedPets === '없음') {
-		$('#pet-txt').closest('.profile-sentence').addClass('none');
-	} else {
-		$('#pet-txt').closest('.profile-sentence').removeClass('none');
-	}
+    if (normalizedPets === '없음') {
+        $('#pet-txt').closest('.profile-sentence').addClass('none');
+    } else {
+        $('#pet-txt').closest('.profile-sentence').removeClass('none');
+    }
 
-	$('input[name="pet"]').prop('checked', false);
-	uniquePets.forEach(p => {
-		if (p === '강아지') $('#dog1').prop('checked', true);
-		if (p === '고양이') $('#cat2').prop('checked', true);
-	});
+    $('input[name="pet"]').prop('checked', false);
+    uniquePets.forEach(p => {
+        if (p === '강아지') $('#dog1').prop('checked', true);
+        if (p === '고양이') $('#cat2').prop('checked', true);
+    });
 
-	// ✅ 이미지 반영: src 일치 + 없으면 비움
-	const $img = $('.profile-img img');
-	if (user.profile_image_url) {
-		const fileName = user.profile_image_url.split('/').pop();
-		const fullPath = `/assets/imgs/temp/${fileName}`;
-		$img.attr('src', fullPath).removeClass('none');
-	} else {
-		$img.attr('src', '').addClass('none'); // ✅ src 초기화 추가
-	}
+    // ✅ 이미지 반영: src 체크 후 처리
+    const $img = $('.profile-img img');
+    if (user.profile_image_url) {
+        $img.attr('src', user.profile_image_url)
+            .show()
+            .on('error', function() {
+                $(this).addClass('none'); // 이미지 로드 실패 시 숨김
+            });
+    } else {
+        $img.removeAttr('src').addClass('none');
+    }
 }
 
 function profileComp(e) {
-	const $editModeHasDiv = $('.profile-area');
-	const $target = $(e);
+	const user = JSON.parse(localStorage.getItem("user"));
+	const email = user?.email;
 	const nickname = $('#nickname-input').val()?.trim();
 	const password = $('#password-change').val()?.trim();
 	const passwordConfirm = $('#password-change-comp').val()?.trim();
 	const region = $('#region-select').val();
+	const fileInput = document.querySelector('#profile-img-input');
+	const file = fileInput?.files[0];
 
-	// ✅ 현재 체크된 반려동물 수집
-	const pets = $('.profile-my-changes input[name="pet"]:checked')
-		.map(function () {
-			return $(this).val().trim();
-		})
-		.get();
-
-	console.log('[🐾 DEBUG] 체크된 반려동물:', pets);
-
-	const user = JSON.parse(localStorage.getItem("user"));
-	const email = user?.email;
-
-	if (!nickname || !password || !passwordConfirm) {
-		return alert("모든 값을 입력해주세요.");
-	}
-	if (password !== passwordConfirm) {
-		return alert("비밀번호가 일치하지 않습니다.");
-	}
-	if (!user || !email) {
-		alert("로그인 정보가 유효하지 않습니다. 다시 로그인 해주세요.");
-		location.href = "/HM/HM010.html";
+	// ✅ 비밀번호 입력 확인
+	if (!password) {
+		alert("비밀번호를 입력해주세요.");
 		return;
 	}
 
-	// ✅ 중복 제거 + 고정 순서
-	const orderedPets = ['강아지', '고양이'];
-	const uniquePets = [...new Set(pets)];
-	const normalizedPets = orderedPets.filter(p => uniquePets.includes(p)).join(', ') || '없음';
+	// ✅ 비밀번호 확인 입력 확인
+	if (password !== passwordConfirm) {
+		alert("비밀번호가 일치하지 않습니다.");
+		return;
+	}
 
-	console.log('[🚀 서버로 보낼 cat_or_dog]:', normalizedPets);
+	// ✅ 반려동물 체크된 값 수집
+	const pets = $('.profile-my-changes input[name="pet"]:checked')
+		.map(function () {
+			return $(this).val();
+		})
+		.get();
+	const petText = pets.length ? pets.join(", ") : "없음";
 
-	const updatedData = {
-		nickname,
-		password: password || user.password,
-		region,
-		cat_or_dog: normalizedPets,
-		email
-	};
+	// ✅ FormData 생성
+	const formData = new FormData();
+	formData.append("email", email);
+	formData.append("nickname", nickname);
+	formData.append("password", password);
+	formData.append("region", region);
+	formData.append("cat_or_dog", pets.join(','));
+
+	if (file) {
+		formData.append("profileImage", file);
+	}
 
 	fetch('/api/user/update-profile', {
 		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(updatedData)
+		body: formData
 	})
-	.then(res => res.json())
+	.then(res => {
+		if (!res.ok) throw new Error("서버 응답 오류");
+		return res.json();
+	})
 	.then(data => {
 		if (data.success) {
 			alert("프로필이 수정되었습니다!");
-
-			// ✅ localStorage 갱신
+			
+			// ✅ localStorage 업데이트
 			const updatedUser = {
 				...user,
 				nickname,
 				region,
-				cat_or_dog: normalizedPets
+				cat_or_dog: pets.join(','),
+				profile_image_url: data.imageUrl || user.profile_image_url
 			};
 			localStorage.setItem("user", JSON.stringify(updatedUser));
-			updateLoginButtons();
 
-			// ✅ UI 상태 복원
-			$editModeHasDiv.removeClass('-edit-mode');
+			// ✅ UI 업데이트
+			syncUserProfileUI(updatedUser);
+			renderUserProfile();
+
+			// ✅ 반려동물 텍스트 반영
+			$('#pet-txt').text(petText);
+
+			// ✅ 수정 완료 후 UI 복귀
+			$('.profile-area').removeClass('-edit-mode');
 			$('.profile-buttons .button.none').removeClass('none');
-			$target.addClass('none');
+			$(e).addClass('none');
 			$('.profile-my-changes').addClass('none');
 			$('.profile-my-views').removeClass('none');
-
-			// ✅ UI 갱신 함수 호출
-			syncUserProfileUI(updatedUser);
 		} else {
 			alert("수정 실패: " + data.message);
 		}
 	})
 	.catch(err => {
-		console.error("수정 오류:", err);
+		console.error("프로필 수정 오류:", err);
 		alert("서버 오류가 발생했습니다.");
 	});
 }
@@ -475,8 +478,7 @@ function triggerProfileImageUpload(el) {
 function handleProfileImageUpload(input) {
 	const file = input.files[0];
 	if (!file) return;
-
-	// 파일 미리보기 처리
+	
 	const reader = new FileReader();
 	reader.onload = function (e) {
 		const $img = $(input).closest('.profile-img').find('img');
@@ -484,42 +486,56 @@ function handleProfileImageUpload(input) {
 	};
 
 	reader.readAsDataURL(file);
+}
 
-	// 👉 선택적으로 서버로 업로드 요청할 수도 있음
-	// ex) fetch로 FormData 전송 → DB에 저장
+// 프로필 이미지 삭제
+function handleProfileImageDelete(el) {
+	const user = JSON.parse(localStorage.getItem("user"));
+	const email = user?.email;
+
+	if (!email) {
+		alert("로그인이 필요합니다.");
+		return;
+	}
+
+	// 서버에 이미지 삭제 요청
+	fetch('/api/user/delete-profile-image', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ email })
+	})
+	.then(res => res.json())
+	.then(data => {
+		if (data.success) {
+			alert("이미지 삭제 완료");
+
+			// ✅ localStorage에서 이미지 URL 삭제
+			const updatedUser = { ...user, profile_image_url: null };
+			localStorage.setItem("user", JSON.stringify(updatedUser));
+
+			// ✅ UI에서 이미지 제거 및 none 클래스 적용
+			const $img = $(el).closest('.profile-img').find('img');
+			$img.attr('src', '').addClass('none');
+		} else {
+			alert("이미지 삭제 실패: " + data.message);
+		}
+	})
+	.catch(err => {
+		console.error("이미지 삭제 오류:", err);
+		alert("서버 오류가 발생했습니다.");
+	});
 }
 
 function renderUserProfile() {
 	const user = JSON.parse(localStorage.getItem("user"));
 	if (!user) return;
 
-	const petsArray = (user.cat_or_dog || '').split(',').map(p => p.trim()).filter(p => p && p !== '없음');
-	const orderedPets = ['강아지', '고양이'];
-	const uniquePets = [...new Set(petsArray)];
-	const normalizedPets = orderedPets.filter(p => uniquePets.includes(p)).join(', ') || '없음';
-
 	$('#nickname-txt, #nickname').text(user.nickname);
 	$('#region-txt, #made-region-txt').text(user.region);
-	$('#pet-txt').text(normalizedPets);
 
-	if (normalizedPets === '없음') {
-		$('#pet-txt').closest('.profile-sentence').addClass('none');
-	} else {
-		$('#pet-txt').closest('.profile-sentence').removeClass('none');
-	}
-
-	$('input[name="pet"]').prop('checked', false);
-	uniquePets.forEach(p => {
-		if (p === '강아지') $('#dog1').prop('checked', true);
-		if (p === '고양이') $('#cat2').prop('checked', true);
-	});
-
-	// ✅ 이미지 반영
 	const $img = $('.profile-img img');
 	if (user.profile_image_url) {
-		const fileName = user.profile_image_url.split('/').pop();
-		const fullPath = `/assets/imgs/temp/${fileName}`;
-		$img.attr('src', fullPath).removeClass('none');
+		$img.attr('src', user.profile_image_url).removeClass('none');
 	} else {
 		$img.attr('src', '').addClass('none');
 	}

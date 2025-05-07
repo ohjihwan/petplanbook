@@ -107,7 +107,7 @@ router.post("/places", upload.single("image"), async (req, res) => {
   });
 
   if (!name || !category || !address || !description) {
-    console.log("❗ 필수 항목 누락됨");
+    console.log("필수 항목 누락됨");
     return res.status(400).send("필수 항목이 누락되었습니다.");
   }
 
@@ -116,12 +116,11 @@ router.post("/places", upload.single("image"), async (req, res) => {
       "INSERT INTO places (name, category, address, description, image_url) VALUES (?, ?, ?, ?, ?)",
       [name, category, address, description, imageUrl]
     );
-    console.log("✅ INSERT 성공:", result.insertId);
     res
       .status(201)
       .json({ message: "장소 등록 완료", placeId: result.insertId });
   } catch (err) {
-    console.error("❗ INSERT 실패:", err);
+    console.error("INSERT 실패:", err);
     res.status(500).send("서버 오류");
   }
 });
