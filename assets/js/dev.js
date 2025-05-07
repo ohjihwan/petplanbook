@@ -369,90 +369,96 @@ function syncUserProfileUI(user) {
         $img.attr('src', user.profile_image_url)
             .show()
             .on('error', function() {
-                $(this).hide(); // 이미지 로드 실패 시 숨김
+                $(this).addClass('none'); // 이미지 로드 실패 시 숨김
             });
     } else {
-        $img.removeAttr('src').hide();
+        $img.removeAttr('src').addClass('none');
     }
 }
 
 function profileComp(e) {
-	const $editModeHasDiv = $('.profile-area');
-	const $target = $(e);
+	const user = JSON.parse(localStorage.getItem("user"));
+	const email = user?.email;
 	const nickname = $('#nickname-input').val()?.trim();
 	const password = $('#password-change').val()?.trim();
 	const passwordConfirm = $('#password-change-comp').val()?.trim();
 	const region = $('#region-select').val();
+	const fileInput = document.querySelector('#profile-img-input');
+	const file = fileInput?.files[0];
 
-	// ✅ 현재 체크된 반려동물 수집
-	const pets = $('.profile-my-changes input[name="pet"]:checked')
-		.map(function () {
-			return $(this).val().trim();
-		})
-		.get();
-
-	const user = JSON.parse(localStorage.getItem("user"));
-	const email = user?.email;
-
-	if (!nickname || !password || !passwordConfirm) {
-		return alert("모든 값을 입력해주세요.");
-	}
-	if (password !== passwordConfirm) {
-		return alert("비밀번호가 일치하지 않습니다.");
-	}
-	if (!user || !email) {
-		alert("로그인 정보가 유효하지 않습니다. 다시 로그인 해주세요.");
-		location.href = "/HM/HM010.html";
+	// ✅ 비밀번호 입력 확인
+	if (!password) {
+		alert("비밀번호를 입력해주세요.");
 		return;
 	}
 
-	// ✅ 중복 제거 + 고정 순서
-	const orderedPets = ['강아지', '고양이'];
-	const uniquePets = [...new Set(pets)];
-	const normalizedPets = orderedPets.filter(p => uniquePets.includes(p)).join(', ') || '없음';
-	const updatedData = {
-		nickname,
-		password: password || user.password,
-		region,
-		cat_or_dog: normalizedPets,
-		email
-	};
+	// ✅ 비밀번호 확인 입력 확인
+	if (password !== passwordConfirm) {
+		alert("비밀번호가 일치하지 않습니다.");
+		return;
+	}
+
+	// ✅ 반려동물 체크된 값 수집
+	const pets = $('.profile-my-changes input[name="pet"]:checked')
+		.map(function () {
+			return $(this).val();
+		})
+		.get();
+	const petText = pets.length ? pets.join(", ") : "없음";
+
+	// ✅ FormData 생성
+	const formData = new FormData();
+	formData.append("email", email);
+	formData.append("nickname", nickname);
+	formData.append("password", password);
+	formData.append("region", region);
+	formData.append("cat_or_dog", pets.join(','));
+
+	if (file) {
+		formData.append("profileImage", file);
+	}
 
 	fetch('/api/user/update-profile', {
 		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(updatedData)
+		body: formData
 	})
-	.then(res => res.json())
+	.then(res => {
+		if (!res.ok) throw new Error("서버 응답 오류");
+		return res.json();
+	})
 	.then(data => {
 		if (data.success) {
 			alert("프로필이 수정되었습니다!");
-
-			// ✅ localStorage 갱신
+			
+			// ✅ localStorage 업데이트
 			const updatedUser = {
 				...user,
 				nickname,
 				region,
-				cat_or_dog: normalizedPets
+				cat_or_dog: pets.join(','),
+				profile_image_url: data.imageUrl || user.profile_image_url
 			};
 			localStorage.setItem("user", JSON.stringify(updatedUser));
-			updateLoginButtons();
 
-			// ✅ UI 상태 복원
-			$editModeHasDiv.removeClass('-edit-mode');
+			// ✅ UI 업데이트
+			syncUserProfileUI(updatedUser);
+			renderUserProfile();
+
+			// ✅ 반려동물 텍스트 반영
+			$('#pet-txt').text(petText);
+
+			// ✅ 수정 완료 후 UI 복귀
+			$('.profile-area').removeClass('-edit-mode');
 			$('.profile-buttons .button.none').removeClass('none');
-			$target.addClass('none');
+			$(e).addClass('none');
 			$('.profile-my-changes').addClass('none');
 			$('.profile-my-views').removeClass('none');
-
-			// ✅ UI 갱신 함수 호출
-			syncUserProfileUI(updatedUser);
 		} else {
 			alert("수정 실패: " + data.message);
 		}
 	})
 	.catch(err => {
-		console.error("수정 오류:", err);
+		console.error("프로필 수정 오류:", err);
 		alert("서버 오류가 발생했습니다.");
 	});
 }
@@ -471,85 +477,53 @@ function triggerProfileImageUpload(el) {
 
 function handleProfileImageUpload(input) {
 	const file = input.files[0];
-	const user = JSON.parse(localStorage.getItem("user"));
-	const email = user?.email;
-
-	if (!file || !email) return;
-
+	if (!file) return;
+	
 	const reader = new FileReader();
 	reader.onload = function (e) {
 		const $img = $(input).closest('.profile-img').find('img');
 		$img.attr('src', e.target.result).removeClass('none');
 	};
+
 	reader.readAsDataURL(file);
-
-	// 서버로 이미지 업로드
-	const formData = new FormData();
-	formData.append("profileImage", file);
-	formData.append("email", email);
-
-	fetch('/api/user/upload-profile-image', {
-		method: 'POST',
-		body: formData
-	})
-	.then(res => res.json())
-	.then(data => {
-		if (data.success) {
-			alert("프로필 이미지가 수정되었습니다.");
-
-			// ✅ LocalStorage에 이미지 URL 저장
-			const updatedUser = { ...user, profile_image_url: data.imageUrl };
-			localStorage.setItem("user", JSON.stringify(updatedUser));
-			renderUserProfile(); // UI 동기화
-		} else {
-			alert("이미지 업로드 실패: " + data.message);
-		}
-	})
-	.catch(err => {
-		console.error("이미지 업로드 오류:", err);
-		alert("서버 오류가 발생했습니다.");
-	});
 }
 
 // 프로필 이미지 삭제
 function handleProfileImageDelete(el) {
-    const $img = $(el).closest('.profile-img').find('img');
-    const user = JSON.parse(localStorage.getItem("user"));
-    const email = user?.email;
+	const user = JSON.parse(localStorage.getItem("user"));
+	const email = user?.email;
 
-    if (!email) {
-        alert("로그인 정보가 없습니다. 다시 로그인해주세요.");
-        return;
-    }
+	if (!email) {
+		alert("로그인이 필요합니다.");
+		return;
+	}
 
-    const confirmed = confirm("정말 삭제할까요?\n이 작업은 되돌릴 수 없습니다.");
-    if (confirmed) {
-        // 1. UI에서 이미지 숨김 + src 초기화
-        $img.addClass('none').attr('src', '').hide();
+	// 서버에 이미지 삭제 요청
+	fetch('/api/user/delete-profile-image', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ email })
+	})
+	.then(res => res.json())
+	.then(data => {
+		if (data.success) {
+			alert("이미지 삭제 완료");
 
-        // 2. 서버에 프로필 이미지 삭제 요청
-        fetch('/api/user/delete-profile-image', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email })
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                alert("프로필 이미지가 삭제되었습니다.");
-                
-                // 3. localStorage에서도 이미지 삭제 (null 처리)
-                const updatedUser = { ...user, profile_image_url: null };
-                localStorage.setItem("user", JSON.stringify(updatedUser));
-            } else {
-                alert("삭제 실패: " + data.message);
-            }
-        })
-        .catch(err => {
-            console.error("이미지 삭제 오류:", err);
-            alert("서버 오류가 발생했습니다.");
-        });
-    }
+			// ✅ localStorage에서 이미지 URL 삭제
+			const updatedUser = { ...user, profile_image_url: null };
+			localStorage.setItem("user", JSON.stringify(updatedUser));
+
+			// ✅ UI에서 이미지 제거 및 none 클래스 적용
+			const $img = $(el).closest('.profile-img').find('img');
+			$img.attr('src', '').addClass('none');
+		} else {
+			alert("이미지 삭제 실패: " + data.message);
+		}
+	})
+	.catch(err => {
+		console.error("이미지 삭제 오류:", err);
+		alert("서버 오류가 발생했습니다.");
+	});
 }
 
 function renderUserProfile() {

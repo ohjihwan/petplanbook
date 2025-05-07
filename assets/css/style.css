@@ -209,9 +209,8 @@
 .profile-area .profile-box {max-width:110rem; margin:0 auto;}
 .profile-area .profiles {display:flex; align-items:flex-start; gap:4.5rem; margin-top:7.4rem;}
 .profile-area .profiles .profile-img {position:relative; flex:0 0 33.2rem}
-.profile-area .profiles .profile-img figure {overflow:hidden; width:100%; height:25.5rem; border:1px solid #e6e6e6; background:url(../imgs/img/img-MY030-1.svg) no-repeat 50% / auto 100%;}
+.profile-area .profiles .profile-img figure {overflow:hidden; width:100%; height:25.5rem; border:1px solid #e6e6e6; background:#f1f1f1 url(../imgs/img/img-MY030-1.svg) no-repeat 50% / auto 100%;}
 .profile-area .profiles .profile-img figure img {width:100%; height:100%; object-fit:cover; object-position:50%;}
-.profile-area .profiles .profile-img figure img[src=""] {display:block;}
 .profile-area .profiles .profile-img .profile-img-changes {display:none; position:absolute; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.44);}
 .profile-area .profiles .profile-info {flex:1; overflow:hidden; position:relative; font-size:2rem; word-break:keep-all; line-height:6.2rem;}
 .profile-area .profiles .profile-info::after {content:''; position:absolute; width:25rem; height:25rem; right:0; bottom:-7rem; background:url(../imgs/img/img-MY030-1.svg) no-repeat 100% 100% / auto 100%; opacity:0.2;}
