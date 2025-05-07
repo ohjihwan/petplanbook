@@ -124,11 +124,9 @@ function makeRoute(){
     containment: 'parent',
     start: function (e, ui) {
         ui.item.css('transform', 'scale(1.05)'); // 드래그 시작 시 투명도
-        console.log('드래그 시작');
     },
     stop: function (e, ui) {
         ui.item.css('transform', 'scale(1)'); // 드래그 끝나면 복원
-        console.log('드래그 끝');
     }
     });
 };

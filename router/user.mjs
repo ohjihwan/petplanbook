@@ -1,5 +1,8 @@
 import express from "express";
 import db from "../data/db.mjs";
+import multer from "multer";
+import path from "path";
+import fs from "fs";
 
 const router = express.Router();
 
@@ -109,8 +112,6 @@ router.post('/update-profile', async (req, res) => {
 	try {
 		const { email, password, nickname, region, cat_or_dog } = req.body;
 
-		console.log('[프로필 수정 요청] cat_or_dog:', cat_or_dog);
-
 		if (!email || !password || !nickname || !region) {
 			return res.status(400).json({ success: false, message: "필수 항목 누락" });
 		}
@@ -135,13 +136,57 @@ router.post('/update-profile', async (req, res) => {
 	}
 });
 
+// 🔧 이미지 저장 설정
+const storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		const uploadPath = path.join(process.cwd(), "uploads/temp");
+		if (!fs.existsSync(uploadPath)) {
+			fs.mkdirSync(uploadPath, { recursive: true });
+		}
+		cb(null, uploadPath);
+	},
+	filename: (req, file, cb) => {
+		const ext = path.extname(file.originalname);
+		const nickname = req.body.nickname || 'unknown';
+		const fileName = `${nickname}_${Date.now()}${ext}`;
+		cb(null, fileName);
+	},
+});
+
+const upload = multer({ storage });
+
+// ✅ 프로필 이미지 업로드 API
+router.post("/upload-profile-image", upload.single("profileImage"), async (req, res) => {
+    try {
+        const { email } = req.body;
+        if (!email || !req.file) {
+            return res.status(400).json({ success: false, message: "이미지와 이메일이 필요합니다." });
+        }
+
+        const imageUrl = `/uploads/temp/${req.file.filename}`; // URL 경로도 /uploads/temp로 설정
+        await db.execute(`UPDATE user SET profile_image_url = ? WHERE email = ?`, [imageUrl, email]);
+
+        res.json({ success: true, imageUrl });
+    } catch (error) {
+        console.error("이미지 업로드 오류:", error);
+        res.status(500).json({ success: false, message: "서버 오류가 발생했습니다." });
+    }
+});
+
+// ✅ 프로필 이미지 삭제 API
 router.post('/delete-profile-image', async (req, res) => {
 	try {
 		const { email } = req.body;
 		if (!email) return res.status(400).json({ success: false, message: "이메일 누락" });
 
-		await db.execute(`UPDATE user SET profile_image_url = NULL WHERE email = ?`, [email]);
+		// 기존 이미지 삭제 (서버에서 파일도 삭제)
+		const [rows] = await db.query(`SELECT profile_image_url FROM user WHERE email = ?`, [email]);
+		const imagePath = rows[0]?.profile_image_url?.replace('/uploads', './uploads');
+		if (imagePath && fs.existsSync(imagePath)) {
+			fs.unlinkSync(imagePath);
+		}
 
+		await db.execute(`UPDATE user SET profile_image_url = NULL WHERE email = ?`, [email]);
 		res.json({ success: true });
 	} catch (error) {
 		console.error("프로필 이미지 삭제 오류:", error);

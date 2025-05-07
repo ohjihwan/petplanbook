@@ -7,8 +7,10 @@ import userRouter from "./router/user.mjs";
 const app = express();
 
 app.use(cors({
-	origin:true,
-	credentials:true
+	origin: true,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
 }));
 app.use(express.json());
 app.use(session({
