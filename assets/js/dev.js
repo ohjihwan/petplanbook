@@ -1,46 +1,27 @@
-
+// ✅ Delete Data Function with Native confirm
 function deleteData(el, delArea) {
-	const $btn = $(el);
-	const $delArea = $btn.closest(delArea)
-	Swal.fire({
-		title: "정말 삭제할까요?",
-		text: "이 작업은 되돌릴 수 없습니다.",
-		icon: "warning",
-		showCancelButton: true,
-		confirmButtonColor: "#ffcd00",
-		cancelButtonColor: "#dcdcdc", 
-		confirmButtonText: "삭제하기",
-		cancelButtonText: "취소",
-	}).then((result) => {
-		if (result.isConfirmed) {
-			$delArea.remove()
-			console.log( $delArea );
-			console.log("삭제됨! 이거 그냥 만들어본거지 진짜 삭제인지는 모름");
-			// 여기에 삭제 API 호출 or DOM 조작 등 추가
-		} else {
-			console.log("삭제 취소됨");
-		}
-	});
+    const $btn = $(el);
+    const $delArea = $btn.closest(delArea);
+
+    if (confirm("정말 삭제할까요?\n이 작업은 되돌릴 수 없습니다.")) {
+        $delArea.remove();
+        console.log($delArea);
+        console.log("삭제됨! 이거 그냥 만들어본거지 진짜 삭제인지는 모름");
+        // 여기에 삭제 API 호출 or DOM 조작 등 추가
+    } else {
+        return false;
+    }
 }
 
+// ✅ Delete Data Page with Native confirm
 function deleteDataPage() {
-		Swal.fire({
-		title: "정말 삭제할까요?",
-		text: "이 작업은 되돌릴 수 없습니다.",
-		icon: "warning",
-		showCancelButton: true,
-		confirmButtonColor: "#ffcd00",
-		cancelButtonColor: "#dcdcdc", 
-		confirmButtonText: "삭제하기",
-		cancelButtonText: "취소",
-	}).then((result) => {
-		Swal.fire({
-			title: "삭제가 완료되었습니다.",
-			icon: "success",
-			confirmButtonText: "확인",
-			showCancelButton: false
-		});
-	});
+    if (confirm("정말 삭제할까요?\n이 작업은 되돌릴 수 없습니다.")) {
+        alert("삭제가 완료되었습니다.");
+        console.log("페이지 삭제 완료!");
+        // 페이지 삭제 API 호출 or 동작 추가 가능
+    } else {
+        return false;
+    }
 }
 
 function loginOpenPage() {
