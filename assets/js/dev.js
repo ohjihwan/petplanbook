@@ -160,61 +160,54 @@ function recalculateSignupFormHeight() {
 	$('.signup-form').height(totalHeight);
 }
 
-// ✅ 회원가입 변동 높이값 측정
+// ✅ 회원가입 완료 버튼
 function submitSignupForm() {
-	const $form = $('.signup-form');
+    const $form = $('.signup-form');
 
-	// 1) 비밀번호 검증
-	const pwd  = $form.find('[name="password"]').val()?.trim();
-	const pwd2 = $form.find('[name="passwordConfirm"]').val()?.trim();
-	if (pwd !== pwd2) {
-		return alert('비밀번호가 일치하지 않습니다.');
-	}
+    // 1) 반려동물 수집 (Step 2)
+    const pets = [];
+    $form.find('input[name="pet"]:checked').each(function () {
+        pets.push($(this).val());
+    });
 
-	// 2) 반려동물 수집
-	const pets = [];
-	$form.find('input[name="pet"]:checked').each(function () {
-		pets.push($(this).val());
-	});
+    // 2) FormData 생성 (form 내 모든 input[name] + file 포함)
+    const formEl = document.getElementById('signup-field1');
+    const formData = new FormData(formEl);
 
-	// 3) FormData 생성 (form 내 모든 input[name] + file 포함)
-	const formEl  = document.getElementById('signup-field1');
-	const formData = new FormData(formEl);
+    // Multer가 받을 키에 맞춰 pet 배열을 문자열로 덮어쓰기
+    formData.delete('pets');
+    formData.append('cat_or_dog', pets.join(','));
 
-	// Multer가 받을 키에 맞춰 pet 배열을 문자열로 덮어쓰기
-	formData.delete('pets');
-	formData.append('cat_or_dog', pets.join(','));
+    // 3) multipart/form-data 로 전송 (헤더 설정 NO)
+    fetch('/api/user/signup', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => {
+        if (!res.ok) {
+            return res.json().then(err => Promise.reject(err));
+        }
+        return res.json();
+    })
+    .then(data => {
+        alert('회원가입이 완료되었습니다!');
 
-	// 4) multipart/form-data 로 전송 (헤더 설정 NO)
-	fetch('/api/user/signup', {
-		method: 'POST',
-		body: formData
-	})
-	.then(res => {
-		if (!res.ok) {
-			return res.json().then(err => Promise.reject(err));
-		}
-		return res.json();
-	})
-	.then(data => {
-		alert('회원가입이 완료되었습니다!');
-
-		// 5) 기존 리셋 & UI 복귀 로직
-		$form[0].reset();
-		$form.find('.img-view-box img').attr('src', '');
-		$form.find('.field').removeClass('-error');
-		$form.find('.field.step2').hide();
-		$form.find('.field.step1').show();
-		$form.find('.button.-secondary').addClass('none');
-		$form.find('.button.-primary').addClass('none');
-		$form.find('.button:contains("다음")').removeClass('none');
-		recalculateSignupFormHeight();
-		loginShow();
-	})
-	.catch(err => {
-		console.error('회원가입 실패:', err);
-		alert('회원가입 실패: ' + (err.message || '서버 오류'));
-	});
+        // 4) 기존 리셋 & UI 복귀 로직
+        $form[0].reset();
+        $form.find('.img-view-box img').attr('src', '');
+        $form.find('.field').removeClass('-error');
+        $form.find('.field.step2').hide();
+        $form.find('.field.step1').show();
+        $form.find('.button.-secondary').addClass('none');
+        $form.find('.button.-primary').addClass('none');
+        $form.find('.button:contains("다음")').removeClass('none');
+        recalculateSignupFormHeight();
+        loginShow();
+    })
+    .catch(err => {
+        console.error('회원가입 실패:', err);
+        alert('회원가입 실패: ' + (err.message || '서버 오류'));
+    });
 }
 
 function submitLogin() {
@@ -319,37 +312,40 @@ function checkAccessPermission() {
 }
 
 function syncUserProfileUI(user) {
-    const petsArray = (user.cat_or_dog || '').split(',').map(p => p.trim()).filter(p => p && p !== '없음');
-    const orderedPets = ['강아지', '고양이'];
-    const uniquePets = [...new Set(petsArray)];
-    const normalizedPets = orderedPets.filter(p => uniquePets.includes(p)).join(', ') || '없음';
-
+    // ✅ 닉네임, 지역 텍스트 설정
     $('#nickname-txt, #nickname').text(user.nickname);
     $('#region-txt, #made-region-txt').text(user.region);
-    $('#pet-txt').text(normalizedPets);
 
-    if (normalizedPets === '없음') {
-        $('#pet-txt').closest('.profile-sentence').addClass('none');
-    } else {
+    // ✅ 반려동물 텍스트 처리
+    const petsArray = (user.cat_or_dog || '').split(',').map(p => p.trim()).filter(p => p);
+    const normalizedPets = petsArray.length ? petsArray.join(', ') : '';
+
+    if (normalizedPets) {
+        $('#pet-txt').text(normalizedPets);
         $('#pet-txt').closest('.profile-sentence').removeClass('none');
+    } else {
+        $('#pet-txt').text('');
+        $('#pet-txt').closest('.profile-sentence').addClass('none');
     }
 
+    // ✅ 반려동물 체크박스 초기화
     $('input[name="pet"]').prop('checked', false);
-    uniquePets.forEach(p => {
-        if (p === '강아지') $('#dog1').prop('checked', true);
-        if (p === '고양이') $('#cat2').prop('checked', true);
+    petsArray.forEach(pet => {
+        if (pet === '강아지') $('#dog1, #dog11').prop('checked', true);
+        if (pet === '고양이') $('#cat2, #cat22').prop('checked', true);
     });
 
-    // ✅ 이미지 반영: src 체크 후 처리
-    const $img = $('.profile-img img');
+    // ✅ 프로필 이미지 반영
+    const $img = $('.profile-img img, .img-view-box img');
     if (user.profile_image_url) {
         $img.attr('src', user.profile_image_url)
+            .removeClass('none')
             .show()
             .on('error', function() {
                 $(this).addClass('none'); // 이미지 로드 실패 시 숨김
             });
     } else {
-        $img.removeAttr('src').addClass('none');
+        $img.attr('src', '').addClass('none');
     }
 }
 
@@ -389,97 +385,129 @@ function profileEditMode(e) {
 }
 
 function profileComp(e) {
-	const user = JSON.parse(localStorage.getItem("user"));
-	const email = user?.email;
-	const nickname = $('#nickname-input').val()?.trim();
-	const password = $('#password-change').val()?.trim();
-	const passwordConfirm = $('#password-change-comp').val()?.trim();
-	const region = $('#region-select').val();
-	const fileInput = document.querySelector('#profile-img-input');
-	const file = fileInput?.files[0];
+    const user = JSON.parse(localStorage.getItem("user"));
+    const email = user?.email;
+    const nickname = $('#nickname-input').val()?.trim();
+    const password = $('#password-change').val()?.trim();
+    const passwordConfirm = $('#password-change-comp').val()?.trim();
+    const region = $('#region-select').val();
+    const fileInput = document.querySelector('#profile-img-input');
+    const file = fileInput?.files[0];
 
-	// ✅ 비밀번호 입력 확인
-	if (!password) {
-		alert("비밀번호를 입력해주세요.");
-		return;
-	}
+    // ✅ 비밀번호 입력 확인
+    if (!password) {
+        alert("비밀번호를 입력해주세요.");
+        return;
+    }
 
-	// ✅ 비밀번호 확인 입력 확인
-	if (password !== passwordConfirm) {
-		alert("비밀번호가 일치하지 않습니다.");
-		return;
-	}
+    // ✅ 비밀번호 확인 입력 확인
+    if (password !== passwordConfirm) {
+        alert("비밀번호가 일치하지 않습니다.");
+        return;
+    }
 
-	// ✅ 반려동물 체크된 값 수집
-	const pets = $('.profile-my-changes input[name="pet"]:checked')
-		.map(function () {
-			return $(this).val();
-		})
-		.get();
-	const petText = pets.length ? pets.join(", ") : "없음";
+    // ✅ 반려동물 체크된 값 수집
+    const pets = $('.profile-my-changes input[name="pet"]:checked')
+        .map(function () {
+            return $(this).val();
+        })
+        .get();
+    const petText = pets.length ? pets.join(", ") : "없음";
 
-	// ✅ FormData 생성
-	const formData = new FormData();
-	formData.append("email", email);
-	formData.append("nickname", nickname);
-	formData.append("password", password);
-	formData.append("region", region);
-	formData.append("cat_or_dog", pets.join(','));
+    // ✅ FormData 생성
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("nickname", nickname);
+    formData.append("password", password);
+    formData.append("region", region);
+    formData.append("cat_or_dog", pets.join(','));
 
-	if (file) {
-		formData.append("profileImage", file);
-	}
+    if (file) {
+        formData.append("profileImage", file);
+    }
 
-	fetch('/api/user/update-profile', {
-		method: 'POST',
-		body: formData
-	})
-	.then(res => {
-		if (!res.ok) throw new Error("서버 응답 오류");
-		return res.json();
-	})
-	.then(data => {
-		if (data.success) {
-			alert("프로필이 수정되었습니다!");
-			
-			// ✅ localStorage 업데이트
-			const updatedUser = {
-				...user,
-				nickname,
-				region,
-				cat_or_dog: pets.join(','),
-				profile_image_url: data.imageUrl || user.profile_image_url
-			};
-			localStorage.setItem("user", JSON.stringify(updatedUser));
+    fetch('/api/user/update-profile', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => {
+        if (!res.ok) throw new Error("서버 응답 오류");
+        return res.json();
+    })
+    .then(data => {
+        if (data.success) {
+            alert("프로필이 수정되었습니다!");
+            
+            // ✅ localStorage 업데이트
+            const updatedUser = {
+                ...user,
+                nickname,
+                region,
+                cat_or_dog: pets.join(','),
+                profile_image_url: data.imageUrl || user.profile_image_url
+            };
+            localStorage.setItem("user", JSON.stringify(updatedUser));
 
-			// ✅ UI 업데이트
-			syncUserProfileUI(updatedUser);
-			renderUserProfile();
+            // ✅ UI 업데이트
+            syncUserProfileUI(updatedUser);
 
-			// ✅ 반려동물 텍스트 반영
-			$('#pet-txt').text(petText);
+            // ✅ 반려동물 텍스트 즉시 반영 (직접)
+            $('#pet-txt').text(petText);
 
-			// ✅ 수정 완료 후 UI 복귀
-			$('.profile-area').removeClass('-edit-mode');
-			$('.profile-buttons .button.none').removeClass('none');
-			$(e).addClass('none');
-			$('.profile-my-changes').addClass('none');
-			$('.profile-my-views').removeClass('none');
-		} else {
-			alert("수정 실패: " + data.message);
-		}
-	})
-	.catch(err => {
-		console.error("프로필 수정 오류:", err);
-		alert("서버 오류가 발생했습니다.");
-	});
+            // ✅ 수정 완료 후 UI 복귀
+            $('.profile-area').removeClass('-edit-mode');
+            $('.profile-buttons .button.none').removeClass('none');
+            $(e).addClass('none');
+            $('.profile-my-changes').addClass('none');
+            $('.profile-my-views').removeClass('none');
+        } else {
+            alert("수정 실패: " + data.message);
+        }
+    })
+    .catch(err => {
+        console.error("프로필 수정 오류:", err);
+        alert("서버 오류가 발생했습니다.");
+    });
 }
 
+// ✅ renderUserProfile: 로컬 스토리지 기반 UI 업데이트
 function renderUserProfile() {
-	const user = JSON.parse(localStorage.getItem("user"));
-	if (!user) return;
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) return;
 
-	syncUserProfileUI(user);
+    // ✅ 닉네임 및 지역 설정
+    $('#nickname-txt, #nickname').text(user.nickname);
+    $('#region-txt, #made-region-txt').text(user.region);
+
+    // ✅ 반려동물 텍스트 및 체크박스 처리
+    const petsArray = (user.cat_or_dog || '').split(',').map(p => p.trim()).filter(p => p);
+    const normalizedPets = petsArray.length ? petsArray.join(', ') : '';
+
+    if (normalizedPets) {
+        $('#pet-txt').text(normalizedPets);
+        $('#pet-txt').closest('.profile-sentence').removeClass('none');
+    } else {
+        $('#pet-txt').text('');
+        $('#pet-txt').closest('.profile-sentence').addClass('none');
+    }
+
+    // ✅ 반려동물 체크박스 자동 설정 (수정 모드)
+    $('input[name="pet"]').prop('checked', false);
+    petsArray.forEach(pet => {
+        if (pet === '강아지') $('#dog1, #dog11').prop('checked', true);
+        if (pet === '고양이') $('#cat2, #cat22').prop('checked', true);
+    });
+
+    // ✅ 프로필 이미지 설정 (뷰 및 수정)
+    const $img = $('.profile-img img, .img-view-box img');
+    if (user.profile_image_url) {
+        $img.attr('src', user.profile_image_url).removeClass('none').show()
+            .on('error', function() {
+                $(this).addClass('none'); // 이미지 로드 실패 시 숨김
+            });
+    } else {
+        $img.attr('src', '').addClass('none');
+    }
 }
 
 function triggerProfileImageUpload(el) {
@@ -536,21 +564,6 @@ function handleProfileImageDelete(el) {
 		console.error("이미지 삭제 오류:", err);
 		alert("서버 오류가 발생했습니다.");
 	});
-}
-
-function renderUserProfile() {
-	const user = JSON.parse(localStorage.getItem("user"));
-	if (!user) return;
-
-	$('#nickname-txt, #nickname').text(user.nickname);
-	$('#region-txt, #made-region-txt').text(user.region);
-
-	const $img = $('.profile-img img');
-	if (user.profile_image_url) {
-		$img.attr('src', user.profile_image_url).removeClass('none');
-	} else {
-		$img.attr('src', '').addClass('none');
-	}
 }
 
 document.addEventListener('DOMContentLoaded', () => {

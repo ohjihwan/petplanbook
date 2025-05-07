@@ -120,22 +120,27 @@ router.put("/edit", async (req, res) => {
 // ✅ 프로필 이미지 업로드 및 수정 API
 router.post('/update-profile', upload.single("profileImage"), async (req, res) => {
     try {
-        const { email, nickname, password, region } = req.body;
+        const { email, nickname, password, region, cat_or_dog } = req.body;
         const profileImage = req.file ? `/uploads/temp/${req.file.filename}` : null;
+
+        console.log("✅ 서버에서 받은 반려동물:", cat_or_dog); // 🔥 디버깅
 
         if (!email || !nickname || !password || !region) {
             return res.status(400).json({ success: false, message: "필수 항목 누락" });
         }
 
+        // ✅ DB 업데이트 (cat_or_dog 반영)
         const sql = profileImage 
-            ? `UPDATE user SET password = ?, nickname = ?, region = ?, profile_image_url = ? WHERE email = ?`
-            : `UPDATE user SET password = ?, nickname = ?, region = ? WHERE email = ?`;
+            ? `UPDATE user SET password = ?, nickname = ?, region = ?, cat_or_dog = ?, profile_image_url = ? WHERE email = ?`
+            : `UPDATE user SET password = ?, nickname = ?, region = ?, cat_or_dog = ? WHERE email = ?`;
 
         const params = profileImage 
-            ? [password, nickname, region, profileImage, email]
-            : [password, nickname, region, email];
+            ? [password, nickname, region, cat_or_dog, profileImage, email]
+            : [password, nickname, region, cat_or_dog, email];
 
         const [result] = await db.execute(sql, params);
+
+        console.log("✅ DB 업데이트 결과:", result); // 🔥 디버깅
 
         if (result.affectedRows === 1) {
             return res.json({ success: true, imageUrl: profileImage || null });
