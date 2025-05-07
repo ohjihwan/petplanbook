@@ -29,68 +29,76 @@
 								<div class="profiles">
 									<div class="profile-img">
 										<figure>
-											<img src="/assets/imgs/temp/temp-People1.jpg" alt="">
+											<img src="/assets/imgs/temp/temp-People3.jpg" alt="">
 										</figure>
+										<input type="file" id="profile-img-input" accept="image/*" class="none" onchange="handleProfileImageUpload(this)">
 										<div class="profile-img-changes">
-											<button type="button" class="change-button -edit"><span class="hide">수정하기</span></button>
-											<button type="button" class="change-button -delete"><span class="hide">삭제하기</span></button>
+											<button type="button" class="change-button -edit" onclick="triggerProfileImageUpload(this)"><span class="hide">수정하기</span></button>
+											<button type="button" class="change-button -delete" onclick="handleProfileImageDelete(this)"><span class="hide">삭제하기</span></button>
 										</div>
 									</div>
 									<div class="profile-info">
-										이름 <input type="text" id="text10" value="고길동" class="favorite-place-input2">
-										<br>
-										최근에
-										<div class="checkboxs-pets">
-											<div class="checkboxs-pet">
-												<input type="checkbox" id="dog1" name="pet" class="checked">
-												<label for="dog1">강아지</label>
+										<div class="profile-my-views">
+											<p class="profile-sentence">
+												<span id="nickname-txt" class="-point">닉네임</span>님의 글의 전체 추천 수는
+												총 <i class="ico -rating"></i> <span id="rating-num" class="-point">14</span>개의 추천을 받았습니다.
+											</p>
+											<p class="profile-sentence">
+												최근에 <span id="pet-txt" class="-point">고양이</span>와 함께 추억을 만들고 있으며,
+											</p>
+											<p class="profile-sentence">
+												<span id="region-txt" class="-point">거주지</span>
+												<span class="txt">에 거주하시는 <span id="nickname">김제니</span> 회원님은</span>,
+											</p>
+											<p class="profile-sentence">
+												<span id="made-region-txt" class="-point">자주가는거주지</span>
+												<span class="txt">많은 추억을 만들었어요</span>
+											</p>
+										</div>
+										<div class="profile-my-changes none">
+											<div class="changes-section">
+												닉네임 <input type="text" id="nickname-input" class="favorite-place-input2" placeholder="닉네임">
 											</div>
-											<div class="checkboxs-pet">
-												<input type="checkbox" id="cat2" name="pet" class="checked" checked>
-												<label for="cat2">고양이</label>
+											<div class="changes-section">
+												비빌번호 <input type="password" id="password-change" class="favorite-place-input1" placeholder="비밀번호">
+												<input type="password" id="password-change-comp" class="favorite-place-input1" placeholder="비밀번호 확인">
+											</div>
+											<div class="changes-section">
+												키우는 반려동물
+												<div class="checkboxs-pets">
+													<div class="checkboxs-pet">
+														<input type="checkbox" id="dog1" name="pet" class="checked" value="강아지">
+														<label for="dog1">강아지</label>
+													</div>
+													<div class="checkboxs-pet">
+														<input type="checkbox" id="cat2" name="pet" class="checked" value="고양이" checked>
+														<label for="cat2">고양이</label>
+													</div>
+												</div>
+											</div>
+											<div class="changes-section">
+												거주지
+												<select name="region1" id="region-select" class="favorite-place-input1">
+													<option value="강원특별자치도">강원특별자치도</option>
+													<option value="경기도">경기도</option>
+													<option value="경상남도">경상남도</option>
+													<option value="경상북도">경상북도</option>
+													<option value="광주광역시">광주광역시</option>
+													<option value="대구광역시">대구광역시</option>
+													<option value="대전광역시">대전광역시</option>
+													<option value="부산광역시">부산광역시</option>
+													<option value="서울특별시" selected>서울특별시</option>
+													<option value="세종특별자치시">세종특별자치시</option>
+													<option value="울산광역시">울산광역시</option>
+													<option value="인천광역시">인천광역시</option>
+													<option value="전라남도">전라남도</option>
+													<option value="전라북도">전라북도</option>
+													<option value="제주특별자치도">제주특별자치도</option>
+													<option value="충청남도">충청남도</option>
+													<option value="충청북도">충청북도</option>
+												</select>
 											</div>
 										</div>
-										와 함께 추억을 만들고 있으며,<br>
-										<select name="region1" id="region1" class="favorite-place-input1">
-											<option value="강원특별자치도">강원특별자치도</option>
-											<option value="경기도" selected>경기도</option>
-											<option value="경상남도">경상남도</option>
-											<option value="경상북도">경상북도</option>
-											<option value="광주광역시">광주광역시</option>
-											<option value="대구광역시">대구광역시</option>
-											<option value="대전광역시">대전광역시</option>
-											<option value="부산광역시">부산광역시</option>
-											<option value="서울특별시">서울특별시</option>
-											<option value="세종특별자치시">세종특별자치시</option>
-											<option value="울산광역시">울산광역시</option>
-											<option value="인천광역시">인천광역시</option>
-											<option value="전라남도">전라남도</option>
-											<option value="전라북도">전라북도</option>
-											<option value="제주특별자치도">제주특별자치도</option>
-											<option value="충청남도">충청남도</option>
-											<option value="충청북도">충청북도</option>
-										</select>
-										<span class="txt">에 거주하시는 회원님은</span>,<br>
-										<select name="region2" id="region2" class="favorite-place-input1">
-											<option value="강원특별자치도">강원특별자치도</option>
-											<option value="경기도">경기도</option>
-											<option value="경상남도">경상남도</option>
-											<option value="경상북도">경상북도</option>
-											<option value="광주광역시">광주광역시</option>
-											<option value="대구광역시">대구광역시</option>
-											<option value="대전광역시">대전광역시</option>
-											<option value="부산광역시">부산광역시</option>
-											<option value="서울특별시" selected>서울특별시</option>
-											<option value="세종특별자치시">세종특별자치시</option>
-											<option value="울산광역시">울산광역시</option>
-											<option value="인천광역시">인천광역시</option>
-											<option value="전라남도">전라남도</option>
-											<option value="전라북도">전라북도</option>
-											<option value="제주특별자치도">제주특별자치도</option>
-											<option value="충청남도">충청남도</option>
-											<option value="충청북도">충청북도</option>
-										</select>
-										<span class="txt">많은 추억을 만들었어요</span>
 									</div>
 								</div>
 
@@ -121,7 +129,7 @@
 
 							<div class="profile-buttons">
 								<button type="button" class="button -primary -lg" onclick="profileEditMode(this)">수정하기</button>
-								<button type="button" class="button -primary -lg none">작성완료</button>
+								<button type="button" class="button -primary -lg none" onclick="profileComp(this)">작성완료</button>
 							</div>
 						</div>
 
@@ -135,7 +143,7 @@
 		</div>
 	</div>
 
-	<div class="modal -login-modal"></div>
+	<div id="login-modal" class="modal -login-modal"></div>
 
     <script src="/assets/libs/jquery/jquery-3.6.0.min.js"></script>
 	<script src="/assets/libs/jquery-ui/jquery-ui.min.js"></script>
@@ -145,7 +153,7 @@
 	<script src="/assets/js/style.js"></script>
 	<script src="/assets/js/dev.js"></script>
 	<script>
-		// 스크립트 작성
+		renderUserProfile()
 	</script>
 </body>
 </html>

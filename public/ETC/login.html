@@ -72,11 +72,11 @@
 						<p class="label">당신의 반려동물은?</p>
 						<div class="checkboxs">
 							<div class="checkbox">
-								<input type="checkbox" id="dog11" name="pet" class="checked">
+								<input type="checkbox" id="dog11" name="pet" class="checked" value="강아지">
 								<label for="dog11">강아지</label>
 							</div>
 							<div class="checkbox">
-								<input type="checkbox" id="cat22" name="pet" class="checked">
+								<input type="checkbox" id="cat22" name="pet" class="checked" value="고양이">
 								<label for="cat22">고양이</label>
 							</div>
 						</div>
@@ -106,23 +106,25 @@
 				<p class="login-txt">계정이 없다면? <button type="button" onclick="signupShow()">여기를 눌러 가입</button>해주세요</p>
 				<form action="" class="login-form">
 					<div class="field">
-						<label for="text1" class="label">로그인 이메일</label>
+						<label for="login-email" class="label">로그인 이메일</label>
 						<div class="text">
-							<input type="text" id="text1" required placeholder="이곳에 이메일을 입력해 주세요">
+							<input type="text" id="login-email" required placeholder="이곳에 이메일을 입력해 주세요">
 						</div>
 					</div>
 
 					<div class="field">
-						<label for="password" class="label">비밀번호</label>
+						<label for="login-password" class="label">비밀번호</label>
 						<div class="text">
-							<input type="password" id="password" required placeholder="이곳에 비밀번호를 입력해 주세요">
+							<input type="password" id="login-password" required placeholder="이곳에 비밀번호를 입력해 주세요">
 						</div>
 					</div>
 
 					<div class="buttons">
-						<button type="button" class="button -primary -md w-full">로그인</button>
+						<button type="button" class="button -primary -md w-full" onclick="submitLogin()">로그인</button>
+						<!-- 
 						<div class="ptb-8 center">또는</div>
-						<button type="button" class="button -border-type -md w-full"><i class="ico -kakao"></i> 카카오톡 로그인</button>
+						<button type="button" class="button -border-type -md w-full"><i class="ico -kakao"></i> 카카오톡 로그인</button> 
+						-->
 					</div>
 				</form>
 			</div>
