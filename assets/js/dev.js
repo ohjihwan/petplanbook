@@ -1,19 +1,18 @@
-// ✅ Delete Data Function with Native confirm
+// ✅ 1. 삭제 확인 얼랏
 function deleteData(el, delArea) {
     const $btn = $(el);
     const $delArea = $btn.closest(delArea);
 
-    if (confirm("정말 삭제할까요?\n이 작업은 되돌릴 수 없습니다.")) {
+    if (confirm("정말 삭제할까요?")) {
         $delArea.remove();
-        console.log($delArea);
-        console.log("삭제됨! 이거 그냥 만들어본거지 진짜 삭제인지는 모름");
+        console.log($delArea, "삭제됨!");
         // 여기에 삭제 API 호출 or DOM 조작 등 추가
     } else {
         return false;
     }
 }
 
-// ✅ Delete Data Page with Native confirm
+// ✅ 2. 게시글 삭제
 function deleteDataPage() {
     if (confirm("정말 삭제할까요?\n이 작업은 되돌릴 수 없습니다.")) {
         alert("삭제가 완료되었습니다.");
@@ -24,21 +23,21 @@ function deleteDataPage() {
     }
 }
 
-// ✅ 헤더 로그인 기능
+// ✅ 3. 헤더 로그인 기능
 function loginOpenPage() {
 	modalOpenId('login-modal');
 	$('.modal .signup-area').hide();
 	$('.modal .login-area').show();
 }
 
-// ✅ 헤더 회원가입 -> 로그인 교체
+// ✅ 4. 헤더 회원가입 -> 로그인 교체
 function loginShow() {
 	$('.modal .signup-area').hide();
 	$('.modal .login-area').show();
 	$('.login-form .button:contains("로그인")').removeClass('none');
 }
 
-// ✅ 헤더 로그인 -> 회원가입 교체
+// ✅ 5. 헤더 로그인 -> 회원가입 교체
 function signupShow() {
 	$('.modal .login-area').hide();
 	$('.modal .signup-area').show();
@@ -49,7 +48,7 @@ function signupShow() {
 	recalculateSignupFormHeight();
 }
 
-// ✅ 회원가입 step1 리팩토리
+// ✅ 6. 회원가입 step1 리팩토리
 function optionalField(e) {
     const $form = $('.signup-form');
     $form.find('.field').removeClass('-error');
@@ -66,7 +65,7 @@ function optionalField(e) {
         .catch(err => console.warn('검증 중단:', err.message));
 }
 
-// ✅ 이메일 중복 체크
+// ✅ 7. 이메일 중복 체크
 function checkEmailDuplication(email) {
     return fetch('/api/user/check-email', {
         method: 'POST',
@@ -82,7 +81,7 @@ function checkEmailDuplication(email) {
     });
 }
 
-// ✅ 비밀번호 확인
+// ✅ 8. 비밀번호 확인
 function verifyPasswordMatch(password, passwordConfirm) {
     if (password !== passwordConfirm) {
         $('.signup-form [name="passwordConfirm"]').closest('.field').addClass('-error');
@@ -91,7 +90,7 @@ function verifyPasswordMatch(password, passwordConfirm) {
     }
 }
 
-// ✅ 필수 입력값 확인
+// ✅ 9. 필수 입력값 확인
 function checkRequiredFields($form) {
     const isValid = $form.find('.field.step1 :input[required]').toArray().every(input => {
         const value = $(input).val()?.trim();
@@ -108,7 +107,7 @@ function checkRequiredFields($form) {
     }
 }
 
-// ✅ 다음 단계 이동
+// ✅ 10. 다음 단계 이동
 function moveToNextStep(e) {
     $('.signup-form .field.step1').hide();
     $('.signup-form .field.step2').show();
@@ -117,7 +116,7 @@ function moveToNextStep(e) {
     recalculateSignupFormHeight();
 }
 
-// ✅ 회원가입 이전
+// ✅ 11. 회원가입 이전
 function goBackToRequired(e) {
 	$('.signup-form .field.step2').hide();
 	$('.signup-form .field.step1').show();
@@ -127,7 +126,7 @@ function goBackToRequired(e) {
 	recalculateSignupFormHeight();
 }
 
-// ✅ 회원가입 프로필 이미지 미리보기
+// ✅ 12. 회원가입 프로필 이미지 미리보기
 function setImagePreviewAll(contextSelector) {
 	$(contextSelector).on('change', 'input[type="file"]', function (e) {
 		const file = e.target.files[0];
@@ -150,7 +149,7 @@ function setImagePreviewAll(contextSelector) {
 	});
 }
 
-// ✅ 회원가입 변동 높이값 측정
+// ✅ 13. 회원가입 변동 높이값 측정
 function recalculateSignupFormHeight() {
 	let totalHeight = 0;
 	$('.signup-form .field:visible').each(function () {
@@ -160,7 +159,7 @@ function recalculateSignupFormHeight() {
 	$('.signup-form').height(totalHeight);
 }
 
-// ✅ 회원가입 완료 버튼
+// ✅ 14. 회원가입 완료 버튼
 function submitSignupForm() {
     const $form = $('.signup-form');
 
@@ -210,6 +209,7 @@ function submitSignupForm() {
     });
 }
 
+// ✅ 15. 로그인 버튼
 function submitLogin() {
 	const email = $('#login-email').val()?.trim();
 	const password = $('#login-password').val()?.trim();
@@ -244,6 +244,7 @@ function submitLogin() {
 	});
 }
 
+// ✅ 16. 로그인 카운트 1시간
 function checkLoginExpiration() {
 	const loginTime = localStorage.getItem("loginTime");
 	const expireDuration = 1000 * 60 * 60;
@@ -253,6 +254,7 @@ function checkLoginExpiration() {
 	}
 }
 
+// ✅ 17. 로그아웃
 function logout() {
 	localStorage.removeItem("user");
 	localStorage.removeItem("loginTime");
@@ -261,6 +263,7 @@ function logout() {
 	location.href = "/HM/HM010.html";
 }
 
+// ✅ 18. 로그인&로그아웃 버튼 조작
 function updateLoginButtons() {
 	const user = JSON.parse(localStorage.getItem("user"));
 	if (user) {
@@ -274,6 +277,7 @@ function updateLoginButtons() {
 	}
 }
 
+// ✅ 19. keyup 후 인풋의 에러 케이스 제거
 function errorInputClear() {
 	$(document).on('keyup change', ':input[required]', function () {
 		const $field = $(this).closest('.field');
@@ -291,6 +295,7 @@ function errorInputClear() {
 	});
 }
 
+// ✅ 20. 로그인&로그아웃 페이지 진입 차별화
 function checkAccessPermission() {
 	document.addEventListener('click', function (e) {
 		const link = e.target.closest('a[href]');
@@ -311,6 +316,7 @@ function checkAccessPermission() {
 	});
 }
 
+// ✅ 21. 프로필 수정 시 화면 반영 UI
 function syncUserProfileUI(user) {
     // ✅ 닉네임, 지역 텍스트 설정
     $('#nickname-txt, #nickname').text(user.nickname);
@@ -349,6 +355,7 @@ function syncUserProfileUI(user) {
     }
 }
 
+// ✅ 22. 프로필 수정버튼
 function profileEditMode(e) {
 	const $editModeHasDiv = $('.profile-area');
 	const $target = $(e);
@@ -384,6 +391,7 @@ function profileEditMode(e) {
 	$('.profile-my-views').addClass('none');
 }
 
+// ✅ 23. 프로필 수정 후 작성 완료 버튼
 function profileComp(e) {
     const user = JSON.parse(localStorage.getItem("user"));
     const email = user?.email;
@@ -470,16 +478,16 @@ function profileComp(e) {
     });
 }
 
-// ✅ renderUserProfile: 로컬 스토리지 기반 UI 업데이트
+// ✅ 24. 프로필 수정 진입시 DB 기준 세팅
 function renderUserProfile() {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) return;
 
-    // ✅ 닉네임 및 지역 설정
+    // 닉네임 및 지역 설정
     $('#nickname-txt, #nickname').text(user.nickname);
     $('#region-txt, #made-region-txt').text(user.region);
 
-    // ✅ 반려동물 텍스트 및 체크박스 처리
+    // 반려동물 텍스트 및 체크박스 처리
     const petsArray = (user.cat_or_dog || '').split(',').map(p => p.trim()).filter(p => p);
     const normalizedPets = petsArray.length ? petsArray.join(', ') : '';
 
@@ -491,14 +499,14 @@ function renderUserProfile() {
         $('#pet-txt').closest('.profile-sentence').addClass('none');
     }
 
-    // ✅ 반려동물 체크박스 자동 설정 (수정 모드)
+    // 반려동물 체크박스 자동 설정 (수정 모드)
     $('input[name="pet"]').prop('checked', false);
     petsArray.forEach(pet => {
         if (pet === '강아지') $('#dog1, #dog11').prop('checked', true);
         if (pet === '고양이') $('#cat2, #cat22').prop('checked', true);
     });
 
-    // ✅ 프로필 이미지 설정 (뷰 및 수정)
+    // 프로필 이미지 설정 (뷰 및 수정)
     const $img = $('.profile-img img, .img-view-box img');
     if (user.profile_image_url) {
         $img.attr('src', user.profile_image_url).removeClass('none').show()
@@ -510,11 +518,13 @@ function renderUserProfile() {
     }
 }
 
+// ✅ 25. 프로필 이미지 교체
 function triggerProfileImageUpload(el) {
 	const $input = $(el).closest('.profile-img').find('#profile-img-input');
 	$input.click();
 }
 
+// ✅ 26. 프로필 이미지 교체를 위한 인풋 파일
 function handleProfileImageUpload(input) {
 	const file = input.files[0];
 	if (!file) return;
@@ -528,7 +538,7 @@ function handleProfileImageUpload(input) {
 	reader.readAsDataURL(file);
 }
 
-// 프로필 이미지 삭제
+// ✅ 27. 프로필 이미지 삭제
 function handleProfileImageDelete(el) {
 	const user = JSON.parse(localStorage.getItem("user"));
 	const email = user?.email;
@@ -567,8 +577,8 @@ function handleProfileImageDelete(el) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-	errorInputClear() // 인풋 유휴성 체크
-	checkAccessPermission(); // 비로그인/로그인 페이지 진입 관련
+	errorInputClear() // 19. keyup 후 인풋의 에러 케이스 제거
+	checkAccessPermission(); // 20. 로그인&로그아웃 페이지 진입 차별화
 });
 
 /* 로드 페이지 관리 */
@@ -581,8 +591,8 @@ if (location.port === '8080') {
 	basePath = '/html';
 }
 $('.page .header').load(`${basePath}/ETC/header.html?v=${Date.now()}`, function () {
-	updateLoginButtons();
-	checkLoginExpiration();
+	updateLoginButtons(); // 18. 로그인&로그아웃 버튼 조작
+	checkLoginExpiration(); // 16. 로그인 카운트 1시간
 });
 $('.page .footer').load(`${basePath}/ETC/footer.html?v=${Date.now()}`);
 $('.modal.-login-modal').load(`${basePath}/ETC/login.html?v=${Date.now()}`);
