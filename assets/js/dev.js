@@ -489,6 +489,46 @@ function handleProfileImageUpload(input) {
 	// ex) fetch로 FormData 전송 → DB에 저장
 }
 
+function handleProfileImageDelete(el) {
+	const $img = $(el).closest('.profile-img').find('img');
+	const user = JSON.parse(localStorage.getItem("user"));
+	const email = user?.email;
+
+	if (!email) {
+		alert("로그인 정보가 없습니다. 다시 로그인해주세요.");
+		return;
+	}
+
+	const confirmed = confirm("정말 삭제할까요?\n이 작업은 되돌릴 수 없습니다.");
+	if (confirmed) {
+		// 1. UI에서 이미지 숨김 + src 초기화
+		$img.addClass('none').attr('src', '');
+
+		// 2. 서버에 프로필 이미지 삭제 요청
+		fetch('/api/user/delete-profile-image', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ email })
+		})
+		.then(res => res.json())
+		.then(data => {
+			if (data.success) {
+				alert("프로필 이미지가 삭제되었습니다.");
+				
+				// 3. localStorage에서도 이미지 삭제 (null 처리)
+				const updatedUser = { ...user, profile_image_url: null };
+				localStorage.setItem("user", JSON.stringify(updatedUser));
+			} else {
+				alert("삭제 실패: " + data.message);
+			}
+		})
+		.catch(err => {
+			console.error("이미지 삭제 오류:", err);
+			alert("서버 오류가 발생했습니다.");
+		});
+	}
+}
+
 function renderUserProfile() {
 	const user = JSON.parse(localStorage.getItem("user"));
 	if (!user) return;

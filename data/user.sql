@@ -1,5 +1,9 @@
 DROP TABLE IF EXISTS `user`;
 
+CREATE DATABASE my_database;
+USE my_database;
+SHOW DATABASES;
+
 -- user 테이블 생성
 CREATE TABLE `user` (
     email VARCHAR(50) PRIMARY KEY,
