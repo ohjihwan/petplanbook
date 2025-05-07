@@ -4,7 +4,7 @@ CREATE TABLE `user` (
     password VARCHAR(255) NOT NULL,
     nickname VARCHAR(10) NOT NULL,
     region VARCHAR(5) NOT NULL,
-    cat_or_dog ENUM('cat', 'dog'),
+    cat_or_dog VARCHAR(3),
     profile_image_url VARCHAR(500)
 );
 
