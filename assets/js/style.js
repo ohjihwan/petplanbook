@@ -44,7 +44,11 @@ function mainSuggestionSwiper(){
         },
     });
 
-    $('.suggestion-place .overflow-area').hover(() => swiper.autoplay.stop(), () => swiper.autoplay.start());
+    $(document).on('mouseenter','.suggestion-place .overflow-area', function () {
+        mainSuggestionSwiper.autoplay.stop();
+    }).on('mouseleave','.suggestion-place .overflow-area', function () {
+        mainSuggestionSwiper.autoplay.start();
+    });
 }
 
 function detailImgs(){
