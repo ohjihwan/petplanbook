@@ -55,23 +55,33 @@ router.post("/login", async (req, res) => {
 });
 
 // ✅ 회원가입 API
-router.post("/signup", async (req, res) => {
-	try {
-		const { email, password, nickname, region, pets, fileName } = req.body;
-		const cat_or_dog = pets ? pets.join(',') : null;
-		const profile_image_url = fileName ? `/uploads/temp/${fileName}` : null;
+router.post("/signup", upload.single("profileImage"), async (req, res) => {
+    console.log("▶ signup body:", req.body);
+    console.log("▶ signup file:", req.file);
 
-		await db.execute(
-			`INSERT INTO user (email, password, nickname, region, cat_or_dog, profile_image_url)
-			 VALUES (?, ?, ?, ?, ?, ?)`,
-			[email, password, nickname, region, cat_or_dog, profile_image_url]
-		);
+    try {
+        const { email, password, nickname, region, cat_or_dog } = req.body;
+        const profileImageUrl = req.file
+            ? `/uploads/temp/${req.file.filename}`
+            : null;
 
-		res.status(200).json({ success: true, message: "회원가입 완료" });
-	} catch (err) {
-		console.error("회원가입 실패:", err);
-		res.status(500).json({ success: false, message: "회원가입 실패" });
-	}
+        if (!email || !password || !nickname || !region) {
+            return res.status(400).json({ success: false, message: "필수 항목이 누락되었습니다." });
+        }
+
+        // ✅ MySQL INSERT 실행
+        await db.execute(
+            `INSERT INTO \`user\`
+             (email, password, nickname, region, cat_or_dog, profile_image_url)
+             VALUES (?, ?, ?, ?, ?, ?)`,
+            [email, password, nickname, region, cat_or_dog || null, profileImageUrl]
+        );
+
+        return res.status(200).json({ success: true, message: "회원가입 완료" });
+    } catch (err) {
+        console.error("🔥 회원가입 오류 상세:", err);
+        return res.status(500).json({ success: false, message: err.message });
+    }
 });
 
 // ✅ 이메일 중복 체크 API

@@ -58,7 +58,7 @@ function optionalField(e) {
     const password = $form.find('[name="password"]').val()?.trim();
     const passwordConfirm = $form.find('[name="passwordConfirm"]').val()?.trim();
 
-    // 회원가입 입력값 체크 후 step2 로 이동동
+    // 회원가입 입력값 체크 후 step2 로 이동
     checkEmailDuplication(email)
         .then(() => verifyPasswordMatch(password, passwordConfirm))
         .then(() => checkRequiredFields($form))
@@ -127,6 +127,7 @@ function goBackToRequired(e) {
 	recalculateSignupFormHeight();
 }
 
+// ✅ 회원가입 프로필 이미지 미리보기
 function setImagePreviewAll(contextSelector) {
 	$(contextSelector).on('change', 'input[type="file"]', function (e) {
 		const file = e.target.files[0];
@@ -137,8 +138,6 @@ function setImagePreviewAll(contextSelector) {
 			const reader = new FileReader();
 			reader.onload = function (event) {
 				$previewImg.attr('src', event.target.result);
-
-				// 🔥 이미지 로드 후 폼 높이 다시 계산
 				$previewImg.on('load', function () {
 					recalculateSignupFormHeight();
 				});
@@ -146,11 +145,12 @@ function setImagePreviewAll(contextSelector) {
 			reader.readAsDataURL(file);
 		} else {
 			$previewImg.attr('src', '');
-			recalculateSignupFormHeight(); // 이미지 지운 경우도 높이 반영
+			recalculateSignupFormHeight();
 		}
 	});
 }
 
+// ✅ 회원가입 변동 높이값 측정
 function recalculateSignupFormHeight() {
 	let totalHeight = 0;
 	$('.signup-form .field:visible').each(function () {
@@ -160,41 +160,46 @@ function recalculateSignupFormHeight() {
 	$('.signup-form').height(totalHeight);
 }
 
+// ✅ 회원가입 변동 높이값 측정
 function submitSignupForm() {
 	const $form = $('.signup-form');
 
-	// 회원가입 데이터 수집
-	const signupData = {
-		email: $form.find('[name="email"]').val()?.trim(),
-		password: $form.find('[name="password"]').val()?.trim(),
-		passwordConfirm: $form.find('[name="passwordConfirm"]').val()?.trim(),
-		nickname: $form.find('[name="nickname"]').val()?.trim(),
-		region: $form.find('[name="region"]').val(),
-		pets: [],
-		fileName: $form.find('[name="profileImage"]')[0]?.files[0]?.name || null
-	};
+	// 1) 비밀번호 검증
+	const pwd  = $form.find('[name="password"]').val()?.trim();
+	const pwd2 = $form.find('[name="passwordConfirm"]').val()?.trim();
+	if (pwd !== pwd2) {
+		return alert('비밀번호가 일치하지 않습니다.');
+	}
 
-	// 체크된 반려동물 종류 수집
+	// 2) 반려동물 수집
+	const pets = [];
 	$form.find('input[name="pet"]:checked').each(function () {
-		signupData.pets.push($(this).val());
+		pets.push($(this).val());
 	});
 
-	// fetch 요청
+	// 3) FormData 생성 (form 내 모든 input[name] + file 포함)
+	const formEl  = document.getElementById('signup-field1');
+	const formData = new FormData(formEl);
+
+	// Multer가 받을 키에 맞춰 pet 배열을 문자열로 덮어쓰기
+	formData.delete('pets');
+	formData.append('cat_or_dog', pets.join(','));
+
+	// 4) multipart/form-data 로 전송 (헤더 설정 NO)
 	fetch('/api/user/signup', {
 		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(signupData)
+		body: formData
 	})
 	.then(res => {
 		if (!res.ok) {
-			// 서버에서 409, 500 등의 오류 응답 시 JSON 추출 후 catch로 넘김
 			return res.json().then(err => Promise.reject(err));
 		}
 		return res.json();
 	})
 	.then(data => {
 		alert('회원가입이 완료되었습니다!');
-		// 초기화
+
+		// 5) 기존 리셋 & UI 복귀 로직
 		$form[0].reset();
 		$form.find('.img-view-box img').attr('src', '');
 		$form.find('.field').removeClass('-error');
