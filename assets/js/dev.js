@@ -376,6 +376,41 @@ function syncUserProfileUI(user) {
     }
 }
 
+function profileEditMode(e) {
+	const $editModeHasDiv = $('.profile-area');
+	const $target = $(e);
+	if (!$editModeHasDiv.hasClass('-edit-mode')) {
+		$editModeHasDiv.addClass('-edit-mode');
+		$('.profile-buttons .button.none').removeClass('none');
+		$target.addClass('none');
+	}
+
+	const user = JSON.parse(localStorage.getItem("user"));
+	if (user) {
+		$('#nickname-input').val(user.nickname);
+		$('#password-change').val('');
+		$('#password-change-comp').val('');
+		$('#region-select').val(user.region);
+
+		// ✅ 반려동물 체크박스 초기화 및 설정
+		const petValues = (user.cat_or_dog || "")
+			.split(',')
+			.map(v => v.trim())
+			.filter(v => v && v !== '없음');
+
+		const $petInputs = $('.profile-my-changes input[name="pet"]'); // 🎯 특정 영역만
+		$petInputs.prop('checked', false);
+		$petInputs.each(function () {
+			if (petValues.includes($(this).val())) {
+				$(this).prop('checked', true);
+			}
+		});
+	}
+
+	$('.profile-my-changes').removeClass('none');
+	$('.profile-my-views').addClass('none');
+}
+
 function profileComp(e) {
 	const user = JSON.parse(localStorage.getItem("user"));
 	const email = user?.email;

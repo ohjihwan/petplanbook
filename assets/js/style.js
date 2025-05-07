@@ -22,7 +22,7 @@ function mainSuggestionSwiper(){
         observerParents:true,
         loop: true,
         autoplay:{
-            delay: 4000
+            delay: 2500
         },
         loopedSlides: 10,
         speed:500,
@@ -44,11 +44,7 @@ function mainSuggestionSwiper(){
         },
     });
 
-    $(document).on('mouseenter','.suggestion-place .overflow-area', function () {
-        mainSuggestionSwiper.autoplay.stop();
-    }).on('mouseleave','.suggestion-place .overflow-area', function () {
-        mainSuggestionSwiper.autoplay.start();
-    });
+    $('.suggestion-place .overflow-area').hover(() => swiper.autoplay.stop(), () => swiper.autoplay.start());
 }
 
 function detailImgs(){
@@ -71,15 +67,9 @@ function detailImgs(){
     });
 }
 
-function locationModalOpen(){
-    $('body').addClass('lock')
-    $('.modal').show()
-    // detailImgs()
-}
-
 function modalOpenId(modalId){
     $('body').addClass('lock')
-    $('#'+modalId).show()
+    $(`#${modalId}`).show()
     console.log(modalId)
 }
 
@@ -148,40 +138,11 @@ if (guideArrow) {
 	});
 }
 
-function profileEditMode(e) {
-	const $editModeHasDiv = $('.profile-area');
-	const $target = $(e);
-	if (!$editModeHasDiv.hasClass('-edit-mode')) {
-		$editModeHasDiv.addClass('-edit-mode');
-		$('.profile-buttons .button.none').removeClass('none');
-		$target.addClass('none');
+$(document).on('keydown', function (e) {
+	if (e.key === "Escape" || e.keyCode === 27) {
+		modalClose() // 해당 팝업 닫힘
 	}
-
-	const user = JSON.parse(localStorage.getItem("user"));
-	if (user) {
-		$('#nickname-input').val(user.nickname);
-		$('#password-change').val('');
-		$('#password-change-comp').val('');
-		$('#region-select').val(user.region);
-
-		// ✅ 반려동물 체크박스 초기화 및 설정
-		const petValues = (user.cat_or_dog || "")
-			.split(',')
-			.map(v => v.trim())
-			.filter(v => v && v !== '없음');
-
-		const $petInputs = $('.profile-my-changes input[name="pet"]'); // 🎯 특정 영역만
-		$petInputs.prop('checked', false);
-		$petInputs.each(function () {
-			if (petValues.includes($(this).val())) {
-				$(this).prop('checked', true);
-			}
-		});
-	}
-
-	$('.profile-my-changes').removeClass('none');
-	$('.profile-my-views').addClass('none');
-}
+});
 
 gnbMouseenter() // GNB
 ratingChecked() // 좋아요&싫어요
