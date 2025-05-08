@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>반려동물 동반 여행</title>
+</head>
+<body>
+	<h1>반려동물 동반 여행지</h1>
+	<div id="travel-list"></div>
+	<script>
+		async function fetchPetTravelData() {
+    try {
+        const response = await fetch("http://localhost:8081/api/pet-travel");
+        const data = await response.json();
+        console.log(data); // 데이터 구조 확인
+
+        if (data.response && data.response.body && data.response.body.items) {
+            renderPetTravelData(data);
+        } else {
+            document.getElementById('travel-list').innerHTML = "<p>데이터가 없습니다.</p>";
+        }
+    } catch (error) {
+        console.error("API 요청 에러:", error);
+        document.getElementById('travel-list').innerHTML = "<p>API 요청 중 오류가 발생했습니다.</p>";
+    }
+}
+
+function renderPetTravelData(data) {
+    const list = document.getElementById('travel-list');
+    list.innerHTML = '';
+
+    const items = data.response.body.items.item;
+    if (!items || items.length === 0) {
+        list.innerHTML = "<p>표시할 여행지가 없습니다.</p>";
+        return;
+    }
+
+    items.forEach((item) => {
+        const div = document.createElement('div');
+        div.innerHTML = `
+            <h3>${item.title}</h3>
+            <img src="${item.originimgurl}" alt="${item.title}" width="200px">
+        `;
+        list.appendChild(div);
+    });
+}
+
+fetchPetTravelData();
+
+
+	</script>
+</body>
+</html>
