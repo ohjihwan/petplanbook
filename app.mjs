@@ -3,7 +3,7 @@ import cors from "cors";
 import session from "express-session";
 import userRouter from "./router/user.mjs";
 import routeRouter from "./router/route.mjs";
-import postRouter from "./router/post.mjs";
+import postRouter from "./router/posts.mjs";
 
 const app = express();
 
