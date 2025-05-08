@@ -1,184 +1,281 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CM020</title>
-	<link rel="stylesheet" href="/assets/css/swiper.css">
-	<link rel="stylesheet" href="/assets/css/common-ui.css">
-	<link rel="stylesheet" href="/assets/css/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/assets/css/swiper.css" />
+    <link rel="stylesheet" href="/assets/css/common-ui.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
+  <body>
     <div class="page">
-		<div class="container">
-			<header class="header">
-				<!-- header.html 로 페이지 통합 관리 -->
-			</header>
+      <div class="container">
+        <header class="header">
+          <!-- header.html 로 페이지 통합 관리 -->
+        </header>
 
-			<main class="contents">
-				<div class="content">
+        <main class="contents">
+          <div class="content">
+            <section class="main-banner">
+              <figure class="img-box">
+                <img src="/assets/imgs/img/img-CM010-1.jpg" alt="" />
+              </figure>
+              <div class="text-box">
+                <h2 class="title">추천 루트</h2>
+                <p class="txt">
+                  다른 반려인들이 다녀온 루트를 그대로 따라 해보세요!
+                </p>
+                <div class="guide-arrow" aria-label="하단에 컨텐츠가 있습니다">
+                  <i></i>
+                  <i></i>
+                </div>
+              </div>
+            </section>
 
-					<section class="main-banner">
-						<figure class="img-box">
-							<img src="/assets/imgs/img/img-CM010-1.jpg" alt="">
-						</figure>
-						<div class="text-box">
-							<h2 class="title">추천 루트</h2>
-							<p class="txt">다른 반려인들이 다녀온 루트를 그대로 따라 해보세요!</p>
-							<div class="guide-arrow" aria-label="하단에 컨텐츠가 있습니다">
-								<i></i>
-								<i></i>
-							</div>
-						</div>
-					</section>
-
-					<section class="map-content-area">
-						<div class="inner">
-							<div class="title-box">
-								<h2 class="title">루트꾸미기</h2>
-								<!--  
+            <section class="map-content-area">
+              <div class="inner">
+                <div class="title-box">
+                  <h2 class="title">루트꾸미기</h2>
+                  <!--  
 									수정하기 기능 시
 									<h2 class="title">수정하기</h2>
 								-->
-								<p class="txt">조금만 더 꾸며볼까요?</p>
-							</div>
+                  <p class="txt">조금만 더 꾸며볼까요?</p>
+                </div>
 
-							
-							<div class="function-box -gray-case">
+                <div class="function-box -gray-case">
+                  <div class="following-path">
+                    <div class="scrolling swiper-wrapper">
+                      <ul class="swiper-slide">
+                        <li>
+                          <strong>로켓 호텔</strong>
+                          <dl>
+                            <dt>주소</dt>
+                            <dd>서울시 송파구</dd>
+                            <dt>전화</dt>
+                            <dd>02-0000-0000</dd>
+                            <dt>날짜</dt>
+                            <dd>2025-04-17</dd>
+                            <dt>시간</dt>
+                            <dd>오전 11:30</dd>
+                          </dl>
+                        </li>
+                        <li>
+                          <strong>봄날 카페</strong>
+                          <dl>
+                            <dt>주소</dt>
+                            <dd>서울시 강북구</dd>
+                            <dt>전화</dt>
+                            <dd>02-0000-0000</dd>
+                            <dt>날짜</dt>
+                            <dd>2025-04-17</dd>
+                            <dt>시간</dt>
+                            <dd>오후 02:30</dd>
+                          </dl>
+                        </li>
+                        <li>
+                          <strong>꾸러기 애견 캠핑</strong>
+                          <dl>
+                            <dt>주소</dt>
+                            <dd>서울시 강남구</dd>
+                            <dt>전화</dt>
+                            <dd>02-0000-0000</dd>
+                            <dt>날짜</dt>
+                            <dd>2025-04-17</dd>
+                            <dt>시간</dt>
+                            <dd>오전 08:00</dd>
+                          </dl>
+                        </li>
+                        <li>
+                          <strong>케이스 TEST 2</strong>
+                          <dl>
+                            <dt>주소</dt>
+                            <dd>서울시 강남구</dd>
+                            <dt>전화</dt>
+                            <dd>02-0000-0000</dd>
+                            <dt>날짜</dt>
+                            <dd>2025-04-17</dd>
+                            <dt>시간</dt>
+                            <dd>오전 08:00</dd>
+                          </dl>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- API 기능 -->
+                  <div id="map" class="map-box"></div>
+                  <!-- // -->
+                  <form
+                    id="placeForm"
+                    enctype="multipart/form-data"
+                    class="field-area"
+                  >
+                    <div class="field">
+                      <label for="name" class="label">글 제목</label>
+                      <div class="text">
+                        <input
+                          type="text"
+                          id="name"
+                          placeholder="이곳에 글 제목을 입력해 주세요"
+                        />
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label for="image" class="label">사진 첨부</label>
+                      <div class="text -file">
+                        <input
+                          type="file"
+                          id="image"
+                          value="최대 30mb 첨부 가능해요"
+                        />
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label for="textarea" class="label">글 내용</label>
+                      <div class="textarea">
+                        <textarea
+                          id="textarea"
+                          placeholder="이곳에 글 내용을 입력해 주세요"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </form>
 
-								<div class="following-path">
-									<div class="scrolling swiper-wrapper">
-										<ul class="swiper-slide">
-											<li>
-												<strong>로켓 호텔</strong>
-												<dl>
-													<dt>주소</dt>
-													<dd>서울시 송파구</dd>
-													<dt>전화</dt>
-													<dd>02-0000-0000</dd>
-													<dt>날짜</dt>
-													<dd>2025-04-17</dd>
-													<dt>시간</dt>
-													<dd>오전 11:30</dd>
-												</dl>
-											</li>
-											<li>
-												<strong>봄날 카페</strong>
-												<dl>
-													<dt>주소</dt>
-													<dd>서울시 강북구</dd>
-													<dt>전화</dt>
-													<dd>02-0000-0000</dd>
-													<dt>날짜</dt>
-													<dd>2025-04-17</dd>
-													<dt>시간</dt>
-													<dd>오후 02:30</dd>
-												</dl>
-											</li>
-											<li>
-												<strong>꾸러기 애견 캠핑</strong>
-												<dl>
-													<dt>주소</dt>
-													<dd>서울시 강남구</dd>
-													<dt>전화</dt>
-													<dd>02-0000-0000</dd>
-													<dt>날짜</dt>
-													<dd>2025-04-17</dd>
-													<dt>시간</dt>
-													<dd>오전 08:00</dd>
-												</dl>
-											</li>
-											<li>
-												<strong>케이스 TEST 2</strong>
-												<dl>
-													<dt>주소</dt>
-													<dd>서울시 강남구</dd>
-													<dt>전화</dt>
-													<dd>02-0000-0000</dd>
-													<dt>날짜</dt>
-													<dd>2025-04-17</dd>
-													<dt>시간</dt>
-													<dd>오전 08:00</dd>
-												</dl>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<!-- API 기능 -->
-								<div id="map" class="map-box"></div>
-								<!-- // -->
-								<form id="placeForm" enctype="multipart/form-data" class="field-area">
-									<div class="field">
-										<label for="name" class="label">글 제목</label>
-										<div class="text">
-											<input type="text" id="name" placeholder="이곳에 글 제목을 입력해 주세요">
-										</div>
-									</div>
-									<div class="field">
-										<label for="image" class="label">사진 첨부</label>
-										<div class="text -file">
-											<input type="file" id="image" value="최대 30mb 첨부 가능해요">
-										</div>
-									</div>
-									<div class="field">
-										<label for="textarea" class="label">글 내용</label>
-										<div class="textarea">
-											<textarea id="textarea" placeholder="이곳에 글 내용을 입력해 주세요"></textarea>
-										</div>
-									</div>
-								</form>
+                  <div class="upload-gallery">
+                    <div class="img-box">
+                      <button
+                        type="button"
+                        class="img-view"
+                        onclick="modalOpenId('imgView1')"
+                      >
+                        <img src="/assets/imgs/temp/temp1.png" alt="" />
+                      </button>
+                      <button
+                        type="button"
+                        class="close"
+                        onclick="deleteData(this, '.img-box')"
+                      >
+                        <span class="hide">사진 삭제</span>
+                      </button>
+                    </div>
+                    <div class="img-box">
+                      <button
+                        type="button"
+                        class="img-view"
+                        onclick="modalOpenId('imgView2')"
+                      >
+                        <img src="/assets/imgs/temp/temp2.png" alt="" />
+                      </button>
+                      <button
+                        type="button"
+                        class="close"
+                        onclick="deleteData(this, '.img-box')"
+                      >
+                        <span class="hide">사진 삭제</span>
+                      </button>
+                    </div>
+                    <div class="img-box">
+                      <button
+                        type="button"
+                        class="img-view"
+                        onclick="modalOpenId('imgView3')"
+                      >
+                        <img src="/assets/imgs/temp/temp3.png" alt="" />
+                      </button>
+                      <button
+                        type="button"
+                        class="close"
+                        onclick="deleteData(this, '.img-box')"
+                      >
+                        <span class="hide">사진 삭제</span>
+                      </button>
+                    </div>
+                    <div class="img-box">
+                      <button
+                        type="button"
+                        class="img-view"
+                        onclick="modalOpenId('imgView1')"
+                      >
+                        <img src="/assets/imgs/temp/temp1.png" alt="" />
+                      </button>
+                      <button
+                        type="button"
+                        class="close"
+                        onclick="deleteData(this, '.img-box')"
+                      >
+                        <span class="hide">사진 삭제</span>
+                      </button>
+                    </div>
+                    <div class="img-box">
+                      <button
+                        type="button"
+                        class="img-view"
+                        onclick="modalOpenId('imgView2')"
+                      >
+                        <img src="/assets/imgs/temp/temp2.png" alt="" />
+                      </button>
+                      <button
+                        type="button"
+                        class="close"
+                        onclick="deleteData(this, '.img-box')"
+                      >
+                        <span class="hide">사진 삭제</span>
+                      </button>
+                    </div>
+                    <div class="img-box">
+                      <button
+                        type="button"
+                        class="img-view"
+                        onclick="modalOpenId('imgView3')"
+                      >
+                        <img src="/assets/imgs/temp/temp3.png" alt="" />
+                      </button>
+                      <button
+                        type="button"
+                        class="close"
+                        onclick="deleteData(this, '.img-box')"
+                      >
+                        <span class="hide">사진 삭제</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
 
-								<div class="upload-gallery">
-									<div class="img-box">
-										<button type="button" class="img-view" onclick="modalOpenId('imgView1')">
-											<img src="/assets/imgs/temp/temp1.png" alt="">
-										</button>
-										<button type="button" class="close" onclick="deleteData(this, '.img-box')"><span class="hide">사진 삭제</span></button>
-									</div>
-									<div class="img-box">
-										<button type="button" class="img-view" onclick="modalOpenId('imgView2')">
-											<img src="/assets/imgs/temp/temp2.png" alt="">
-										</button>
-										<button type="button" class="close" onclick="deleteData(this, '.img-box')"><span class="hide">사진 삭제</span></button>
-									</div>
-									<div class="img-box">
-										<button type="button" class="img-view" onclick="modalOpenId('imgView3')">
-											<img src="/assets/imgs/temp/temp3.png" alt="">
-										</button>
-										<button type="button" class="close" onclick="deleteData(this, '.img-box')"><span class="hide">사진 삭제</span></button>
-									</div>
-									<div class="img-box">
-										<button type="button" class="img-view" onclick="modalOpenId('imgView1')">
-											<img src="/assets/imgs/temp/temp1.png" alt="">
-										</button>
-										<button type="button" class="close" onclick="deleteData(this, '.img-box')"><span class="hide">사진 삭제</span></button>
-									</div>
-									<div class="img-box">
-										<button type="button" class="img-view" onclick="modalOpenId('imgView2')">
-											<img src="/assets/imgs/temp/temp2.png" alt="">
-										</button>
-										<button type="button" class="close" onclick="deleteData(this, '.img-box')"><span class="hide">사진 삭제</span></button>
-									</div>
-									<div class="img-box">
-										<button type="button" class="img-view" onclick="modalOpenId('imgView3')">
-											<img src="/assets/imgs/temp/temp3.png" alt="">
-										</button>
-										<button type="button" class="close" onclick="deleteData(this, '.img-box')"><span class="hide">사진 삭제</span></button>
-									</div>
-								</div>
-							</div>
-							
-							<div class="map-content-buttons">
-								<button type="button" id="editBtn" class="button -primary -lg">임시저장</button><!-- 수정으로 들어올 시 수정이 되면 disabled -->
-								<button type="button" id="completeBtn" class="button -primary -lg">작성완료</button>
-								<a href="../MY/MY010.html" id="goListBtn" class="button -secondary -lg">목록으로</a>
-							</div>
-						</div>
-					</section>
+                <div class="map-content-buttons">
+                  <button
+                    type="button"
+                    id="editBtn"
+                    class="button -primary -lg"
+                  >
+                    임시저장</button
+                  ><!-- 수정으로 들어올 시 수정이 되면 disabled -->
+                  <button
+                    type="button"
+                    id="completeBtn"
+                    class="button -primary -lg"
+                  >
+                    작성완료
+                  </button>
+                  <a
+                    href="../MY/MY010.html"
+                    id="goListBtn"
+                    class="button -secondary -lg"
+                    >목록으로</a
+                  >
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
 
-				</div>
-			</main>
+        <footer class="footer">
+          <!-- footer.html 로 페이지 통합 관리 -->
+        </footer>
+      </div>
+    </div>
 
+<<<<<<< HEAD
 			<footer class="footer">
 				<!-- footer.html 로 페이지 통합 관리 -->
 			</footer>
@@ -186,60 +283,69 @@
 	</div>
 
 	<div id="login-modal" class="modal -login-modal"></div>
+=======
+    <div class="modal -login-modal"></div>
+>>>>>>> 1942834975cb54ce3a71314fb08c388f3037240c
 
     <div id="imgView1" class="modal">
-		<div class="container">
-			<header class="header">
-				<div class="inner">
-					<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
-				</div>
-			</header>
+      <div class="container">
+        <header class="header">
+          <div class="inner">
+            <button type="button" class="close" onclick="modalClose()">
+              <span class="hide">닫기</span>
+            </button>
+          </div>
+        </header>
 
-			<main class="contents">
-				<div class="content">
-					<div class="img-view-box">
-						<img src="/assets/imgs/temp/temp1.png" alt="">
-					</div>
-				</div>
-			</main>
-		</div>
-	</div>
+        <main class="contents">
+          <div class="content">
+            <div class="img-view-box">
+              <img src="/assets/imgs/temp/temp1.png" alt="" />
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
 
     <div id="imgView2" class="modal">
-		<div class="container">
-			<header class="header">
-				<div class="inner">
-					<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
-				</div>
-			</header>
+      <div class="container">
+        <header class="header">
+          <div class="inner">
+            <button type="button" class="close" onclick="modalClose()">
+              <span class="hide">닫기</span>
+            </button>
+          </div>
+        </header>
 
-			<main class="contents">
-				<div class="content">
-					<div class="img-view-box">
-						<img src="/assets/imgs/temp/bigbigbig.jpg" alt="">
-					</div>
-				</div>
-			</main>
-		</div>
-	</div>
+        <main class="contents">
+          <div class="content">
+            <div class="img-view-box">
+              <img src="/assets/imgs/temp/bigbigbig.jpg" alt="" />
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
 
     <div id="imgView3" class="modal">
-		<div class="container">
-			<header class="header">
-				<div class="inner">
-					<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
-				</div>
-			</header>
+      <div class="container">
+        <header class="header">
+          <div class="inner">
+            <button type="button" class="close" onclick="modalClose()">
+              <span class="hide">닫기</span>
+            </button>
+          </div>
+        </header>
 
-			<main class="contents">
-				<div class="content">
-					<div class="img-view-box">
-						<img src="/assets/imgs/temp/temp-event-page1.jpg" alt="">
-					</div>
-				</div>
-			</main>
-		</div>
-	</div>
+        <main class="contents">
+          <div class="content">
+            <div class="img-view-box">
+              <img src="/assets/imgs/temp/temp-event-page1.jpg" alt="" />
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
 
     <script src="/assets/libs/jquery/jquery-3.6.0.min.js"></script>
 	<script src="/assets/libs/jquery-ui/jquery-ui.min.js"></script>

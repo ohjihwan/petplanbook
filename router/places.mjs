@@ -3,6 +3,7 @@ import multer from "multer";
 import db from "../data/db.mjs";
 import path from "path";
 
+
 const router = express.Router();
 
 const storage = multer.diskStorage({
@@ -121,6 +122,19 @@ router.post("/places", upload.single("image"), async (req, res) => {
       .json({ message: "장소 등록 완료", placeId: result.insertId });
   } catch (err) {
     console.error("INSERT 실패:", err);
+    res.status(500).send("서버 오류");
+  }
+});
+
+// 개별 장소 조회
+router.get("/places/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const [rows] = await db.query("SELECT * FROM places WHERE id = ?", [id]);
+    if (rows.length === 0) return res.status(404).send("존재하지 않는 장소");
+    res.json(rows[0]);
+  } catch (err) {
+    console.error("개별 장소 조회 실패:", err);
     res.status(500).send("서버 오류");
   }
 });

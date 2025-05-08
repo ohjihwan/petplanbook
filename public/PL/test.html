@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>공공데이터 카드 출력</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      .card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .card h3 {
+        margin-top: 0;
+      }
+      .card p {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>공공데이터 카드 목록</h1>
+    <div id="cardContainer"></div>
+
+    <script>
+      const apiUrl = "https://apis.data.go.kr/B551011/KorPetTourService";
+      const serviceKey =
+        "UvLF7t9J%2FvxTgPxkNgzxlTU%2Blfow7PsCVu0JG9rL%2FCV1eUNnhyXfRPEzBY7l35YwHVA9qO3ziVgCac4nKgpLzg%3D%3D";
+      const params =
+        "?page=1&perPage=10&serviceKey=" + encodeURIComponent(serviceKey);
+
+      fetch(apiUrl + params)
+        .then((response) => response.json())
+        .then((data) => {
+          const container = document.getElementById("cardContainer");
+          if (data.data && data.data.length > 0) {
+            data.data.forEach((item) => {
+              const card = document.createElement("div");
+              card.className = "card";
+              card.innerHTML = `
+                            <h3>${item.title}</h3>
+                            <p><strong>주소:</strong> ${item.addr1}</p>
+                            <p><strong>동반 가능 여부:</strong> ${item.acmpyTypeCd}</p>
+                            <p><strong>대표번호:</strong> ${item.tel}</p>
+                        `;
+              container.appendChild(card);
+            });
+          } else {
+            container.innerHTML = "<p>데이터를 불러올 수 없습니다.</p>";
+          }
+        })
+        .catch((error) => {
+          console.error("에러 발생:", error);
+          document.getElementById("cardContainer").innerHTML =
+            "<p>데이터 불러오기 중 에러 발생</p>";
+        });
+    </script>
+  </body>
+</html>
