@@ -50,4 +50,16 @@ router.post("/api/post", upload.single("image"), async (req, res) => {
   }
 });
 
+router.get("/api/routes", async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT * FROM route ORDER BY id DESC");
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ error: "데이터 불러오기 중 오류 발생", details: err.message });
+  }
+});
+
 export default router;
