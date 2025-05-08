@@ -1,4 +1,5 @@
 import express from "express";
+import petTravelRouter from "./api/petTravel.mjs";
 import cors from "cors";
 import session from "express-session";
 import placeRouter from "./router/places.mjs";
@@ -13,6 +14,7 @@ app.use(cors({
     allowedHeaders: ["Content-Type", "Authorization"]
 }));
 app.use(express.json());
+app.use('/api', petTravelRouter)
 app.use(session({
 	secret: "your-secure-secret-key",
 	resave: false,
