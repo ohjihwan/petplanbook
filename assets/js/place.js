@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const resultBox = document.querySelector(".search-result-box ul");
 
   // 예시 장소 데이터
-  // api와 DB 연동이 된다면 지울 것것
+  // api와 DB 연동이 된다면 지울 것
   const places = [
     {
       name: "무지개 애견 유치원",
