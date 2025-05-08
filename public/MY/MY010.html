@@ -263,47 +263,10 @@
     <script src="/assets/js/map.js"></script>
     <script
       type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=706f2ef595d7fa1279baace1d65f8f18&libraries=services"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9921046766278baaca9a7d657feaf033&libraries=services"
     ></script>
     <script>
       mapSeting();
-    </script>
-    <script>
-      document
-        .getElementById("routeForm")
-        .addEventListener("submit", async function (e) {
-          e.preventDefault();
-          const place = document.getElementById("place").value;
-          const address = document.getElementById("address").value;
-          const date = document.getElementById("date").value;
-
-          const [year, month, day] = date.split("-");
-
-          const data = {
-            place,
-            address,
-            date_year: year,
-            date_month: month,
-            date_day: day,
-          };
-
-          try {
-            const response = await fetch("/api/route", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data),
-            });
-            const result = await response.json();
-            if (response.ok) {
-              alert("루트 등록 완료!");
-            } else {
-              alert("에러: " + result.error);
-            }
-          } catch (err) {
-            console.error(err);
-            alert("서버 요청 중 오류 발생");
-          }
-        });
     </script>
   </body>
 </html>
