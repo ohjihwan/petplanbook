@@ -217,6 +217,8 @@
                 <dd>서울 서초구 서래로</dd>
                 <dt>대표번호</dt>
                 <dd>02-000-0000</dd>
+                <dt>카테고리</dt>
+                <dd>숙박</dd>
               </dl>
             </div>
           </div>
@@ -224,7 +226,11 @@
 
         <div class="fixed">
           <div class="buttons">
-            <button type="button" class="button -primary -lg">
+            <button
+              type="button"
+              class="button -primary -lg"
+              onclick="savePlace()"
+            >
               이 장소 저장하기
             </button>
           </div>
@@ -379,6 +385,7 @@
         details[0].textContent = item.title || "-";
         details[1].textContent = item.addr1 || "-";
         details[2].textContent = item.tel || "-";
+        details[3].textContent = getCategory(item) || "-";
         modal.style.display = "block";
         new Swiper(".mySwiper", {
           navigation: {
@@ -391,6 +398,46 @@
       // ✅ 모달 닫기 함수 추가
       function modalClose() {
         document.getElementById("detail").style.display = "none";
+      }
+
+      async function savePlace() {
+        const details = document.querySelectorAll("#detail .details dd");
+        const title = details[0].textContent;
+        const addr1 = details[1].textContent;
+        const tel = details[2].textContent;
+        const category = details[3].textContent;
+
+        try {
+          const response = await fetch("http://localhost:5501/api/save-place", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title, addr1, tel, category }),
+          });
+
+          if (!response.ok) {
+            throw new Error(`서버 응답 실패: ${response.status}`);
+          }
+
+          const result = await response.json();
+
+          if (result.success) {
+            const confirmed = confirm(
+              "✅ 장소가 저장되었습니다! MY장소로 이동하시겠습니까?"
+            );
+            if (confirmed) {
+              console.log("사용자가 [예]를 눌렀습니다.");
+              window.location.href =
+                "http://127.0.0.1:5501/public/MY/MY022.html"; //예시 public html!!! 변경해줘야함
+            } else {
+              console.log("사용자가 [아니오]를 눌렀습니다.");
+            }
+          } else {
+            alert("⚠️ 저장에 실패했습니다: " + result.message);
+          }
+        } catch (error) {
+          console.error(error);
+          alert("❌ 서버 오류 발생: " + error.message);
+        }
       }
     </script>
   </body>
