@@ -532,22 +532,3 @@ function setupCategoryCheckboxes() {
 }
 
 // 페이지 로드 시 초기화
-window.addEventListener("load", () => {
-  console.log("페이지 로드 완료");
-
-  // 카카오맵 SDK 로드 확인
-  if (typeof kakao === "undefined" || !kakao.maps) {
-    console.error("카카오맵 SDK가 로드되지 않았습니다.");
-    return;
-  }
-
-  const mapContainer = document.getElementById("map");
-  if (mapContainer) {
-    console.log("지도 컨테이너를 찾았습니다.");
-    initMap();
-    setupEventListeners();
-    setupCategoryCheckboxes();
-  } else {
-    console.error("지도 컨테이너를 찾을 수 없습니다.");
-  }
-});
