@@ -6,7 +6,7 @@ import petTravelRouter from "./api/pet_travel.mjs";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 5504;
+const port = process.env.PORT || 8081;
 
 // CORS 설정
 app.use(cors());
