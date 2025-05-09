@@ -207,6 +207,7 @@
 	
 		async function fetchTravelList() {
 			const listUrl = `https://apis.data.go.kr/B551011/KorPetTourService/areaBasedList?serviceKey=GTr1cI7Wi0FRbOTFBaUzUCzCDP4OnyyEmHnn11pxCUC5ehG5bQnbyztgeydnOWz1O04tjw1SE5RsX8RNo6XCgQ%3D%3D&numOfRows=1000&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json`;
+			console.log("📡 브라우저에서 직접 API 요청:", listUrl);
 			const response = await fetch(listUrl);
 			const apiData = await response.json();
 			travelData = apiData.response?.body?.items?.item || [];
