@@ -191,16 +191,17 @@
 .search-result-box ul li a {display:block;}
 .search-result-box .img-box {overflow:hidden; position:relative; width:100%; height:21.4rem; background-color:#ddd;}
 .search-result-box .img-box img {width:100%; height:100%; object-fit:cover; object-position:50% 50%;}
-.search-result-box .img-box .flags {position:absolute; right:0.9rem; top:0.5rem;}
-.search-result-box .img-box .flags .flag {display:inline-block; line-height:3rem; padding:0 2rem; border-radius:0.4rem 0.8rem 0.4rem 0.4rem; text-align:center;}
-.search-result-box .img-box .flags .flag.-color2 {background-color:#d0e2c2;}
-.search-result-box .img-box .flags .flag.-color3 {background-color:#a3d6eb;}
 .search-result-box .txts {margin-top:2.8rem; padding:1.2rem; text-align:center;}
 .search-result-box .txts .main-txt {display:block; font-size:2.4rem; font-weight:500; color:#000;}
 .search-result-box .txts .sub-txt {display:block; font-size:2rem; color:#000;}
 .search-result-box ul li a:hover .img-box img {transform:scale(1.1); transition:transform 0.25s ease-out;}
 .search-result-box ul li a:hover .main-txt {text-decoration:underline; text-underline-offset:4px;}
 .search-result-box ul li a:hover .sub-txt {text-decoration:underline; text-underline-offset:4px;}
+.search-result-box .category {position:absolute; right:0.9rem; top:0.5rem; z-index:10}
+.search-result-box .category.lodging { background-color: #FFD700; color: #000; padding: 3px 8px; border-radius: 5px; display: inline-block; }
+.search-result-box .category.cafe { background-color: #FF6347; color: #fff; padding: 3px 8px; border-radius: 5px; display: inline-block; }
+.search-result-box .category.activity { background-color: #4CAF50; color: #fff; padding: 3px 8px; border-radius: 5px; display: inline-block; }
+.search-result-box .category.etc { background-color: #777; color: #fff; padding: 3px 8px; border-radius: 5px; display: inline-block; }
 .search-result-box ul li .close {position:absolute; right:1rem; top:1rem; width:3rem; height:3rem; border-radius:50%; background-color:rgba(0,0,0,0.7);}
 .search-result-box ul li .close::before {content:''; position:absolute; left:50%; top:50%; width:1px; height:1.4rem; background-color:#fff; transform:translate(-50%, -50%) rotate(45deg);}
 .search-result-box ul li .close::after {content:''; position:absolute; left:50%; top:50%; width:1px; height:1.4rem; background-color:#fff; transform:translate(-50%, -50%) rotate(-45deg);}
