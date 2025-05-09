@@ -620,30 +620,3 @@ $(".page .header").load(
 );
 $(".page .footer").load(`${basePath}/ETC/footer.html?v=${Date.now()}`);
 $(".modal.-login-modal").load(`${basePath}/ETC/login.html?v=${Date.now()}`);
-
-/* async function loadRoutes() {
-  try {
-    const response = await fetch("/api/routes");
-    const routes = await response.json();
-
-    const listEl = document.getElementById("routeList");
-    listEl.innerHTML = routes
-      .map(
-        (route) => `
-		<div class="route-item">
-		  <h3>${route.place}</h3>
-		  <p>${route.address}</p>
-		  <p>${route.date_year}-${route.date_month}-${route.date_day}</p>
-		</div>
-	  `
-      )
-      .join("");
-  } catch (err) {
-    console.error(err);
-    document.getElementById("routeList").innerHTML =
-      "<p>데이터를 불러오지 못했습니다.</p>";
-  }
-}
-
-loadRoutes();
- */
