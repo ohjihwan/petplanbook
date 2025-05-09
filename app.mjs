@@ -4,6 +4,7 @@ import cors from "cors";
 import session from "express-session";
 import dotenv from "dotenv";
 import petTravelRouter from "./api/pet_travel.mjs";
+import saveRouter from "./router/save.mjs";
 import apiRouter from "./data/api.mjs";
 import placeRouter from "./router/places.mjs";
 import userRouter from "./router/user.mjs";
@@ -24,6 +25,10 @@ app.use(
   })
 );
 
+app.use(cors());
+
+// JSON 파싱 및 세션 설정
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // JSON 파싱 및 세션 설정
 app.use("/api/user", userRouter);
 app.use(
@@ -45,16 +50,13 @@ app.use("/", express.static("public"));
 // 여행지 API 라우터 설정
 app.use("/api/pet-travel", petTravelRouter);
 
-app.use("/api", placeRouter);
-
 // 경로찾기 시 DB 저장 라우터
-app.use("/api", apiRouter);
+app.use("/api", saveRouter);
 
 // 404 에러 처리
 app.use((req, res) => {
   res.status(404).send("404 Not Found");
 });
-
 
 (async () => {
   try {
@@ -65,8 +67,7 @@ app.use((req, res) => {
   }
 })();
 
-
 // 서버 실행
-app.listen(PORT, () => {
-  console.log(`서버 실행 중: http://localhost:${PORT}`);
+app.listen(5501, () => {
+  console.log(`서버 실행 중: http://localhost:${5501}`);
 });
