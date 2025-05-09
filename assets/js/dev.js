@@ -301,7 +301,7 @@ function errorInputClear() {
 }
 
 // ✅ 20. 로그인&로그아웃 페이지 진입 차별화
-function checkAccessPermission() {
+/* function checkAccessPermission() {
   document.addEventListener("click", function (e) {
     const link = e.target.closest("a[href]");
     if (!link) return;
@@ -325,7 +325,7 @@ function checkAccessPermission() {
       alert("로그인 후 이용해주세요.");
     }
   });
-}
+} */
 
 // ✅ 21. 프로필 수정 시 화면 반영 UI
 function syncUserProfileUI(user) {
@@ -599,7 +599,7 @@ function handleProfileImageDelete(el) {
 
 document.addEventListener("DOMContentLoaded", () => {
   errorInputClear(); // 19. keyup 후 인풋의 에러 케이스 제거
-  checkAccessPermission(); // 20. 로그인&로그아웃 페이지 진입 차별화
+  // checkAccessPermission(); // 20. 로그인&로그아웃 페이지 진입 차별화
 });
 
 /* 로드 페이지 관리 */
