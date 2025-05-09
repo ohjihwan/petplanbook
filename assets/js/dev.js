@@ -301,7 +301,7 @@ function errorInputClear() {
 }
 
 // ✅ 20. 로그인&로그아웃 페이지 진입 차별화
-function checkAccessPermission() {
+/* function checkAccessPermission() {
   document.addEventListener("click", function (e) {
     const link = e.target.closest("a[href]");
     if (!link) return;
@@ -325,7 +325,7 @@ function checkAccessPermission() {
       alert("로그인 후 이용해주세요.");
     }
   });
-}
+} */
 
 // ✅ 21. 프로필 수정 시 화면 반영 UI
 function syncUserProfileUI(user) {
@@ -599,7 +599,7 @@ function handleProfileImageDelete(el) {
 
 document.addEventListener("DOMContentLoaded", () => {
   errorInputClear(); // 19. keyup 후 인풋의 에러 케이스 제거
-  checkAccessPermission(); // 20. 로그인&로그아웃 페이지 진입 차별화
+  // checkAccessPermission(); // 20. 로그인&로그아웃 페이지 진입 차별화
 });
 
 /* 로드 페이지 관리 */
@@ -624,30 +624,3 @@ $(".page .header").load(
 );
 $(".page .footer").load(`${basePath}/ETC/footer.html?v=${Date.now()}`);
 $(".modal.-login-modal").load(`${basePath}/ETC/login.html?v=${Date.now()}`);
-/* 
-async function loadRoutes() {
-  try {
-    const response = await fetch("/api/routes");
-    const routes = await response.json();
-
-    const listEl = document.getElementById("routeList");
-    listEl.innerHTML = routes
-      .map(
-        (route) => `
-		<div class="route-item">
-		  <h3>${route.place}</h3>
-		  <p>${route.address}</p>
-		  <p>${route.date_year}-${route.date_month}-${route.date_day}</p>
-		</div>
-	  `
-      )
-      .join("");
-  } catch (err) {
-    console.error(err);
-    document.getElementById("routeList").innerHTML =
-      "<p>데이터를 불러오지 못했습니다.</p>";
-  }
-}
-
-loadRoutes();
- */
