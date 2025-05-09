@@ -607,7 +607,11 @@ let basePath = "";
 if (location.port === "8080") {
   // Node 서버: public 폴더 기준
   basePath = "";
-} else if (location.port === "5500" || location.port === "5501") {
+} else if (
+  location.port === "5500" ||
+  location.port === "5501" ||
+  location.port === "5504"
+) {
   // Live Server: html 폴더 내부 기준
   basePath = "/html";
 }
@@ -620,7 +624,7 @@ $(".page .header").load(
 );
 $(".page .footer").load(`${basePath}/ETC/footer.html?v=${Date.now()}`);
 $(".modal.-login-modal").load(`${basePath}/ETC/login.html?v=${Date.now()}`);
-
+/* 
 async function loadRoutes() {
   try {
     const response = await fetch("/api/routes");
@@ -646,3 +650,4 @@ async function loadRoutes() {
 }
 
 loadRoutes();
+ */
