@@ -292,7 +292,7 @@ function displayTravelList() {
     const imageUrl = item.firstimage || defaultImage;
 
     li.innerHTML = `
-      <a href="#none" role="button">
+      <a href="javascript:void(0)" role="button">
         <div class="img-box">
           <div class="category ${getCategoryClass(item)}">${getCategory(
       item

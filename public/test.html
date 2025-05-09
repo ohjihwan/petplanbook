@@ -124,7 +124,7 @@
         displayItems.forEach(item => {
           const li = document.createElement("li");
           li.innerHTML = `
-            <a href="#none" role="button" onclick="modalOpenId('detail')">
+            <a href="javascript:void(0)" role="button" onclick="modalOpenId('detail')">
               <div class="img-box">
                 <div class="flags">
                   <div class="category ${getCategoryType(item)}">${getCategory(item)}</div>
