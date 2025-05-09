@@ -21,5 +21,5 @@ app.use("/api/pet_travel", petTravelRouter);
 
 // 서버 시작
 app.listen(PORT, () => {
-  console.log(`서버가 http://${HOST}:${PORT} 에서 실행 중입니다.`);
+	console.log(`서버가 http://${HOST}:${PORT} 에서 실행 중입니다.`);
 });

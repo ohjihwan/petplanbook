@@ -568,7 +568,7 @@ function displayResults(results) {
       if (searchResultBox) {
         const li = document.createElement("li");
         li.innerHTML = `
-          <a href="#none" role="button" onclick="selectPlace({
+          <a href="javascript:void(0)" role="button" onclick="selectPlace({
             id: '${place.id}',
             place_name: '${place.place_name}',
             y: ${place.y},
