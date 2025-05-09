@@ -252,10 +252,14 @@
 	<script>
 		mapSeting()
 
+		dotenv.config();
+		const PORT = process.env.PORT || 8084;
+		const HOST = process.env.HOST;
+
 		document.getElementById("placeForm").addEventListener("submit", async (e) => {
 			e.preventDefault();
 			const formData = new FormData(e.target);
-			const res = await fetch("http://localhost:8080/places", {
+			const res = await fetch(`http://${HOST}:${PORT}/places`, {
 				method: "POST",
 				body: formData,
 			});
@@ -297,7 +301,7 @@
 			if (imageInput.files[0]) {
 			const formData = new FormData();
 			formData.append("image", imageInput.files[0]);
-			const res = await fetch("http://localhost:8080/uploads", {
+			const res = await fetch(`http://${HOST}:${PORT}/uploads`, {
 				method: "POST",
 				body: formData,
 			});
@@ -305,7 +309,7 @@
 			imageUrl = data.imageUrl;
 			}
 			// 2. 글 정보 JSON으로 저장
-			await fetch("http://localhost:8080/place", {
+			await fetch(`http://${HOST}:${PORT}/place`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ name, description, imageUrl }),

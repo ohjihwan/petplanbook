@@ -68,12 +68,15 @@
     <script src="../../assets/js/dev.js"></script>
 
     <script>
+      dotenv.config();
+      const PORT = process.env.PORT || 8084;
+      const HOST = process.env.HOST;
       document
         .getElementById("placeForm")
         .addEventListener("submit", async (e) => {
           e.preventDefault();
           const formData = new FormData(e.target);
-          const res = await fetch("http://localhost:8080/places", {
+          const res = await fetch(`http://${HOST}:${PORT}/places`, {
             method: "POST",
             body: formData,
           });
@@ -83,7 +86,7 @@
         });
 
       async function loadPlaces() {
-        const res = await fetch("http://localhost:8080/places");
+        const res = await fetch(`http://${HOST}:${PORT}/places`);
         const places = await res.json();
 
         const listDiv = document.getElementById("place-list");
@@ -99,7 +102,7 @@
             <li class="unit">
                 <a href="../MY/MY020.html">
                     <figure class="img-box">
-                        <img src="http://localhost:8080${
+                        <img src="http://${HOST}:${PORT}${
                           place.image_url
                         }" alt="">
                     </figure>
@@ -123,7 +126,7 @@
 
       async function deletePlace(id) {
         if (!confirm("정말 삭제하시겠습니까?")) return;
-        const res = await fetch(`http://localhost:8080/places/${id}`, {
+        const res = await fetch(`http://${HOST}:${PORT}/places/${id}`, {
           method: "DELETE",
         });
         const result = await res.json();
@@ -137,7 +140,7 @@
         const newAddress = prompt("새 주소를 입력하세요:");
         const newDescription = prompt("새 설명을 입력하세요:");
         if (!newName || !newCategory || !newAddress || !newDescription) return;
-        const res = await fetch(`http://localhost:8080/places/${id}`, {
+        const res = await fetch(`http://${HOST}:${PORT}/places/${id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -188,7 +191,7 @@
       renderPosts();
 
       async function renderPlaces() {
-        const res = await fetch("http://localhost:8080/place");
+        const res = await fetch(`http://${HOST}:${PORT}/place`);
         const places = await res.json();
         const listDiv = document.getElementById("place-list");
         if (!places.length) {

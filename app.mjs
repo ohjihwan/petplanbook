@@ -13,6 +13,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8081;
+const HOST = process.env.HOST ;
 
 // CORS 설정
 app.use(
@@ -70,5 +71,5 @@ app.use((req, res) => {
 
 // 서버 실행
 app.listen(PORT, () => {
-  console.log(`서버 실행 중: http://localhost:${PORT}`);
+  console.log(`서버 실행 중: http://${HOST}:${PORT}`);
 });
