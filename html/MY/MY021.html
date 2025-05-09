@@ -107,17 +107,17 @@
 								<!-- API 기능 -->
 								<div id="map" class="map-box"></div>
 								<!-- // -->
-								<div class="field-area">
+								<form id="placeForm" enctype="multipart/form-data" class="field-area">
 									<div class="field">
-										<label for="text1" class="label">글 제목</label>
+										<label for="name" class="label">글 제목</label>
 										<div class="text">
-											<input type="text" id="text1" placeholder="이곳에 글 제목을 입력해 주세요">
+											<input type="text" id="name" placeholder="이곳에 글 제목을 입력해 주세요">
 										</div>
 									</div>
 									<div class="field">
-										<label for="text3" class="label">사진 첨부</label>
+										<label for="image" class="label">사진 첨부</label>
 										<div class="text -file">
-											<input type="file" id="text3" value="최대 30mb 첨부 가능해요">
+											<input type="file" id="image" value="최대 30mb 첨부 가능해요">
 										</div>
 									</div>
 									<div class="field">
@@ -126,7 +126,7 @@
 											<textarea id="textarea" placeholder="이곳에 글 내용을 입력해 주세요"></textarea>
 										</div>
 									</div>
-								</div>
+								</form>
 
 								<div class="upload-gallery">
 									<div class="img-box">
@@ -169,9 +169,9 @@
 							</div>
 							
 							<div class="map-content-buttons">
-								<button type="button" class="button -primary -lg">임시저장</button><!-- 수정으로 들어올 시 수정이 되면 disabled -->
-								<button type="button" class="button -primary -lg">작성완료</button>
-								<a href="../MY/MY010.html" class="button -secondary -lg">목록으로</a>
+								<button type="button" id="editBtn" class="button -primary -lg">임시저장</button><!-- 수정으로 들어올 시 수정이 되면 disabled -->
+								<button type="button" id="completeBtn" class="button -primary -lg">작성완료</button>
+								<a href="../MY/MY010.html" id="goListBtn" class="button -secondary -lg">목록으로</a>
 							</div>
 						</div>
 					</section>
@@ -185,7 +185,7 @@
 		</div>
 	</div>
 
-	<div class="modal -login-modal"></div>
+	<div id="login-modal" class="modal -login-modal"></div>
 
     <div id="imgView1" class="modal">
 		<div class="container">
@@ -245,13 +245,76 @@
 	<script src="../../assets/libs/jquery-ui/jquery-ui.min.js"></script>
 	<script src="../../assets/libs/jquery-ui/jquery.ui.touch-punch.min.js"></script>
 	<script src="../../assets/libs/swiper/dist/js/swiper.min.js"></script>
-	<script src="../../assets/libs/sweetalert2/sweetalert2.js"></script>
 	<script src="../../assets/js/style.js"></script>
 	<script src="../../assets/js/dev.js"></script>
 	<script src="../../assets/js/map.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9921046766278baaca9a7d657feaf033&libraries=services"></script>
 	<script>
-		mapSeting()		
+		mapSeting()
+
+		document.getElementById("placeForm").addEventListener("submit", async (e) => {
+			e.preventDefault();
+			const formData = new FormData(e.target);
+			const res = await fetch("http://localhost:8080/places", {
+				method: "POST",
+				body: formData,
+			});
+			const result = await res.json();
+			alert(result.message);
+			window.location.href = "../MY/MY030.html"; // 글 목록 페이지로 이동
+		});
+
+		// 이미지 미리보기 기능
+		const imageInput = document.querySelector('input[type="file"]');
+		imageInput.addEventListener("change", (e) => {
+			const file = e.target.files[0];
+			if (file) {
+			const reader = new FileReader();
+			reader.onload = function (e) {
+				// 이미지 미리보기를 upload-gallery에 추가
+				const imgBox = document.createElement("div");
+				imgBox.className = "img-box";
+				imgBox.innerHTML = `
+				<button type="button" class="img-view">
+					<img src="${e.target.result}" alt="" />
+				</button>
+				<button type="button" class="close" onclick="this.parentElement.remove()">
+					<span class="hide">사진 삭제</span>
+				</button>
+				`;
+				document.querySelector(".upload-gallery").appendChild(imgBox);
+			};
+			reader.readAsDataURL(file);
+			}
+		});
+
+		document.getElementById("completeBtn").onclick = async function () {
+			const name = document.getElementById("name").value;
+			const description = document.getElementById("description").value;
+			const imageInput = document.getElementById("image");
+			let imageUrl = "";
+			// 1. 이미지 업로드
+			if (imageInput.files[0]) {
+			const formData = new FormData();
+			formData.append("image", imageInput.files[0]);
+			const res = await fetch("http://localhost:8080/uploads", {
+				method: "POST",
+				body: formData,
+			});
+			const data = await res.json();
+			imageUrl = data.imageUrl;
+			}
+			// 2. 글 정보 JSON으로 저장
+			await fetch("http://localhost:8080/place", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ name, description, imageUrl }),
+			});
+			window.location.href = "MY030.html";
+		};
+		document.getElementById("goListBtn").onclick = function () {
+			window.location.href = "MY020.html";
+		};
 	</script>
 </body>
 </html>

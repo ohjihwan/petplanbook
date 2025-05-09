@@ -1,0 +1,137 @@
+<!-- <div class="modal -login-modal"> -->
+<div class="container">
+	<header class="header">
+		<div class="inner">
+			<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
+		</div>
+	</header>
+
+	<main class="contents">
+		<div class="content">
+			<div class="signup-area">
+				<h3 class="signup-title">
+					회원가입
+				</h3>
+				<p class="login-txt">계정이 없다면? <button type="button" onclick="loginShow()">여기를 눌러 가입</button>해주세요</p>
+				<form action="" id="signup-field1" class="signup-form">
+					<div class="field step1">
+						<label for="text1" class="label">회원가입 이메일</label>
+						<div class="text">
+							<input type="text" id="text1" name="email" required placeholder="이메일을 입력해 주세요">
+						</div>
+					</div>
+
+					<div class="field step1">
+						<label for="password" class="label">비밀번호</label>
+						<div class="text">
+							<input type="password" id="password" name="password" required placeholder="비밀번호를 입력해 주세요">
+						</div>
+					</div>
+
+					<div class="field step1">
+						<label for="password2" class="label">비밀번호 확인</label>
+						<div class="text">
+							<input type="password" id="password2" name="passwordConfirm" required placeholder="한번 더 비밀번호를 입력해 주세요">
+						</div>
+					</div>
+
+					<div class="field step1">
+						<label for="test2" class="label">닉네임</label>
+						<div class="text">
+							<input type="text" id="test2" name="nickname" required placeholder="닉네임을을 입력해 주세요">
+						</div>
+					</div>
+
+					<div class="field step1">
+						<label for="region" class="label">지역</label>
+						<div class="select">
+							<select name="region" id="region" required>
+								<option value="">지역 선택</option>
+								<option value="강원특별자치도">강원특별자치도</option>
+								<option value="경기도">경기도</option>
+								<option value="경상남도">경상남도</option>
+								<option value="경상북도">경상북도</option>
+								<option value="광주광역시">광주광역시</option>
+								<option value="대구광역시">대구광역시</option>
+								<option value="대전광역시">대전광역시</option>
+								<option value="부산광역시">부산광역시</option>
+								<option value="서울특별시">서울특별시</option>
+								<option value="세종특별자치시">세종특별자치시</option>
+								<option value="울산광역시">울산광역시</option>
+								<option value="인천광역시">인천광역시</option>
+								<option value="전라남도">전라남도</option>
+								<option value="전라북도">전라북도</option>
+								<option value="제주특별자치도">제주특별자치도</option>
+								<option value="충청남도">충청남도</option>
+								<option value="충청북도">충청북도</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="field step2">
+						<p class="label">당신의 반려동물은?</p>
+						<div class="checkboxs">
+							<div class="checkbox">
+								<input type="checkbox" id="dog11" name="pet" class="checked" value="강아지">
+								<label for="dog11">강아지</label>
+							</div>
+							<div class="checkbox">
+								<input type="checkbox" id="cat22" name="pet" class="checked" value="고양이">
+								<label for="cat22">고양이</label>
+							</div>
+						</div>
+					</div>
+
+					<div class="field step2">
+						<label for="text3" class="label">사진 첨부</label>
+						<div class="text -file">
+							<input type="file" id="text3" name="profileImage">
+						</div>
+						<div class="img-view-box">
+							<img src="" alt="">
+						</div>
+					</div>
+
+					<div class="buttons">
+						<button type="button" class="button -secondary -md w-full" onclick="optionalField(this)">다음</button>
+						<button type="button" class="button -secondary -md none" onclick="goBackToRequired(this)">이전</button>
+						<button type="button" class="button -primary -md none" onclick="submitSignupForm()">회원가입</button>
+					</div>
+				</form>
+			</div>
+			<div class="login-area">
+				<div class="login-img-motions">
+					<img src="/assets/imgs/img/img-ETC010-1.svg" alt="">
+				</div>
+				<p class="login-txt">계정이 없다면? <button type="button" onclick="signupShow()">여기를 눌러 가입</button>해주세요</p>
+				<form action="" class="login-form">
+					<div class="field">
+						<label for="login-email" class="label">로그인 이메일</label>
+						<div class="text">
+							<input type="text" id="login-email" required placeholder="이곳에 이메일을 입력해 주세요">
+						</div>
+					</div>
+
+					<div class="field">
+						<label for="login-password" class="label">비밀번호</label>
+						<div class="text">
+							<input type="password" id="login-password" required placeholder="이곳에 비밀번호를 입력해 주세요">
+						</div>
+					</div>
+
+					<div class="buttons">
+						<button type="button" class="button -primary -md w-full" onclick="submitLogin()">로그인</button>
+						<!-- 
+						<div class="ptb-8 center">또는</div>
+						<button type="button" class="button -border-type -md w-full"><i class="ico -kakao"></i> 카카오톡 로그인</button> 
+						-->
+					</div>
+				</form>
+			</div>
+		</div>
+	</main>
+</div>
+<script>
+	setImagePreviewAll('.signup-form'); // 첨부파일 이미지 미리보기
+</script>
+<!-- </div> -->

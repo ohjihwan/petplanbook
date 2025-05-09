@@ -232,6 +232,7 @@ body {
 .plr-0 {padding-left:0 !important; padding-right:0 !important;}
 .center {text-align:center;}
 .ptb-8 {padding-top:0.8rem !important; padding-bottom:0.8rem !important;}
+.none {display:none !important}
 
 /* ROOT
    ==== */
@@ -284,6 +285,7 @@ body.lock {overflow:hidden;}
 .header .inner .quick-search .link::after {content:''; position:absolute; right:0; top:0; width:4.5rem; height:5.1rem; background:var(--button-primary) url(../imgs/ico/ico-search.png) no-repeat 50% / 4rem auto;}
 .header .inner .quick-link {margin-left:5.3rem;}
 .header .inner .quick-link .link {font-size:2.4rem; background-color:#fff;}
+.header .inner .quick-link .welcome-msg {display:block; font-size:1.6rem; color:#343434; margin-right:1rem;}
 .header.-open-depth2 {height:28rem;}
 .header.-open-depth2 .inner .logo::after {bottom:-19.2rem;}
 .header.-open-depth2 .inner .logo img {transform:translateX(-8rem);}

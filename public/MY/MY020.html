@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CM030</title>
-	<link rel="stylesheet" href="../../assets/css/swiper.css">
-	<link rel="stylesheet" href="../../assets/css/common-ui.css">
-	<link rel="stylesheet" href="../../assets/css/style.css">
+    <title>MY020</title>
+	<link rel="stylesheet" href="/assets/css/swiper.css">
+	<link rel="stylesheet" href="/assets/css/common-ui.css">
+	<link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
     <div class="page">
@@ -20,11 +20,11 @@
 
 					<section class="main-banner">
 						<figure class="img-box">
-							<img src="../../assets/imgs/img/img-CM010-1.jpg" alt="">
+							<img src="/assets/imgs/img/img-MY010-3.jpg" alt="">
 						</figure>
 						<div class="text-box">
-							<h2 class="title">추천 루트</h2>
-							<p class="txt">다른 반려인들이 다녀온 루트를 그대로 따라 해보세요!</p>
+							<h2 class="title">내 글 보기</h2>
+							<p class="txt">내가 쓴 글을 모아서 보세요</p>
 							<div class="guide-arrow" aria-label="하단에 컨텐츠가 있습니다">
 								<i></i>
 								<i></i>
@@ -35,13 +35,26 @@
 					<section class="map-content-area">
 						<div class="inner">
 							<div class="title-box">
-								<h2 class="title">글 내용 보기</h2>
-								<p class="txt">마음에든다? 내루트로 저장하자</p>
+								<h2 class="title">완성된 루트</h2>
+								<p class="txt">꾸미느라 정말 수고 많으셨어요</p>
 							</div>
-
 							
 							<div class="function-box -gray-case">
-
+								
+								<div class="field -route-select">
+									<label for="text" class="label">마이페이지 루트 불러오기</label>
+									<div class="select" style="width:35.4rem">
+										<select name="" id="">
+											<option value="0">선택해 주세요 (예시:여름휴가루트)</option>
+											<option value="1">루트1</option>
+											<option value="2">루트2</option>
+											<option value="3">루트3</option>
+											<option value="4">루트4</option>
+											<option value="5">루트5</option>
+										</select>
+									</div>
+								</div>
+								
 								<div class="following-path">
 									<div class="scrolling swiper-wrapper">
 										<ul class="swiper-slide">
@@ -103,6 +116,7 @@
 								<!-- API 기능 -->
 								<div id="map" class="map-box"></div>
 								<!-- // -->
+								 
 								<div class="board-area">
 									<div class="field">
 										<p class="label">글 제목</p>
@@ -120,14 +134,6 @@
 										<p class="label">평가하기</p>
 										<div class="board-text">
 											<div class="rating-box">
-												<div class="rating -good">
-													 <input type="checkbox" id="rating-good" class="hide">
-													 <label for="rating-good"><span class="hide">좋아요</span></label>
-												</div>
-												<div class="rating -bad">
-													 <input type="checkbox" id="rating-bad" class="hide">
-													 <label for="rating-bad"><span class="hide">싫어요</span></label>
-												</div>
 												<p class="rating-txt"><span class="number">11</span>명이 추천하는 루트에요</p>
 											</div>
 										</div>
@@ -137,40 +143,41 @@
 								<div class="upload-gallery">
 									<div class="img-box">
 										<button type="button" class="img-view" onclick="modalOpenId('imgView1')">
-											<img src="../../assets/imgs/temp/temp1.png" alt="">
+											<img src="/assets/imgs/temp/temp1.png" alt="">
 										</button>
 									</div>
 									<div class="img-box">
 										<button type="button" class="img-view" onclick="modalOpenId('imgView2')">
-											<img src="../../assets/imgs/temp/temp2.png" alt="">
+											<img src="/assets/imgs/temp/temp2.png" alt="">
 										</button>
 									</div>
 									<div class="img-box">
 										<button type="button" class="img-view" onclick="modalOpenId('imgView3')">
-											<img src="../../assets/imgs/temp/temp3.png" alt="">
+											<img src="/assets/imgs/temp/temp3.png" alt="">
 										</button>
 									</div>
 									<div class="img-box">
 										<button type="button" class="img-view" onclick="modalOpenId('imgView1')">
-											<img src="../../assets/imgs/temp/temp1.png" alt="">
+											<img src="/assets/imgs/temp/temp1.png" alt="">
 										</button>
 									</div>
 									<div class="img-box">
 										<button type="button" class="img-view" onclick="modalOpenId('imgView2')">
-											<img src="../../assets/imgs/temp/temp2.png" alt="">
+											<img src="/assets/imgs/temp/temp2.png" alt="">
 										</button>
 									</div>
 									<div class="img-box">
 										<button type="button" class="img-view" onclick="modalOpenId('imgView3')">
-											<img src="../../assets/imgs/temp/temp3.png" alt="">
+											<img src="/assets/imgs/temp/temp3.png" alt="">
 										</button>
 									</div>
 								</div>
 							</div>
 							
 							<div class="map-content-buttons">
-								<button type="button" class="button -primary -lg">내루트에 저장</button>
-								<a href="../CO/CO010.html" class="button -secondary -lg">목록으로</a>
+								<button type="button" class="button -primary -lg">공유하기</button>
+								<a href="../MY/MY021.html" class="button -secondary -lg">수정하기</a>
+								<button type="button" class="button -secondary -lg" onclick="deleteDataPage()">삭제하기</button>
 							</div>
 						</div>
 					</section>
@@ -197,7 +204,7 @@
 			<main class="contents">
 				<div class="content">
 					<div class="img-view-box">
-						<img src="../../assets/imgs/temp/temp1.png" alt="">
+						<img src="/assets/imgs/temp/temp1.png" alt="">
 					</div>
 				</div>
 			</main>
@@ -215,7 +222,7 @@
 			<main class="contents">
 				<div class="content">
 					<div class="img-view-box">
-						<img src="../../assets/imgs/temp/bigbigbig.jpg" alt="">
+						<img src="/assets/imgs/temp/bigbigbig.jpg" alt="">
 					</div>
 				</div>
 			</main>
@@ -233,20 +240,20 @@
 			<main class="contents">
 				<div class="content">
 					<div class="img-view-box">
-						<img src="../../assets/imgs/temp/temp-event-page1.jpg" alt="">
+						<img src="/assets/imgs/temp/temp-event-page1.jpg" alt="">
 					</div>
 				</div>
 			</main>
 		</div>
 	</div>
 
-    <script src="../../assets/libs/jquery/jquery-3.6.0.min.js"></script>
-	<script src="../../assets/libs/jquery-ui/jquery-ui.min.js"></script>
-	<script src="../../assets/libs/jquery-ui/jquery.ui.touch-punch.min.js"></script>
-	<script src="../../assets/libs/swiper/dist/js/swiper.min.js"></script>
-	<script src="../../assets/js/style.js"></script>
-	<script src="../../assets/js/dev.js"></script>
-	<script src="../../assets/js/map.js"></script>
+    <script src="/assets/libs/jquery/jquery-3.6.0.min.js"></script>
+	<script src="/assets/libs/jquery-ui/jquery-ui.min.js"></script>
+	<script src="/assets/libs/jquery-ui/jquery.ui.touch-punch.min.js"></script>
+	<script src="/assets/libs/swiper/dist/js/swiper.min.js"></script>
+	<script src="/assets/js/style.js"></script>
+	<script src="/assets/js/dev.js"></script>
+	<script src="/assets/js/map.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9921046766278baaca9a7d657feaf033&libraries=services"></script>
 	<script>
 		mapSeting()		

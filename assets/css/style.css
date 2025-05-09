@@ -45,7 +45,7 @@
 
 .title-box {text-align:center;}
 .title-box .title {line-height:1.2; font-size:6.4rem; font-weight:900; color:var(--button-primary);}
-.title-box .txt {font-size:2.4rem; font-weight:600; color:#000;}
+.title-box .txt {margin-top:1rem; font-size:2.4rem; font-weight:600; color:#000;}
 .title-box a.txt {display:inline-block; position:relative; padding-right:2rem; font-size:2.4rem; font-weight:600; color:#000;}
 .title-box a.txt::after {content:''; position:absolute; right:0; top:50%; transform:translateY(-50%) rotate(45deg); width:1.2rem; height:1.2rem; border-top:1px solid #343434; border-right:1px solid #343434;}
 .title-box .button {margin-top:1rem;}
@@ -191,30 +191,63 @@
 .search-result-box ul li a {display:block;}
 .search-result-box .img-box {overflow:hidden; position:relative; width:100%; height:21.4rem; background-color:#ddd;}
 .search-result-box .img-box img {width:100%; height:100%; object-fit:cover; object-position:50% 50%;}
-.search-result-box .img-box .flags {position:absolute; right:0.9rem; top:0.5rem;}
-.search-result-box .img-box .flags .flag {display:inline-block; line-height:3rem; padding:0 2rem; border-radius:0.4rem 0.8rem 0.4rem 0.4rem; text-align:center;}
-.search-result-box .img-box .flags .flag.-color2 {background-color:#d0e2c2;}
-.search-result-box .img-box .flags .flag.-color3 {background-color:#a3d6eb;}
 .search-result-box .txts {margin-top:2.8rem; padding:1.2rem; text-align:center;}
 .search-result-box .txts .main-txt {display:block; font-size:2.4rem; font-weight:500; color:#000;}
 .search-result-box .txts .sub-txt {display:block; font-size:2rem; color:#000;}
 .search-result-box ul li a:hover .img-box img {transform:scale(1.1); transition:transform 0.25s ease-out;}
 .search-result-box ul li a:hover .main-txt {text-decoration:underline; text-underline-offset:4px;}
 .search-result-box ul li a:hover .sub-txt {text-decoration:underline; text-underline-offset:4px;}
+.search-result-box .category {position:absolute; right:0.9rem; top:0.5rem; z-index:10}
+.search-result-box .category.lodging { background-color: #FFD700; color: #000; padding: 3px 8px; border-radius: 5px; display: inline-block; }
+.search-result-box .category.cafe { background-color: #FF6347; color: #fff; padding: 3px 8px; border-radius: 5px; display: inline-block; }
+.search-result-box .category.activity { background-color: #4CAF50; color: #fff; padding: 3px 8px; border-radius: 5px; display: inline-block; }
+.search-result-box .category.etc { background-color: #777; color: #fff; padding: 3px 8px; border-radius: 5px; display: inline-block; }
 .search-result-box ul li .close {position:absolute; right:1rem; top:1rem; width:3rem; height:3rem; border-radius:50%; background-color:rgba(0,0,0,0.7);}
 .search-result-box ul li .close::before {content:''; position:absolute; left:50%; top:50%; width:1px; height:1.4rem; background-color:#fff; transform:translate(-50%, -50%) rotate(45deg);}
 .search-result-box ul li .close::after {content:''; position:absolute; left:50%; top:50%; width:1px; height:1.4rem; background-color:#fff; transform:translate(-50%, -50%) rotate(-45deg);}
 
 .profile-area .profile-box {max-width:110rem; margin:0 auto;}
 .profile-area .profile-box {max-width:110rem; margin:0 auto;}
-.profile-area .profiles {display:flex; align-items:stretch; gap:4.5rem; margin-top:7.4rem;}
-.profile-area .profiles .profile-img {flex:0 0 33.2rem}
-.profile-area .profiles .profile-img figure {overflow:hidden; width:100%; height:25.5rem;}
+.profile-area .profiles {display:flex; align-items:flex-start; gap:4.5rem; margin-top:7.4rem;}
+.profile-area .profiles .profile-img {position:relative; flex:0 0 33.2rem}
+.profile-area .profiles .profile-img figure {overflow:hidden; width:100%; height:25.5rem; border:1px solid #e6e6e6; background:#f1f1f1 url(../imgs/img/img-MY030-1.svg) no-repeat 50% / auto 100%;}
 .profile-area .profiles .profile-img figure img {width:100%; height:100%; object-fit:cover; object-position:50%;}
-.profile-area .profiles .profile-img figcaption {padding:0.2rem 1rem; border-bottom:1px solid #d3d3d3; border-left:1px solid #d3d3d3; border-right:1px solid #d3d3d3; font-size:1.8rem; color:#000; background-color:#f0f0f0;}
-.profile-area .profiles .profile-img figcaption .name {font-weight:600;}
-.profile-area .profiles .profile-info {flex:1; display:flex; flex-direction:column; justify-content:space-between;}
-.profile-area .profiles .profile-info .ratings {display:flex; align-items:center; gap:0.4rem; font-size:2rem;}
+.profile-area .profiles .profile-img .profile-img-changes {display:none; position:absolute; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.44);}
+.profile-area .profiles .profile-info {flex:1; overflow:hidden; position:relative; font-size:2rem; word-break:keep-all; line-height:6.2rem;}
+.profile-area .profiles .profile-info::after {content:''; position:absolute; width:25rem; height:25rem; right:0; bottom:-7rem; background:url(../imgs/img/img-MY030-1.svg) no-repeat 100% 100% / auto 100%; opacity:0.2;}
+.profile-area .profiles .profile-info .-point {font-size:3rem; font-weight:700;}
+.profile-area .profiles .profile-info .rating-num {width:8rem; height:5rem; padding:0 1.6rem; border:1px solid #d9d9d9; border-radius:1rem; font-size:2rem; font-weight:300; color:#000; text-align:center; background-color:#fff;}
+.profile-area .profiles .profile-info .favorite-place-input1,
+.profile-area .profiles .profile-info .favorite-place-input2 {height:5rem; padding:0 1.6rem; border:1px solid #d9d9d9; border-radius:1rem; font-size:2rem; font-weight:300; color:#000; text-align:center; background-color:#fff;}
+.profile-area .profiles .profile-info .favorite-place-input1 {width:18rem;}
+.profile-area .profiles .profile-info select.favorite-place-input1 {padding-right:3.5rem;}
+.profile-area .profiles .profile-info .favorite-place-input2 {width:10rem;}
+.profile-area .profiles .profile-info select.favorite-place-input1,
+.profile-area .profiles .profile-info select.favorite-place-input2 {background:#fff url(../imgs/ico/ico-select-arrow.png) no-repeat right 1.6rem center / 1rem auto;}
+
+.profile-area .profiles .profile-info .checkboxs-pets {display:inline-block; margin:0 1rem;}
+.profile-area .profiles .profile-info .checkboxs-pet {display:inline-block; position:relative;}
+.profile-area .profiles .profile-info .checkboxs-pet label {padding-left:2.5rem; font-size:2rem;}
+.profile-area .profiles .profile-info .checkboxs-pet label::before {content:''; position:absolute; left:0; top:50%; transform:translateY(-50%); width:2.2rem; height:2.2rem; border:1px solid #e6e6e6; border-radius:0.4rem;}
+.profile-area .profiles .profile-info .checkboxs-pet .checked:checked + label {font-size:3rem;}
+.profile-area .profiles .profile-info .checkboxs-pet .checked:checked + label::before {border-color:#ffcd00; background-color:#ffcd00; transition:all 0.25s;}
+.profile-area .profiles .profile-info .checkboxs-pet label::after {content:''; position:absolute; left:0; top:50%; transform:translateY(-50%); width:2.2rem; height:2.2rem; background:url(../imgs/ico/ico-checked.svg) no-repeat 50% / 1.2rem auto; filter:invert(1);}
+.profile-area .profiles .profile-info .checkboxs-pet .checked:checked + label::after {filter:invert(0);}
+
+.profile-area .public-box {margin-top:5rem;}
+.profile-area .public-box .title {font-size:2.4rem;}
+.profile-area .public-box ul {margin-top:0.5rem;}
+.profile-area .public-box li {border-bottom:1px solid #d3d3d3;}
+.profile-area .public-box li .link {display:flex; justify-content:space-between; align-items:center; padding:0.7rem 1.6rem;}
+.profile-area .public-box li .link p {font-size:2rem; font-weight:500; color:#000;}
+.profile-area .public-box li .link time {font-size:1.8rem; font-weight:300; color:#666;}
+.profile-area .public-box li .link:hover p {text-decoration:underline; text-underline-offset:4px;}
+.profile-area .profile-buttons {margin-top:8rem; text-align:center;}
+
+.profile-area.-edit-mode .profile-img .profile-img-changes {display:flex; justify-content:center; align-items:center; gap:4rem;}
+.profile-area.-edit-mode .profile-img .profile-img-changes .change-button {width:5rem; height:5rem; border-radius:50%;}
+.profile-area.-edit-mode .profile-img .profile-img-changes .change-button.-edit {background:rgba(255,255,255,0.7) url(../imgs/ico/ico-edit-fill.png) no-repeat 50% / 2.4rem auto;}
+.profile-area.-edit-mode .profile-img .profile-img-changes .change-button.-delete {background:rgba(255,255,255,0.7) url(../imgs/ico/ico-trash-fill.png) no-repeat 50% / 2.4rem auto;}
 
 /* ETC */
 .navigation {display:flex; justify-content:center; align-items:center; gap:0 0.8rem; margin-top:6rem;}
@@ -246,10 +279,17 @@
 .modal.-login-modal .container .login-form .field,
 .modal.-login-modal .container .login-form .buttons {margin-top:1.5rem;}
 .modal.-login-modal .signup-area .signup-title {line-height:1.2; font-size:6.4rem; font-weight:900; color:var(--button-primary); text-align:center;}
+.modal.-login-modal .container .signup-form {width:30rem; margin:0 auto; transition:height 0.25s ease-in;}
+.modal.-login-modal .container .signup-form .field,
+.modal.-login-modal .container .signup-form .buttons {margin-top:1.5rem;}
+.modal.-login-modal .container .signup-form .field.-error .label {color:#ec0c0c;}
+.modal.-login-modal .container .signup-form .field.-error input,
+.modal.-login-modal .container .signup-form .field.-error select {border-color:#ec0c0c;}
+.modal.-login-modal .container .signup-form .img-view-box {margin-top:1rem;}
 
 .ico {display:inline-block; vertical-align:middle;}
 .ico.-kakao {width:3.3rem; height:3.3rem; background:url(../imgs/ico/ico-kakao.png) no-repeat 50% / 100% auto; vertical-align:-9px;}
-.ico.-rating {width:2rem; height:2rem; background:url(../imgs/ico/ico-good-active.png) no-repeat 50% / 100% auto; vertical-align:-9px;}
+.ico.-rating {width:2rem; height:2rem; background:url(../imgs/ico/ico-good-active.png) no-repeat 50% / 100% auto;}
 
 .event-imgs {display:block;}
 
