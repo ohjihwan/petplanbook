@@ -6,6 +6,8 @@ import dotenv from "dotenv";
 import petTravelRouter from "./api/pet_travel.mjs";
 import apiRouter from "./data/api.mjs";
 import placeRouter from "./router/places.mjs";
+import userRouter from "./router/user.mjs";
+import db from "./data/db.mjs";
 
 dotenv.config();
 
@@ -22,8 +24,8 @@ app.use(
   })
 );
 
-// JSON 파싱 및 세션 설정
-app.use(express.json());
+app.use(express.json()); // JSON 파싱 및 세션 설정
+app.use("/api/user", userRouter);
 app.use(
   session({
     secret: "your-secure-secret-key",
@@ -52,6 +54,17 @@ app.use("/api", apiRouter);
 app.use((req, res) => {
   res.status(404).send("404 Not Found");
 });
+
+
+(async () => {
+  try {
+    const [rows] = await db.query("SELECT 1");
+    console.log("✅ MySQL 연결 성공:", rows);
+  } catch (error) {
+    console.error("❌ MySQL 연결 실패:", error);
+  }
+})();
+
 
 // 서버 실행
 app.listen(PORT, () => {
