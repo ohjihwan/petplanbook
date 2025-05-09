@@ -215,8 +215,6 @@
                 <dd>퍼피스드림</dd>
                 <dt>상세주소</dt>
                 <dd>서울 서초구 서래로</dd>
-                <dt>동반가능</dt>
-                <dd>강아지/고양이</dd>
                 <dt>대표번호</dt>
                 <dd>02-000-0000</dd>
               </dl>
@@ -380,8 +378,7 @@
         const details = modal.querySelectorAll(".details dd");
         details[0].textContent = item.title || "-";
         details[1].textContent = item.addr1 || "-";
-        details[2].textContent = "강아지/고양이";
-        details[3].textContent = item.tel || "-";
+        details[2].textContent = item.tel || "-";
         modal.style.display = "block";
         new Swiper(".mySwiper", {
           navigation: {

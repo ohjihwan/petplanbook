@@ -5,6 +5,7 @@ import session from "express-session";
 import dotenv from "dotenv";
 import petTravelRouter from "./api/pet_travel.mjs";
 import apiRouter from "./data/api.mjs";
+import placeRouter from "./router/places.mjs";
 
 dotenv.config();
 
@@ -41,6 +42,8 @@ app.use("/", express.static("public"));
 
 // 여행지 API 라우터 설정
 app.use("/api/pet-travel", petTravelRouter);
+
+app.use("/api", placeRouter);
 
 // 경로찾기 시 DB 저장 라우터
 app.use("/api", apiRouter);
