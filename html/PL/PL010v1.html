@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>PL010</title>
+    <link rel="stylesheet" href="../../assets/css/swiper.css" />
+    <link rel="stylesheet" href="../../assets/css/common-ui.css" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="icon" type="image/x-icon" href="../../assets/imgs/favicon.ico" />
+  </head>
+  <body>
+    <div class="page">
+      <div class="container">
+        <header class="header">
+          <!-- header.html 로 페이지 통합 관리 -->
+        </header>
+
+        <main class="contents">
+          <div class="content">
+            <section class="main-banner">
+              <figure class="img-box">
+                <img src="../../assets/imgs/img/img-PL010-1.jpg" alt="" />
+              </figure>
+              <div class="text-box">
+                <h2 class="title">장소찾기</h2>
+                <p class="txt">반려동물과 함께 여행할 장소를 찾아보세요</p>
+                <div class="guide-arrow" aria-label="하단에 컨텐츠가 있습니다">
+                  <i></i>
+                  <i></i>
+                </div>
+              </div>
+            </section>
+
+            <section class="map-content-area">
+              <div class="inner">
+                <div class="function-box">
+                  <!-- API 기능 -->
+                  <div
+                    id="map"
+                    class="map-box"
+                    style="width: 100%; height: 500px"
+                  ></div>
+                  <div id="place-list" class="place-list"></div>
+                  <!-- // -->
+                  <div class="field-area">
+                    <div class="field">
+                      <label for="region" class="label">지역</label>
+                      <div class="select">
+                        <select name="region" id="region">
+                          <option value="">지역 선택</option>
+                          <option value="강원특별자치도">강원특별자치도</option>
+                          <option value="경기도">경기도</option>
+                          <option value="경상남도">경상남도</option>
+                          <option value="경상북도">경상북도</option>
+                          <option value="광주광역시">광주광역시</option>
+                          <option value="대구광역시">대구광역시</option>
+                          <option value="대전광역시">대전광역시</option>
+                          <option value="부산광역시">부산광역시</option>
+                          <option value="서울특별시">서울특별시</option>
+                          <option value="세종특별자치시">세종특별자치시</option>
+                          <option value="울산광역시">울산광역시</option>
+                          <option value="인천광역시">인천광역시</option>
+                          <option value="전라남도">전라남도</option>
+                          <option value="전라북도">전라북도</option>
+                          <option value="제주특별자치도">제주특별자치도</option>
+                          <option value="충청남도">충청남도</option>
+                          <option value="충청북도">충청북도</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label for="searchPlace" class="label">장소 검색</label>
+                      <div class="text">
+                        <input
+                          type="text"
+                          id="searchPlace"
+                          required
+                          placeholder="(예시:애견유치원)"
+                        />
+                        <input type="hidden" id="address" />
+                      </div>
+                    </div>
+                    <div class="field">
+                      <p class="label">카테고리 별 검색</p>
+
+                      <div class="checkboxs">
+                        <div class="checkbox">
+                          <input
+                            type="checkbox"
+                            id="category-숙소"
+                            name="pet"
+                            class="checked"
+                            data-category="AD5"
+                          />
+                          <label for="category-숙소">숙소</label>
+                        </div>
+                        <div class="checkbox">
+                          <input
+                            type="checkbox"
+                            id="category-식당"
+                            name="pet"
+                            class="checked"
+                            data-category="FD6"
+                          />
+                          <label for="category-식당">식당</label>
+                        </div>
+                        <div class="checkbox">
+                          <input
+                            type="checkbox"
+                            id="category-카페"
+                            name="pet"
+                            class="checked"
+                            data-category="CE7"
+                          />
+                          <label for="category-카페">카페</label>
+                        </div>
+                        <div class="checkbox">
+                          <input
+                            type="checkbox"
+                            id="category-명소"
+                            name="pet"
+                            class="checked"
+                            data-category="AT4"
+                          />
+                          <label for="category-명소">명소</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label for="text3" class="label">날짜 선택</label>
+                      <div class="text">
+                        <input
+                          type="date"
+                          id="text3"
+                          required
+                          placeholder="날짜를 선택해주세요"
+                        />
+                      </div>
+                    </div>
+                    <div class="field-half">
+                      <div class="field">
+                        <label for="text33" class="label">인원수</label>
+                        <div class="text">
+                          <input
+                            type="text"
+                            id="text33"
+                            placeholder="인원수 입력"
+                          />
+                        </div>
+                      </div>
+                      <div class="field">
+                        <label for="text44" class="label">반려동물 수</label>
+                        <div class="text">
+                          <input
+                            type="text"
+                            id="text44"
+                            placeholder="반려동물 수 입력"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="comp-buttons">
+                      <button
+                        type="button"
+                        class="button -primary -lg w-full"
+                        onclick="searchPlaces()"
+                      >
+                        검색하기
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="search-result-box">
+                  <ul>
+                    <li>
+                      <a
+                        href="#none"
+                        role="button"
+                        onclick="selectPlace({
+                        id: '1',
+                        place_name: '무지개 애견 유치원',
+                        y: 37.1234,
+                        x: 126.1234,
+                        address_name: '경기도 평택시 비전동',
+                        category: 'AD5'
+                      }); return false;"
+                      >
+                        <div class="img-box">
+                          <div class="flags">
+                            <span class="flag -color3">추천</span>
+                          </div>
+                          <img
+                            src="../../assets/imgs/temp/temp-list2.jpg"
+                            alt=""
+                          />
+                        </div>
+                        <div class="txts">
+                          <strong class="main-txt"
+                            >무지개
+                            <span class="point">애견</span> 유치원</strong
+                          >
+                          <span class="sub-txt">경기도 평택시 비전동</span>
+                          <button
+                            type="button"
+                            class="button -primary -sm"
+                            onclick="event.stopPropagation(); showLocationDetail({
+                            title: '무지개 애견 유치원',
+                            address: '경기도 평택시 비전동',
+                            petTypes: '강아지/고양이',
+                            phone: '02-000-0000',
+                            homepage: 'instagram.com/puppy',
+                            images: [
+                              '../../assets/imgs/temp/temp1.png',
+                              '../../assets/imgs/temp/temp2.png',
+                              '../../assets/imgs/temp/temp3.png',
+                              '../../assets/imgs/temp/temp4.jpg',
+                              '../../assets/imgs/temp/temp5.jpg',
+                              '../../assets/imgs/temp/temp6.jpg'
+                            ]
+                          }); return false;"
+                          >
+                            상세보기
+                          </button>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#none"
+                        role="button"
+                        onclick="selectPlace({
+                        id: '2',
+                        place_name: '애견가게 스타필드점',
+                        y: 37.1234,
+                        x: 126.1234,
+                        address_name: '서울시 서초구 방배동',
+                        category: 'FD6'
+                      }); return false;"
+                      >
+                        <div class="img-box">
+                          <div class="flags">
+                            <span class="flag -color2">인기</span>
+                          </div>
+                          <img
+                            src="../../assets/imgs/temp/temp-list2.jpg"
+                            alt=""
+                          />
+                        </div>
+                        <div class="txts">
+                          <strong class="main-txt"
+                            ><span class="point">애견</span>가게
+                            스타필드점</strong
+                          >
+                          <span class="sub-txt">서울시 서초구 방배동</span>
+                          <button
+                            type="button"
+                            class="button -primary -sm"
+                            onclick="event.stopPropagation(); showLocationDetail({
+                            title: '애견가게 스타필드점',
+                            address: '서울시 서초구 방배동',
+                            petTypes: '강아지/고양이',
+                            phone: '02-000-0000',
+                            homepage: 'instagram.com/puppy',
+                            images: [
+                              '../../assets/imgs/temp/temp1.png',
+                              '../../assets/imgs/temp/temp2.png',
+                              '../../assets/imgs/temp/temp3.png',
+                              '../../assets/imgs/temp/temp4.jpg',
+                              '../../assets/imgs/temp/temp5.jpg',
+                              '../../assets/imgs/temp/temp6.jpg'
+                            ]
+                          }); return false;"
+                          >
+                            상세보기
+                          </button>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#none"
+                        role="button"
+                        onclick="selectPlace({
+                        id: '3',
+                        place_name: '별나라 애견동반 호텔',
+                        y: 37.1234,
+                        x: 126.1234,
+                        address_name: '서울시 강남구 역삼동',
+                        category: 'AD5'
+                      }); return false;"
+                      >
+                        <div class="img-box">
+                          <img
+                            src="../../assets/imgs/temp/temp-list2.jpg"
+                            alt=""
+                          />
+                        </div>
+                        <div class="txts">
+                          <strong class="main-txt"
+                            >별나라 <span class="point">애견</span>동반
+                            호텔</strong
+                          >
+                          <span class="sub-txt">서울시 강남구 역삼동</span>
+                          <button
+                            type="button"
+                            class="button -primary -sm"
+                            onclick="event.stopPropagation(); showLocationDetail({
+                            title: '별나라 애견동반 호텔',
+                            address: '서울시 강남구 역삼동',
+                            petTypes: '강아지/고양이',
+                            phone: '02-000-0000',
+                            homepage: 'instagram.com/puppy',
+                            images: [
+                              '../../assets/imgs/temp/temp1.png',
+                              '../../assets/imgs/temp/temp2.png',
+                              '../../assets/imgs/temp/temp3.png',
+                              '../../assets/imgs/temp/temp4.jpg',
+                              '../../assets/imgs/temp/temp5.jpg',
+                              '../../assets/imgs/temp/temp6.jpg'
+                            ]
+                          }); return false;"
+                          >
+                            상세보기
+                          </button>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#none"
+                        role="button"
+                        onclick="selectPlace({
+                        id: '4',
+                        place_name: '공주님 애견동반 호텔',
+                        y: 37.1234,
+                        x: 126.1234,
+                        address_name: '서울시 강남구 역삼동',
+                        category: 'AD5'
+                      }); return false;"
+                      >
+                        <div class="img-box">
+                          <img
+                            src="../../assets/imgs/temp/temp-list2.jpg"
+                            alt=""
+                          />
+                        </div>
+                        <div class="txts">
+                          <strong class="main-txt"
+                            >공주님 <span class="point">애견</span>동반
+                            호텔</strong
+                          >
+                          <span class="sub-txt">서울시 강남구 역삼동</span>
+                          <button
+                            type="button"
+                            class="button -primary -sm"
+                            onclick="event.stopPropagation(); showLocationDetail({
+                            title: '공주님 애견동반 호텔',
+                            address: '서울시 강남구 역삼동',
+                            petTypes: '강아지/고양이',
+                            phone: '02-000-0000',
+                            homepage: 'instagram.com/puppy',
+                            images: [
+                              '../../assets/imgs/temp/temp1.png',
+                              '../../assets/imgs/temp/temp2.png',
+                              '../../assets/imgs/temp/temp3.png',
+                              '../../assets/imgs/temp/temp4.jpg',
+                              '../../assets/imgs/temp/temp5.jpg',
+                              '../../assets/imgs/temp/temp6.jpg'
+                            ]
+                          }); return false;"
+                          >
+                            상세보기
+                          </button>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#none"
+                        role="button"
+                        onclick="selectPlace({
+                        id: '5',
+                        place_name: '케이스 TEST 애견',
+                        y: 37.1234,
+                        x: 126.1234,
+                        address_name: '서울시 강남구 역삼동',
+                        category: 'AT4'
+                      }); return false;"
+                      >
+                        <div class="img-box">
+                          <img
+                            src="../../assets/imgs/temp/temp-list2.jpg"
+                            alt=""
+                          />
+                        </div>
+                        <div class="txts">
+                          <strong class="main-txt"
+                            >케이스 TEST <span class="point">애견</span></strong
+                          >
+                          <span class="sub-txt">서울시 강남구 역삼동</span>
+                          <button
+                            type="button"
+                            class="button -primary -sm"
+                            onclick="event.stopPropagation(); showLocationDetail({
+                            title: '케이스 TEST 애견',
+                            address: '서울시 강남구 역삼동',
+                            petTypes: '강아지/고양이',
+                            phone: '02-000-0000',
+                            homepage: 'instagram.com/puppy',
+                            images: [
+                              '../../assets/imgs/temp/temp1.png',
+                              '../../assets/imgs/temp/temp2.png',
+                              '../../assets/imgs/temp/temp3.png',
+                              '../../assets/imgs/temp/temp4.jpg',
+                              '../../assets/imgs/temp/temp5.jpg',
+                              '../../assets/imgs/temp/temp6.jpg'
+                            ]
+                          }); return false;"
+                          >
+                            상세보기
+                          </button>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+
+        <footer class="footer">
+          <!-- footer.html 로 페이지 통합 관리 -->
+        </footer>
+      </div>
+    </div>
+
+    <div class="modal -login-modal"></div>
+
+    <div class="modal">
+      <div class="container">
+        <header class="header">
+          <div class="inner">
+            <button type="button" class="close" onclick="modalClose()">
+              <span class="hide">닫기</span>
+            </button>
+          </div>
+        </header>
+
+        <main class="contents">
+          <div class="content">
+            <div class="location-detail">
+              <div class="title-box">
+                <h2 class="title">장소 자세히</h2>
+                <p class="txt">자세히 읽고나서 저장해보세요</p>
+              </div>
+
+              <div class="detail-imgs swiper mySwiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <img src="../../assets/imgs/temp/temp1.png" alt="" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="../../assets/imgs/temp/temp2.png" alt="" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="../../assets/imgs/temp/temp3.png" alt="" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="../../assets/imgs/temp/temp4.jpg" alt="" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="../../assets/imgs/temp/temp5.jpg" alt="" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="../../assets/imgs/temp/temp6.jpg" alt="" />
+                  </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+              </div>
+
+              <dl class="details">
+                <dt>상호이름</dt>
+                <dd>퍼피스드림</dd>
+                <dt>상세주소</dt>
+                <dd>서울 서초구 서래로</dd>
+                <dt>동반가능</dt>
+                <dd>강아지/고양이</dd>
+                <dt>대표번호</dt>
+                <dd>02-000-0000</dd>
+                <dt>홈페이지</dt>
+                <dd>instagram.com/puppy</dd>
+              </dl>
+            </div>
+          </div>
+        </main>
+
+        <div class="fixed">
+          <div class="buttons">
+            <button
+              type="button"
+              class="button -primary -lg"
+              onclick="saveAndClose()"
+            >
+              이 장소 저장하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 스크립트 -->
+    <script src="../../assets/libs/jquery/jquery-3.6.0.min.js"></script>
+    <script src="../../assets/libs/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../../assets/libs/jquery-ui/jquery.ui.touch-punch.min.js"></script>
+    <script src="../../assets/libs/swiper/dist/js/swiper.min.js"></script>
+    <script src="../../assets/libs/sweetalert2/sweetalert2.js"></script>
+    <script src="../../assets/js/style.js"></script>
+    <script src="../../assets/js/dev.js"></script>
+    <script src="../../assets/js/show_route.js"></script>
+    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=706f2ef595d7fa1279baace1d65f8f18&libraries=services&autoload=false"></script>
+    <script>
+      kakao.maps.load(function () {
+        const script = document.createElement("script");
+        script.src = "../../assets/js/map.js";
+        script.onload = function () {
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", function () {
+              if (typeof initializeMap === "function") {
+                initializeMap();
+              }
+            });
+          } else {
+            if (typeof initializeMap === "function") {
+              initializeMap();
+            }
+          }
+        };
+        document.body.appendChild(script);
+      });
+
+      function saveAndClose() {
+        alert("장소가 저장되었습니다.");
+        modalClose();
+      }
+    </script>
+  </body>
+</html>

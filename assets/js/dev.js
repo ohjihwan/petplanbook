@@ -607,7 +607,11 @@ let basePath = "";
 if (location.port === "8080") {
   // Node 서버: public 폴더 기준
   basePath = "";
-} else if (location.port === "5500" || location.port === "5501") {
+} else if (
+  location.port === "5500" ||
+  location.port === "5501" ||
+  location.port === "5504"
+) {
   // Live Server: html 폴더 내부 기준
   basePath = "/html";
 }
