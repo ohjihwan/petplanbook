@@ -621,7 +621,7 @@ $(".page .header").load(
 $(".page .footer").load(`${basePath}/ETC/footer.html?v=${Date.now()}`);
 $(".modal.-login-modal").load(`${basePath}/ETC/login.html?v=${Date.now()}`);
 
-async function loadRoutes() {
+/* async function loadRoutes() {
   try {
     const response = await fetch("/api/routes");
     const routes = await response.json();
@@ -646,3 +646,4 @@ async function loadRoutes() {
 }
 
 loadRoutes();
+ */
