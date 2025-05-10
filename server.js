@@ -3,6 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import petTravelRouter from "./api/pet_travel.mjs";
 
+dotenv.config();
+
 const app = express();
 const PORT = process.env.PORT || 8081;
 const HOST = process.env.HOST;

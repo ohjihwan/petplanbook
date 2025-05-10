@@ -17,7 +17,7 @@ router.post("/save-route", async (req, res) => {
 	}
 });
 
-router.get("/places", async (req, res) => {
+router.get("/save-places", async (req, res) => {
 	try {
 		const [rows] = await db.query(
 			"SELECT * FROM saved_places ORDER BY created_at DESC"
