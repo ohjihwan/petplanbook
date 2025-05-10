@@ -100,7 +100,7 @@ body.lock {overflow:hidden;}
 .button.-border-type {color:#000; border:1px solid #d3ded3; background-color:#fff;}
 .button.-md {height:5rem; line-height:5rem; padding:0 5rem; border-radius:1.2rem; font-size:1.8rem; font-weight:600;}
 .button.-lg {height:6.5rem; line-height:6.5rem; padding:0 5rem; border-radius:1.2rem; font-size:2.1rem; font-weight:700;}
-.button:disabled {color:#474747; background-color:#d9d9d9;}
+.button:disabled {color:#474747; background-color:#d9d9d9; cursor:no-drop;}
 .button.w-full {padding:0 0.4rem;}
 
 /* 스와이프 좌우 버튼 */
