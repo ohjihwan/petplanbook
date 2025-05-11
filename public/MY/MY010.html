@@ -32,105 +32,115 @@
 						</div>
 					</section>
 
-					<section class="map-content-area">
-						<div class="inner">
-							<div class="function-box">
-								<!-- API 기능 -->
-								<div id="map" class="map-box"></div>
-								<!-- // -->
-								<div class="field-area">
-									<div class="field">
-										<label for="region" class="label">지역</label>
-										<div class="select">
-											<select name="region" id="region">
-												<option value="">지역 선택</option>
-												<option value="강원특별자치도">강원특별자치도</option>
-												<option value="경기도">경기도</option>
-												<option value="경상남도">경상남도</option>
-												<option value="경상북도">경상북도</option>
-												<option value="광주광역시">광주광역시</option>
-												<option value="대구광역시">대구광역시</option>
-												<option value="대전광역시">대전광역시</option>
-												<option value="부산광역시">부산광역시</option>
-												<option value="서울특별시">서울특별시</option>
-												<option value="세종특별자치시">세종특별자치시</option>
-												<option value="울산광역시">울산광역시</option>
-												<option value="인천광역시">인천광역시</option>
-												<option value="전라남도">전라남도</option>
-												<option value="전라북도">전라북도</option>
-												<option value="제주특별자치도">제주특별자치도</option>
-												<option value="충청남도">충청남도</option>
-												<option value="충청북도">충청북도</option>
-											</select>
-										</div>
-									</div>
-									<div class="field">
-										<label for="text1" class="label">장소 검색</label>
-										<div class="text">
-											<input
-												type="text"
-												id="text1"
-												required
-												placeholder="(예시:애견유치원)"
-											/>
-										</div>
-									</div>
-									<div class="field">
-										<p class="label">펫종류</p>
-										<style></style>
-										<div class="checkboxs">
-											<div class="checkbox">
-												<input type="checkbox" id="dog" name="pet" class="checked"/>
-												<label for="dog">강아지</label>
-											</div>
-											<div class="checkbox">
-												<input type="checkbox" id="cat" name="pet" class="checked"/>
-												<label for="cat">고양이</label>
-											</div>
-										</div>
-									</div>
-									<div class="field">
-										<label for="text3" class="label">날짜 선택</label>
-										<div class="text">
-											<input
-												type="date"
-												id="text3"
-												required
-												placeholder="날짜를 선택해주세요"
-											/>
-										</div>
-									</div>
-									<div class="field-half">
-										<div class="field">
-											<label for="text33" class="label">인원수</label>
-											<div class="text">
-												<input
-													type="text"
-													id="text33"
-													placeholder="인원수 입력"
-												/>
-											</div>
-										</div>
-										<div class="field">
-											<label for="text44" class="label">반려동물 수</label>
-											<div class="text">
-												<input
-													type="text"
-													id="text44"
-													placeholder="반려동물 수 입력"
-												/>
-											</div>
-										</div>
-									</div>
-									<div class="comp-buttons">
-										<button type="button" class="button -primary -lg w-full">
-											루트 추가하기
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</section>
+            <section class="map-content-area">
+              <div class="inner">
+                <div class="function-box">
+                  <!-- API 기능 -->
+                  <div id="map" class="map-box"></div>
+                  <!-- // -->
+                  <div class="field-area">
+                    <div class="field">
+                      <label for="region" class="label">지역</label>
+                      <div class="select">
+                        <select name="region" id="region">
+                          <option value="">지역 선택</option>
+                          <option value="강원특별자치도">강원특별자치도</option>
+                          <option value="경기도">경기도</option>
+                          <option value="경상남도">경상남도</option>
+                          <option value="경상북도">경상북도</option>
+                          <option value="광주광역시">광주광역시</option>
+                          <option value="대구광역시">대구광역시</option>
+                          <option value="대전광역시">대전광역시</option>
+                          <option value="부산광역시">부산광역시</option>
+                          <option value="서울특별시">서울특별시</option>
+                          <option value="세종특별자치시">세종특별자치시</option>
+                          <option value="울산광역시">울산광역시</option>
+                          <option value="인천광역시">인천광역시</option>
+                          <option value="전라남도">전라남도</option>
+                          <option value="전라북도">전라북도</option>
+                          <option value="제주특별자치도">제주특별자치도</option>
+                          <option value="충청남도">충청남도</option>
+                          <option value="충청북도">충청북도</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label for="text1" class="label">장소 검색</label>
+                      <div class="text">
+                        <input
+                          type="text"
+                          id="text1"
+                          required
+                          placeholder="(예시:애견유치원)"
+                        />
+                      </div>
+                    </div>
+                    <div class="field">
+                      <p class="label">펫종류</p>
+                      <style></style>
+                      <div class="checkboxs">
+                        <div class="checkbox">
+                          <input
+                            type="checkbox"
+                            id="dog"
+                            name="pet"
+                            class="checked"
+                          />
+                          <label for="dog">강아지</label>
+                        </div>
+                        <div class="checkbox">
+                          <input
+                            type="checkbox"
+                            id="cat"
+                            name="pet"
+                            class="checked"
+                          />
+                          <label for="cat">고양이</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label for="text3" class="label">날짜 선택</label>
+                      <div class="text">
+                        <input
+                          type="date"
+                          id="text3"
+                          required
+                          placeholder="날짜를 선택해주세요"
+                        />
+                      </div>
+                    </div>
+                    <div class="field-half">
+                      <div class="field">
+                        <label for="text33" class="label">인원수</label>
+                        <div class="text">
+                          <input
+                            type="text"
+                            id="text33"
+                            placeholder="인원수 입력"
+                          />
+                        </div>
+                      </div>
+                      <div class="field">
+                        <label for="text44" class="label">반려동물 수</label>
+                        <div class="text">
+                          <input
+                            type="text"
+                            id="text44"
+                            placeholder="반려동물 수 입력"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="comp-buttons">
+                      <button type="button" class="button -primary -lg w-full">
+                        루트 추가하기
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
 
 					<section class="make-route-area">
 						<div class="inner">
