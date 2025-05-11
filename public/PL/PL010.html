@@ -178,7 +178,7 @@
 	<script src="/assets/js/dev.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=706f2ef595d7fa1279baace1d65f8f18&libraries=services"></script>
 	<script src="/assets/js/map.js"></script>
-	<!-- <script src="/assets/js/API.js"></script> -->
+	<script src="/assets/js/API.js"></script>
 	<script>
 		async function savePlace() {
 			const details = document.querySelectorAll("#detail .details dd");
@@ -188,7 +188,7 @@
 			const category = details[3].textContent;
 
 			try {
-				const response = await fetch(`http://localhost:8081/api/save-place`, {
+				const response = await fetch(`/api/save-place`, {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({ title, addr1, tel, category }),
@@ -202,12 +202,9 @@
 
 				if (result.success) {
 					const confirmed = confirm("✅ 장소가 저장되었습니다! MY장소로 이동하시겠습니까?");
-				if (confirmed) {
-					console.log("사용자가 [예]를 눌렀습니다.");
-					window.location.href = `http://127.0.0.1:8081/public/MY/MY022.html`;
-				} else {
-					console.log("사용자가 [아니오]를 눌렀습니다.");
-				}
+					if (confirmed) {
+						window.location.href = `/MY/MY010.html`;
+					}
 				} else {
 					alert("⚠️ 저장에 실패했습니다: " + result.message);
 				}

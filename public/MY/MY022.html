@@ -264,13 +264,13 @@
 	<script src="/assets/js/style.js"></script>
 	<script src="/assets/js/dev.js"></script>
 	<script>
+		// 장소 목록 로드 함수
 		async function loadPlaces() {
 			try {
-				const response = await fetch("http://localhost:5501/api/places");
+				const response = await fetch('/api/save-places');
 				if (!response.ok) {
 					throw new Error(`서버 응답 실패: ${response.status}`);
 				}
-
 				const places = await response.json();
 				const resultBox = document.querySelector(".search-result-box ul");
 				resultBox.innerHTML = ""; // 기존 li들 초기화
@@ -279,32 +279,61 @@
 					document.querySelector(".result-empty").style.display = "block";
 				} else {
 					document.querySelector(".result-empty").style.display = "none";
+					places.forEach((place) => {
+						const li = document.createElement("li");
+						li.innerHTML = `
+							<a href="javascript:void(0)" role="button" onclick="modalOpenId('detail')">
+								<div class="img-box">
+									<img src="${place.firstimage || '/assets/imgs/temp/temp-list2.jpg'}" alt="${place.title}" />
+								</div>
+								<div class="txts">
+									<strong class="main-txt">${place.title}</strong>
+									<span class="sub-txt">${place.addr1 || '주소 정보 없음'}</span>
+								</div>
+							</a>
+							<button type="button" class="close" onclick="deletePlace(${place.id})">
+								<span class="hide">삭제</span>
+							</button>
+						`;
+						resultBox.appendChild(li);
+					});
 				}
-
-				places.forEach((place) => {
-					const li = document.createElement("li");
-					li.innerHTML = `
-			<a href="javascript:void(0)" role="button" onclick="modalOpenId('detail')">
-				<div class="img-box">
-					<img src="/assets/imgs/temp/temp-list2.jpg" alt="">
-				</div>
-				<div class="txts">
-					<strong class="main-txt">${place.title}</strong>
-					<span class="sub-txt">${place.addr1}</span>
-				</div>
-			</a>
-			<button type="button" class="close" onclick="deleteData(this, 'li')"><span class="hide">삭제</span></button>
-		`;
-					resultBox.appendChild(li);
-				});
 			} catch (error) {
-				console.error(error);
-				alert("❌ 장소 불러오기 실패: " + error.message);
+				console.error('장소 목록 로드 실패:', error);
+				document.querySelector(".result-empty").style.display = "block";
 			}
 		}
 
-		// 페이지 로드 후 실행
-		window.onload = loadPlaces;
+		// 장소 삭제 함수
+		async function deletePlace(placeId) {
+			if (!confirm('정말로 이 장소를 삭제하시겠습니까?')) {
+				return;
+			}
+
+			try {
+				const response = await fetch(`/api/save-places/${placeId}`, {
+					method: 'DELETE'
+				});
+				
+				if (!response.ok) {
+					throw new Error(`서버 응답 실패: ${response.status}`);
+				}
+
+				const result = await response.json();
+				if (result.success) {
+					// 삭제 성공 시 목록 새로고침
+					loadPlaces();
+				} else {
+					alert('장소 삭제에 실패했습니다.');
+				}
+			} catch (error) {
+				console.error('장소 삭제 실패:', error);
+				alert('장소 삭제 중 오류가 발생했습니다.');
+			}
+		}
+
+		// 페이지 로드 시 장소 목록 로드
+		document.addEventListener('DOMContentLoaded', loadPlaces);
 	</script>
 </body>
 </html>

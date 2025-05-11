@@ -230,13 +230,104 @@
 	<script src="/assets/libs/sweetalert2/sweetalert2.js"></script>
 	<script src="/assets/js/style.js"></script>
 	<script src="/assets/js/dev.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=706f2ef595d7fa1279baace1d65f8f18&libraries=services"></script>
 	<script src="/assets/js/map.js"></script>
-	<script
-		type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=706f2ef595d7fa1279baace1d65f8f18&libraries=services"
-	></script>
 	<script>
-		mapSeting();
+		// 저장된 장소 목록 로드
+		async function loadSavedPlaces() {
+			try {
+				const response = await fetch('/api/save-places');
+				if (!response.ok) {
+					throw new Error(`서버 응답 실패: ${response.status}`);
+				}
+				const places = await response.json();
+				const routeContainer = document.querySelector('.make-route');
+				
+				// 기존 placeholder 제거
+				const placeholder = routeContainer.querySelector('.item.-placeholder');
+				if (placeholder) {
+					placeholder.remove();
+				}
+
+				// 저장된 장소가 없는 경우
+				if (places.length === 0) {
+					routeContainer.innerHTML = '<div class="item -placeholder"></div>';
+					return;
+				}
+
+				// 저장된 장소 표시 및 경로 표시
+				displayRoute(places);
+			} catch (error) {
+				console.error('장소 목록 로드 실패:', error);
+				alert('장소 목록을 불러오는데 실패했습니다.');
+			}
+		}
+
+		// 장소 삭제 함수
+		async function deletePlace(placeId) {
+			if (!confirm('정말로 이 장소를 삭제하시겠습니까?')) {
+				return;
+			}
+
+			try {
+				const response = await fetch(`/api/save-places/${placeId}`, {
+					method: 'DELETE'
+				});
+				
+				if (!response.ok) {
+					throw new Error(`서버 응답 실패: ${response.status}`);
+				}
+
+				const result = await response.json();
+				if (result.success) {
+					// 삭제 성공 시 목록 새로고침
+					loadSavedPlaces();
+				} else {
+					alert('장소 삭제에 실패했습니다.');
+				}
+			} catch (error) {
+				console.error('장소 삭제 실패:', error);
+				alert('장소 삭제 중 오류가 발생했습니다.');
+			}
+		}
+
+		// 정렬 기능 초기화
+		function initSortable() {
+			$('.make-route').sortable({
+				handle: '.sorting-handler',
+				placeholder: 'item -placeholder',
+				forcePlaceholderSize: true,
+				update: function(event, ui) {
+					// 정렬 후 경로 업데이트
+					const places = Array.from(this.querySelectorAll('.item:not(.-placeholder)')).map(item => {
+						const name = item.querySelector('.name').textContent;
+						const addr1 = item.querySelector('.info dd:nth-child(2)').textContent;
+						const tel = item.querySelector('.info dd:nth-child(4)').textContent;
+						return { title: name, addr1, tel };
+					});
+					displayRoute(places);
+				}
+			});
+		}
+
+		// 루트 추가하기 버튼 이벤트
+		document.querySelector('.comp-buttons button').addEventListener('click', function() {
+			if (selectedPlace) {
+				addToRoute(selectedPlace);
+			}
+		});
+
+		// 페이지 로드 시 초기화
+		document.addEventListener('DOMContentLoaded', () => {
+			// 지도 초기화
+			initMap();
+			
+			// 저장된 장소 로드
+			loadSavedPlaces();
+			
+			// 정렬 기능 초기화
+			initSortable();
+		});
 	</script>
 </body>
 </html>

@@ -3,6 +3,11 @@ let filteredData = [];
 let currentPage = 1;
 const itemsPerPage = 8;
 
+// 검색 결과를 전역으로 공유하기 위한 이벤트
+const searchResultEvent = new CustomEvent('searchResultUpdated', {
+	detail: { data: null }
+});
+
 /* function toggleSelect() {
 	console.log('fdas')
 	const region = document.getElementById("region").value;
@@ -17,8 +22,16 @@ const itemsPerPage = 8;
 } */
 
 async function fetchTravelList() {
+	const searchText = document.getElementById("text1")?.value.trim() || "";
+	const region = document.getElementById("region")?.value || "";
+
+	// 검색어나 지역이 없으면 데이터를 가져오지 않음
+	if (!searchText && !region) {
+		return;
+	}
+
 	const listUrl = `https://apis.data.go.kr/B551011/KorPetTourService/areaBasedList?serviceKey=GTr1cI7Wi0FRbOTFBaUzUCzCDP4OnyyEmHnn11pxCUC5ehG5bQnbyztgeydnOWz1O04tjw1SE5RsX8RNo6XCgQ%3D%3D&numOfRows=1000&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json`;
-	console.log("📡 브라우저에서 직접  요청:", listUrl);
+	console.log("📡 브라우저에서 직접 API 요청:", listUrl);
 	const response = await fetch(listUrl);
 	const apiData = await response.json();
 	travelData = apiData.response?.body?.items?.item || [];
@@ -32,16 +45,21 @@ document.getElementById("text1").addEventListener("keydown", (e) => {
 });
 
 function searchTravelList() {
+	currentPage = 1;
 	travelData = [];
 	filteredData = [];
-	currentPage = 1;
 	fetchTravelList();
 }
 
 function filterAndDisplayList() {
-	const searchText = document.getElementById("text1").value.trim().toLowerCase();
-	const region = document.getElementById("region").value;
-	const selectedCategories = Array.from(document.querySelectorAll(".checkbox input:checked")).map(checkbox => checkbox.value);
+	const searchInput = document.getElementById("text1");
+	const regionSelect = document.getElementById("region");
+	const categoryCheckboxes = document.querySelectorAll(".checkbox input:checked");
+
+	// DOM 요소가 없을 경우 기본값 사용
+	const searchText = searchInput ? searchInput.value.trim().toLowerCase() : "";
+	const region = regionSelect ? regionSelect.value : "";
+	const selectedCategories = Array.from(categoryCheckboxes).map(checkbox => checkbox.value);
 
 	filteredData = travelData.filter(item => {
 		const matchesText = item.title.toLowerCase().includes(searchText);
@@ -50,25 +68,35 @@ function filterAndDisplayList() {
 		return matchesText && matchesRegion && matchesCategory;
 	});
 
+	// 검색 결과 이벤트 발생
+	searchResultEvent.detail.data = filteredData;
+	document.dispatchEvent(searchResultEvent);
+
 	displayTravelList();
 }
 
 function displayTravelList() {
 	const list = document.getElementById("travel-list");
-	const ul = list.querySelector("ul");
-	ul.innerHTML = ""; // 기존 목록 초기화
+	if (!list) return;
 
-	const start = (currentPage - 1) * itemsPerPage;
-	const end = start + itemsPerPage;
-	const displayItems = filteredData.slice(0, end);
+	const ul = list.querySelector("ul");
+	if (!ul) return;
+
+	ul.innerHTML = "";
+
+	const start = 0;
+	const end = currentPage * itemsPerPage;
+	const displayItems = filteredData.slice(start, end);
 
 	displayItems.forEach(item => {
 		const li = document.createElement("li");
+		const defaultImage = "https://dummyimage.com/200x200/cccccc/ffffff&text=No+Image";
+		const imageUrl = item.firstimage || defaultImage;
 		li.innerHTML = `
-			<a href="#none" role="button">
+			<a href="javascript:void(0)" role="button">
 				<div class="img-box">
 					<div class="category ${getCategoryClass(item)}">${getCategory(item)}</div>
-					<img src="${item.firstimage || 'https://dummyimage.com/200x200/cccccc/ffffff&text=No+Imdsaage'}" alt="${item.title}">
+					<img src="${imageUrl}" data-src="${imageUrl}" alt="${item.title}" onerror="this.onerror=null; this.src='${imageUrl}';">
 				</div>
 				<div class="txts">
 					<strong class="main-txt">${item.title}</strong>
@@ -76,19 +104,32 @@ function displayTravelList() {
 				</div>
 			</a>
 		`;
+
+		// 이미지 로드 시도
+		const img = li.querySelector("img");
+		if (img) {
+			img.onload = function() {
+				if (this.src !== defaultImage) {
+					this.src = this.getAttribute("data-src");
+				}
+			};
+			img.onerror = function() {
+				this.src = defaultImage;
+			};
+		}
+
+		li.addEventListener("click", () => openDetailModal(item));
 		ul.appendChild(li);
 	});
 
-	// "더보기" 버튼 표시/숨김 제어
 	const loadMoreButton = document.getElementById("load-more");
-	if (displayItems.length >= itemsPerPage && end < filteredData.length) {
-		loadMoreButton.style.display = "inline-block";
-	} else {
-		loadMoreButton.style.display = "none";
+	if (loadMoreButton) {
+		if (end < filteredData.length) {
+			loadMoreButton.style.display = "inline-block";
+		} else {
+			loadMoreButton.style.display = "none";
+		}
 	}
-
-	// 노출된 li 수와 전체 필터링 수 콘솔 출력
-	console.log(`📊 노출된 아이템 수: ${ul.querySelectorAll("li").length} / ${filteredData.length}`);
 }
 
 // 더보기 기능
@@ -115,7 +156,7 @@ function getCategory(item) {
 }
 
 // ✅ 모달 열기 함수 추가
-/* function openDetailModal(item) {
+function openDetailModal(item) {
 	const modal = document.getElementById("detail");
 	const swiperWrapper = modal.querySelector(".swiper-wrapper");
 	swiperWrapper.innerHTML = `
@@ -135,4 +176,4 @@ function getCategory(item) {
 			prevEl: ".swiper-button-prev",
 		},
 	});
-} */
+} 
