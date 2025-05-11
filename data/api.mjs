@@ -6,7 +6,7 @@ const router = express.Router();
 const pool = mysql.createPool({
   host: "localhost",
   user: "root",
-  password: "liberty", // ← 본인 MySQL 비밀번호
+  password: "1234", // ← 본인 MySQL 비밀번호
   database: "database", // ← 본인 MySQL 데이터베이스 이름
   waitForConnections: true,
   connectionLimit: 10,

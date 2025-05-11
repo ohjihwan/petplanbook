@@ -278,14 +278,58 @@
 	<script src="/assets/libs/swiper/dist/js/swiper.min.js"></script>
 	<script src="/assets/js/style.js"></script>
 	<script src="/assets/js/dev.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=706f2ef595d7fa1279baace1d65f8f18&libraries=services"></script>
 	<script src="/assets/js/map.js"></script>
-	<script
-		type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=706f2ef595d7fa1279baace1d65f8f18&libraries=services"
-	></script>
 	<script>
-		mapSeting();
+		// 지도 초기화 함수
+		async function initializeMap() {
+			try {
+				console.log('지도 초기화 시작');
+				
+				// SDK 로드 확인
+				if (typeof kakao === 'undefined' || typeof kakao.maps === 'undefined') {
+					throw new Error('카카오맵 SDK가 로드되지 않았습니다.');
+				}
 
+				// mapSeting 함수 확인
+				if (typeof window.mapSeting !== 'function') {
+					throw new Error('mapSeting 함수를 찾을 수 없습니다.');
+				}
+
+				// 지도 컨테이너 확인
+				const mapContainer = document.getElementById('map');
+				if (!mapContainer) {
+					throw new Error('지도 컨테이너를 찾을 수 없습니다.');
+				}
+
+				// 지도 컨테이너 스타일 설정
+				mapContainer.style.cssText = `
+					width: 100%;
+					height: 500px;
+					position: relative;
+					overflow: hidden;
+					display: block !important;
+					visibility: visible !important;
+				`;
+
+				// 약간의 지연을 주어 DOM이 완전히 준비되도록 함
+				await new Promise(resolve => setTimeout(resolve, 100));
+
+				// mapSeting 함수 실행
+				window.mapSeting();
+				console.log('지도 초기화 완료');
+			} catch (error) {
+				console.error('지도 초기화 중 오류 발생:', error);
+			}
+		}
+
+		// 페이지 로드 시 초기화
+		document.addEventListener('DOMContentLoaded', function() {
+			console.log('DOMContentLoaded 이벤트 발생');
+			initializeMap();
+		});
+
+		// 폼 제출 이벤트 처리
 		document
 			.getElementById("placeForm")
 			.addEventListener("submit", async (e) => {
@@ -311,24 +355,26 @@
 					const imgBox = document.createElement("div");
 					imgBox.className = "img-box";
 					imgBox.innerHTML = `
-			<button type="button" class="img-view">
-				<img src="${e.target.result}" alt="" />
-			</button>
-			<button type="button" class="close" onclick="this.parentElement.remove()">
-				<span class="hide">사진 삭제</span>
-			</button>
-			`;
+						<button type="button" class="img-view">
+							<img src="${e.target.result}" alt="" />
+						</button>
+						<button type="button" class="close" onclick="this.parentElement.remove()">
+							<span class="hide">사진 삭제</span>
+						</button>
+					`;
 					document.querySelector(".upload-gallery").appendChild(imgBox);
 				};
 				reader.readAsDataURL(file);
 			}
 		});
 
+		// 작성 완료 버튼 클릭 이벤트
 		document.getElementById("completeBtn").onclick = async function () {
 			const name = document.getElementById("name").value;
 			const description = document.getElementById("description").value;
 			const imageInput = document.getElementById("image");
 			let imageUrl = "";
+			
 			// 1. 이미지 업로드
 			if (imageInput.files[0]) {
 				const formData = new FormData();
@@ -340,6 +386,7 @@
 				const data = await res.json();
 				imageUrl = data.imageUrl;
 			}
+			
 			// 2. 글 정보 JSON으로 저장
 			await fetch(`http://${HOST}:${PORT}/place`, {
 				method: "POST",
@@ -348,6 +395,8 @@
 			});
 			window.location.href = "MY030.html";
 		};
+
+		// 목록으로 버튼 클릭 이벤트
 		document.getElementById("goListBtn").onclick = function () {
 			window.location.href = "MY020.html";
 		};

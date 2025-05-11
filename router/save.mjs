@@ -20,4 +20,18 @@ router.post("/api/save-place", async (req, res) => {
   }
 });
 
+router.delete("/save-places/:id", async (req, res) => {
+	const placeId = req.params.id;
+	try {
+		await db.query(
+			"DELETE FROM saved_places WHERE id = ?",
+			[placeId]
+		);
+		res.json({ success: true, message: "삭제 성공" });
+	} catch (err) {
+		console.error("DB 삭제 오류:", err);
+		res.status(500).json({ success: false, message: "삭제 실패" });
+	}
+});
+
 export default router;
