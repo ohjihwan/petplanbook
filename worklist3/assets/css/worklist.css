@@ -1,24 +1,24 @@
 @charset "utf-8"; 
 
 :root{
-    --bg:#fefefe; 
-    --table-bg:#f2f2f2; 
-    --border-color:#e6e6e6; 
-    --text-color:#767676; 
-    --light-text-color:#121212; 
-    --text-color-active:#111; 
-    --deep-border-color:#e6e7e9; 
-    --invert:none
+	--bg:#fefefe; 
+	--table-bg:#f2f2f2; 
+	--border-color:#e6e6e6; 
+	--text-color:#767676; 
+	--light-text-color:#121212; 
+	--text-color-active:#111; 
+	--deep-border-color:#e6e7e9; 
+	--invert:none
 }
 :root .darkWorklist {
-    --bg:#1e1e1e; 
-    --table-bg:#272727; 
-    --border-color:#444; 
-    --text-color:#999; 
-    --light-text-color:#d0d0d0; 
-    --text-color-active:#fafafa; 
-    --deep-border-color:#868686; 
-    --invert:invert(1); 
+	--bg:#1e1e1e; 
+	--table-bg:#272727; 
+	--border-color:#444; 
+	--text-color:#999; 
+	--light-text-color:#d0d0d0; 
+	--text-color-active:#fafafa; 
+	--deep-border-color:#868686; 
+	--invert:invert(1); 
 }
 
 * {box-sizing:border-box; margin:0; padding:0;}
@@ -125,12 +125,12 @@ table .note > span > .detail {display:none;}
 td:hover .iframe-select:before {border-color:#bbb;}
 .iframe-select:checked:before {border-top:.2rem solid #ec0c0c; border-left:.2rem solid #ec0c0c; animation:shakeArr 1s linear infinite;}
 @keyframes shakeArr {
-    0%{transform:translateY(-50%) rotate(135deg);}
-    25%{transform:translateY(-100%) rotate(135deg);}
-    50%{transform:translateY(0) rotate(135deg);}
-    75%{transform:translateY(-50%) rotate(135deg);}
-    76%{transform:translateY(-50%) rotate(135deg) scale(2);}
-    100%{transform:translateY(-50%) rotate(135deg) scale(1);}
+	0%{transform:translateY(-50%) rotate(135deg);}
+	25%{transform:translateY(-100%) rotate(135deg);}
+	50%{transform:translateY(0) rotate(135deg);}
+	75%{transform:translateY(-50%) rotate(135deg);}
+	76%{transform:translateY(-50%) rotate(135deg) scale(2);}
+	100%{transform:translateY(-50%) rotate(135deg) scale(1);}
 }
 td:hover .iframe-select:checked:before {border-top:.2rem solid #ec0c0c; border-left:.2rem solid #ec0c0c;}
 
@@ -170,14 +170,14 @@ body.lock {overflow:hidden; position:fixed; width:100%; height:100vh; padding-ri
 .loading-box .loader span{position:absolute; top:0; left:0; width:100%; height:100%; transform:rotate(calc(30deg * var(--i)));}
 .loading-box .loader span::before{content:''; position:absolute; top:0; left:0; width:20px; height:20px; background:rgba(255,255,255,.15);}
 .loading-box .loader span:nth-child(3n + 3):before{background-color:#fff; box-shadow:0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #fff; 
-    animation:loader2 2s linear infinite; transform-origin:75px;}
+	animation:loader2 2s linear infinite; transform-origin:75px;}
 @keyframes loader2Box {
-    0%{transform:rotate(0deg);}
-    100%{transform:rotate(360deg);}
+	0%{transform:rotate(0deg);}
+	100%{transform:rotate(360deg);}
 }
 @keyframes loader2 {
-    0%, 25%{transform:rotate(0deg);}
-    75%, 90%, 100%{transform:rotate(180deg);}
+	0%, 25%{transform:rotate(0deg);}
+	75%, 90%, 100%{transform:rotate(180deg);}
 }
 
 /* 검색 필터 */
@@ -214,7 +214,7 @@ body.lock {overflow:hidden; position:fixed; width:100%; height:100vh; padding-ri
 	body {min-width:100%;}
 	table {table-layout:unset};
 	.wrap {width:100%; min-width: 100%;}
-    .wh__nav,
+	.wh__nav,
 	table thead,
 	table .user,
 	table .date,
@@ -232,7 +232,7 @@ body.lock {overflow:hidden; position:fixed; width:100%; height:100vh; padding-ri
 	table [class^="lv"]:first-child::before {content:none;}
 	table .iden {width:100%; padding:0 0.7rem; margin-top:5px; padding-top:5px; border-top:1px solid var(--border-color); font-weight:bold; text-align:left;}
 	table .func {flex:1 1 100%; display:flex; align-items:center; padding:0; font-weight:bold; font-size:18px; text-decoration:underline; text-underline-offset:.2em;}
-	table .state  {flex:0 0 80px; display:flex; justify-content:center; align-items:center; margin-top:8px; border-radius:0.8rem;}
+	table .state {flex:0 0 80px; display:flex; justify-content:center; align-items:center; margin-top:8px; border-radius:0.8rem;}
 	.filter-box {width:180px;}
 	table tr.del {position:relative;}
 	table tr.del .state {position:absolute; left:0; top:0; width:100%; height:100%; margin:0; font-size:50px; color:var(--text-color-active); background-color:rgb(102, 102, 102, 0.5);}
