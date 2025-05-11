@@ -50,7 +50,7 @@ app.use("/", express.static("public"));
 app.use("/api/pet-travel", petTravelRouter);
 
 // 경로찾기 시 DB 저장 라우터
-app.use(saveRouter);
+app.use("/api", saveRouter);
 app.use("/api", apiRouter);
 
 // 404 에러 처리
