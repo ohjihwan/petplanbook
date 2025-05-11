@@ -122,51 +122,49 @@
 		</div>
 	</div>
 
-	<div id="login-modal" class="modal -login-modal"></div>
-	
 	<div id="detail" class="modal">
 		<div class="container">
 			<header class="header">
 				<div class="inner">
-					<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
+					<button type="button" class="close" onclick="modalClose()">
+						<span class="hide">닫기</span>
+					</button>
 				</div>
 			</header>
 
-			<main class="contents">
-				<div class="content">
-					
-					<div class="location-detail">
-						<div class="title-box">
-							<h2 class="title">장소 자세히</h2>
-							<p class="txt">자세히 읽고나서 저장해보세요</p>
-						</div>
-
-						<div class="detail-imgs swiper detail-imgs">
-							<div class="swiper-wrapper"></div>
-							<div class="swiper-button-next"></div>
-							<div class="swiper-button-prev"></div>
-						</div>
-						
-						<dl class="details">
-							<dt>상호이름</dt>
-							<dd></dd>
-							<dt>상세주소</dt>
-							<dd></dd>
-							<dt>대표번호</dt>
-							<dd></dd>
-							<dt>카테고리</dt>
-							<dd></dd>
-						</dl>
+		<main class="contents">
+			<div class="content">
+				<div class="location-detail">
+					<div class="title-box">
+						<h2 class="title">장소 자세히</h2>
+						<p class="txt">자세히 읽고나서 저장해보세요</p>
 					</div>
 
-				</div>
-			</main>
+					<div class="detail-imgs swiper detail-imgs">
+						<div class="swiper-wrapper"></div>
+						<div class="swiper-button-next"></div>
+						<div class="swiper-button-prev"></div>
+					</div>
 
-			<div class="fixed">
-				<div class="buttons">
-					<button type="button" class="button -primary -lg" onclick="savePlace()">이 장소 저장하기</button>
+					<dl class="details">
+						<dt>상호이름</dt>
+						<dd></dd>
+						<dt>상세주소</dt>
+						<dd></dd>
+						<dt>대표번호</dt>
+						<dd></dd>
+						<dt>카테고리</dt>
+						<dd></dd>
+					</dl>
 				</div>
 			</div>
+		</main>
+
+		<div class="fixed">
+			<div class="buttons">
+				<button type="button" class="button -primary -lg" onclick="savePlace()">이 장소 저장하기</button>
+			</div>
+		</div>
 		</div>
 	</div>
 
@@ -176,9 +174,9 @@
 	<script src="/assets/libs/swiper/dist/js/swiper.min.js"></script>
 	<script src="/assets/js/style.js"></script>
 	<script src="/assets/js/dev.js"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=706f2ef595d7fa1279baace1d65f8f18&libraries=services"></script>
+	<script type="text/javascript"src="//dapi.kakao.com/v2/maps/sdk.js?appkey=706f2ef595d7fa1279baace1d65f8f18&libraries=services"></script>
 	<script src="/assets/js/map.js"></script>
-	<script src="/assets/js/API.js"></script>
+	<!-- <script src="/assets/js/API.js"></script> -->
 	<script>
 		async function savePlace() {
 			const details = document.querySelectorAll("#detail .details dd");
@@ -188,7 +186,7 @@
 			const category = details[3].textContent;
 
 			try {
-				const response = await fetch(`/api/save-place`, {
+				const response = await fetch(`http://localhost:8081/api/save-place`, {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({ title, addr1, tel, category }),
@@ -201,9 +199,14 @@
 				const result = await response.json();
 
 				if (result.success) {
-					const confirmed = confirm("✅ 장소가 저장되었습니다! MY장소로 이동하시겠습니까?");
+					const confirmed = confirm(
+						"✅ 장소가 저장되었습니다! MY장소로 이동하시겠습니까?"
+					);
 					if (confirmed) {
-						window.location.href = `/MY/MY010.html`;
+						console.log("사용자가 [예]를 눌렀습니다.");
+						window.location.href = `http://127.0.0.1:8081/public/MY/MY022.html`;
+					} else {
+						console.log("사용자가 [아니오]를 눌렀습니다.");
 					}
 				} else {
 					alert("⚠️ 저장에 실패했습니다: " + result.message);
