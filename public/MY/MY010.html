@@ -47,7 +47,7 @@
                           id="region"
                           onchange="toggleSelect()"
                         >
-                          <option value="">지역 선택</option>
+                          <option value="" selected>지역 선택</option>
                           <option value="강원특별자치도">강원특별자치도</option>
                           <option value="경기도">경기도</option>
                           <option value="경상남도">경상남도</option>
@@ -259,6 +259,7 @@
 	<script src="/assets/libs/sweetalert2/sweetalert2.js"></script>
 	<script src="/assets/js/style.js"></script>
 	<script src="/assets/js/dev.js"></script>
+    <script src="/assets/js/API.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=706f2ef595d7fa1279baace1d65f8f18&libraries=services"></script>
 	<script src="/assets/js/map.js"></script>
 	<script>
@@ -346,10 +347,48 @@
 			}
 		});
 
+		// 검색 함수를 전역으로 정의
+		window.searchTravelList = async function() {
+			await fetchTravelList();
+		};
+
+		// 지역 선택 시 검색 실행
+		function toggleSelect() {
+			const regionSelect = document.getElementById('region');
+			const searchBtn = document.getElementById('compButtons');
+			const selectedRegion = regionSelect.value;
+
+			if (selectedRegion) {
+				searchBtn.disabled = false;
+				searchBtn.textContent = '검색';
+				// 선택된 지역으로 지도 이동
+				if (typeof window.moveToRegion === 'function') {
+					window.moveToRegion(selectedRegion);
+				}
+				// 지역 선택 시 검색 실행
+				window.searchTravelList();
+			} else {
+				searchBtn.disabled = true;
+				searchBtn.textContent = '지역을 선택해주세요';
+			}
+		}
+
+		// 검색 버튼 클릭 시 검색 실행
+		document.getElementById('compButtons').addEventListener('click', window.searchTravelList);
+
+		// 검색어 입력 시 엔터키로 검색
+		document.getElementById('text1').addEventListener('keypress', function(e) {
+			if (e.key === 'Enter') {
+				window.searchTravelList();
+			}
+		});
+
 		// 페이지 로드 시 초기화
 		document.addEventListener('DOMContentLoaded', () => {
 			// 지도 초기화
-			initMap();
+			if (typeof window.mapSeting === 'function') {
+				window.mapSeting();
+			}
 			
 			// 저장된 장소 로드
 			loadSavedPlaces();
