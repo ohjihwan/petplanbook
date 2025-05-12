@@ -1,20 +1,18 @@
+// router/places.mjs
 import express from "express";
 import db from "../data/db.mjs";
 
 const router = express.Router();
 
-router.post("/save-place", async (req, res) => {
-  const { title, addr1, tel } = req.body;
-
+router.get("/", async (req, res) => {
   try {
-    const [result] = await db.query(
-      "INSERT INTO saved_places (title, addr1, tel) VALUES (?, ?, ?)",
-      [title, addr1, tel]
+    const [rows] = await db.query(
+      "SELECT * FROM places ORDER BY created_at DESC"
     );
-    res.json({ success: true, message: "저장 성공!", id: result.insertId });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: "저장 실패" });
+    res.json(rows);
+  } catch (err) {
+    console.error("장소 불러오기 실패:", err);
+    res.status(500).json({ error: "서버 오류" });
   }
 });
 

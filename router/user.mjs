@@ -31,12 +31,25 @@ router.post("/login", async (req, res) => {
 	try {
 		const { email, password } = req.body;
 		if (!email || !password) {
-			return res.status(400).json({ success: false, message: "이메일과 비밀번호를 입력해 주세요." });
+			return res
+				.status(400)
+				.json({
+					success: false,
+					message: "이메일과 비밀번호를 입력해 주세요.",
+				});
 		}
 
-		const [rows] = await db.query("SELECT * FROM user WHERE email = ? AND password = ?", [email, password]);
+		const [rows] = await db.query(
+			"SELECT * FROM user WHERE email = ? AND password = ?",
+			[email, password]
+		);
 		if (rows.length === 0) {
-			return res.status(401).json({ success: false, message: "이메일 또는 비밀번호가 틀렸습니다." });
+			return res
+				.status(401)
+				.json({
+					success: false,
+					message: "이메일 또는 비밀번호가 틀렸습니다.",
+				});
 		}
 
 		const user = rows[0];
@@ -46,51 +59,60 @@ router.post("/login", async (req, res) => {
 			nickname: user.nickname,
 			region: user.region,
 			cat_or_dog: user.cat_or_dog,
-			profile_image_url: user.profile_image_url
+			profile_image_url: user.profile_image_url,
 		});
 	} catch (err) {
 		console.error("로그인 실패:", err);
-		res.status(500).json({ success: false, message: "서버 오류가 발생했습니다." });
+		res
+			.status(500)
+			.json({ success: false, message: "서버 오류가 발생했습니다." });
 	}
 });
 
 // ✅ 회원가입 API
 router.post("/signup", upload.single("profileImage"), async (req, res) => {
-    console.log("▶ signup body:", req.body);
-    console.log("▶ signup file:", req.file);
+	console.log("▶ signup body:", req.body);
+	console.log("▶ signup file:", req.file);
 
-    try {
-        const { email, password, nickname, region, cat_or_dog } = req.body;
-        const profileImageUrl = req.file
-            ? `/uploads/temp/${req.file.filename}`
-            : null;
+	try {
+		const { email, password, nickname, region, cat_or_dog } = req.body;
+		const profileImageUrl = req.file
+			? `/uploads/temp/${req.file.filename}`
+			: null;
 
-        if (!email || !password || !nickname || !region) {
-            return res.status(400).json({ success: false, message: "필수 항목이 누락되었습니다." });
-        }
+		if (!email || !password || !nickname || !region) {
+			return res
+				.status(400)
+				.json({ success: false, message: "필수 항목이 누락되었습니다." });
+		}
 
-        // ✅ MySQL INSERT 실행
-        await db.execute(
-            `INSERT INTO \`user\`
-             (email, password, nickname, region, cat_or_dog, profile_image_url)
-             VALUES (?, ?, ?, ?, ?, ?)`,
-            [email, password, nickname, region, cat_or_dog || null, profileImageUrl]
-        );
+		// ✅ MySQL INSERT 실행
+		await db.execute(
+			`INSERT INTO \`user\`
+						 (email, password, nickname, region, cat_or_dog, profile_image_url)
+						 VALUES (?, ?, ?, ?, ?, ?)`,
+			[email, password, nickname, region, cat_or_dog || null, profileImageUrl]
+		);
 
-        return res.status(200).json({ success: true, message: "회원가입 완료" });
-    } catch (err) {
-        console.error("🔥 회원가입 오류 상세:", err);
-        return res.status(500).json({ success: false, message: err.message });
-    }
+		return res.status(200).json({ success: true, message: "회원가입 완료" });
+	} catch (err) {
+		console.error("🔥 회원가입 오류 상세:", err);
+		return res.status(500).json({ success: false, message: err.message });
+	}
 });
 
 // ✅ 이메일 중복 체크 API
 router.post("/check-email", async (req, res) => {
 	try {
 		const { email } = req.body;
-		const [rows] = await db.query("SELECT COUNT(*) AS count FROM user WHERE email = ?", [email]);
+		const [rows] = await db.query(
+			"SELECT COUNT(*) AS count FROM user WHERE email = ?",
+			[email]
+		);
 		if (rows[0].count > 0) {
-			return res.status(409).json({ success: false, message: "이미 사용 중인 이메일입니다." });
+			return res
+				.status(409)
+				.json({ success: false, message: "이미 사용 중인 이메일입니다." });
 		}
 		res.json({ success: true, message: "사용 가능한 이메일입니다." });
 	} catch (err) {
@@ -103,7 +125,7 @@ router.post("/check-email", async (req, res) => {
 router.put("/edit", async (req, res) => {
 	try {
 		const { email, password, nickname, region, pets } = req.body;
-		const cat_or_dog = pets ? pets.join(',') : null;
+		const cat_or_dog = pets ? pets.join(",") : null;
 
 		await db.execute(
 			`UPDATE user SET password = ?, nickname = ?, region = ?, cat_or_dog = ? WHERE email = ?`,
@@ -118,56 +140,78 @@ router.put("/edit", async (req, res) => {
 });
 
 // ✅ 프로필 이미지 업로드 및 수정 API
-router.post('/update-profile', upload.single("profileImage"), async (req, res) => {
-    try {
-        const { email, nickname, password, region, cat_or_dog } = req.body;
-        const profileImage = req.file ? `/uploads/temp/${req.file.filename}` : null;
+router.post(
+	"/update-profile",
+	upload.single("profileImage"),
+	async (req, res) => {
+		try {
+			const { email, nickname, password, region, cat_or_dog } = req.body;
+			const profileImage = req.file
+				? `/uploads/temp/${req.file.filename}`
+				: null;
 
-        console.log("✅ 서버에서 받은 반려동물:", cat_or_dog); // 🔥 디버깅
+			console.log("✅ 서버에서 받은 반려동물:", cat_or_dog); // 🔥 디버깅
 
-        if (!email || !nickname || !password || !region) {
-            return res.status(400).json({ success: false, message: "필수 항목 누락" });
-        }
+			if (!email || !nickname || !password || !region) {
+				return res
+					.status(400)
+					.json({ success: false, message: "필수 항목 누락" });
+			}
 
-        // ✅ DB 업데이트 (cat_or_dog 반영)
-        const sql = profileImage 
-            ? `UPDATE user SET password = ?, nickname = ?, region = ?, cat_or_dog = ?, profile_image_url = ? WHERE email = ?`
-            : `UPDATE user SET password = ?, nickname = ?, region = ?, cat_or_dog = ? WHERE email = ?`;
+			// ✅ DB 업데이트 (cat_or_dog 반영)
+			const sql = profileImage
+				? `UPDATE user SET password = ?, nickname = ?, region = ?, cat_or_dog = ?, profile_image_url = ? WHERE email = ?`
+				: `UPDATE user SET password = ?, nickname = ?, region = ?, cat_or_dog = ? WHERE email = ?`;
 
-        const params = profileImage 
-            ? [password, nickname, region, cat_or_dog, profileImage, email]
-            : [password, nickname, region, cat_or_dog, email];
+			const params = profileImage
+				? [password, nickname, region, cat_or_dog, profileImage, email]
+				: [password, nickname, region, cat_or_dog, email];
 
-        const [result] = await db.execute(sql, params);
+			const [result] = await db.execute(sql, params);
 
-        console.log("✅ DB 업데이트 결과:", result); // 🔥 디버깅
+			console.log("✅ DB 업데이트 결과:", result); // 🔥 디버깅
 
-        if (result.affectedRows === 1) {
-            return res.json({ success: true, imageUrl: profileImage || null });
-        } else {
-            return res.status(400).json({ success: false, message: "업데이트 실패" });
-        }
-    } catch (error) {
-        console.error("❌ 프로필 수정 오류:", error);
-        return res.status(500).json({ success: false, message: "서버 오류 발생" });
-    }
-});
+			if (result.affectedRows === 1) {
+				return res.json({ success: true, imageUrl: profileImage || null });
+			} else {
+				return res
+					.status(400)
+					.json({ success: false, message: "업데이트 실패" });
+			}
+		} catch (error) {
+			console.error("❌ 프로필 수정 오류:", error);
+			return res
+				.status(500)
+				.json({ success: false, message: "서버 오류 발생" });
+		}
+	}
+);
 
 // ✅ 프로필 이미지 삭제 API
-router.post('/delete-profile-image', async (req, res) => {
+router.post("/delete-profile-image", async (req, res) => {
 	try {
 		const { email } = req.body;
-		if (!email) return res.status(400).json({ success: false, message: "이메일 누락" });
+		if (!email)
+			return res.status(400).json({ success: false, message: "이메일 누락" });
 
-		const [rows] = await db.query(`SELECT profile_image_url FROM user WHERE email = ?`, [email]);
-		const imagePath = rows[0]?.profile_image_url?.replace('/uploads', './uploads');
+		const [rows] = await db.query(
+			`SELECT profile_image_url FROM user WHERE email = ?`,
+			[email]
+		);
+		const imagePath = rows[0]?.profile_image_url?.replace(
+			"/uploads",
+			"./uploads"
+		);
 
 		// 이미지 파일 삭제
 		if (imagePath && fs.existsSync(imagePath)) {
 			fs.unlinkSync(imagePath);
 		}
 
-		await db.execute(`UPDATE user SET profile_image_url = NULL WHERE email = ?`, [email]);
+		await db.execute(
+			`UPDATE user SET profile_image_url = NULL WHERE email = ?`,
+			[email]
+		);
 		res.json({ success: true });
 	} catch (error) {
 		console.error("프로필 이미지 삭제 오류:", error);
@@ -177,7 +221,7 @@ router.post('/delete-profile-image', async (req, res) => {
 
 // ✅ 로그아웃 API
 router.post("/logout", (req, res) => {
-	req.session.destroy(err => {
+	req.session.destroy((err) => {
 		if (err) return res.status(500).send("로그아웃 실패");
 		res.json({ success: true, message: "로그아웃 성공" });
 	});
