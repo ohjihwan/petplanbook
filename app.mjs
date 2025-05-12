@@ -9,6 +9,9 @@ import apiRouter from "./data/api.mjs";
 import userRouter from "./router/user.mjs";
 import placesRouter from "./router/places.mjs";
 import db from "./data/db.mjs";
+import uploadRouter from "./router/post.mjs";
+
+
 
 dotenv.config();
 
