@@ -42,7 +42,11 @@
                     <div class="field">
                       <label for="region" class="label">지역</label>
                       <div class="select">
-                        <select name="region" id="region">
+                        <select
+                          name="region"
+                          id="region"
+                          onchange="toggleSelect()"
+                        >
                           <option value="">지역 선택</option>
                           <option value="강원특별자치도">강원특별자치도</option>
                           <option value="경기도">경기도</option>
@@ -64,6 +68,7 @@
                         </select>
                       </div>
                     </div>
+
                     <div class="field">
                       <label for="text1" class="label">장소 검색</label>
                       <div class="text">
@@ -75,30 +80,50 @@
                         />
                       </div>
                     </div>
-                    <div class="field">
-                      <p class="label">펫종류</p>
-                      <style></style>
-                      <div class="checkboxs">
-                        <div class="checkbox">
-                          <input
-                            type="checkbox"
-                            id="dog"
-                            name="pet"
-                            class="checked"
-                          />
-                          <label for="dog">강아지</label>
-                        </div>
-                        <div class="checkbox">
-                          <input
-                            type="checkbox"
-                            id="cat"
-                            name="pet"
-                            class="checked"
-                          />
-                          <label for="cat">고양이</label>
-                        </div>
+
+                    <div class="checkboxs">
+                      <div class="checkbox">
+                        <input
+                          type="checkbox"
+                          id="lodgment"
+                          name="check"
+                          class="checked"
+                          value="숙박"
+                        />
+                        <label for="lodgment">숙박</label>
+                      </div>
+                      <div class="checkbox">
+                        <input
+                          type="checkbox"
+                          id="eating"
+                          name="check"
+                          class="checked"
+                          value="음식점"
+                        />
+                        <label for="eating">음식점</label>
+                      </div>
+                      <div class="checkbox">
+                        <input
+                          type="checkbox"
+                          id="place"
+                          name="check"
+                          class="checked"
+                          value="놀거리"
+                        />
+                        <label for="place">놀거리</label>
+                      </div>
+                      <div class="checkbox">
+                        <input
+                          type="checkbox"
+                          id="etc"
+                          name="check"
+                          class="checked"
+                          value="기타"
+                        />
+                        <label for="etc">기타</label>
                       </div>
                     </div>
+
                     <div class="field">
                       <label for="text3" class="label">날짜 선택</label>
                       <div class="text">
@@ -110,31 +135,16 @@
                         />
                       </div>
                     </div>
-                    <div class="field-half">
-                      <div class="field">
-                        <label for="text33" class="label">인원수</label>
-                        <div class="text">
-                          <input
-                            type="text"
-                            id="text33"
-                            placeholder="인원수 입력"
-                          />
-                        </div>
-                      </div>
-                      <div class="field">
-                        <label for="text44" class="label">반려동물 수</label>
-                        <div class="text">
-                          <input
-                            type="text"
-                            id="text44"
-                            placeholder="반려동물 수 입력"
-                          />
-                        </div>
-                      </div>
-                    </div>
+
                     <div class="comp-buttons">
-                      <button type="button" class="button -primary -lg w-full">
-                        루트 추가하기
+                      <button
+                        type="button"
+                        id="compButtons"
+                        class="button -primary -lg w-full"
+                        onclick="searchTravelList()"
+                        disabled
+                      >
+                        지역을 먼저 선택해주세요
                       </button>
                     </div>
                   </div>
