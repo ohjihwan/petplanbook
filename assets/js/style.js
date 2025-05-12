@@ -15,41 +15,6 @@ function ratingChecked(){
     });
 }
 
-function mainSuggestionSwiper(){
-    let mainSuggestionSwiper = new Swiper(".suggestion-place .overflow-area", {
-        slideClass: "place",
-        observer:true,
-        observerParents:true,
-        loop: true,
-        autoplay:{
-            delay: 2500
-        },
-        loopedSlides: 10,
-        speed:500,
-        wahchOverflow:true,
-        effect: "coverflow",
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: "auto",
-        coverflowEffect: {
-            rotate: 15,
-            stretch: 0,
-            depth: 100,
-            modifier: 2,
-            slideShadows: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-    });
-
-    $(document).on('mouseenter','.suggestion-place .overflow-area', function () {
-        mainSuggestionSwiper.autoplay.stop();
-    }).on('mouseleave','.suggestion-place .overflow-area', function () {
-        mainSuggestionSwiper.autoplay.start();
-    });
-}
 
 function detailImgs(){
     let detailImgs = new Swiper(".detail-imgs", {
@@ -150,7 +115,6 @@ $(document).on('keydown', function (e) {
 
 gnbMouseenter() // GNB
 ratingChecked() // 좋아요&싫어요
-mainSuggestionSwiper() // 메인 모션 스와이프
 followingPath() // 동선스크롤 이벤트
 makeRoute() // 루트꾸미기 순서 섞기
 // profileEditMode() // 프로필 수정하기
