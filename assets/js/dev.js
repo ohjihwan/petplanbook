@@ -597,6 +597,46 @@ function handleProfileImageDelete(el) {
 		});
 }
 
+// ✅ 28. 내 장소로 저장
+async function savePlace() {
+    const details = document.querySelectorAll("#detail .details dd");
+    const title = details[0].textContent;
+    const addr1 = details[1].textContent;
+    const tel = details[2].textContent;
+    const category = details[3].textContent;
+
+    try {
+        const response = await fetch("http://localhost:8081/api/save-place", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title, addr1, tel, category }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`서버 응답 실패: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (result.success) {
+            const confirmed = confirm(
+                "✅ 장소가 저장되었습니다! MY장소로 이동하시겠습니까?"
+            );
+            if (confirmed) {
+                console.log("사용자가 [예]를 눌렀습니다.");
+                window.location.href = "http://localhost:8081/MY/MY022.html";
+            } else {
+                console.log("사용자가 [아니오]를 눌렀습니다.");
+            }
+        } else {
+            alert("⚠️ 저장에 실패했습니다: " + result.message);
+        }
+    } catch (error) {
+        console.error("❌ 서버 오류 발생:", error);
+        alert("❌ 서버 오류 발생: " + error.message);
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 	errorInputClear(); // 19. keyup 후 인풋의 에러 케이스 제거
 	checkAccessPermission(); // 20. 로그인&로그아웃 페이지 진입 차별화
