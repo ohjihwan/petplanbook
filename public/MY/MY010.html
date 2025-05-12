@@ -32,134 +32,80 @@
 						</div>
 					</section>
 
-            <section class="map-content-area">
-              <div class="inner">
-                <div class="function-box">
-                  <!-- API 기능 -->
-                  <div id="map" class="map-box"></div>
-                  <!-- // -->
-                  <div class="field-area">
-                    <div class="field">
-                      <label for="region" class="label">지역</label>
-                      <div class="select">
-                        <select
-                          name="region"
-                          id="region"
-                          onchange="toggleSelect()"
-                        >
-                          <option value="">지역 선택</option>
-                          <option value="강원특별자치도">강원특별자치도</option>
-                          <option value="경기도">경기도</option>
-                          <option value="경상남도">경상남도</option>
-                          <option value="경상북도">경상북도</option>
-                          <option value="광주광역시">광주광역시</option>
-                          <option value="대구광역시">대구광역시</option>
-                          <option value="대전광역시">대전광역시</option>
-                          <option value="부산광역시">부산광역시</option>
-                          <option value="서울특별시">서울특별시</option>
-                          <option value="세종특별자치시">세종특별자치시</option>
-                          <option value="울산광역시">울산광역시</option>
-                          <option value="인천광역시">인천광역시</option>
-                          <option value="전라남도">전라남도</option>
-                          <option value="전라북도">전라북도</option>
-                          <option value="제주특별자치도">제주특별자치도</option>
-                          <option value="충청남도">충청남도</option>
-                          <option value="충청북도">충청북도</option>
-                        </select>
-                      </div>
-                    </div>
+					<section class="map-content-area">
+						<div class="inner">
+							<div class="function-box">
+								<!-- API 기능 -->
+								<div id="map" class="map-box"></div>
+								<!-- // -->
+								<div class="field-area">
+									<div class="field">
+										<label for="region" class="label">지역</label>
+										<div class="select">
+											<select name="region" id="region" onchange="toggleSelect()">
+												<option value="">지역 선택</option>
+												<option value="강원특별자치도">강원특별자치도</option>
+												<option value="경기도">경기도</option>
+												<option value="경상남도">경상남도</option>
+												<option value="경상북도">경상북도</option>
+												<option value="광주광역시">광주광역시</option>
+												<option value="대구광역시">대구광역시</option>
+												<option value="대전광역시">대전광역시</option>
+												<option value="부산광역시">부산광역시</option>
+												<option value="서울특별시">서울특별시</option>
+												<option value="세종특별자치시">세종특별자치시</option>
+												<option value="울산광역시">울산광역시</option>
+												<option value="인천광역시">인천광역시</option>
+												<option value="전라남도">전라남도</option>
+												<option value="전라북도">전라북도</option>
+												<option value="제주특별자치도">제주특별자치도</option>
+												<option value="충청남도">충청남도</option>
+												<option value="충청북도">충청북도</option>
+											</select>
+										</div>
+									</div>
 
-                    <div class="field">
-                      <label for="text1" class="label">장소 검색</label>
-                      <div class="text">
-                        <input
-                          type="text"
-                          id="text1"
-                          required
-                          placeholder="(예시:애견유치원)"
-                        />
-                      </div>
-                    </div>
+									<div class="field">
+										<label for="text1" class="label">장소 검색</label>
+										<div class="text">
+											<input type="text" id="text1" required placeholder="(예시:애견유치원)">
+										</div>
+									</div>
 
-                    <div class="checkboxs">
-                      <div class="checkbox">
-                        <input
-                          type="checkbox"
-                          id="lodgment"
-                          name="check"
-                          class="checked"
-                          value="숙박"
-                        />
-                        <label for="lodgment">숙박</label>
-                      </div>
-                      <div class="checkbox">
-                        <input
-                          type="checkbox"
-                          id="eating"
-                          name="check"
-                          class="checked"
-                          value="음식점"
-                        />
-                        <label for="eating">음식점</label>
-                      </div>
-                      <div class="checkbox">
-                        <input
-                          type="checkbox"
-                          id="place"
-                          name="check"
-                          class="checked"
-                          value="놀거리"
-                        />
-                        <label for="place">놀거리</label>
-                      </div>
-                      <div class="checkbox">
-                        <input
-                          type="checkbox"
-                          id="etc"
-                          name="check"
-                          class="checked"
-                          value="기타"
-                        />
-                        <label for="etc">기타</label>
-                      </div>
-                    </div>
+									<div class="checkboxs">
+										<div class="checkbox">
+											<input type="checkbox" id="lodgment" name="check" class="checked" value="숙박">
+											<label for="lodgment">숙박</label>
+										</div>
+										<div class="checkbox">
+											<input type="checkbox" id="eating" name="check" class="checked" value="음식점">
+											<label for="eating">음식점</label>
+										</div>
+										<div class="checkbox">
+											<input type="checkbox" id="place" name="check" class="checked" value="놀거리">
+											<label for="place">놀거리</label>
+										</div>
+										<div class="checkbox">
+											<input type="checkbox" id="etc" name="check" class="checked" value="기타">
+											<label for="etc">기타</label>
+										</div>
+									</div>
 
-                    <div class="field">
-                      <label for="text3" class="label">날짜 선택</label>
-                      <div class="text">
-                        <input
-                          type="date"
-                          id="text3"
-                          required
-                          placeholder="날짜를 선택해주세요"
-                        />
-                      </div>
-                    </div>
+									<div class="field">
+										<label for="text3" class="label">날짜 선택</label>
+										<div class="text">
+											<input type="date" id="text3" required placeholder="날짜를 선택해주세요">
+										</div>
+									</div>
 
-                    <div class="comp-buttons">
-                      <button
-                        type="button"
-                        id="compButtons"
-                        class="button -primary -lg"
-                        onclick="searchTravelList()"
-                        disabled
-                      >
-                        지역을 먼저 선택해주세요
-                      </button>
-                      <button
-                        type="button"
-                        id="compButtons"
-                        class="button -secondary -lg"
-                        
-                        disabled
-                      >
-                        재탐
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
+									<div class="comp-buttons">
+										<button type="button" id="compButtons" class="button -primary -lg" onclick="searchTravelList()" disabled>지역을 먼저 선택해주세요</button>
+										<button type="button" id="compButtons" class="button -secondary -lg">재탐</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
 
 					<section class="make-route-area">
 						<div class="inner">
@@ -357,59 +303,55 @@
 			// 정렬 기능 초기화
 			initSortable();
 		});
-	</script>
-    <script>
-  async function loadSavedPlaces() {
-    try {
-      const response = await fetch('/api/places');
-      if (!response.ok) throw new Error(`서버 오류: ${response.status}`);
-      const places = await response.json();
+		async function loadSavedPlaces() {
+			try {
+				const response = await fetch('/api/places');
+				if (!response.ok) throw new Error(`서버 오류: ${response.status}`);
+				const places = await response.json();
 
-      const routeContainer = document.querySelector('.make-route');
-      routeContainer.innerHTML = ""; // 기존 내용 제거
+				const routeContainer = document.querySelector('.make-route');
+				routeContainer.innerHTML = ""; // 기존 내용 제거
 
-      if (places.length === 0) {
-        routeContainer.innerHTML = '<div class="item -placeholder"></div>';
-        return;
-      }
+				if (places.length === 0) {
+					routeContainer.innerHTML = '<div class="item -placeholder"></div>';
+					return;
+				}
 
-      places.forEach(place => {
-        const item = document.createElement('div');
-        item.className = 'item';
-        item.innerHTML = `
-          <div class="sorting-handler"></div>
-          <figure class="img-box">
-            <img src="${place.firstimage || '/assets/imgs/temp/temp1.png'}" alt="">
-          </figure>
-          <div class="infos">
-            <h3 class="name">${place.title}</h3>
-            <dl class="info">
-              <dt>주소</dt><dd>${place.addr1 || '-'}</dd>
-              <dt>전화</dt><dd>${place.tel || '-'}</dd>
-              <dt>카테고리</dt><dd>${place.category || '-'}</dd>
-            </dl>
-          </div>
-          <div class="button-set">
-            <button type="button" class="button" onclick='openModal(${JSON.stringify(place)})'>자세히</button>
-          </div>
-        `;
-        routeContainer.appendChild(item);
-      });
-    } catch (err) {
-      alert('장소 불러오기 실패: ' + err.message);
-    }
-  }
-
-  function openModal(place) {
-    document.querySelector("#detail .details dd:nth-of-type(1)").textContent = place.title || '-';
-    document.querySelector("#detail .details dd:nth-of-type(2)").textContent = place.addr1 || '-';
-    document.querySelector("#detail .details dd:nth-of-type(3)").textContent = place.tel || '-';
-    document.querySelector("#detail .details dd:nth-of-type(4)").textContent = place.category || '-';
-    document.querySelector("#detail .details dd:nth-of-type(5)").textContent = place.homepage || '-';
-    modalOpenId('detail');
-  }
-
-  document.addEventListener('DOMContentLoaded', loadSavedPlaces);
+				places.forEach(place => {
+					const item = document.createElement('div');
+					item.className = 'item';
+					item.innerHTML = `
+					<div class="sorting-handler"></div>
+					<figure class="img-box">
+						<img src="${place.firstimage || '/assets/imgs/temp/temp1.png'}" alt="">
+					</figure>
+					<div class="infos">
+						<h3 class="name">${place.title}</h3>
+						<dl class="info">
+						<dt>주소</dt><dd>${place.addr1 || '-'}</dd>
+						<dt>전화</dt><dd>${place.tel || '-'}</dd>
+						<dt>카테고리</dt><dd>${place.category || '-'}</dd>
+						</dl>
+					</div>
+					<div class="button-set">
+						<button type="button" class="button" onclick='openModal(${JSON.stringify(place)})'>자세히</button>
+					</div>
+					`;
+					routeContainer.appendChild(item);
+				});
+			} catch (err) {
+				alert('장소 불러오기 실패: ' + err.message);
+			}
+		}
+		function openModal(place) {
+			document.querySelector("#detail .details dd:nth-of-type(1)").textContent = place.title || '-';
+			document.querySelector("#detail .details dd:nth-of-type(2)").textContent = place.addr1 || '-';
+			document.querySelector("#detail .details dd:nth-of-type(3)").textContent = place.tel || '-';
+			document.querySelector("#detail .details dd:nth-of-type(4)").textContent = place.category || '-';
+			document.querySelector("#detail .details dd:nth-of-type(5)").textContent = place.homepage || '-';
+			modalOpenId('detail');
+		}
+		document.addEventListener('DOMContentLoaded', loadSavedPlaces);
 </script>
 
 </body>

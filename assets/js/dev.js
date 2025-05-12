@@ -601,42 +601,42 @@ function handleProfileImageDelete(el) {
 
 // ✅ 28. 내 장소로 저장
 async function savePlace() {
-    const details = document.querySelectorAll("#detail .details dd");
-    const title = details[0]?.textContent.trim() || "제목 없음";
-    const addr1 = details[1]?.textContent.trim() || "주소 없음";
-    const tel = details[2]?.textContent.trim() || "전화번호 없음";
-    const category = details[3]?.textContent.trim() || "카테고리 없음";
+	const details = document.querySelectorAll("#detail .details dd");
+	const title = details[0]?.textContent.trim() || "제목 없음";
+	const addr1 = details[1]?.textContent.trim() || "주소 없음";
+	const tel = details[2]?.textContent.trim() || "전화번호 없음";
+	const category = details[3]?.textContent.trim() || "카테고리 없음";
 
-    const imgElement = document.querySelector(".detail-imgs img");
-    const firstimage = imgElement ? imgElement.src : "";
+	const imgElement = document.querySelector(".detail-imgs img");
+	const firstimage = imgElement ? imgElement.src : "";
 
-    try {
-        const response = await fetch("http://localhost:8081/api/save-place", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ title, addr1, tel, category, firstimage }),
-        });
+	try {
+		const response = await fetch("http://localhost:8081/api/save-place", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ title, addr1, tel, category, firstimage }),
+		});
 
-        if (!response.ok) {
-            throw new Error(`서버 응답 실패: ${response.status}`);
-        }
+		if (!response.ok) {
+			throw new Error(`서버 응답 실패: ${response.status}`);
+		}
 
-        const result = await response.json();
+		const result = await response.json();
 
-        if (result.success) {
-            const confirmed = confirm(
-                "✅ 장소가 저장되었습니다! MY장소로 이동하시겠습니까?"
-            );
-            if (confirmed) {
-                window.location.href = "http://localhost:8081/MY/MY022.html";
-            }
-        } else {
-            alert("⚠️ 저장에 실패했습니다: " + result.message);
-        }
-    } catch (error) {
-        console.error("❌ 서버 오류 발생:", error);
-        alert("❌ 서버 오류 발생: " + error.message);
-    }
+		if (result.success) {
+			const confirmed = confirm(
+				"✅ 장소가 저장되었습니다! MY장소로 이동하시겠습니까?"
+			);
+			if (confirmed) {
+				window.location.href = "http://localhost:8081/MY/MY022.html";
+			}
+		} else {
+			alert("⚠️ 저장에 실패했습니다: " + result.message);
+		}
+	} catch (error) {
+		console.error("❌ 서버 오류 발생:", error);
+		alert("❌ 서버 오류 발생: " + error.message);
+	}
 }
 
 document.addEventListener("DOMContentLoaded", () => {
