@@ -53,7 +53,7 @@ app.use("/api/pet-travel", petTravelRouter);
 // 경로찾기 시 DB 저장 라우터
 app.use("/api", saveRouter);
 app.use("/api", apiRouter);
-app.use(placesRouter);
+app.use("/api/places", placesRouter);
 
 // 404 에러 처리
 app.use((req, res) => {
@@ -68,8 +68,6 @@ app.use((req, res) => {
     console.error("❌ MySQL 연결 실패:", error);
   }
 })();
-
-app.use(placesRouter);
 
 // 서버 실행
 app.listen(PORT, () => {
