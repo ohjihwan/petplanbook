@@ -265,12 +265,6 @@
 	
 				// ✅ 조회수 정렬 (내림차순)
 				places.sort((a, b) => (b.readcount || 0) - (a.readcount || 0));
-				
-				// ✅ 상위 50개 조회수 출력
-				console.log("✅ 상위 50개 장소 조회수:");
-				places.slice(0, 50).forEach((place, index) => {
-					console.log(`${index + 1}. ${place.title} - 조회수: ${place.readcount || 0}`);
-				});
 	
 				// ✅ 50개로 잘라서 사용
 				places = places.slice(0, 50);
