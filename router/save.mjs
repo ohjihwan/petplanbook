@@ -1,9 +1,9 @@
 import express from "express";
-import db from "../data/db.mjs"; // DB 연결 모듈 (경로에 맞게 조정)
+import db from "../data/db.mjs";
 
 const router = express.Router();
 
-router.post("/api/save-place", async (req, res) => {
+router.post("/save-place", async (req, res) => {
   const { title, addr1, tel, category } = req.body;
 
   try {
@@ -14,9 +14,7 @@ router.post("/api/save-place", async (req, res) => {
     res.json({ success: true, message: "장소 저장 완료", id: result.insertId });
   } catch (error) {
     console.error("DB 저장 실패:", error);
-    res
-      .status(500)
-      .json({ success: false, message: "DB 저장 실패", error: error.message });
+    res.status(500).json({ success: false, message: "DB 저장 실패", error: error.message });
   }
 });
 

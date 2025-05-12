@@ -339,5 +339,59 @@
 			initSortable();
 		});
 	</script>
+    <script>
+  async function loadSavedPlaces() {
+    try {
+      const response = await fetch('/api/places');
+      if (!response.ok) throw new Error(`서버 오류: ${response.status}`);
+      const places = await response.json();
+
+      const routeContainer = document.querySelector('.make-route');
+      routeContainer.innerHTML = ""; // 기존 내용 제거
+
+      if (places.length === 0) {
+        routeContainer.innerHTML = '<div class="item -placeholder"></div>';
+        return;
+      }
+
+      places.forEach(place => {
+        const item = document.createElement('div');
+        item.className = 'item';
+        item.innerHTML = `
+          <div class="sorting-handler"></div>
+          <figure class="img-box">
+            <img src="${place.firstimage || '/assets/imgs/temp/temp1.png'}" alt="">
+          </figure>
+          <div class="infos">
+            <h3 class="name">${place.title}</h3>
+            <dl class="info">
+              <dt>주소</dt><dd>${place.addr1 || '-'}</dd>
+              <dt>전화</dt><dd>${place.tel || '-'}</dd>
+              <dt>카테고리</dt><dd>${place.category || '-'}</dd>
+            </dl>
+          </div>
+          <div class="button-set">
+            <button type="button" class="button" onclick='openModal(${JSON.stringify(place)})'>자세히</button>
+          </div>
+        `;
+        routeContainer.appendChild(item);
+      });
+    } catch (err) {
+      alert('장소 불러오기 실패: ' + err.message);
+    }
+  }
+
+  function openModal(place) {
+    document.querySelector("#detail .details dd:nth-of-type(1)").textContent = place.title || '-';
+    document.querySelector("#detail .details dd:nth-of-type(2)").textContent = place.addr1 || '-';
+    document.querySelector("#detail .details dd:nth-of-type(3)").textContent = place.tel || '-';
+    document.querySelector("#detail .details dd:nth-of-type(4)").textContent = place.category || '-';
+    document.querySelector("#detail .details dd:nth-of-type(5)").textContent = place.homepage || '-';
+    modalOpenId('detail');
+  }
+
+  document.addEventListener('DOMContentLoaded', loadSavedPlaces);
+</script>
+
 </body>
 </html>
