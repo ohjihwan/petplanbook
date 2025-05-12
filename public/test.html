@@ -1,181 +1,278 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-  <title>반려동물 동반 여행지</title>
-  <style>
-    .search-container {
-      margin-bottom: 20px;
-    }
-    .category {
-      font-size: 14px;
-      font-weight: bold;
-      padding: 3px 8px;
-      border-radius: 5px;
-      display: inline-block;
-    }
-    .category.lodging { background-color: #FFD700; color: #000; }
-    .category.cafe { background-color: #FF6347; color: #fff; }
-    .category.activity { background-color: #4CAF50; color: #fff; }
-    .category.etc { background-color: #777; color: #fff; }
-  </style>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>PL010</title>
+	<link rel="stylesheet" href="/assets/css/swiper.css" />
+	<link rel="stylesheet" href="/assets/css/common-ui.css" />
+	<link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 <body>
-  <h1>반려동물 동반 여행지</h1>
-  <div class="search-container">
-    <input type="text" id="search-input" placeholder="여행지 검색..." onkeydown="if(event.key === 'Enter') searchTravelList()" />
-    <button onclick="searchTravelList()">검색</button>
-  </div>
+	<div class="page">
+		<div class="container">
+			<header class="header">
+				<!-- header.html 로 페이지 통합 관리 -->
+			</header>
+			<main class="contents">
+				<div class="content">
+					<section class="main-banner">
+						<figure class="img-box">
+							<img src="/assets/imgs/img/img-PL010-1.jpg" alt="" />
+						</figure>
+						<div class="text-box">
+							<h2 class="title">장소찾기</h2>
+							<p class="txt">반려동물과 함께 여행할 장소를 찾아보세요</p>
+							<div class="guide-arrow" aria-label="하단에 컨텐츠가 있습니다">
+								<i></i>
+								<i></i>
+							</div>
+						</div>
+					</section>
+					<section class="map-content-area">
+						<div class="inner">
+							<div class="function-box">
+								<!-- API 기능 -->
+								<div id="map" class="map-box"></div>
+								<!-- // -->
+								<div class="field-area">
+									<div class="field">
+										<label for="region" class="label">지역</label>
+										<div class="select">
+											<select name="region" id="region" onchange="toggleSelect()">
+												<option value="">지역 선택</option>
+												<option value="강원특별자치도">강원특별자치도</option>
+												<option value="경기도">경기도</option>
+												<option value="경상남도">경상남도</option>
+												<option value="경상북도">경상북도</option>
+												<option value="광주광역시">광주광역시</option>
+												<option value="대구광역시">대구광역시</option>
+												<option value="대전광역시">대전광역시</option>
+												<option value="부산광역시">부산광역시</option>
+												<option value="서울특별시">서울특별시</option>
+												<option value="세종특별자치시">세종특별자치시</option>
+												<option value="울산광역시">울산광역시</option>
+												<option value="인천광역시">인천광역시</option>
+												<option value="전라남도">전라남도</option>
+												<option value="전라북도">전라북도</option>
+												<option value="제주특별자치도">제주특별자치도</option>
+												<option value="충청남도">충청남도</option>
+												<option value="충청북도">충청북도</option>
+											</select>
+										</div>
+									</div>
+									<div class="field">
+										<label for="text1" class="label">장소 검색</label>
+										<div class="text">
+											<input type="text" id="text1" required placeholder="(예시:애견유치원)">
+										</div>
+									</div>
+									<div class="checkboxs">
+										<div class="checkbox">
+											<input type="checkbox" id="lodgment" name="check" class="checked" value="숙박">
+											<label for="lodgment">숙박</label>
+										</div>
+										<div class="checkbox">
+											<input type="checkbox" id="eating" name="check" class="checked" value="음식점">
+											<label for="eating">음식점</label>
+										</div>
+										<div class="checkbox">
+											<input type="checkbox" id="place" name="check" class="checked" value="놀거리">
+											<label for="place">놀거리</label>
+										</div>
+										<div class="checkbox">
+											<input type="checkbox" id="etc" name="check" class="checked" value="기타">
+											<label for="etc">기타</label>
+										</div>
+									</div>
+									<div class="field">
+										<label for="text3" class="label">날짜 선택</label>
+										<div class="text">
+											<input type="date" id="text3" required placeholder="날짜를 선택해주세요">
+										</div>
+									</div>
+									<div class="comp-buttons">
+										<button type="button" id="compButtons" class="button -primary -lg w-full" onclick="searchTravelList()" disabled>지역을 먼저 선택해주세요</button>
+									</div>
+								</div>
+							</div>
+							<div id="travel-list" class="search-result-box">
+								<ul></ul>
+								<div class="buttons -center">
+									<button id="load-more" style="display: none" class="button -secondary -md travel-list-more" onclick="loadMore()">더보기</button>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</main>
+			<footer class="footer">
+				<!-- footer.html 로 페이지 통합 관리 -->
+			</footer>
+		</div>
+	</div>
+	<div id="login-modal" class="modal -login-modal"></div>
+	<div id="detail" class="modal">
+		<div class="container">
+			<header class="header">
+				<div class="inner">
+					<button type="button" class="close" onclick="modalClose()">
+						<span class="hide">닫기</span>
+					</button>
+				</div>
+			</header>
+			<main class="contents">
+				<div class="content">
+					<div class="location-detail">
+						<div class="title-box">
+							<h2 class="title">장소 자세히</h2>
+							<p class="txt">자세히 읽고나서 저장해보세요</p>
+						</div>
+						<div class="detail-imgs swiper detail-imgs">
+							<div class="swiper-wrapper"></div>
+							<div class="swiper-button-next"></div>
+							<div class="swiper-button-prev"></div>
+						</div>
+						<dl class="details">
+							<dt>상호이름</dt>
+							<dd></dd>
+							<dt>상세주소</dt>
+							<dd></dd>
+							<dt>대표번호</dt>
+							<dd></dd>
+							<dt>카테고리</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</div>
+			</main>
+			<div class="fixed">
+				<div class="buttons">
+					<button type="button" class="button -primary -lg" onclick="savePlace()">이 장소 저장하기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/assets/libs/jquery/jquery-3.6.0.min.js"></script>
+	<script src="/assets/libs/jquery-ui/jquery-ui.min.js"></script>
+	<script src="/assets/libs/jquery-ui/jquery.ui.touch-punch.min.js"></script>
+	<script src="/assets/libs/swiper/dist/js/swiper.min.js"></script>
+	<script src="/assets/js/style.js"></script>
+	<script src="/assets/js/dev.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=706f2ef595d7fa1279baace1d65f8f18&libraries=services"></script>
+	<script src="/assets/js/map.js"></script>
+	<!-- <script src="/assets/js/API.js"></script> -->
+	<script>
+		// 더보기 함수를 전역으로 정의
+		window.loadMore = function() {
+			const list = document.getElementById("travel-list");
+			if (!list) return;
 
-  <div class="filter-container">
-    <label><input type="checkbox" class="category-checkbox" value="lodging"> 숙박</label>
-    <label><input type="checkbox" class="category-checkbox" value="cafe"> 카페/음식점</label>
-    <label><input type="checkbox" class="category-checkbox" value="activity"> 놀거리</label>
-    <label><input type="checkbox" class="category-checkbox" value="etc"> 기타</label>
+			const ul = list.querySelector("ul");
+			if (!ul) return;
 
+			// filteredData가 없는 경우 처리
+			if (!window.filteredData || !Array.isArray(window.filteredData)) {
+				console.error('검색 결과가 없습니다.');
+				return;
+			}
 
-    
-  </div>
+			// 현재 표시된 아이템 수
+			const currentItems = ul.querySelectorAll("li").length;
+			
+			// 추가로 표시할 아이템 수 (4개)
+			const itemsToAdd = 4;
+			
+			// 현재 검색된 데이터에서 추가로 표시할 아이템 가져오기
+			const displayItems = window.filteredData.slice(currentItems, currentItems + itemsToAdd);
+			
+			// 추가 아이템이 있는 경우에만 더보기 버튼 표시
+			const loadMoreButton = document.getElementById("load-more");
+			if (loadMoreButton) {
+				loadMoreButton.style.display = currentItems + itemsToAdd < window.filteredData.length ? "inline-block" : "none";
+			}
 
-  <div id="travel-list" style="display:none;">
-    <ul>
-        
-    </ul>
-  </div>
-  <button id="load-more" style="display:none;" onclick="loadMore()">더보기</button>
-  
-  <script>
-    let travelData = [];
-    let filteredData = [];
-    let currentPage = 1;
-    const itemsPerPage = 8;
+			// 새로운 아이템 추가
+			displayItems.forEach(item => {
+				const li = document.createElement("li");
+				const defaultImage = "https://dummyimage.com/200x200/cccccc/ffffff&text=No+Image";
+				const imageUrl = item.firstimage || defaultImage;
+				li.innerHTML = `
+				<a href="javascript:void(0)" role="button">
+					<div class="img-box">
+					<div class="category ${getCategoryClass(item)}">${getCategory(item)}</div>
+					<img src="${imageUrl}" data-src="${imageUrl}" alt="${item.title}" onerror="this.onerror=null; this.src='${defaultImage}';">
+					</div>
+					<div class="txts">
+					<strong class="main-txt">${item.title}</strong>
+					<span class="sub-txt">${item.addr1 || '주소 정보 없음'}</span>
+					</div>
+				</a>
+				`;
 
-    async function fetchTravelList() {
-      try {
-        const listUrl = `https://apis.data.go.kr/B551011/KorPetTourService/areaBasedList?serviceKey=GTr1cI7Wi0FRbOTFBaUzUCzCDP4OnyyEmHnn11pxCUC5ehG5bQnbyztgeydnOWz1O04tjw1SE5RsX8RNo6XCgQ%3D%3D&numOfRows=1000&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json`;
-        
-        console.log("📡 브라우저에서 직접 API 요청:", listUrl);
+				li.addEventListener("click", () => openDetailModal(item));
+				ul.appendChild(li);
+			});
+			};
 
-        const apiResponse = await fetch(listUrl);
-        const apiData = await apiResponse.json();
-        console.log("✅ API 응답:", apiData);
+			// 검색 함수를 전역으로 정의
+			window.searchTravelList = async function() {
+			await fetchTravelList();
+			};
 
-        travelData = apiData.response?.body?.items?.item || [];
-        filterAndDisplayList();
-      } catch (error) {
-        console.error("❌ API 요청 에러:", error.message);
-        document.getElementById("travel-list").style.display = "block";
-        document.getElementById("travel-list").innerHTML = "<ul><li>API 요청 중 오류가 발생했습니다.</li></ul>";
-      }
-    }
+			// 지역 선택 시 검색 실행
+			function toggleSelect() {
+			const regionSelect = document.getElementById('region');
+			const searchBtn = document.getElementById('compButtons');
+			const selectedRegion = regionSelect.value;
 
-    // 검색 기능 (검색 버튼 클릭 시에만)
-    function searchTravelList() {
-      if (!document.getElementById("search-input").value.trim()) {
-        alert("검색어를 입력하세요.");
-        return;
-      }
+			if (selectedRegion) {
+				searchBtn.disabled = false;
+				searchBtn.textContent = '검색';
+				// 선택된 지역으로 지도 이동
+				if (typeof window.moveToRegion === 'function') {
+				window.moveToRegion(selectedRegion);
+				}
+				// 지역 선택 시 검색 실행
+				window.searchTravelList();
+			} else {
+				searchBtn.disabled = true;
+				searchBtn.textContent = '지역을 선택해주세요';
+			}
+			}
 
-      travelData = [];
-      filteredData = [];
-      currentPage = 1;
-      document.getElementById("travel-list").style.display = "none";
-      document.getElementById("load-more").style.display = "none";
-      fetchTravelList();
-    }
+			// 검색 버튼 클릭 시 검색 실행
+			document.getElementById('compButtons').addEventListener('click', window.searchTravelList);
 
-    // 검색어와 카테고리 필터링 (검색 버튼 클릭 시에만)
-    function filterAndDisplayList() {
-      const searchText = document.getElementById("search-input").value.trim().toLowerCase();
-      const selectedCategories = Array.from(document.querySelectorAll(".category-checkbox:checked"))
-        .map(checkbox => checkbox.value);
+			// 검색어 입력 시 엔터키로 검색
+			document.getElementById('searchPlace').addEventListener('keypress', function(e) {
+			if (e.key === 'Enter') {
+				window.searchTravelList();
+			}
+			});
 
-      filteredData = travelData.filter(item => {
-        const matchesText = item.title.toLowerCase().includes(searchText);
-        const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(getCategoryType(item));
-        return matchesText && matchesCategory;
-      });
+			// DOM이 완전히 로드된 후 실행
+			document.addEventListener('DOMContentLoaded', function() {
+			console.log('DOM 로드 완료');
+			// 지도 컨테이너 스타일 초기화
+			const mapContainer = document.getElementById('map');
+			if (mapContainer) {
+				mapContainer.style.width = '100%';
+				mapContainer.style.height = '500px';
+				mapContainer.style.position = 'relative';
+				mapContainer.style.overflow = 'hidden';
+				mapContainer.style.display = 'block';
+				mapContainer.style.visibility = 'visible';
+				mapContainer.style.minHeight = '500px';
+				mapContainer.style.zIndex = '1';
+				mapContainer.style.backgroundColor = '#f8f8f8';
+			}
 
-      sortByTopReadCount();
-      displayTravelList();
-    }
-
-    // 조회수 높은 항목을 첫 번째로 배치 (하나만)
-    function sortByTopReadCount() {
-      if (filteredData.length === 0) return;
-
-      const maxReadItem = filteredData.reduce((max, item) => 
-        item.readcount > (max.readcount || 0) ? item : max, {});
-
-      if (maxReadItem.readcount > 0) {
-        filteredData = filteredData.filter(item => item !== maxReadItem);
-        filteredData.unshift(maxReadItem);
-      }
-    }
-
-    // 여행지 목록 표시 (최대 8개씩)
-    function displayTravelList() {
-      const list = document.getElementById("travel-list");
-      list.innerHTML = "<ul></ul>";
-      list.style.display = "block";
-      const ul = list.querySelector("ul");
-
-      const start = (currentPage - 1) * itemsPerPage;
-      const end = start + itemsPerPage;
-      const displayItems = filteredData.slice(0, end);
-
-      if (displayItems.length > 0) {
-        displayItems.forEach(item => {
-          const li = document.createElement("li");
-          li.innerHTML = `
-            <a href="javascript:void(0)" role="button" onclick="modalOpenId('detail')">
-              <div class="img-box">
-                <div class="flags">
-                  <div class="category ${getCategoryType(item)}">${getCategory(item)}</div>
-                </div>
-                <img src="${item.firstimage || 'https://dummyimage.com/200x200/cccccc/ffffff&text=No+Image'}" alt="${item.title}">
-              </div>
-              <div class="txts">
-                <strong class="main-txt">${item.title}</strong>
-                <span class="sub-txt">${item.addr1 || '주소 정보 없음'}</span>
-              </div>
-            </a>
-          `;
-          ul.appendChild(li);
-        });
-
-        document.getElementById("load-more").style.display = displayItems.length >= itemsPerPage && end < filteredData.length ? "block" : "none";
-      } else {
-        ul.innerHTML = "<li>검색 결과가 없습니다.</li>";
-        document.getElementById("load-more").style.display = "none";
-      }
-
-      // 노출된 li 수 콘솔에 출력
-      console.log(`📊 노출된 아이템 수: ${ul.querySelectorAll("li").length} / ${filteredData.length}`);
-    }
-
-    // 다음 페이지 로드
-    function loadMore() {
-      currentPage++;
-      displayTravelList();
-    }
-
-    // 카테고리 구분 함수
-    function getCategoryType(item) {
-      const type = item.contenttypeid;
-      if (type === "32") return "lodging";
-      if (type === "39") return "cafe";
-      if (type === "12" || type === "28") return "activity";
-      return "etc";
-    }
-
-    function getCategory(item) {
-      const type = getCategoryType(item);
-      if (type === "lodging") return "🏨 숙박";
-      if (type === "cafe") return "☕ 카페 / 음식점";
-      if (type === "activity") return "🎢 놀거리";
-      return "📌 기타";
-    }
-</script>
-
+			// 초기 검색 실행
+			if (document.getElementById('region').value) {
+				window.searchTravelList();
+			}
+		});
+	</script>
 </body>
 </html>
