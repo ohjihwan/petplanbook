@@ -4,12 +4,12 @@ import db from "../data/db.mjs";
 const router = express.Router();
 
 router.post("/save-place", async (req, res) => {
-  const { title, addr1, tel, category } = req.body;
+  const { title, addr1, tel, category, firstimage } = req.body; // ✅ firstimage 추가
 
   try {
     const [result] = await db.query(
-      "INSERT INTO places (title, addr1, tel, category) VALUES (?, ?, ?, ?)",
-      [title, addr1, tel, category]
+      "INSERT INTO places (title, addr1, tel, category, firstimage) VALUES (?, ?, ?, ?, ?)",
+      [title, addr1, tel, category, firstimage] // ✅ firstimage 값도 전달
     );
     res.json({ success: true, message: "장소 저장 완료", id: result.insertId });
   } catch (error) {
@@ -19,3 +19,4 @@ router.post("/save-place", async (req, res) => {
 });
 
 export default router;
+

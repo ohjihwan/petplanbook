@@ -143,6 +143,19 @@
       document.querySelector("#detail .details dd:nth-of-type(3)").textContent = place.category || "-";
       document.querySelector("#detail .details dd:nth-of-type(4)").textContent = place.tel || "-";
       document.querySelector("#detail .details dd:nth-of-type(5)").textContent = "-";
+
+      const swiperWrapper = document.querySelector("#detail .swiper-wrapper");
+      swiperWrapper.innerHTML = `
+        <div class="swiper-slide">
+          <img src="${place.firstimage || '/assets/imgs/temp/temp1.png'}" alt="">
+        </div>`;
+
+      new Swiper(".mySwiper", {
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        }
+      });
     }
 
     window.onload = loadPlaces;
