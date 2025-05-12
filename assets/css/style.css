@@ -103,6 +103,9 @@
 .map-content-area .function-box {display:flex; flex-wrap:wrap; gap:3.7rem; position:relative; padding:5rem 4.4rem;}
 .map-content-area .function-box .map-box {flex:1; overflow:hidden; height:51.4rem;}
 .map-content-area .function-box .field-area .checkboxs .checkbox {flex:unset}
+.map-content-area .function-box .field-area .comp-buttons {display:flex; gap:0 1rem;}
+.map-content-area .function-box .field-area .comp-buttons .button {padding:0 2rem;}
+.map-content-area .function-box .field-area .comp-buttons .button:first-child {flex:1;}
 .map-content-area .function-box .field-area,
 .map-content-area .function-box .board-area {flex:0 0 35.4rem; display:flex; flex-direction:column; justify-content:space-between;}
 .map-content-area .function-box .board-area .board-text {padding:1.4rem 1.6rem; border-bottom:1px solid #d9d9d9; font-size:2rem; font-weight:300; color:#474747;}
