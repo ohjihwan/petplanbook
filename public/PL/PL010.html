@@ -41,11 +41,7 @@
                     <div class="field">
                       <label for="region" class="label">지역</label>
                       <div class="select">
-                        <select
-                          name="region"
-                          id="region"
-                          onchange="toggleSelect()"
-                        >
+                        <select name="region" id="region">
                           <option value="">지역 선택</option>
                           <option value="강원특별자치도">강원특별자치도</option>
                           <option value="경기도">경기도</option>
@@ -138,10 +134,8 @@
                     <div class="comp-buttons">
                       <button
                         type="button"
-                        id="compButtons"
                         class="button -primary -lg w-full"
                         onclick="searchTravelList()"
-                        disabled
                       >
                         탐색하기
                       </button>
@@ -193,21 +187,42 @@
                 <p class="txt">자세히 읽고나서 저장해보세요</p>
               </div>
 
-              <div class="detail-imgs swiper detail-imgs">
-                <div class="swiper-wrapper"></div>
+              <div class="detail-imgs swiper mySwiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <img src="/assets/imgs/temp/temp1.png" alt="" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="/assets/imgs/temp/temp2.png" alt="" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="/assets/imgs/temp/temp3.png" alt="" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="/assets/imgs/temp/temp4.jpg" alt="" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="/assets/imgs/temp/temp5.jpg" alt="" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="/assets/imgs/temp/temp6.jpg" alt="" />
+                  </div>
+                </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
               </div>
 
               <dl class="details">
                 <dt>상호이름</dt>
-                <dd></dd>
+                <dd>퍼피스드림</dd>
                 <dt>상세주소</dt>
-                <dd></dd>
+                <dd>서울 서초구 서래로</dd>
+                <dt>동반가능</dt>
+                <dd>강아지/고양이</dd>
                 <dt>대표번호</dt>
-                <dd></dd>
-                <dt>카테고리</dt>
-                <dd></dd>
+                <dd>02-000-0000</dd>
+                <dt>홈페이지</dt>
+                <dd>instagram.com/puppy</dd>
               </dl>
             </div>
           </div>
@@ -215,11 +230,7 @@
 
         <div class="fixed">
           <div class="buttons">
-            <button
-              type="button"
-              class="button -primary -lg"
-              onclick="savePlace()"
-            >
+            <button type="button" class="button -primary -lg">
               이 장소 저장하기
             </button>
           </div>
@@ -233,61 +244,29 @@
     <script src="/assets/libs/swiper/dist/js/swiper.min.js"></script>
     <script src="/assets/js/style.js"></script>
     <script src="/assets/js/dev.js"></script>
-    <script
-      type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=706f2ef595d7fa1279baace1d65f8f18&libraries=services"
-    ></script>
-    <script src="/assets/libs/jquery/jquery-3.6.0.min.js"></script>
-    <script src="/assets/libs/jquery-ui/jquery-ui.min.js"></script>
-    <script src="/assets/libs/jquery-ui/jquery.ui.touch-punch.min.js"></script>
-    <script src="/assets/libs/swiper/dist/js/swiper.min.js"></script>
-    <script src="/assets/js/style.js"></script>
-    <script src="/assets/js/dev.js"></script>
-    <script
-      type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=706f2ef595d7fa1279baace1d65f8f18&libraries=services"
-    ></script>
-    <script src="/assets/js/map.js"></script>
-    <!-- <script src="/assets/js/API.js"></script> -->
+    <!-- <script src="/assets/js/map.js"></script> -->
+    <script src="/assets/js/API.js"></script>
     <script>
-      async function savePlace() {
-        const details = document.querySelectorAll("#detail .details dd");
-        const title = details[0].textContent;
-        const addr1 = details[1].textContent;
-        const tel = details[2].textContent;
-        const category = details[3].textContent;
+      // 페이지 로드 시 초기화
+      window.addEventListener("load", () => {
+        console.log("페이지 로드 완료");
 
-        try {
-          const response = await fetch("http://localhost:8081/api/save-place", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ title, addr1, tel, category }),
-          });
-
-          if (!response.ok) {
-            throw new Error(`서버 응답 실패: ${response.status}`);
-          }
-
-          const result = await response.json();
-
-          if (result.success) {
-            const confirmed = confirm(
-              "✅ 장소가 저장되었습니다! MY장소로 이동하시겠습니까?"
-            );
-            if (confirmed) {
-              console.log("사용자가 [예]를 눌렀습니다.");
-              window.location.href = "http://localhost:8081/MY/MY022.html";
-            } else {
-              console.log("사용자가 [아니오]를 눌렀습니다.");
-            }
-          } else {
-            alert("⚠️ 저장에 실패했습니다: " + result.message);
-          }
-        } catch (error) {
-          console.error("❌ 서버 오류 발생:", error);
-          alert("❌ 서버 오류 발생: " + error.message);
+        // 카카오맵 SDK 로드 확인
+        if (typeof kakao === "undefined" || !kakao.maps) {
+          console.error("카카오맵 SDK가 로드되지 않았습니다.");
+          return;
         }
-      }
+
+        const mapContainer = document.getElementById("map");
+        if (mapContainer) {
+          console.log("지도 컨테이너를 찾았습니다.");
+          initMap();
+          setupEventListeners();
+          setupCategoryCheckboxes();
+        } else {
+          console.error("지도 컨테이너를 찾을 수 없습니다.");
+        }
+      });
     </script>
   </body>
 </html>

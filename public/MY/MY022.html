@@ -352,7 +352,7 @@
   // 장소 목록 불러오기
   async function loadPlaces() {
     try {
-      const response = await fetch("/api/save-places");
+      const response = await fetch("/api/places");
       if (!response.ok) throw new Error(`서버 응답 실패: ${response.status}`);
 
       const places = await response.json();
@@ -401,16 +401,9 @@
   document.querySelector("#detail .details dd:nth-of-type(4)").textContent = place.tel || "-";
   document.querySelector("#detail .details dd:nth-of-type(5)").textContent = "-"; // homepage 필드는 없음 → 기본값으로 처리
 }
-
-
-    // 이미지가 있다면 슬라이더 첫 번째에 반영
-    const slide = document.querySelector("#detail .swiper-wrapper .swiper-slide:first-child img");
-    if (place.image) {
-      slide.src = place.image;
-    } else {
-      slide.src = "/assets/imgs/temp/temp1.png"; // 기본 이미지
-    }
   }
+
+
 
   // 페이지 로드 시 실행
   window.onload = loadPlaces;
