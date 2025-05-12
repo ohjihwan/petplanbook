@@ -304,13 +304,13 @@
     <script src="/assets/js/style.js"></script>
     <script src="/assets/js/dev.js"></script>
     <script>
+      // 장소 목록 로드 함수
       async function loadPlaces() {
         try {
-          const response = await fetch("http://localhost:5501/api/places");
+          const response = await fetch("/api/save-places");
           if (!response.ok) {
             throw new Error(`서버 응답 실패: ${response.status}`);
           }
-
           const places = await response.json();
           const resultBox = document.querySelector(".search-result-box ul");
           resultBox.innerHTML = ""; // 기존 li들 초기화
@@ -345,45 +345,6 @@
 
       // 페이지 로드 후 실행
       window.onload = loadPlaces;
-    </script>
-    <script>
-  async function loadPlaceList() {
-    try {
-      const response = await fetch("http://localhost:8081/api/places");
-      const places = await response.json();
-
-      const listBox = document.getElementById("place-list");
-      listBox.innerHTML = ""; // 초기화
-
-      if (places.length === 0) {
-        listBox.innerHTML = "<p>📭 저장된 장소가 없습니다.</p>";
-        return;
-      }
-
-      places.forEach((place) => {
-        const div = document.createElement("div");
-        div.className = "place-item";
-        div.innerHTML = `
-          <strong>${place.title}</strong><br/>
-          <span>${place.addr1}</span><br/>
-          <span>${place.tel || '번호 없음'}</span><br/>
-          <hr/>
-        `;
-        listBox.appendChild(div);
-      });
-    } catch (error) {
-      console.error("불러오기 실패:", error);
-      alert("서버 오류: " + error.message);
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", loadPlaceList);
-
-
-
-      // ✅ 페이지 로드시 실행
-      window.addEventListener("DOMContentLoaded", fetchAndDisplayPlaces);
-  </script>    
     </script>
   </body>
 </html>

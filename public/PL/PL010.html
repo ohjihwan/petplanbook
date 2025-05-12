@@ -248,7 +248,7 @@
         const category = details[3].textContent;
 
         try {
-          const response = await fetch(`http://localhost:8081/api/save-place`, {
+          const response = await fetch("http://localhost:8081/api/save-place", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ title, addr1, tel, category }),
@@ -266,8 +266,7 @@
             );
             if (confirmed) {
               console.log("사용자가 [예]를 눌렀습니다.");
-              window.location.href =
-                "http://localhost:8081/public/MY/MY022.html";
+              window.location.href = "http://localhost:8081/MY/MY022.html";
             } else {
               console.log("사용자가 [아니오]를 눌렀습니다.");
             }
@@ -275,7 +274,7 @@
             alert("⚠️ 저장에 실패했습니다: " + result.message);
           }
         } catch (error) {
-          console.error(error);
+          console.error("❌ 서버 오류 발생:", error);
           alert("❌ 서버 오류 발생: " + error.message);
         }
       }
