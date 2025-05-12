@@ -52,9 +52,9 @@ app.use("/", express.static("public"));
 app.use("/api/pet-travel", petTravelRouter);
 
 // 경로찾기 시 DB 저장 라우터
+app.use("/api", placesRouter);
 app.use("/api", saveRouter);
 app.use("/api", apiRouter);
-app.use("/api/places", placesRouter);
 
 // 404 에러 처리
 app.use((req, res) => {
