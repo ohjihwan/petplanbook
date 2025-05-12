@@ -1,10 +1,4 @@
-import dotenv from "dotenv";
 
-dotenv.config();
-
-const app = express();
-const PORT = process.env.PORT || 8081;
-const HOST = process.env.HOST;
 
 // ✅ 1. 삭제 확인 얼랏
 function deleteData(el, delArea) {
@@ -616,8 +610,8 @@ async function savePlace() {
 	const imgElement = document.querySelector(".detail-imgs img");
 	const firstimage = imgElement ? imgElement.src : "";
 
-    try {
-		const response = await fetch(`http://${HOST}:${PORT}/api/save-place`, {
+	try {
+		const response = await fetch("http://localhost:8081/api/save-place", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ title, addr1, tel, category, firstimage }),
@@ -634,7 +628,7 @@ async function savePlace() {
 				"✅ 장소가 저장되었습니다! MY장소로 이동하시겠습니까?"
 			);
 			if (confirmed) {
-				window.location.href = `http://${HOST}:${PORT}/MY/MY022.html`;
+				window.location.href = "http://localhost:8081/MY/MY022.html";
 			}
 		} else {
 			alert("⚠️ 저장에 실패했습니다: " + result.message);

@@ -15,7 +15,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8081;
-const HOST = process.env.HOST;
+const HOST = process.env.HOST || "localhost";
 
 // CORS 설정
 app.use(
