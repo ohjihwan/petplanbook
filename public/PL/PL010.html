@@ -163,7 +163,116 @@
 	<script src="/assets/js/map.js"></script>
 	<!-- <script src="/assets/js/API.js"></script> -->
 	<script>
-		
+		// 더보기 함수를 전역으로 정의
+		window.loadMore = function() {
+			const list = document.getElementById("travel-list");
+			if (!list) return;
+
+			const ul = list.querySelector("ul");
+			if (!ul) return;
+
+			// filteredData가 없는 경우 처리
+			if (!window.filteredData || !Array.isArray(window.filteredData)) {
+				console.error('검색 결과가 없습니다.');
+				return;
+			}
+
+			// 현재 표시된 아이템 수
+			const currentItems = ul.querySelectorAll("li").length;
+			
+			// 추가로 표시할 아이템 수 (4개)
+			const itemsToAdd = 4;
+			
+			// 현재 검색된 데이터에서 추가로 표시할 아이템 가져오기
+			const displayItems = window.filteredData.slice(currentItems, currentItems + itemsToAdd);
+			
+			// 추가 아이템이 있는 경우에만 더보기 버튼 표시
+			const loadMoreButton = document.getElementById("load-more");
+			if (loadMoreButton) {
+				loadMoreButton.style.display = currentItems + itemsToAdd < window.filteredData.length ? "inline-block" : "none";
+			}
+
+			// 새로운 아이템 추가
+			displayItems.forEach(item => {
+				const li = document.createElement("li");
+				const defaultImage = "https://dummyimage.com/200x200/cccccc/ffffff&text=No+Image";
+				const imageUrl = item.firstimage || defaultImage;
+				li.innerHTML = `
+				<a href="javascript:void(0)" role="button">
+					<div class="img-box">
+					<div class="category ${getCategoryClass(item)}">${getCategory(item)}</div>
+					<img src="${imageUrl}" data-src="${imageUrl}" alt="${item.title}" onerror="this.onerror=null; this.src='${defaultImage}';">
+					</div>
+					<div class="txts">
+					<strong class="main-txt">${item.title}</strong>
+					<span class="sub-txt">${item.addr1 || '주소 정보 없음'}</span>
+					</div>
+				</a>
+				`;
+
+				li.addEventListener("click", () => openDetailModal(item));
+				ul.appendChild(li);
+			});
+			};
+
+			// 검색 함수를 전역으로 정의
+			window.searchTravelList = async function() {
+			await fetchTravelList();
+			};
+
+			// 지역 선택 시 검색 실행
+			function toggleSelect() {
+			const regionSelect = document.getElementById('region');
+			const searchBtn = document.getElementById('compButtons');
+			const selectedRegion = regionSelect.value;
+
+			if (selectedRegion) {
+				searchBtn.disabled = false;
+				searchBtn.textContent = '검색';
+				// 선택된 지역으로 지도 이동
+				if (typeof window.moveToRegion === 'function') {
+				window.moveToRegion(selectedRegion);
+				}
+				// 지역 선택 시 검색 실행
+				window.searchTravelList();
+			} else {
+				searchBtn.disabled = true;
+				searchBtn.textContent = '지역을 선택해주세요';
+			}
+			}
+
+			// 검색 버튼 클릭 시 검색 실행
+			document.getElementById('compButtons').addEventListener('click', window.searchTravelList);
+
+			// 검색어 입력 시 엔터키로 검색
+			document.getElementById('searchPlace').addEventListener('keypress', function(e) {
+			if (e.key === 'Enter') {
+				window.searchTravelList();
+			}
+			});
+
+			// DOM이 완전히 로드된 후 실행
+			document.addEventListener('DOMContentLoaded', function() {
+			console.log('DOM 로드 완료');
+			// 지도 컨테이너 스타일 초기화
+			const mapContainer = document.getElementById('map');
+			if (mapContainer) {
+				mapContainer.style.width = '100%';
+				mapContainer.style.height = '500px';
+				mapContainer.style.position = 'relative';
+				mapContainer.style.overflow = 'hidden';
+				mapContainer.style.display = 'block';
+				mapContainer.style.visibility = 'visible';
+				mapContainer.style.minHeight = '500px';
+				mapContainer.style.zIndex = '1';
+				mapContainer.style.backgroundColor = '#f8f8f8';
+			}
+
+			// 초기 검색 실행
+			if (document.getElementById('region').value) {
+				window.searchTravelList();
+			}
+		});
 	</script>
 </body>
 </html>
