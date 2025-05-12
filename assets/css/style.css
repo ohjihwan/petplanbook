@@ -106,6 +106,7 @@
 .map-content-area .function-box .field-area .comp-buttons {display:flex; gap:0 1rem;}
 .map-content-area .function-box .field-area .comp-buttons .button {padding:0 2rem;}
 .map-content-area .function-box .field-area .comp-buttons .button:first-child {flex:1;}
+.map-content-area .function-box .field-area .comp-buttons .button:disabled:first-child + .button {display:none;}
 .map-content-area .function-box .field-area,
 .map-content-area .function-box .board-area {flex:0 0 35.4rem; display:flex; flex-direction:column; justify-content:space-between;}
 .map-content-area .function-box .board-area .board-text {padding:1.4rem 1.6rem; border-bottom:1px solid #d9d9d9; font-size:2rem; font-weight:300; color:#474747;}
@@ -175,18 +176,20 @@
 .my-region-area .search-box .field-search-button {width:10rem; height:100%; border-radius:1rem; background:var(--button-primary) url(../imgs/ico/ico-search.png) no-repeat 50% / 4rem auto;}
 
 .make-route {position:relative; margin:0 5.3rem;}
+.make-route::before {content:''; display:block; height:2rem;}
+.make-route::after {content:''; display:block; height:5rem;}
 .make-route .item {display:flex; align-items:stretch; position:relative; padding:2.3rem 2.1rem; background-color:#f5f5f5; transition:transform 0.25s;}
 .make-route .item + .item {margin-top:1rem;}
 .make-route .item.-placeholder {height:1.5rem; padding:0; background-color:transparent;}
 .make-route .sorting-handler {flex:0 0 7rem; margin-right:1.3rem; background:#fdfdfd url(../../assets/imgs/ico/ico-move.png) no-repeat 50% / auto 7.7rem; cursor:grab;}
 .make-route .sorting-handler:active {cursor:grabbing;}
-.make-route .img-box {flex:0 0 24rem; margin-right:3.6rem;}
+.make-route .img-box {flex:0 0 24rem; height:16rem; margin-right:3.6rem;}
 .make-route .img-box img {display:block; width:100%; height:100%; object-fit:cover; object-position:50%;}
 .make-route .infos {flex:1;}
 .make-route .infos .name {font-size:2.4rem; font-weight:600; color:#000;}
 .make-route .infos .info {display:flex; flex-wrap:wrap; margin-top:1rem;}
-.make-route .infos .info dt{flex:0 0 5rem; font-size:2rem; font-weight:300; color:#000; line-height:1.4;}
-.make-route .infos .info dd{flex:0 0 calc(100% - 5rem); font-size:2rem; font-weight:300; color:#000; line-height:1.4;}
+.make-route .infos .info dt{flex:0 0 10rem; font-size:2rem; font-weight:300; color:#000; line-height:1.4;}
+.make-route .infos .info dd{flex:0 0 calc(100% - 10rem); font-size:2rem; font-weight:300; color:#000; line-height:1.4;}
 .make-route .button-set {position:absolute; right:2.7rem; bottom:2.3rem; z-index:10;}
 
 .result-empty {margin:15rem 0 10rem; padding-top:19.3rem; background:url(../imgs/img/img-MY030-1.svg) no-repeat 50% 0 / auto 19.3rem; font-size:3rem; font-weight:600; text-align:center;}

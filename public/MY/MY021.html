@@ -131,12 +131,12 @@
 											/>
 										</div>
 									</div>
-                                    <div class="field">
-                                        <label for="text3" class="label">날짜 선택</label>
-                                        <div class="text">
-                                            <input type="date" id="text3" required="" placeholder="날짜를 선택해주세요">
-                                        </div>
-                                    </div>
+									<div class="field">
+										<label for="text3" class="label">날짜 선택</label>
+										<div class="text">
+											<input type="date" id="text3" required="" placeholder="날짜를 선택해주세요">
+										</div>
+									</div>
 									<div class="field">
 										<label for="textarea" class="label">글 내용</label>
 										<div class="textarea">
@@ -342,7 +342,7 @@
 			.addEventListener("submit", async (e) => {
 				e.preventDefault();
 				const formData = new FormData(e.target);
-				const res = await fetch(`http://${HOST}:${PORT}/places`, {
+				const res = await fetch(`http://localhost:8081/places`, {
 					method: "POST",
 					body: formData,
 				});
@@ -386,7 +386,7 @@
 			if (imageInput.files[0]) {
 				const formData = new FormData();
 				formData.append("image", imageInput.files[0]);
-				const res = await fetch(`http://${HOST}:${PORT}/uploads`, {
+				const res = await fetch(`http://localhost:8081/uploads`, {
 					method: "POST",
 					body: formData,
 				});
@@ -395,7 +395,7 @@
 			}
 			
 			// 2. 글 정보 JSON으로 저장
-			await fetch(`http://${HOST}:${PORT}/place`, {
+			await fetch(`http://localhost:8081/place`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ name, description, imageUrl }),

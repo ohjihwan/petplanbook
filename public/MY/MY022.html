@@ -1,164 +1,221 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CM020</title>
-  <link rel="stylesheet" href="/assets/css/swiper.css" />
-  <link rel="stylesheet" href="/assets/css/common-ui.css" />
-  <link rel="stylesheet" href="/assets/css/style.css" />
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>MY022</title>
+	<link rel="stylesheet" href="/assets/css/swiper.css" />
+	<link rel="stylesheet" href="/assets/css/common-ui.css" />
+	<link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 <body>
-  <div class="page">
-    <div class="container">
-      <header class="header">
-        <!-- header.html 로 페이지 통합 관리 -->
-      </header>
+	<div class="page">
+		<div class="container">
+			<header class="header">
+				<!-- header.html 로 페이지 통합 관리 -->
+			</header>
 
-      <main class="contents">
-        <div class="content">
-          <section class="main-banner">
-            <figure class="img-box">
-              <img src="/assets/imgs/img/img-CM010-1.jpg" alt="" />
-            </figure>
-            <div class="text-box">
-              <h2 class="title">마이 장소</h2>
-              <p class="txt">다른 반려인들이 다녀온 루트를 그대로 따라 해보세요!</p>
-              <div class="guide-arrow" aria-label="하단에 컨텐츠가 있습니다">
-                <i></i>
-                <i></i>
-              </div>
-            </div>
-          </section>
+			<main class="contents">
+				<div class="content">
+					<section class="main-banner">
+						<figure class="img-box">
+							<img src="/assets/imgs/img/img-CM010-1.jpg" alt="" />
+						</figure>
+						<div class="text-box">
+							<h2 class="title">마이 장소</h2>
+							<p class="txt">다른 반려인들이 다녀온 루트를 그대로 따라 해보세요!</p>
+							<div class="guide-arrow" aria-label="하단에 컨텐츠가 있습니다">
+								<i></i>
+								<i></i>
+							</div>
+						</div>
+					</section>
 
-          <section class="my-region-area">
-            <div class="inner">
-              <div class="search-box">
-                <!-- 생략: 지역/검색 입력 필드 -->
-              </div>
+					<section class="my-region-area">
+						<div class="inner">
+							<div class="search-box">
+								<div class="field">
+									<label for="region" class="label">지역</label>
+									<div class="select">
+										<select name="region" id="region">
+											<option value="">지역 선택</option>
+											<option value="강원특별자치도">강원특별자치도</option>
+											<option value="경기도">경기도</option>
+											<option value="경상남도">경상남도</option>
+											<option value="경상북도">경상북도</option>
+											<option value="광주광역시">광주광역시</option>
+											<option value="대구광역시">대구광역시</option>
+											<option value="대전광역시">대전광역시</option>
+											<option value="부산광역시">부산광역시</option>
+											<option value="서울특별시">서울특별시</option>
+											<option value="세종특별자치시">세종특별자치시</option>
+											<option value="울산광역시">울산광역시</option>
+											<option value="인천광역시">인천광역시</option>
+											<option value="전라남도">전라남도</option>
+											<option value="전라북도">전라북도</option>
+											<option value="제주특별자치도">제주특별자치도</option>
+											<option value="충청남도">충청남도</option>
+											<option value="충청북도">충청북도</option>
+										</select>
+									</div>
+								</div>
+								<div class="field">
+									<label for="text1" class="label">장소 검색</label>
+									<div class="text">
+										<input
+											type="text"
+											id="text1"
+											required
+											placeholder="(예시:애견유치원)"
+										/>
+									</div>
+								</div>
+								<div class="field">
+									<label for="text3" class="label">날짜 선택</label>
+									<div class="text">
+										<input
+											type="date"
+											id="text3"
+											required
+											placeholder="날짜를 선택해주세요"
+										/>
+									</div>
+								</div>
+								<div class="buttons">
+									<button type="button" class="field-search-button">
+										<span class="hide">검색</span>
+									</button>
+								</div>
+							</div>
 
-              <div class="result-empty">
-                <p>아직 글이 없어요</p>
-              </div>
+							<div class="result-empty">
+								<p>아직 글이 없어요</p>
+							</div>
 
-              <div class="search-result-box plr-0">
-                <ul></ul>
-              </div>
-            </div>
-          </section>
-        </div>
-      </main>
+							<div class="search-result-box plr-0">
+								<ul></ul>
+							</div>
+						</div>
+					</section>
+				</div>
+			</main>
 
-      <footer class="footer">
-        <!-- footer.html 로 페이지 통합 관리 -->
-      </footer>
-    </div>
-  </div>
+			<footer class="footer">
+				<!-- footer.html 로 페이지 통합 관리 -->
+			</footer>
+		</div>
+	</div>
 
-  <div id="login-modal" class="modal -login-modal"></div>
+	<div id="login-modal" class="modal -login-modal"></div>
 
-  <div id="detail" class="modal">
-    <div class="container">
-      <header class="header">
-        <div class="inner">
-          <button type="button" class="close" onclick="modalClose()">
-            <span class="hide">닫기</span>
-          </button>
-        </div>
-      </header>
-      <main class="contents">
-        <div class="content">
-          <div class="location-detail">
-            <div class="title-box">
-              <h2 class="title">장소 자세히</h2>
-              <p class="txt">자세히 읽고나서 저장해보세요</p>
-            </div>
+	<div id="detail" class="modal">
+		<div class="container">
+			<header class="header">
+				<div class="inner">
+					<button type="button" class="close" onclick="modalClose()">
+						<span class="hide">닫기</span>
+					</button>
+				</div>
+			</header>
+			<main class="contents">
+				<div class="content">
+					<div class="location-detail">
+						<div class="title-box">
+							<h2 class="title">장소 자세히</h2>
+							<p class="txt">자세히 읽고나서 저장해보세요</p>
+						</div>
 
-            <div class="detail-imgs swiper mySwiper">
-              <div class="swiper-wrapper"></div>
-              <div class="swiper-button-next"></div>
-              <div class="swiper-button-prev"></div>
-            </div>
+						<div class="detail-imgs swiper mySwiper">
+							<div class="swiper-wrapper"></div>
+							<div class="swiper-button-next"></div>
+							<div class="swiper-button-prev"></div>
+						</div>
 
-            <dl class="details">
-              <dt>상호이름</dt><dd></dd>
-              <dt>상세주소</dt><dd></dd>
-              <dt>동반가능</dt><dd></dd>
-              <dt>대표번호</dt><dd></dd>
-              <dt>홈페이지</dt><dd>-</dd>
-            </dl>
-          </div>
-        </div>
-      </main>
-    </div>
-  </div>
+						<dl class="details">
+							<dt>상호이름</dt>
+							<dd></dd>
+							<dt>상세주소</dt>
+							<dd></dd>
+							<dt>카테고리</dt>
+							<dd></dd>
+							<dt>대표번호</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</div>
+			</main>
+			<div class="fixed">
+				<div class="buttons">
+					<button type="button" class="button -primary -lg">루트 꾸미기로 보내기</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <script src="/assets/libs/jquery/jquery-3.6.0.min.js"></script>
-  <script src="/assets/libs/jquery-ui/jquery-ui.min.js"></script>
-  <script src="/assets/libs/jquery-ui/jquery.ui.touch-punch.min.js"></script>
-  <script src="/assets/libs/swiper/dist/js/swiper.min.js"></script>
-  <script src="/assets/js/style.js"></script>
-  <script src="/assets/js/dev.js"></script>
+	<script src="/assets/libs/jquery/jquery-3.6.0.min.js"></script>
+	<script src="/assets/libs/jquery-ui/jquery-ui.min.js"></script>
+	<script src="/assets/libs/jquery-ui/jquery.ui.touch-punch.min.js"></script>
+	<script src="/assets/libs/swiper/dist/js/swiper.min.js"></script>
+	<script src="/assets/js/style.js"></script>
+	<script src="/assets/js/dev.js"></script>
+	<script>
+		async function loadPlaces() {
+			try {
+				const response = await fetch("/api/places");
+				if (!response.ok) throw new Error(`서버 응답 실패: ${response.status}`);
 
-  <script>
-    async function loadPlaces() {
-      try {
-        const response = await fetch("/api/places");
-        if (!response.ok) throw new Error(`서버 응답 실패: ${response.status}`);
+				const result = await response.json();
+				const places = result.data; // ✅ 응답에서 data 배열 사용
+				const resultBox = document.querySelector(".search-result-box ul");
+				resultBox.innerHTML = "";
 
-        const places = await response.json();
-        const resultBox = document.querySelector(".search-result-box ul");
-        resultBox.innerHTML = "";
+				document.querySelector(".result-empty").style.display = places.length === 0 ? "block" : "none";
 
-        document.querySelector(".result-empty").style.display = places.length === 0 ? "block" : "none";
+				places.forEach((place) => {
+					const li = document.createElement("li");
+					li.innerHTML = `
+						<a href="javascript:void(0)" role="button" onclick='modalOpenPlace(${JSON.stringify(place)})'>
+							<div class="img-box">
+								<img src="${place.firstimage || '/assets/imgs/temp/temp-list2.jpg'}" alt="">
+							</div>
+							<div class="txts">
+								<strong class="main-txt">${place.title}</strong>
+								<span class="sub-txt">${place.addr1}</span>
+							</div>
+						</a>
+						<button type="button" class="close" onclick="deleteData(this, 'li')">
+							<span class="hide">삭제</span>
+						</button>
+					`;
+					resultBox.appendChild(li);
+				});
+			} catch (err) {
+				console.error("❌ 장소 불러오기 실패:", err.sqlMessage || err.message);
+				res.status(500).json({ success: false, error: "서버 오류", details: err.message });
+			}
+		}
+		function modalOpenPlace(place) {
+			modalOpenId("detail");
+			document.querySelector("#detail .details dd:nth-of-type(1)").textContent = place.title || "-";
+			document.querySelector("#detail .details dd:nth-of-type(2)").textContent = place.addr1 || "-";
+			document.querySelector("#detail .details dd:nth-of-type(3)").textContent = place.category || "-";
+			document.querySelector("#detail .details dd:nth-of-type(4)").textContent = place.tel || "-";
 
-        places.forEach((place) => {
-          const li = document.createElement("li");
-          li.innerHTML = `
-            <a href="javascript:void(0)" role="button" onclick='modalOpenPlace(${JSON.stringify(place)})'>
-              <div class="img-box">
-                <img src="${place.firstimage || '/assets/imgs/temp/temp-list2.jpg'}" alt="">
-              </div>
-              <div class="txts">
-                <strong class="main-txt">${place.title}</strong>
-                <span class="sub-txt">${place.addr1}</span>
-              </div>
-            </a>
-            <button type="button" class="close" onclick="deleteData(this, 'li')">
-              <span class="hide">삭제</span>
-            </button>
-          `;
-          resultBox.appendChild(li);
-        });
-      } catch (error) {
-        console.error(error);
-        alert("❌ 장소 불러오기 실패: " + error.message);
-      }
-    }
+			const swiperWrapper = document.querySelector("#detail .swiper-wrapper");
+			swiperWrapper.innerHTML = `
+				<div class="swiper-slide">
+					<img src="${place.firstimage || '/assets/imgs/temp/temp1.png'}" alt="">
+				</div>`;
 
-    function modalOpenPlace(place) {
-      modalOpenId("detail");
-      document.querySelector("#detail .details dd:nth-of-type(1)").textContent = place.title || "-";
-      document.querySelector("#detail .details dd:nth-of-type(2)").textContent = place.addr1 || "-";
-      document.querySelector("#detail .details dd:nth-of-type(3)").textContent = place.category || "-";
-      document.querySelector("#detail .details dd:nth-of-type(4)").textContent = place.tel || "-";
-      document.querySelector("#detail .details dd:nth-of-type(5)").textContent = "-";
+			new Swiper(".mySwiper", {
+				navigation: {
+					nextEl: ".swiper-button-next",
+					prevEl: ".swiper-button-prev"
+				}
+			});
+		}
 
-      const swiperWrapper = document.querySelector("#detail .swiper-wrapper");
-      swiperWrapper.innerHTML = `
-        <div class="swiper-slide">
-          <img src="${place.firstimage || '/assets/imgs/temp/temp1.png'}" alt="">
-        </div>`;
-
-      new Swiper(".mySwiper", {
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        }
-      });
-    }
-
-    window.onload = loadPlaces;
-  </script>
+		window.onload = loadPlaces;
+	</script>
 </body>
 </html>
