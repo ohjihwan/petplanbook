@@ -605,11 +605,14 @@ async function savePlace() {
     const tel = details[2].textContent;
     const category = details[3].textContent;
 
+    const imgElement = document.querySelector(".detail-imgs img");
+    const firstimage = imgElement ? imgElement.src : null;
+
     try {
         const response = await fetch("http://localhost:8081/api/save-place", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ title, addr1, tel, category }),
+            body: JSON.stringify({ title, addr1, tel, category, firstimage }),
         });
 
         if (!response.ok) {
