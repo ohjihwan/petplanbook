@@ -7,6 +7,7 @@ import petTravelRouter from "./api/pet_travel.mjs";
 import saveRouter from "./router/save.mjs";
 import apiRouter from "./data/api.mjs";
 import userRouter from "./router/user.mjs";
+import placesRouter from "./router/places.mjs";
 import db from "./data/db.mjs";
 
 dotenv.config();
@@ -52,6 +53,7 @@ app.use("/api/pet-travel", petTravelRouter);
 // 경로찾기 시 DB 저장 라우터
 app.use("/api", saveRouter);
 app.use("/api", apiRouter);
+app.use("/api/places", placesRouter);
 
 // 404 에러 처리
 app.use((req, res) => {
