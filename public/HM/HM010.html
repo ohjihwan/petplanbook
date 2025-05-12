@@ -241,14 +241,25 @@
 	<script src="/assets/js/style.js"></script>
 	<script src="/assets/js/dev.js"></script>
 	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			loadRecommendedPlaces();
-		});
-		
-		// ✅ Swiper 인스턴스를 전역 변수로 안전하게 설정
-		window.mainSuggestionSwiper = window.mainSuggestionSwiper || null;
-		
-		// ✅ 메인 페이지 추천 장소 로드 함수
+		// ✅ 이미지 로드 확인 함수 (비동기)
+		async function checkImageLoad(url) {
+			return new Promise((resolve) => {
+				const img = new Image();
+				img.src = url;
+				img.onload = () => resolve(true);
+				img.onerror = () => resolve(false);
+			});
+		}
+
+		// ✅ 카테고리 스타일 클래스 지정 함수
+		function getCategoryClassByType(category) {
+			if (category.includes("숙박")) return "lodging";
+			if (category.includes("음식점") || category.includes("카페")) return "cafe";
+			if (category.includes("놀거리")) return "activity";
+			return "etc";
+		}
+
+		// ✅ 메인 페이지에서 Swiper 슬라이드 클릭 시 모달 팝업
 		async function loadRecommendedPlaces() {
 			try {
 				const apiUrl = "https://apis.data.go.kr/B551011/KorPetTourService/areaBasedList?serviceKey=GTr1cI7Wi0FRbOTFBaUzUCzCDP4OnyyEmHnn11pxCUC5ehG5bQnbyztgeydnOWz1O04tjw1SE5RsX8RNo6XCgQ%3D%3D&numOfRows=50&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json";
@@ -258,40 +269,38 @@
 						"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
 					}
 				});
-		
+
 				const data = await response.json();
 				let places = data.response.body.items.item;
 				console.log("✅ 전체 장소 수:", places.length);
-	
+
 				// ✅ 조회수 정렬 (내림차순)
 				places.sort((a, b) => (b.readcount || 0) - (a.readcount || 0));
-	
-				// ✅ 50개로 잘라서 사용
 				places = places.slice(0, 50);
-	
+
 				const placeArea = document.querySelector(".place-area");
 				placeArea.innerHTML = ""; // 기존 슬라이드 초기화
-	
-				// ✅ 카테고리별로 장소 분류
+			
 				const categorizedPlaces = {
 					"🏨 숙박": [],
 					"☕🍴 음식점": [],
 					"🎢 놀거리": [],
 					"📌 기타": []
 				};
-		
+				
+				// ✅ 장소 분류 및 이미지 로드 확인
 				for (const place of places) {
 					const imageUrl = place.firstimage;
 					const type = place.contenttypeid;
 					if (!imageUrl) continue;
-		
+
 					const image = await checkImageLoad(imageUrl);
 					if (!image) continue;
-		
+
 					const category = getCategoryByType(type);
 					categorizedPlaces[category].push(place);
 				}
-	
+
 				// ✅ 각 카테고리에서 랜덤하게 최대 2개씩 선택
 				Object.keys(categorizedPlaces).forEach(category => {
 					const shuffledPlaces = shuffleArray(categorizedPlaces[category]);
@@ -299,7 +308,8 @@
 						const slide = document.createElement("a");
 						slide.href = "javascript:void(0)";
 						slide.classList.add("place", "swiper-slide");
-	
+						slide.onclick = () => openDetailModal(place); // ✅ 클릭 이벤트 직접 추가
+
 						const categoryClass = getCategoryClassByType(category);
 						slide.innerHTML = `
 							<div class="img-box">
@@ -309,17 +319,15 @@
 								<h3 class="main-txt">${place.title}</h3>
 								<span class="sub-txt">주소 : ${place.addr1 || '주소 정보 없음'}</span>
 							</div>
-							<div class="category ${categoryClass}">
-								${category}
-							</div>
+							<div class="category ${categoryClass}">${category}</div>
 						`;
-	
+
 						placeArea.appendChild(slide);
 					});
 				});
-		
+
 				console.log("✅ 로드된 장소 수:", placeArea.children.length);
-		
+
 				// ✅ 로드된 슬라이드가 있을 때만 Swiper 초기화
 				if (placeArea.children.length > 0) {
 					initializeSwiper();
@@ -330,14 +338,14 @@
 				console.error("🔥 추천 장소 로드 오류:", error);
 			}
 		}
-		
+
 		// ✅ Swiper 초기화 함수
 		function initializeSwiper() {
 			if (window.mainSuggestionSwiper) {
 				window.mainSuggestionSwiper.destroy(true, true);
 				window.mainSuggestionSwiper = null;
 			}
-		
+
 			window.mainSuggestionSwiper = new Swiper(".suggestion-place .overflow-area", {
 				slideClass: "place",
 				observer: true,
@@ -347,16 +355,12 @@
 					delay: 2500,
 					disableOnInteraction: false
 				},
-				loopedSlides: 10,
 				speed: 500,
-				watchOverflow: true,
 				effect: "coverflow",
-				grabCursor: true,
 				centeredSlides: true,
 				slidesPerView: "auto",
 				coverflowEffect: {
 					rotate: 15,
-					stretch: 0,
 					depth: 100,
 					modifier: 2,
 					slideShadows: true,
@@ -366,24 +370,39 @@
 					prevEl: ".swiper-button-prev",
 				},
 			});
-			
-			$(document).on('mouseenter','.suggestion-place .overflow-area', function () {
-				mainSuggestionSwiper.autoplay.stop();
-			}).on('mouseleave','.suggestion-place .overflow-area', function () {
-				mainSuggestionSwiper.autoplay.start();
-			});
 		}
-		
-		// ✅ 이미지 로드 확인 함수 (비동기)
-		async function checkImageLoad(url) {
-			return new Promise((resolve) => {
-				const img = new Image();
-				img.src = url;
-				img.onload = () => resolve(true);
-				img.onerror = () => resolve(false);
+
+		// ✅ 모달 팝업 열기
+		function openDetailModal(place) {
+			document.querySelector("#detail .details dd:nth-of-type(1)").textContent = place.title || "-";
+			document.querySelector("#detail .details dd:nth-of-type(2)").textContent = place.addr1 || "-";
+			document.querySelector("#detail .details dd:nth-of-type(3)").textContent = place.tel || "-";
+			document.querySelector("#detail .details dd:nth-of-type(4)").textContent = place.category || "-";
+
+			// 이미지 슬라이드
+			const swiperWrapper = document.querySelector("#detail .swiper-wrapper");
+			swiperWrapper.innerHTML = `<div class="swiper-slide"><img src="${place.firstimage || '/assets/imgs/temp/temp1.png'}" alt=""></div>`;
+
+			new Swiper(".detail-imgs", {
+				navigation: {
+					nextEl: ".swiper-button-next",
+					prevEl: ".swiper-button-prev"
+				}
 			});
+
+			document.getElementById("detail").style.display = "block";
 		}
-		
+
+		// ✅ 모달 닫기
+		function modalClose() {
+			document.getElementById("detail").style.display = "none";
+		}
+
+		// ✅ 랜덤 섞기 함수
+		function shuffleArray(array) {
+			return array.sort(() => Math.random() - 0.5);
+		}
+
 		// ✅ 카테고리 라벨 지정 함수 (contenttypeid 기준)
 		function getCategoryByType(type) {
 			if (type == 32) return "🏨 숙박";
@@ -391,19 +410,10 @@
 			if (type == 12 || type == 28) return "🎢 놀거리";
 			return "📌 기타";
 		}
-		
-		// ✅ 카테고리 스타일 클래스 지정 함수
-		function getCategoryClassByType(category) {
-			if (category.includes("숙박")) return "lodging";
-			if (category.includes("음식점") || category.includes("카페")) return "cafe";
-			if (category.includes("놀거리")) return "activity";
-			return "etc";
-		}
-		
-		// ✅ 랜덤 섞기 함수
-		function shuffleArray(array) {
-			return array.sort(() => Math.random() - 0.5);
-		}
+
+		// ✅ 페이지 로드 시 자동 실행
+		document.addEventListener("DOMContentLoaded", loadRecommendedPlaces);
+
 	</script>
 </body>
 </html>
