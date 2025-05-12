@@ -1,3 +1,5 @@
+
+
 // ✅ 1. 삭제 확인 얼랏
 function deleteData(el, delArea) {
 	const $btn = $(el);
@@ -600,13 +602,13 @@ function handleProfileImageDelete(el) {
 // ✅ 28. 내 장소로 저장
 async function savePlace() {
     const details = document.querySelectorAll("#detail .details dd");
-    const title = details[0].textContent;
-    const addr1 = details[1].textContent;
-    const tel = details[2].textContent;
-    const category = details[3].textContent;
+    const title = details[0]?.textContent.trim() || "제목 없음";
+    const addr1 = details[1]?.textContent.trim() || "주소 없음";
+    const tel = details[2]?.textContent.trim() || "전화번호 없음";
+    const category = details[3]?.textContent.trim() || "카테고리 없음";
 
     const imgElement = document.querySelector(".detail-imgs img");
-    const firstimage = imgElement ? imgElement.src : null;
+    const firstimage = imgElement ? imgElement.src : "";
 
     try {
         const response = await fetch("http://localhost:8081/api/save-place", {
@@ -626,10 +628,7 @@ async function savePlace() {
                 "✅ 장소가 저장되었습니다! MY장소로 이동하시겠습니까?"
             );
             if (confirmed) {
-                console.log("사용자가 [예]를 눌렀습니다.");
                 window.location.href = "http://localhost:8081/MY/MY022.html";
-            } else {
-                console.log("사용자가 [아니오]를 눌렀습니다.");
             }
         } else {
             alert("⚠️ 저장에 실패했습니다: " + result.message);

@@ -11,8 +11,6 @@ import placesRouter from "./router/places.mjs";
 import db from "./data/db.mjs";
 import uploadRouter from "./router/post.mjs";
 
-
-
 dotenv.config();
 
 const app = express();
