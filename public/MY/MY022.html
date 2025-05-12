@@ -136,25 +136,17 @@
 							<dd></dd>
 							<dt>상세주소</dt>
 							<dd></dd>
-							<dt>동반가능</dt>
+							<dt>카테고리</dt>
 							<dd></dd>
 							<dt>대표번호</dt>
 							<dd></dd>
-							<dt>홈페이지</dt>
-							<dd>-</dd>
 						</dl>
 					</div>
 				</div>
 			</main>
 			<div class="fixed">
 				<div class="buttons">
-					<button
-						type="button"
-						class="button -primary -lg"
-						
-					>
-						루트 꾸미기로 보내기
-					</button>
+					<button type="button" class="button -primary -lg">루트 꾸미기로 보내기</button>
 				</div>
 			</div>
 		</div>
@@ -208,7 +200,6 @@
 			document.querySelector("#detail .details dd:nth-of-type(2)").textContent = place.addr1 || "-";
 			document.querySelector("#detail .details dd:nth-of-type(3)").textContent = place.category || "-";
 			document.querySelector("#detail .details dd:nth-of-type(4)").textContent = place.tel || "-";
-			document.querySelector("#detail .details dd:nth-of-type(5)").textContent = "-";
 
 			const swiperWrapper = document.querySelector("#detail .swiper-wrapper");
 			swiperWrapper.innerHTML = `
