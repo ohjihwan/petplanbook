@@ -116,8 +116,15 @@
 	<script src="/assets/libs/swiper/dist/js/swiper.min.js"></script>
 	<script src="/assets/js/style.js"></script>
 	<script src="/assets/js/dev.js"></script>
-
 	<script>
+        import dotenv from "dotenv";
+
+        dotenv.config();
+
+        const app = express();
+        const PORT = process.env.PORT || 8081;
+        const HOST = process.env.HOST;
+
 		document
 			.getElementById("placeForm")
 			.addEventListener("submit", async (e) => {
@@ -149,9 +156,7 @@
 					<li class="unit">
 							<a href="../MY/MY020.html">
 									<figure class="img-box">
-											<img src="http://localhost:8080${
-												place.image_url
-											}" alt="">
+											<img src="http://${HOST}:${PORT}${place.image_url}" alt="">
 									</figure>
 									<div class="txts">
 											<h3 class="main-txt">${place.name}</h3>
@@ -238,7 +243,7 @@
 		renderPosts();
 
 		async function renderPlaces() {
-			const res = await fetch(`http://local${HOST}:${PORT}/place`);
+			const res = await fetch(`http://${HOST}:${PORT}/place`);
 			const places = await res.json();
 			const listDiv = document.getElementById("place-list");
 			if (!places.length) {
@@ -253,7 +258,7 @@
 					<div style="display:flex;align-items:flex-start;gap:16px;">
 						${
 							place.imageUrl
-								? `<img src="http://localhost:8080${place.imageUrl}" alt="썸네일" style="width:80px;height:60px;object-fit:cover;border-radius:6px;">`
+								? `<img src="http://${HOST}:${PORT}${place.imageUrl}" alt="썸네일" style="width:80px;height:60px;object-fit:cover;border-radius:6px;">`
 								: ""
 						}
 						<div>
