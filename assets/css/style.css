@@ -59,9 +59,11 @@
 .suggestion-place .place-area .place-info {margin-top:2.5rem;}
 .suggestion-place .place-area .place-info .main-txt{font-size:2.4rem; font-weight:600;}
 .suggestion-place .place-area .place-info .sub-txt{height:5.4rem; font-size:2rem;}
-.suggestion-place .place-area .hashtag {margin-top:1.5rem; font-size:2rem;}
-.suggestion-place .place-area .hashtag span {display:inline-block; line-height:2; padding:0 1.6rem; border-radius:3rem; color:#343434; background-color:#e6e6e6;}
-.suggestion-place .place-area .hashtag span + span {margin-left:0.6rem;}
+.suggestion-place .place-area .category {display:inline-block; line-height:2; margin-top:1.5rem; padding:0.3rem 0.8rem; border-radius:1.2rem; font-size:2rem;}
+.suggestion-place .place-area .category.lodging { background-color:#FFD700; color:#000;}
+.suggestion-place .place-area .category.cafe { background-color:#FF6347; color:#fff;}
+.suggestion-place .place-area .category.activity { background-color:#4CAF50; color:#fff;}
+.suggestion-place .place-area .category.etc { background-color:#777; color:#fff;}
 .suggestion-place .swiper-button-next {width:4.5rem; height:10rem; padding:1rem; background-color:rgba(0,0,0,0.7);}
 .suggestion-place .swiper-button-prev {width:4.5rem; height:10rem; padding:1rem; background-color:rgba(0,0,0,0.7);}
 .suggestion-place .place-area .place:hover .img-box img {transform:scale(1.1); transition:transform 0.25s ease-out;}
@@ -200,11 +202,11 @@
 .search-result-box ul li a:hover .img-box img {transform:scale(1.1); transition:transform 0.25s ease-out;}
 .search-result-box ul li a:hover .main-txt {text-decoration:underline; text-underline-offset:4px;}
 .search-result-box ul li a:hover .sub-txt {text-decoration:underline; text-underline-offset:4px;}
-.search-result-box .category {position:absolute; right:0.9rem; top:0.5rem; z-index:10}
-.search-result-box .category.lodging { background-color:#FFD700; color:#000; padding:3px 8px; border-radius:5px; display:inline-block; }
-.search-result-box .category.cafe { background-color:#FF6347; color:#fff; padding:3px 8px; border-radius:5px; display:inline-block; }
-.search-result-box .category.activity { background-color:#4CAF50; color:#fff; padding:3px 8px; border-radius:5px; display:inline-block; }
-.search-result-box .category.etc { background-color:#777; color:#fff; padding:3px 8px; border-radius:5px; display:inline-block; }
+.search-result-box .category {display:inline-block; position:absolute; right:0.9rem; top:0.5rem; z-index:10; padding:0.3rem 0.8rem; border-radius:0.5;}
+.search-result-box .category.lodging { background-color:#FFD700; color:#000;}
+.search-result-box .category.cafe { background-color:#FF6347; color:#fff;}
+.search-result-box .category.activity { background-color:#4CAF50; color:#fff;}
+.search-result-box .category.etc { background-color:#777; color:#fff;}
 .search-result-box ul li .close {position:absolute; right:1rem; top:1rem; width:3rem; height:3rem; border-radius:50%; background-color:rgba(0,0,0,0.7);}
 .search-result-box ul li .close::before {content:''; position:absolute; left:50%; top:50%; width:1px; height:1.4rem; background-color:#fff; transform:translate(-50%, -50%) rotate(45deg);}
 .search-result-box ul li .close::after {content:''; position:absolute; left:50%; top:50%; width:1px; height:1.4rem; background-color:#fff; transform:translate(-50%, -50%) rotate(-45deg);}

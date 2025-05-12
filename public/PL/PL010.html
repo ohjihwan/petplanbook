@@ -225,44 +225,7 @@
     <script src="/assets/js/map.js"></script>
     <!-- <script src="/assets/js/API.js"></script> -->
     <script>
-      async function savePlace() {
-        const details = document.querySelectorAll("#detail .details dd");
-        const title = details[0].textContent;
-        const addr1 = details[1].textContent;
-        const tel = details[2].textContent;
-        const category = details[3].textContent;
-
-        const imgElement = document.querySelector(".detail-imgs img");
-        const firstimage = imgElement ? imgElement.src : null;
-        try {
-          const response = await fetch(`http://localhost:8081/api/save-place`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ title, addr1, tel, category, firstimage }),
-          });
-          if (!response.ok) {
-            throw new Error(`서버 응답 실패: ${response.status}`);
-          }
-          const result = await response.json();
-          if (result.success) {
-            const confirmed = confirm(
-              "✅ 장소가 저장되었습니다! MY장소로 이동하시겠습니까?"
-            );
-            if (confirmed) {
-              console.log("사용자가 [예]를 눌렀습니다.");
-              
-              window.location.href = `http://127.0.0.1:8081/MY/MY022.html`;
-            } else {
-              console.log("사용자가 [아니오]를 눌렀습니다.");
-            }
-          } else {
-            alert("⚠️ 저장에 실패했습니다: " + result.message);
-          }
-        } catch (error) {
-          console.error(error);
-          alert("❌ 서버 오류 발생: " + error.message);
-        }
-      }
+      
     </script>
   </body>
 </html>
