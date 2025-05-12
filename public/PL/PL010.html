@@ -66,11 +66,11 @@
                       </div>
                     </div>
                     <div class="field">
-                      <label for="text1" class="label">장소 검색</label>
+                      <label for="searchPlace" class="label">장소 검색</label>
                       <div class="text">
                         <input
                           type="text"
-                          id="text1"
+                          id="searchPlace"
                           required
                           placeholder="(예시:애견유치원)"
                         />
@@ -225,7 +225,18 @@
     <script src="/assets/js/map.js"></script>
     <!-- <script src="/assets/js/API.js"></script> -->
     <script>
-      
+      function toggleSelect() {
+        const regionSelect = document.getElementById('region');
+        const searchButton = document.getElementById('compButtons');
+        
+        if (regionSelect.value) {
+          searchButton.disabled = false;
+          searchButton.textContent = '검색하기';
+        } else {
+          searchButton.disabled = true;
+          searchButton.textContent = '지역을 먼저 선택해주세요';
+        }
+      }
     </script>
   </body>
 </html>
