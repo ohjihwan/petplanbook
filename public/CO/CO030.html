@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CM030</title>
+	<link rel="stylesheet" href="/assets/css/swiper.css">
+	<link rel="stylesheet" href="/assets/css/common-ui.css">
+	<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+	<div class="page">
+		<div class="container">
+			<header class="header">
+				<!-- header.html 로 페이지 통합 관리 -->
+			</header>
+
+			<main class="contents">
+				<div class="content">
+
+					<section class="main-banner">
+						<figure class="img-box">
+							<img src="/assets/imgs/img/img-CM010-1.jpg" alt="">
+						</figure>
+						<div class="text-box">
+							<h2 class="title">추천 루트</h2>
+							<p class="txt">다른 반려인들이 다녀온 루트를 그대로 따라 해보세요!</p>
+							<div class="guide-arrow" aria-label="하단에 컨텐츠가 있습니다">
+								<i></i>
+								<i></i>
+							</div>
+						</div>
+					</section>
+
+					<section class="map-content-area">
+						<div class="inner">
+							<div class="title-box">
+								<h2 class="title">글 내용 보기</h2>
+								<p class="txt">마음에든다? 내루트로 저장하자</p>
+							</div>
+
+							
+							<div class="function-box -gray-case">
+
+								<div class="following-path">
+									<div class="scrolling swiper-wrapper">
+										<ul class="swiper-slide">
+											<li>
+												<strong>로켓 호텔</strong>
+												<dl>
+													<dt>주소</dt>
+													<dd>서울시 송파구</dd>
+													<dt>전화</dt>
+													<dd>02-0000-0000</dd>
+													<dt>날짜</dt>
+													<dd>2025-04-17</dd>
+													<dt>시간</dt>
+													<dd>오전 11:30</dd>
+												</dl>
+											</li>
+											<li>
+												<strong>봄날 카페</strong>
+												<dl>
+													<dt>주소</dt>
+													<dd>서울시 강북구</dd>
+													<dt>전화</dt>
+													<dd>02-0000-0000</dd>
+													<dt>날짜</dt>
+													<dd>2025-04-17</dd>
+													<dt>시간</dt>
+													<dd>오후 02:30</dd>
+												</dl>
+											</li>
+											<li>
+												<strong>꾸러기 애견 캠핑</strong>
+												<dl>
+													<dt>주소</dt>
+													<dd>서울시 강남구</dd>
+													<dt>전화</dt>
+													<dd>02-0000-0000</dd>
+													<dt>날짜</dt>
+													<dd>2025-04-17</dd>
+													<dt>시간</dt>
+													<dd>오전 08:00</dd>
+												</dl>
+											</li>
+											<li>
+												<strong>케이스 TEST 2</strong>
+												<dl>
+													<dt>주소</dt>
+													<dd>서울시 강남구</dd>
+													<dt>전화</dt>
+													<dd>02-0000-0000</dd>
+													<dt>날짜</dt>
+													<dd>2025-04-17</dd>
+													<dt>시간</dt>
+													<dd>오전 08:00</dd>
+												</dl>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<!-- API 기능 -->
+								<div id="map" class="map-box"></div>
+								<!-- // -->
+								<div class="board-area">
+									<div class="field">
+										<p class="label">글 제목</p>
+										<div class="board-text">
+											<p>냥이랑 이렇게 즐거운 여행은 처음이네요</p>
+										</div>
+									</div>
+									<div class="field">
+										<p class="label">사진 첨부</p>
+										<div class="board-text -board-textarea">
+											<p>기다렸던 보람이 있었어요 >_< 행복하구 즐거웠구.. 사진도 기대했던거 보다 훨씬 잘 나와서 주변에서 막 부럽다고 그러네요 겨울에도 한번 더 다녀오고 싶어용!!</p>
+										</div>
+									</div>
+									<div class="field">
+										<p class="label">평가하기</p>
+										<div class="board-text">
+											<div class="rating-box">
+												<div class="rating -good">
+													 <input type="checkbox" id="rating-good" class="hide">
+													 <label for="rating-good"><span class="hide">좋아요</span></label>
+												</div>
+												<div class="rating -bad">
+													 <input type="checkbox" id="rating-bad" class="hide">
+													 <label for="rating-bad"><span class="hide">싫어요</span></label>
+												</div>
+												<p class="rating-txt"><span class="number">11</span>명이 추천하는 루트에요</p>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="upload-gallery">
+									<div class="img-box">
+										<button type="button" class="img-view" onclick="modalOpenId('imgView1')">
+											<img src="/assets/imgs/temp/temp1.png" alt="">
+										</button>
+									</div>
+									<div class="img-box">
+										<button type="button" class="img-view" onclick="modalOpenId('imgView2')">
+											<img src="/assets/imgs/temp/temp2.png" alt="">
+										</button>
+									</div>
+									<div class="img-box">
+										<button type="button" class="img-view" onclick="modalOpenId('imgView3')">
+											<img src="/assets/imgs/temp/temp3.png" alt="">
+										</button>
+									</div>
+									<div class="img-box">
+										<button type="button" class="img-view" onclick="modalOpenId('imgView1')">
+											<img src="/assets/imgs/temp/temp1.png" alt="">
+										</button>
+									</div>
+									<div class="img-box">
+										<button type="button" class="img-view" onclick="modalOpenId('imgView2')">
+											<img src="/assets/imgs/temp/temp2.png" alt="">
+										</button>
+									</div>
+									<div class="img-box">
+										<button type="button" class="img-view" onclick="modalOpenId('imgView3')">
+											<img src="/assets/imgs/temp/temp3.png" alt="">
+										</button>
+									</div>
+								</div>
+							</div>
+							
+							<div class="map-content-buttons">
+								<button type="button" class="button -primary -lg">내루트에 저장</button>
+								<a href="../CO/CO010.html" class="button -secondary -lg">목록으로</a>
+							</div>
+						</div>
+					</section>
+
+				</div>
+			</main>
+
+			<footer class="footer">
+				<!-- footer.html 로 페이지 통합 관리 -->
+			</footer>
+		</div>
+	</div>
+
+	<div id="login-modal" class="modal -login-modal"></div>
+
+	<div id="imgView1" class="modal">
+		<div class="container">
+			<header class="header">
+				<div class="inner">
+					<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
+				</div>
+			</header>
+
+			<main class="contents">
+				<div class="content">
+					<div class="img-view-box">
+						<img src="/assets/imgs/temp/temp1.png" alt="">
+					</div>
+				</div>
+			</main>
+		</div>
+	</div>
+
+	<div id="imgView2" class="modal">
+		<div class="container">
+			<header class="header">
+				<div class="inner">
+					<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
+				</div>
+			</header>
+
+			<main class="contents">
+				<div class="content">
+					<div class="img-view-box">
+						<img src="/assets/imgs/temp/bigbigbig.jpg" alt="">
+					</div>
+				</div>
+			</main>
+		</div>
+	</div>
+
+	<div id="imgView3" class="modal">
+		<div class="container">
+			<header class="header">
+				<div class="inner">
+					<button type="button" class="close" onclick="modalClose()"><span class="hide">닫기</span></button>
+				</div>
+			</header>
+
+			<main class="contents">
+				<div class="content">
+					<div class="img-view-box">
+						<img src="/assets/imgs/temp/temp-event-page1.jpg" alt="">
+					</div>
+				</div>
+			</main>
+		</div>
+	</div>
+
+	<script src="/assets/libs/jquery/jquery-3.6.0.min.js"></script>
+	<script src="/assets/libs/jquery-ui/jquery-ui.min.js"></script>
+	<script src="/assets/libs/jquery-ui/jquery.ui.touch-punch.min.js"></script>
+	<script src="/assets/libs/swiper/dist/js/swiper.min.js"></script>
+	<script src="/assets/js/style.js"></script>
+	<script src="/assets/js/dev.js"></script>
+	<script src="/assets/js/map.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=706f2ef595d7fa1279baace1d65f8f18&libraries=services"></script>
+	<script>
+		mapSeting()		
+	</script>
+</body>
+</html>
