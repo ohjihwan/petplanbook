@@ -250,6 +250,7 @@
         fjs.parentNode.insertBefore(js, fjs);
       })(document, "script", "kakao-maps-sdk");
 
+<<<<<<< HEAD
       // 루트 추가하기 버튼 이벤트
       document.addEventListener("DOMContentLoaded", function () {
         const addRouteButton = document.querySelector(".comp-buttons button");
@@ -269,6 +270,20 @@
             }
           });
         }
+=======
+					<div class="buttons -center">
+						<a href="../MY/MY021.html" class="button -primary -lg" onclick="saveRouteToDB()">글 작성하기</a>
+
+					</div>
+				</div>
+			</main>
+
+			<footer class="footer"
+				<!-- footer.html 로 페이지 통합 관리 -->
+			</footer>
+		</div>
+	</div>
+>>>>>>> b2e0888ea2a79c69012479998ea6393795ba3b18
 
         // 정렬 기능 초기화
         if (typeof $ !== "undefined" && $.fn.sortable) {
@@ -350,7 +365,148 @@
         modalOpenId("detail");
       }
 
+<<<<<<< HEAD
       document.addEventListener("DOMContentLoaded", loadSavedPlaces);
     </script>
   </body>
+=======
+			$(routeContainer).sortable({
+				handle: '.sorting-handler',
+				placeholder: '.item.-placeholder',
+				containment: '.make-route-restricted',
+				forcePlaceholderSize: true,
+				update: function(event, ui) {
+					const places = Array.from(routeContainer.querySelectorAll('.item')).map(item => {
+						const name = item.querySelector('.name').textContent;
+						const addr1 = item.querySelector('.info dd:nth-of-type(2)').textContent;
+						const tel = item.querySelector('.info dd:nth-of-type(4)') 
+								? item.querySelector('.info dd:nth-of-type(4)').textContent 
+								: '-';
+						const category = item.querySelector('.info dd:nth-of-type(6)') 
+								? item.querySelector('.info dd:nth-of-type(6)').textContent 
+								: '-';
+
+						return { title: name, addr1, tel, category };
+					});
+
+					console.log("✅ 정렬된 장소 목록:", places);
+				}
+			});
+		}
+
+		// 루트 추가하기 버튼 이벤트
+		document.querySelector('.comp-buttons button').addEventListener('click', function() {
+			if (selectedPlace) {
+				addToRoute(selectedPlace);
+			}
+		});
+
+		// 페이지 로드 시 초기화
+		document.addEventListener('DOMContentLoaded', () => {
+			// 지도 초기화
+			initMap();
+			
+			// 저장된 장소 로드
+			loadSavedPlaces();
+			
+			// 정렬 기능 초기화
+			initSortable();
+		});
+
+		// 저장된 장소 목록 로드
+		async function loadSavedPlaces() {
+			try {
+				const response = await fetch('/api/places');
+				if (!response.ok) throw new Error(`서버 오류: ${response.status}`);
+
+				const result = await response.json();
+				const places = Array.isArray(result.data) ? result.data : [];
+				
+				const routeContainer = document.querySelector('.make-route');
+				if (!routeContainer) {
+					console.error("❌ .make-route 요소가 존재하지 않습니다.");
+					return;
+				}
+
+				routeContainer.innerHTML = ""; // 기존 내용 제거
+
+				if (places.length === 0) {
+					routeContainer.innerHTML = '<div class="item -placeholder">저장된 장소가 없습니다.</div>';
+					return;
+				}
+
+				places.forEach(place => {
+					const item = document.createElement('div');
+					item.className = 'item';
+					item.innerHTML = `
+						<div class="sorting-handler"></div>
+						<figure class="img-box">
+							<img src="${place.firstimage || '/assets/imgs/temp/temp1.png'}" alt="">
+						</figure>
+						<div class="infos">
+							<h3 class="name">${place.title}</h3>
+							<dl class="info">
+								<dt>주소</dt><dd>${place.addr1 || '-'}</dd>
+								<dt>전화</dt><dd>${place.tel || '-'}</dd>
+								<dt>카테고리</dt><dd>${place.category || '-'}</dd>
+							</dl>
+						</div>
+						<div class="button-set">
+							<button type="button" class="button" onclick="deleteData(this, '.item')">삭제하기</button>
+
+						</div>
+					`;
+					routeContainer.appendChild(item);
+				});
+			} catch (err) { 
+				console.error("❌ 장소 불러오기 실패:", err);
+				alert('장소 불러오기 실패: ' + err.message);
+			}
+		}
+
+		document.addEventListener('DOMContentLoaded', loadSavedPlaces);
+</script>
+
+<script>
+function deleteData(button, parentSelector) {
+	if (!confirm("정말로 삭제하시겠습니까?")) return;
+
+	const targetElement = button.closest(parentSelector);
+	if (targetElement) {
+		targetElement.remove(); // ✂️ 화면에서 제거
+	}
+}
+</script>
+<script>
+    async function saveRouteToDB() {
+	const routeItems = document.querySelectorAll(".make-route .item");
+	const routeList = [];
+
+	routeItems.forEach(item => {
+		const title = item.querySelector(".name")?.textContent.trim();
+		const addr1 = item.querySelector(".info dd:nth-of-type(1)")?.textContent.trim();
+		const tel = item.querySelector(".info dd:nth-of-type(2)")?.textContent.trim();
+		const category = item.querySelector(".info dd:nth-of-type(3)")?.textContent.trim();
+		const image = item.querySelector("img")?.getAttribute("src");
+
+		if (title && addr1) {
+			routeList.push({ title, addr1, tel, category, firstimage: image });
+		}
+	});
+
+	// 여러 개를 순차 저장
+	for (const route of routeList) {
+		await fetch("/api/save-route", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(route)
+		});
+	}
+}
+
+</script>
+
+
+</body>
+>>>>>>> b2e0888ea2a79c69012479998ea6393795ba3b18
 </html>

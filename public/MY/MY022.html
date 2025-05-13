@@ -149,41 +149,43 @@
         }
       }
 
-      function modalOpenPlace(place) {
-        modalOpenId("detail");
-        document.querySelector(
-          "#detail .details dd:nth-of-type(1)"
-        ).textContent = place.title || "-";
-        document.querySelector(
-          "#detail .details dd:nth-of-type(2)"
-        ).textContent = place.addr1 || "-";
-        document.querySelector(
-          "#detail .details dd:nth-of-type(3)"
-        ).textContent = place.category || "-";
-        document.querySelector(
-          "#detail .details dd:nth-of-type(4)"
-        ).textContent = place.tel || "-";
-        document.querySelector(
-          "#detail .details dd:nth-of-type(5)"
-        ).textContent = "-";
+			new Swiper(".mySwiper", {
+				navigation: {
+					nextEl: ".swiper-button-next",
+					prevEl: ".swiper-button-prev"
+				}
+			});
+		}
+        function deleteData(button, parentTag) {
+	if (!confirm("정말 삭제하시겠습니까?")) return;
 
-        const swiperWrapper = document.querySelector("#detail .swiper-wrapper");
-        swiperWrapper.innerHTML = `
-        <div class="swiper-slide">
-          <img src="${
-            place.firstimage || "/assets/imgs/temp/temp1.png"
-          }" alt="">
-        </div>`;
+	const li = button.closest(parentTag);
+	const title = li.querySelector(".main-txt").textContent.trim();
 
-        new Swiper(".mySwiper", {
-          navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          },
-        });
-      }
+	// 서버로 DELETE 요청 보내기
+	fetch("/api/delete-place", {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify({ title }) // 또는 id를 쓰려면 place.id 도 추가
+	})
+	.then(res => res.json())
+	.then(data => {
+		if (data.success) {
+			alert("삭제 완료");
+			li.remove(); // UI에서도 제거
+		} else {
+			alert("삭제 실패: " + data.message);
+		}
+	})
+	.catch(err => {
+		console.error("삭제 요청 실패:", err);
+		alert("삭제 중 오류 발생");
+	});
+}
 
-      window.onload = loadPlaces;
-    </script>
-  </body>
+		window.onload = loadPlaces;
+	</script>
+</body>
 </html>
