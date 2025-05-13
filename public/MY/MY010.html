@@ -328,12 +328,13 @@
 							</dl>
 						</div>
 						<div class="button-set">
-							<button type="button" class="button")'>삭제하기</button>
+							<button type="button" class="button" onclick="deleteData(this, '.item')">삭제하기</button>
+
 						</div>
 					`;
 					routeContainer.appendChild(item);
 				});
-			} catch (err) {
+			} catch (err) { 
 				console.error("❌ 장소 불러오기 실패:", err);
 				alert('장소 불러오기 실패: ' + err.message);
 			}
@@ -341,6 +342,18 @@
 
 		document.addEventListener('DOMContentLoaded', loadSavedPlaces);
 </script>
+
+<script>
+function deleteData(button, parentSelector) {
+	if (!confirm("정말로 삭제하시겠습니까?")) return;
+
+	const targetElement = button.closest(parentSelector);
+	if (targetElement) {
+		targetElement.remove(); // ✂️ 화면에서 제거
+	}
+}
+</script>
+
 
 </body>
 </html>
