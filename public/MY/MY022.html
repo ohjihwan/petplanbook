@@ -214,6 +214,34 @@
 				}
 			});
 		}
+        function deleteData(button, parentTag) {
+	if (!confirm("정말 삭제하시겠습니까?")) return;
+
+	const li = button.closest(parentTag);
+	const title = li.querySelector(".main-txt").textContent.trim();
+
+	// 서버로 DELETE 요청 보내기
+	fetch("/api/delete-place", {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify({ title }) // 또는 id를 쓰려면 place.id 도 추가
+	})
+	.then(res => res.json())
+	.then(data => {
+		if (data.success) {
+			alert("삭제 완료");
+			li.remove(); // UI에서도 제거
+		} else {
+			alert("삭제 실패: " + data.message);
+		}
+	})
+	.catch(err => {
+		console.error("삭제 요청 실패:", err);
+		alert("삭제 중 오류 발생");
+	});
+}
 
 		window.onload = loadPlaces;
 	</script>

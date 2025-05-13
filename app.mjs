@@ -9,6 +9,7 @@ import apiRouter from "./data/api.mjs";
 import userRouter from "./router/user.mjs";
 import db from "./data/db.mjs";
 import postsRouter from "./router/posts.mjs";
+import deleteRouter from "./router/delete.mjs";
 
 
 dotenv.config();
@@ -54,6 +55,9 @@ app.use("/api/pet-travel", petTravelRouter);
 // 경로찾기 시 DB 저장 라우터
 app.use("/api", saveRouter);
 app.use("/api", apiRouter);
+
+// DB 삭제 라우터
+app.use("/api", deleteRouter);
 
 // 추천 게시글 리스트로 출력
 app.use("/api/posts", postsRouter);
