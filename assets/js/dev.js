@@ -599,6 +599,8 @@ function handleProfileImageDelete(el) {
 		});
 }
 
+
+
 // ✅ 28. 내 장소로 저장
 async function savePlace() {
 	const details = document.querySelectorAll("#detail .details dd");
@@ -666,3 +668,5 @@ $(".page .header").load(
 );
 $(".page .footer").load(`${basePath}/ETC/footer.html?v=${Date.now()}`);
 $(".modal.-login-modal").load(`${basePath}/ETC/login.html?v=${Date.now()}`);
+
+
