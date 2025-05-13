@@ -3,7 +3,17 @@ CREATE DATABASE IF NOT EXISTS `database`;
 USE `database`;
 SHOW TABLES;
 
+CREATE TABLE IF NOT EXISTS `saved_place` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `title` VARCHAR(255) NOT NULL,
+  `addr1` VARCHAR(255) NOT NULL,
+  `tel` VARCHAR(50) NOT NULL,
+  `category` VARCHAR(50) NOT NULL,
+  `firstimage` TEXT,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+select * from saved_place;
 
 CREATE TABLE places (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -16,13 +26,3 @@ CREATE TABLE places (
 ALTER TABLE places ADD COLUMN firstimage VARCHAR(500);
 
 select * from places;
-
-CREATE TABLE saved_route (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR(255),
-  addr1 VARCHAR(255),
-  tel VARCHAR(50),
-  category VARCHAR(100),
-  firstimage VARCHAR(500),
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);

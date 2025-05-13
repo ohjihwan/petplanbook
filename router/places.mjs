@@ -1,25 +1,20 @@
+// router/places.mjs
 import express from "express";
 import db from "../data/db.mjs";
 
 const router = express.Router();
 
-router.delete("/places/delete", async (req, res) => {
+// /api/places 경로 처리
+router.get("/places", async (req, res) => {
 	try {
-		const { title } = req.body;
-		if (!title) return res.status(400).json({ error: "제목이 필요합니다" });
-
-		const [result] = await db.query("DELETE FROM MY022 WHERE title = ?", [title]);
-
-		if (result.affectedRows === 0) {
-			return res.status(404).json({ error: "삭제할 데이터가 없습니다" });
-		}
-
-		res.status(200).json({ message: "삭제 완료" });
+		const [rows] = await db.query(
+			"SELECT * FROM saved_place ORDER BY created_at DESC"
+		);
+		res.json({ success: true, data: rows }); // ✅ data 배열로 응답
 	} catch (err) {
-		console.error("삭제 실패:", err);
-		res.status(500).json({ error: "서버 오류" });
+		console.error("❌ 장소 불러오기 실패:", err);
+		res.status(500).json({ success: false, error: "서버 오류", details: err.message });
 	}
 });
 
 export default router;
-
