@@ -9,7 +9,8 @@ import apiRouter from "./data/api.mjs";
 import userRouter from "./router/user.mjs";
 import placesRouter from "./router/places.mjs";
 import db from "./data/db.mjs";
-import uploadRouter from "./router/post.mjs";
+import postsRouter from "./router/posts.mjs";
+
 
 dotenv.config();
 
@@ -55,6 +56,9 @@ app.use("/api/pet-travel", petTravelRouter);
 app.use("/api", placesRouter);
 app.use("/api", saveRouter);
 app.use("/api", apiRouter);
+
+// 추천 게시글 리스트로 출력
+app.use("/api/posts", postsRouter);
 
 // 404 에러 처리
 app.use((req, res) => {
