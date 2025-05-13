@@ -47,7 +47,8 @@
 							<div class="function-box -gray-case">
 								<div class="following-path">
 									<div class="scrolling swiper-wrapper">
-										<ul class="swiper-slide">
+										<ul id="routeList" class="swiper-slide">
+
 											<script>
 document.addEventListener("DOMContentLoaded", async () => {
   try {
@@ -72,8 +73,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           <dd>${route.tel}</dd>
           <dt>분류</dt>
           <dd>${route.category}</dd>
-          <dt>이미지</dt>
-          <dd><img src="${route.firstimage}" alt="${route.title}" width="100" /></dd>
         </dl>
       `;
       slideList.appendChild(li);
@@ -359,40 +358,80 @@ document.addEventListener("DOMContentLoaded", async () => {
 			}
 		});
 
-		// 작성 완료 버튼 클릭 이벤트
-		document.getElementById("completeBtn").onclick = async function () {
-			const name = document.getElementById("name").value;
-			const description = document.getElementById("textarea").value;
-			const imageInput = document.getElementById("image");
-			let imageUrl = "";
-			
-			// 1. 이미지 업로드
-			if (imageInput.files[0]) {
-				const formData = new FormData();
-				formData.append("image", imageInput.files[0]);
-				const res = await fetch(`http://localhost:8081/uploads`, {
-					method: "POST",
-					body: formData,
-				});
-				const data = await res.json();
-				imageUrl = data.imageUrl;
-			}
-			
-			// 2. 글 정보 JSON으로 저장
-			await fetch(`http://localhost:8081/place`, {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ name, description, imageUrl }),
-			});
-			window.location.href = "MY030.html";
-		};
+		</script>	
 
-		// 목록으로 버튼 클릭 이벤트
-		document.getElementById("goListBtn").onclick = function () {
-			window.location.href = "MY020.html";
-		};
-	</script>
-    
+<script>
+document.getElementById("completeBtn").onclick = async function () {
+  const name = document.getElementById("name").value;
+  const description = document.getElementById("textarea").value;
+  const date = document.getElementById("text3").value;
+  const imageInput = document.getElementById("image");
+
+  // 필수 항목 확인
+  if (!name || !description || !date) {
+    alert("글 제목, 내용, 날짜를 모두 입력해주세요.");
+    return;
+  }
+
+  let imageUrl = "";
+
+  // 이미지 업로드
+  if (imageInput.files[0]) {
+    const formData = new FormData();
+    formData.append("image", imageInput.files[0]);
+
+    const uploadRes = await fetch("http://localhost:8081/uploads", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!uploadRes.ok) {
+      alert("이미지 업로드 실패");
+      return;
+    }
+
+    const uploadData = await uploadRes.json();
+    imageUrl = uploadData.imageUrl;
+  }
+
+  // 추천 루트 리스트 추출
+  const routeItems = document.querySelectorAll("#routeList li");
+  const savedRoutes = Array.from(routeItems).map((li) => {
+    return {
+      title: li.querySelector("strong")?.innerText || "",
+      addr1: li.querySelector("dd:nth-of-type(1)")?.innerText || "",
+      tel: li.querySelector("dd:nth-of-type(2)")?.innerText || "",
+      category: li.querySelector("dd:nth-of-type(3)")?.innerText || "",
+      firstimage: li.querySelector("img")?.src || "",
+      date: date, // 추천 루트에도 날짜 포함
+    };
+  });
+
+  // 전체 데이터 전송
+  const payload = {
+    name,
+    description,
+    date,
+    imageUrl,
+    savedRoutes,
+  };
+
+  const res = await fetch("http://localhost:8081/api/save-route-post", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  if (res.ok) {
+    alert("저장 완료!");
+    window.location.href = "MY030.html";
+  } else {
+    alert("저장 실패");
+  }
+};
+</script>
+
+
 
 </body>
 </html>

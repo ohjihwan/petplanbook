@@ -11,6 +11,7 @@ import db from "./data/db.mjs";
 import postsRouter from "./router/posts.mjs";
 import deleteRouter from "./router/delete.mjs";
 import saveRouteRouter from "./router/saveroute.mjs";
+import postRouter from "./router/post.mjs"; 
 
 
 dotenv.config();
@@ -62,8 +63,8 @@ app.use("/api", deleteRouter);
 
 app.use("/api", saveRouteRouter); 
 
-// 추천 게시글 리스트로 출력
-app.use("/api/posts", postsRouter);
+app.use("/api", postRouter); 
+
 
 // 404 에러 처리
 app.use((req, res) => {
