@@ -82,5 +82,5 @@ app.use((req, res) => {
 
 // 서버 실행
 app.listen(PORT, () => {
-	console.log(`서버 실행 중: http://${HOST}:${PORT}`);
+	console.log(`서버 실행 중, 메인으로 가기: http://${HOST}:${PORT}/HM/HM010.html`);
 });
