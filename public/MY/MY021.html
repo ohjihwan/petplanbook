@@ -48,58 +48,42 @@
 								<div class="following-path">
 									<div class="scrolling swiper-wrapper">
 										<ul class="swiper-slide">
-											<li>
-												<strong>로켓 호텔</strong>
-												<dl>
-													<dt>주소</dt>
-													<dd>서울시 송파구</dd>
-													<dt>전화</dt>
-													<dd>02-0000-0000</dd>
-													<dt>날짜</dt>
-													<dd>2025-04-17</dd>
-													<dt>시간</dt>
-													<dd>오전 11:30</dd>
-												</dl>
-											</li>
-											<li>
-												<strong>봄날 카페</strong>
-												<dl>
-													<dt>주소</dt>
-													<dd>서울시 강북구</dd>
-													<dt>전화</dt>
-													<dd>02-0000-0000</dd>
-													<dt>날짜</dt>
-													<dd>2025-04-17</dd>
-													<dt>시간</dt>
-													<dd>오후 02:30</dd>
-												</dl>
-											</li>
-											<li>
-												<strong>꾸러기 애견 캠핑</strong>
-												<dl>
-													<dt>주소</dt>
-													<dd>서울시 강남구</dd>
-													<dt>전화</dt>
-													<dd>02-0000-0000</dd>
-													<dt>날짜</dt>
-													<dd>2025-04-17</dd>
-													<dt>시간</dt>
-													<dd>오전 08:00</dd>
-												</dl>
-											</li>
-											<li>
-												<strong>케이스 TEST 2</strong>
-												<dl>
-													<dt>주소</dt>
-													<dd>서울시 강남구</dd>
-													<dt>전화</dt>
-													<dd>02-0000-0000</dd>
-													<dt>날짜</dt>
-													<dd>2025-04-17</dd>
-													<dt>시간</dt>
-													<dd>오전 08:00</dd>
-												</dl>
-											</li>
+											<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const res = await fetch("http://localhost:8081/api/saved-routes"); // ← 경로 주의
+    const result = await res.json();
+
+    if (!result.success) {
+      throw new Error("불러오기 실패");
+    }
+
+    const slideList = document.querySelector(".swiper-slide");
+    slideList.innerHTML = ""; // 기존 더미 제거
+
+    result.data.forEach((route) => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <strong>${route.title}</strong>
+        <dl>
+          <dt>주소</dt>
+          <dd>${route.addr1}</dd>
+          <dt>전화</dt>
+          <dd>${route.tel}</dd>
+          <dt>분류</dt>
+          <dd>${route.category}</dd>
+          <dt>이미지</dt>
+          <dd><img src="${route.firstimage}" alt="${route.title}" width="100" /></dd>
+        </dl>
+      `;
+      slideList.appendChild(li);
+    });
+  } catch (err) {
+    console.error("🚫 추천 루트 불러오기 실패:", err.message);
+  }
+});
+</script>
+
 										</ul>
 									</div>
 								</div>
@@ -378,7 +362,7 @@
 		// 작성 완료 버튼 클릭 이벤트
 		document.getElementById("completeBtn").onclick = async function () {
 			const name = document.getElementById("name").value;
-			const description = document.getElementById("description").value;
+			const description = document.getElementById("textarea").value;
 			const imageInput = document.getElementById("image");
 			let imageUrl = "";
 			
@@ -408,5 +392,7 @@
 			window.location.href = "MY020.html";
 		};
 	</script>
+    
+
 </body>
 </html>

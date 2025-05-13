@@ -16,3 +16,13 @@ CREATE TABLE places (
 ALTER TABLE places ADD COLUMN firstimage VARCHAR(500);
 
 select * from places;
+
+CREATE TABLE saved_route (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255),
+  addr1 VARCHAR(255),
+  tel VARCHAR(50),
+  category VARCHAR(100),
+  firstimage VARCHAR(500),
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);

@@ -10,6 +10,7 @@ import userRouter from "./router/user.mjs";
 import db from "./data/db.mjs";
 import postsRouter from "./router/posts.mjs";
 import deleteRouter from "./router/delete.mjs";
+import saveRouteRouter from "./router/saveroute.mjs";
 
 
 dotenv.config();
@@ -58,6 +59,8 @@ app.use("/api", apiRouter);
 
 // DB 삭제 라우터
 app.use("/api", deleteRouter);
+
+app.use("/api", saveRouteRouter); 
 
 // 추천 게시글 리스트로 출력
 app.use("/api/posts", postsRouter);

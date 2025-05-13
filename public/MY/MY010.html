@@ -187,12 +187,13 @@
 					</section>
 
 					<div class="buttons -center">
-						<a href="../MY/MY021.html" class="button -primary -lg">글 작성하기</a>
+						<a href="../MY/MY021.html" class="button -primary -lg" onclick="saveRouteToDB()">글 작성하기</a>
+
 					</div>
 				</div>
 			</main>
 
-			<footer class="footer">
+			<footer class="footer"
 				<!-- footer.html 로 페이지 통합 관리 -->
 			</footer>
 		</div>
@@ -352,6 +353,34 @@ function deleteData(button, parentSelector) {
 		targetElement.remove(); // ✂️ 화면에서 제거
 	}
 }
+</script>
+<script>
+    async function saveRouteToDB() {
+	const routeItems = document.querySelectorAll(".make-route .item");
+	const routeList = [];
+
+	routeItems.forEach(item => {
+		const title = item.querySelector(".name")?.textContent.trim();
+		const addr1 = item.querySelector(".info dd:nth-of-type(1)")?.textContent.trim();
+		const tel = item.querySelector(".info dd:nth-of-type(2)")?.textContent.trim();
+		const category = item.querySelector(".info dd:nth-of-type(3)")?.textContent.trim();
+		const image = item.querySelector("img")?.getAttribute("src");
+
+		if (title && addr1) {
+			routeList.push({ title, addr1, tel, category, firstimage: image });
+		}
+	});
+
+	// 여러 개를 순차 저장
+	for (const route of routeList) {
+		await fetch("/api/save-route", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(route)
+		});
+	}
+}
+
 </script>
 
 
