@@ -187,7 +187,7 @@
 					</section>
 
 					<div class="buttons -center">
-						<a href="../MY/MY021.html" class="button -primary -lg">글 작성하기</a>
+						<a href="../MY/MY021.html" class="button -primary -lg" onclick="saveMapData()">글 작성하기</a>
 					</div>
 				</div>
 			</main>
@@ -341,7 +341,7 @@
 
 		document.addEventListener('DOMContentLoaded', loadSavedPlaces);
 </script>
-<!-- 페이지의 모든 스크립트 끝나기 직전 -->
+
 <script>
 	// 장소를 화면에서만 삭제하는 함수
 	function deletePlaceByTitle(title) {
@@ -357,8 +357,26 @@
 	}
 </script>
 
-</body>
-</html>
+<script>
+function saveMapData() {
+  const items = document.querySelectorAll(".make-route .item");
+  const routeList = [];
 
+  items.forEach(item => {
+    const title = item.querySelector(".name")?.textContent.trim();
+    const addr1 = item.querySelector("dd:nth-of-type(1)")?.textContent.trim();
+    const tel = item.querySelector("dd:nth-of-type(2)")?.textContent.trim();
+    const category = item.querySelector("dd:nth-of-type(3)")?.textContent.trim();
+    const image = item.querySelector("img")?.getAttribute("src");
+
+    if (title && addr1) {
+      routeList.push({ title, addr1, tel, category, firstimage: image });
+    }
+  });
+
+  // localStorage에 저장
+  localStorage.setItem("savedRouteList", JSON.stringify(routeList));
+}
+</script>
 </body>
 </html>
