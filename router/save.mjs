@@ -8,7 +8,7 @@ router.post("/save-place", async (req, res) => {
 
 	try {
 		const [result] = await db.query(
-			"INSERT INTO saved_place (title, addr1, tel, category, firstimage) VALUES (?, ?, ?, ?, ?)",
+			"INSERT INTO places (title, addr1, tel, category, firstimage) VALUES (?, ?, ?, ?, ?)",
 			[title, addr1, tel, category, firstimage] // ✅ firstimage 값도 전달
 		);
 		res.json({ success: true, message: "장소 저장 완료", id: result.insertId });

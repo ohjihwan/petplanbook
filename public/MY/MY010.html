@@ -314,22 +314,23 @@
 					const item = document.createElement('div');
 					item.className = 'item';
 					item.innerHTML = `
-						<div class="sorting-handler"></div>
-						<figure class="img-box">
-							<img src="${place.firstimage || '/assets/imgs/temp/temp1.png'}" alt="">
-						</figure>
-						<div class="infos">
-							<h3 class="name">${place.title}</h3>
-							<dl class="info">
-								<dt>주소</dt><dd>${place.addr1 || '-'}</dd>
-								<dt>전화</dt><dd>${place.tel || '-'}</dd>
-								<dt>카테고리</dt><dd>${place.category || '-'}</dd>
-							</dl>
-						</div>
-						<div class="button-set">
-							<button type="button" class="button")'>삭제하기</button>
-						</div>
-					`;
+	<div class="sorting-handler"></div>
+	<figure class="img-box">
+		<img src="${place.firstimage || '/assets/imgs/temp/temp1.png'}" alt="">
+	</figure>
+	<div class="infos">
+		<h3 class="name">${place.title}</h3>
+		<dl class="info">
+			<dt>주소</dt><dd>${place.addr1 || '-'}</dd>
+			<dt>전화</dt><dd>${place.tel || '-'}</dd>
+			<dt>카테고리</dt><dd>${place.category || '-'}</dd>
+		</dl>
+	</div>
+	<div class="button-set">
+		<button type="button" class="button" onclick="deletePlaceByTitle('${place.title}')">삭제하기</button>
+	</div>
+`;
+
 					routeContainer.appendChild(item);
 				});
 			} catch (err) {
@@ -340,6 +341,24 @@
 
 		document.addEventListener('DOMContentLoaded', loadSavedPlaces);
 </script>
+<!-- 페이지의 모든 스크립트 끝나기 직전 -->
+<script>
+	// 장소를 화면에서만 삭제하는 함수
+	function deletePlaceByTitle(title) {
+		if (!confirm(`"${title}" 장소를 루트에서 삭제하시겠습니까?`)) return;
+
+		const items = document.querySelectorAll(".make-route .item");
+		items.forEach(item => {
+			const name = item.querySelector(".name")?.textContent.trim();
+			if (name === title) {
+				item.remove(); // ✅ 화면에서만 제거, DB는 건드리지 않음
+			}
+		});
+	}
+</script>
+
+</body>
+</html>
 
 </body>
 </html>

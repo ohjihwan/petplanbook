@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/places", async (req, res) => {
 	try {
 		const [rows] = await db.query(
-			"SELECT * FROM saved_place ORDER BY created_at DESC"
+			"SELECT * FROM places ORDER BY created_at DESC"
 		);
 		res.json({ success: true, data: rows }); // ✅ data 배열로 응답
 	} catch (err) {
